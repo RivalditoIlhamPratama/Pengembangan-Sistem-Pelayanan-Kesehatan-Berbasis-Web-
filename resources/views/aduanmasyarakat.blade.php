@@ -23,7 +23,8 @@
           <li class="link"><a href="{{ url('/') }}">Beranda</a></li>
           <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
           <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
-          <li class="link"><a href="{{ url('/aduanmasyarakat') }}">Pelayanan</a></li>
+          <li class="link"><a href="{{ url('/') }}">Alur Pelayanan</a></li>
+          <li class="link"><a href="{{ url('/aduanmasyarakat') }}">Pengaduan</a></li>
           <li class="link">
             <a href="{{ url('/login') }}" class="btn-link">
               <button class="btn">Login</button>
