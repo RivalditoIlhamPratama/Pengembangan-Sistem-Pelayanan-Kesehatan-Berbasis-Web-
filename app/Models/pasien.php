@@ -13,6 +13,9 @@ class pasien extends Model
 
     public function akunpengguna()
     {
-        return $this->belongsTo(user::class, 'id_user', 'idPasien');
+        return $this->belongsTo(user::class, 'user_id', 'id_user');
+    }
+    public function pengaduan(){
+        return $this->hasMany(pengaduan::class, 'idPasien', 'Pasien_id');
     }
 }

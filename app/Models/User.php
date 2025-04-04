@@ -24,7 +24,7 @@ class User extends Authenticatable
     protected $fillable = [
         'username',
         'password',
-        'role',
+        'role'
     ];
 
     /**
@@ -49,6 +49,22 @@ class User extends Authenticatable
 
     public function pasien()
     {
-        return $this->hasMany(pasien::class, 'id_user', 'idPasien');
+        return $this->hasMany(pasien::class, 'id_user', 'user_id');
+    }
+    public function dokter()
+    {
+        return $this->hasMany(dokter::class, 'id_user', 'user_id');
+    }
+    public function staffrekmedis()
+    {
+        return $this->hasMany(staffrekammedis::class, 'id_user', 'user_id');
+    }
+    public function admin()
+    {
+        return $this->hasMany(adminpuskesmas::class, 'id_user', 'user_id');
+    }
+    public function klinik()
+    {
+        return $this->hasMany(klinik::class, 'id_user', 'user_id');
     }
 }

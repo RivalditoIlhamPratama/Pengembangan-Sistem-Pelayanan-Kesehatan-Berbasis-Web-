@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('laporans', function (Blueprint $table) {
             $table->id('idLaporan');
-            $table->unsignedBigInteger('idKlinik');
+            $table->unsignedBigInteger('Klinik_id');
             $table->date('tanggal');
             $table->string('catatanPenyakit');
             $table->integer('jumlahPasien');
             $table->timestamps();
+
+            $table->foreign('Klinik_id')->references('idKlinik')->on('kliniks')->onDelete('cascade');
         });
     }
 
