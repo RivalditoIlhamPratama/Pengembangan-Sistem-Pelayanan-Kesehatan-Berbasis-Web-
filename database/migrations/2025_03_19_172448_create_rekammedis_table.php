@@ -27,8 +27,8 @@ return new class extends Migration
             $table->string('diagnosaMedis');
             $table->timestamps();
 
-            $table->foreign('Dokter_id')->references('idDokter')->on('users')->onDelete('cascade');
-            $table->foreign('StaffRm_id')->references('idStaffRm')->on('users')->onDelete('cascade');
+            $table->foreign('Dokter_id')->references('idDokter')->on('dokters')->onDelete('cascade');
+            $table->foreign('StaffRm_id')->references('idStaffRm')->on('staffrekammedis')->onDelete('cascade');
         });
     }
 

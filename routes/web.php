@@ -18,6 +18,12 @@ Route::get('/', function () {
     return view('index'); // Akan mencari file index.blade.php di resources/views
 });
 
+Route::get('/login', function () {
+    return view('auth/login');
+})->name('login');
+
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login.post');
+
 Route::get('/profil', function () {
     return view('profil'); // Akan mencari profil.blade.php di resources/views
 });
@@ -54,5 +60,3 @@ Route::prefix('admin')->group(function () {
         return view('admin.users');
     })->name('admin.users');  // Route untuk halaman data pengguna
 });
-
-

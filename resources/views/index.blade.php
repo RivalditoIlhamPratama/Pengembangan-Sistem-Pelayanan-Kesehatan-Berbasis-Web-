@@ -31,13 +31,13 @@
           <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
           <li class="link"><a href="{{ url('/aduanmasyarakat') }}">Pelayanan</a></li>
           <li class="link">
-            
-            <a href="login.html" class="btn-link">
+
+            <a href="{{ url('/login') }}" class="btn-link">
               <button class="btn">Login</button>
             </a>
           </li>
           <li class="link">
-            <a href="login.html" class="btn-link">
+            <a href="{{ url('/login') }}" class="btn-link">
               <button class="btn">Daftar</button>
             </a>
           </li>
@@ -45,16 +45,16 @@
       </nav>
       <div class="section__container header__container" id="home">
         <div class="header__image">
-          <img src="assets/icon Header.png" alt="header" /> 
+          <img src="assets/icon Header.png" alt="header" />
         </div>
         <div class="header__content">
           <h4>Pelayanan Masyarakat</h4>
           <h1 class="section__header">Puskesmas Kraksaan</h1>
           <p>
-            layanan digital seperti jadwal praktik dokter, daftar tenaga medis profesional, 
+            layanan digital seperti jadwal praktik dokter, daftar tenaga medis profesional,
             rincian tarif layanan, hingga artikel edukasi kesehatan yang bermanfaat.
           </p>
-          
+
         </div>
       </div>
     </header>
@@ -137,7 +137,7 @@
             </div>
           </div>
 
-          
+
         </div>
         <!-- End Card Dokter -->
         <br>
@@ -145,10 +145,10 @@
         <br>
         <br>
 
-        
+
         <!-- Beita -->
         <div class="berita--container">
-          <h2>Berita Terkait</h2>  
+          <h2>Berita Terkait</h2>
           <p class="centered-text">Berita Berita Puskesmas Kraksaan Terbaru</p>
           <br>
           <br>
@@ -162,7 +162,7 @@
                       <a href="#" class="read-more">Selengkapnya</a>
                   </div>
               </div>
-  
+
               <!-- Repeat the news-card for other entries -->
               <div class="news-card">
                   <img src="assets/berita.jpg" alt="Puskesmas Image">
@@ -216,7 +216,7 @@
               <a href="#" class="read-more">Selengkapnya</a>
           </div>
       </div>
-  
+
               <!-- Add more cards as needed -->
           </div>
       </div>
@@ -230,7 +230,7 @@
 
 
 
-        
+
     <br>
     <!--Footer-->
     <footer class="footer">
@@ -240,9 +240,9 @@
             <a href="#"><img src="assets/11.png" alt="logo" />Puskesmas Kraksaan</a>
           </div>
           <p>
-            layanan digital seperti jadwal praktik dokter, 
-            daftar tenaga medis profesional, 
-            rincian tarif layanan, hingga artikel 
+            layanan digital seperti jadwal praktik dokter,
+            daftar tenaga medis profesional,
+            rincian tarif layanan, hingga artikel
             edukasi kesehatan yang bermanfaat.
           </p>
           <div class="footer__socials">
