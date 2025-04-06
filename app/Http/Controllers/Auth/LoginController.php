@@ -55,6 +55,8 @@ class LoginController extends Controller
 
             $user = Auth::user();
             switch($user->role) {
+                case 'pasien':
+                    return redirect()->intended('/pasien/dashboard');
                 case 'admin':
                     return redirect()->intended('/admin/dashboard');
                 case 'klinik':

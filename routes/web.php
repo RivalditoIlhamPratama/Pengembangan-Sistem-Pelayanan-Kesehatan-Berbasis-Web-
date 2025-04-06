@@ -33,8 +33,8 @@ Route::get('/dokter', function () {
 });
 
 
-Route::get('/aduanmasyarakat', function () {
-    return view('aduanmasyarakat'); // Akan menampilkan aduanmasyarakat.blade.php
+Route::get('aduanmasyarakat', function () {
+    return view('/pasien/aduanmasyarakat'); // Akan menampilkan aduanmasyarakat.blade.php
 });
 
 
@@ -59,4 +59,14 @@ Route::prefix('admin')->group(function () {
     Route::get('/users', function () {
         return view('admin.users');
     })->name('admin.users');  // Route untuk halaman data pengguna
+});
+
+Route::prefix('pasien')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('pasien.pasien');
+    })->name('pasien.dashboard');
+
+    Route::get('/aduan', function () {
+        return view('pasien.aduanmasyarakat');
+    })->name('pasien.aduan');  // Route untuk halaman data pengguna
 });

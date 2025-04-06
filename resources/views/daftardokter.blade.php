@@ -11,6 +11,7 @@
     href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
   />
   <link rel="stylesheet" href="{{ asset('assets/daftardokter.css') }}">
+  <script src="{{ asset('assets/main.js') }}" defer></script>
   <title>Puskesmas Kraksaan</title>
 </head>
 <body>
@@ -18,7 +19,7 @@
       <nav>
         <div class="nav__header">
           <div class="nav__logo">
-            <a href="#"><img src="assets/11.png" alt="logo" />Puskesmas Kraksaan</a>
+            <a href="{{ url('/') }}"><img src="assets/11.png" alt="logo" />Puskesmas Kraksaan</a>
           </div>
           <div class="nav__menu__btn" id="menu-btn">
             <span><i class="ri-menu-line"></i></span>
@@ -28,14 +29,14 @@
             <li class="link"><a href="{{ url('/') }}">Beranda</a></li>
             <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
             <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
-            <li class="link"><a href="{{ url('/aduanmasyarakat') }}">Pelayanan</a></li>
+            <li class="link"><a class="disabled-link" href="{{ url('/aduanmasyarakat') }}">Pelayanan</a></li>
           <li class="link">
-            <a href="login.html" class="btn-link">
+            <a href="{{ url('/login') }}" class="btn-link">
               <button class="btn">Login</button>
             </a>
           </li>
           <li class="link">
-            <a href="login.html" class="btn-link">
+            <a href="{{ url('/login') }}" class="btn-link">
               <button class="btn">Daftar</button>
             </a>
           </li>
@@ -43,7 +44,7 @@
       </nav>
     </header>
 
-    <main>
+    <>
       <h2>Dokter Puskesmas Kraksaan</h2>
       <div class="doctor-card-container">
         <!-- Card Dokter -->
@@ -58,7 +59,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="doctor-card">
           <img src="assets/Dr.Ninda.png" alt="Dr. Komang Ayu" class="doctor-img">
           <div class="doctor-info">
@@ -191,7 +192,7 @@
 
 
       </div>
-    </main>
+    </>
 
 
     <br>
@@ -205,9 +206,9 @@
               <a href="#"><img src="assets/11.png" alt="logo" />Puskesmas Kraksaan</a>
             </div>
             <p>
-              layanan digital seperti jadwal praktik dokter, 
-              daftar tenaga medis profesional, 
-              rincian tarif layanan, hingga artikel 
+              layanan digital seperti jadwal praktik dokter,
+              daftar tenaga medis profesional,
+              rincian tarif layanan, hingga artikel
               edukasi kesehatan yang bermanfaat.
             </p>
             <div class="footer__socials">
@@ -245,6 +246,6 @@
       <!--End Footer-->
 
     <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 </body>
 </html>

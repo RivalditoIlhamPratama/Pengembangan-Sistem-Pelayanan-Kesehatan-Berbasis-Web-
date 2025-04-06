@@ -12,7 +12,6 @@
       href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
     />
     <link rel="stylesheet" href="{{ asset('assets/styles.css') }}">
-    <script src="{{ asset('assets/main.js') }}" defer></script>
     <title>Puskesmas Kraksaan</title>
   </head>
   <body>
@@ -20,7 +19,7 @@
       <nav>
         <div class="nav__header">
           <div class="nav__logo">
-            <a href="{{ url('/') }}"><img src="assets/11.png" alt="logo" />Puskesmas Kraksaan</a>
+            <a href="#"><img src="assets/11.png" alt="logo" />Puskesmas Kraksaan</a>
           </div>
           <div class="nav__menu__btn" id="menu-btn">
             <span><i class="ri-menu-line"></i></span>
@@ -30,16 +29,15 @@
           <li class="link"><a href="{{ url('/') }}">Beranda</a></li>
           <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
           <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
-          <li class="link"><a class="disabled-link" href="{{ url('/aduanmasyarakat') }}">Pelayanan</a></li>
+          <li class="link"><a href="{{ url('/aduanmasyarakat') }}">Pelayanan</a></li>
           <li class="link">
 
-            <a href="{{ url('/login') }}" class="btn-link">
-              <button class="btn">Login</button>
+            <a href="{{ url('/logout') }}" class="btn-link">
+              <button class="btn">logout</button>
             </a>
           </li>
           <li class="link">
-            <a href="{{ url('/login') }}" class="btn-link">
-              <button class="btn">Daftar</button>
+            <a href="#" class="btn-link">
             </a>
           </li>
         </ul>
@@ -282,7 +280,7 @@
 
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-
+    <script src="main.js"></script>
 
   </body>
 </html>
