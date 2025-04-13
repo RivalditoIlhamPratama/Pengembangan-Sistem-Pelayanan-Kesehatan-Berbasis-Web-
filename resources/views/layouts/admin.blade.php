@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Admin Puskesmas</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
     <!-- Bootstrap CSS -->
@@ -25,11 +25,22 @@
         <h1 class="text-xl font-bold">Puskesmas</h1>
     </div>
     <ul class="space-y-2 px-4">
-        <li><a href="{{ route('admin.dashboard') }}" class="block py-2 px-4">Dashboard</a></li>
-        <li><a href="{{ route('admin.users') }}" class="block py-2 px-4 active">Data Pengguna</a></li>
-        <li><a href="#" class="block py-2 px-4">Data Dokter</a></li>
-        <li><a href="#" class="block py-2 px-4">Data Pengaduan</a></li>
-        <li><a href="#" class="block py-2 px-4">Data Laporan Klinik</a></li>
+        <li>
+            <a href="{{ route('admin.dashboard') }}" class="block py-2 px-4">Dashboard</a>
+        </li>
+        <li>
+            <a href="{{ route('admin.users') }}" class="block py-2 px-4 active">Data Pengguna</a>
+        </li>
+        <li>
+            <a href="{{ route('admin.data_pengaduan') }}" class="block py-2 px-4">Data Pengaduan</a>
+        </li>
+        <li>
+            <a href="{{ route('admin.data_dokter') }}" class="block py-2 px-4">Data Dokter</a>
+        </li>
+        <li>
+            <a href="{{ route('admin.laporan_klinik') }}" class="block py-2 px-4">Data Laporan Klinik</a>
+        </li>
+        
     </ul>
 </div>
 
