@@ -27,21 +27,45 @@
           </div>
         </div>
         <ul class="nav__links" id="nav-links">
-          <li class="link"><a href="{{ url('/') }}">Beranda</a></li>
-          <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
-          <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
-          <li class="link"><a class="disabled-link" href="{{ url('/aduanmasyarakat') }}">Pelayanan</a></li>
-          <li class="link">
-
-            <a href="{{ url('/login') }}" class="btn-link">
-              <button class="btn">Login</button>
-            </a>
-          </li>
-          <li class="link">
-            <a href="{{ url('/login') }}" class="btn-link">
-              <button class="btn">Daftar</button>
-            </a>
-          </li>
+            @if(auth()->check() && auth()->user()->role === 'pasien')
+            <li class="link"><a href="{{ route('pasien.dashboard') }}">Beranda</a></li>
+            <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
+            <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
+            @endif
+            @if(!auth()->check() || (auth()->check() && auth()->user()->role !== 'pasien'))
+            <li class="link"><a href="{{ url('/') }}">Beranda</a></li>
+            <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
+            <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
+            @endif
+            <li class="link"><a class="@unless(auth()->check() && auth()->user()->role === 'pasien') disabled-link @endunless" href="{{ url('/aduanmasyarakat') }}">Pelayanan</a></li>
+            @if(!auth()->check() || (auth()->check() && auth()->user()->role !== 'pasien'))
+            <li class="link">
+                <a href="{{ url('/login') }}" class="btn-link">
+                <button class="btn">Login</button>
+                </a>
+            </li>
+            <li class="link">
+                <a href="{{ url('/login') }}" class="btn-link">
+                <button class="btn">Daftar</button>
+                </a>
+            </li>
+            @endif
+            @if(auth()->check() && auth()->user()->role === 'pasien')
+            <li class="link">
+                <div class="flex items-center space-x-4">
+                    <button class="flex items-center space-x-3">
+                        <i class="ri-user-fill text-xl"></i>
+                        <span>{{ auth()->user()->name }}</span>
+                    </button>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="text-white hover:text-gray-300">
+                            <i class="ri-logout-box-r-line text-xl"></i>
+                        </button>
+                    </form>
+                </div>
+            </li>
+            @endif
         </ul>
       </nav>
     </header>
