@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PengaduanController;
+use App\Http\Controllers\RekammedisController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +41,9 @@ Route::get('/dokter', function () {
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::get('/data-pengaduan', [AdminController::class, 'data_pengaduan'])->name('admin.data_pengaduan');
+    Route::get('/laporan-klinik', [AdminController::class, 'laporan_klinik'])->name('admin.laporan_klinik');
+    Route::get('/data-dokter', [AdminController::class, 'data_dokter'])->name('admin.data_dokter');
 });
 
 Route::middleware(['auth', 'pasien'])->prefix('pasien')->group(function () {
@@ -51,5 +55,7 @@ Route::middleware(['auth', 'pasien'])->prefix('pasien')->group(function () {
 Route::middleware(['auth', 'dokter'])->prefix('dokter')->group(function () {
     Route::get('/dashboard', [DokterController::class, 'dashboard'])->name('dokter.dashboard');
     Route::get('/data_dokter', [DokterController::class, 'data_dokter'])->name('dokter.data_dokter');
+    Route::get('/data_dokter/tambah', [DokterController::class, 'store'])->name('dokter.data_dokter.store');
     Route::get('/rekam_medis', [DokterController::class, 'rekam_medis'])->name('dokter.rekam_medis');
+    Route::get('/rekam_medis/tambah', [RekammedisController::class, 'store'])->name('dokter.rekam_medis.submit');
 });
