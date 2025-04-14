@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PengaduanController;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index'); // Akan mencari file index.blade.php di resources/views
+    return view('index');
 });
 
 Route::get('/login', function () {
@@ -28,13 +29,12 @@ Route::get('/login', function () {
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.post');
 Route::post('/logout', [\App\Http\Controllers\Auth\LogoutController::class, 'post'])->name('logout');
 
-
 Route::get('/profil', function () {
-    return view('profil'); // Akan mencari profil.blade.php di resources/views
+    return view('profil');
 });
 
 Route::get('/dokter', function () {
-    return view('daftardokter'); // Akan menampilkan daftardokter.blade.php
+    return view('daftardokter');
 });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
@@ -46,5 +46,10 @@ Route::middleware(['auth', 'pasien'])->prefix('pasien')->group(function () {
     Route::get('/dashboard', [PasienController::class, 'dashboard'])->name('pasien.dashboard');
     Route::get('/aduan', [PasienController::class, 'reports'])->name('pasien.reports');
     Route::post('/submit-pengaduan', [PengaduanController::class, 'store'])->name('pasien.reports.submit');
+});
 
+Route::middleware(['auth', 'dokter'])->prefix('dokter')->group(function () {
+    Route::get('/dashboard', [DokterController::class, 'dashboard'])->name('dokter.dashboard');
+    Route::get('/data_dokter', [DokterController::class, 'data_dokter'])->name('dokter.data_dokter');
+    Route::get('/rekam_medis', [DokterController::class, 'rekam_medis'])->name('dokter.rekam_medis');
 });

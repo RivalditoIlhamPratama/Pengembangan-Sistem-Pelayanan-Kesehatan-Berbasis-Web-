@@ -16,6 +16,10 @@ return [
             'driver' => 'session',
             'provider' => 'pasiens',
         ],
+        'dokter' => [
+            'driver' => 'session',
+            'provider' => 'dokters',
+        ],
     ],
 
     'providers' => [
@@ -26,6 +30,10 @@ return [
         'pasiens' => [  // Add this new provider
             'driver' => 'eloquent',
             'model' => App\Models\pasien::class,
+        ],
+        'dokters' => [  // Add this new provider
+            'driver' => 'eloquent',
+            'model' => App\Models\dokter::class,
         ],
     ],
 

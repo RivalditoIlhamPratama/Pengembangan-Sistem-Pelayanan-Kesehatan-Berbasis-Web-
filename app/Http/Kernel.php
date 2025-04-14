@@ -33,6 +33,7 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'pasien' => \App\Http\Middleware\PasienMiddleware::class,
+        'dokter' => \App\Http\Middleware\DokterMiddleware::class,
     ];
 
     protected $middlewareGroups = [

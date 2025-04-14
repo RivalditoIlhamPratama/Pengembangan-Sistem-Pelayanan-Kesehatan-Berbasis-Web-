@@ -29,6 +29,7 @@
                 <li class="link"><a href="{{ route('pasien.dashboard') }}">Beranda</a></li>
                 <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
                 <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
+                <li class="link"><a href="{{ url('/') }}">Alur Pelayanan</a></li>
                 <li class="link"><a href="{{route('pasien.reports') }}">Pelayanan</a></li>
                 @if(auth()->check() && auth()->user()->role === 'pasien')
                 <li class="link">

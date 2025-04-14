@@ -3,38 +3,39 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use App\Models\Pasien;
+use App\Models\dokter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
-class PasienLoginTest extends TestCase
+class DokterLoginTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function pasien_can_login()
+    public function dokter_can_login()
     {
-        // Create user with patient role
+        // Create user with dokter role
         $user = User::factory()->create([
-            'username' => 'testuser',
+            'username' => 'dokteruser',
             'password' => bcrypt('password123'),
-            'role' => 'pasien'
+            'role' => 'dokter'
         ]);
 
-        // Create complete patient record
-        Pasien::factory()->create([
+        // Create complete dokter record
+        dokter::factory()->create([
             'user_id' => $user->id_user,
-            'namaPasien' => 'Test Patient',
+            'namaDokter' => 'Test Dokter',
+            'spesialis' => 'Umum',
             'jenisKelamin' => 'Pria',
-            'noHp' => '08123456789',
-            'alamatPasien' => 'Test Address',
-            'email' => 'pasien@example.com'
+            'jadwalPraktek' => 'Senin-Jumat',
+            'tglLahir' => '1980-01-01',
+            'alamatDokter' => 'Test Address'
         ]);
 
         // Attempt login
         $response = $this->post('/login', [
-            'username' => 'testuser',
+            'username' => 'dokteruser',
             'password' => 'password123'
         ]);
 
@@ -48,23 +49,24 @@ class PasienLoginTest extends TestCase
     public function invalid_credentials_fail()
     {
         $user = User::factory()->create([
-            'username' => 'testuser',
+            'username' => 'dokteruser',
             'password' => bcrypt('password123'),
-            'role' => 'pasien'
+            'role' => 'dokter'
         ]);
 
-        Pasien::factory()->create([
+        dokter::factory()->create([
             'user_id' => $user->id_user,
-            'namaPasien' => 'Test Patient',
+            'namaDokter' => 'Test Dokter',
+            'spesialis' => 'Umum',
             'jenisKelamin' => 'Pria',
-            'noHp' => '08123456789',
-            'alamatPasien' => 'Test Address',
-            'email' => 'pasien@example.com'
+            'jadwalPraktek' => 'Senin-Jumat',
+            'tglLahir' => '1980-01-01',
+            'alamatDokter' => 'Test Address'
         ]);
 
         // Attempt login with wrong password
         $response = $this->post('/login', [
-            'username' => 'testuser',
+            'username' => 'dokteruser',
             'password' => 'wrongpassword'
         ]);
 
