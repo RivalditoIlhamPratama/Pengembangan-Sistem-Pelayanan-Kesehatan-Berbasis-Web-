@@ -15,7 +15,7 @@
                 </button>
             </div>
             <div>
-                <a href="{{ route('dokter.tambah_rekam_medis') }}" class="btn btn-primary">
+                <a href="#" class="btn btn-primary">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
                 <button id="exportPdf" class="btn btn-danger">
@@ -47,7 +47,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php 
+                    @php
                         $rekamMedis = [
                             ['RM01', '315237128', '2025-01-10', 'Tn. A', 'Dr. Maya Rahma', '36.8°C', '120/80 mmHg', '75 bpm', '170 cm', '65 kg', 'Sehat'],
                             ['RM02', '315237129', '2025-01-11', 'Ny. B', 'Dr. Alamsyah Teguh', '37.5°C', '130/85 mmHg', '78 bpm', '165 cm', '60 kg', 'Flu'],
@@ -74,7 +74,7 @@
                         <td><strong>{{ $data[10] }}</strong></td>
                         <td>
                             <button class="btn btn-sm btn-info detail-btn"
-                                data-bs-toggle="modal" 
+                                data-bs-toggle="modal"
                                 data-bs-target="#detailModal"
                                 data-no="{{ $data[0] }}" data-nik="{{ $data[1] }}" data-date="{{ $data[2] }}"
                                 data-pasien="{{ $data[3] }}" data-dokter="{{ $data[4] }}" data-suhu="{{ $data[5] }}"
@@ -135,10 +135,10 @@
 document.getElementById("exportPdf").addEventListener("click", function() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    
+
     doc.text("Data Rekam Medis", 14, 10);
     doc.autoTable({ html: "#rekamMedisTable" });
-    
+
     doc.save("Data_Rekam_Medis.pdf");
 });
 
@@ -146,7 +146,7 @@ document.getElementById("exportExcel").addEventListener("click", function() {
     let table = document.getElementById("rekamMedisTable");
     let wb = XLSX.utils.book_new();
     let ws = XLSX.utils.table_to_sheet(table);
-    
+
     XLSX.utils.book_append_sheet(wb, ws, "Data Rekam Medis");
     XLSX.writeFile(wb, "Data_Rekam_Medis.xlsx");
 });

@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('adminpuskesmas', function (Blueprint $table) {
             $table->id('idAdmin');
-            $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('user_id');
+            $table->string('namaAdmin');
             $table->enum('jenisKelamin',['Pria', 'Wanita']);
             $table->string('noHp');
             $table->text('alamatAdmin');
             $table->string('email');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');
         });
     }
 

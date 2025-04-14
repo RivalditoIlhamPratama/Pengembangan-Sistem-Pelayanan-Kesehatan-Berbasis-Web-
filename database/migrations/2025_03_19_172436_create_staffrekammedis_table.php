@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('staffrekammedis', function (Blueprint $table) {
             $table->id('idStaffRm');
-            $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('user_id');
             $table->string('namaStaff');
             $table->enum('jenisKelamin',['Pria', 'Wanita']);
             $table->string('noHp');
             $table->text('alamatStaff');
             $table->string('email');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');
         });
     }
 

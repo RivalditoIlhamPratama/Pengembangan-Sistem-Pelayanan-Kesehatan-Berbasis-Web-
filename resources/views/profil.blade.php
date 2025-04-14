@@ -12,7 +12,7 @@
       href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
     />
     <link rel="stylesheet" href="{{ asset('assets/profil.css') }}">
-
+    <script src="{{ asset('assets/main.js') }}" defer></script>
     <title>Puskesmas Kraksaan</title>
   </head>
   <body>
@@ -20,33 +20,58 @@
       <nav>
         <div class="nav__header">
           <div class="nav__logo">
-            <a href="#"><img src="assets/11.png" alt="logo" />Puskesmas Kraksaan</a>
+            <a href="{{ url('/') }}"><img src="assets/11.png" alt="logo" />Puskesmas Kraksaan</a>
           </div>
           <div class="nav__menu__btn" id="menu-btn">
             <span><i class="ri-menu-line"></i></span>
           </div>
         </div>
         <ul class="nav__links" id="nav-links">
-          <li class="link"><a href="{{ url('/') }}">Beranda</a></li>
-          <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
-          <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
-          <li class="link"><a href="{{ url('/') }}">Alur Pelayanan</a></li>
-          <li class="link"><a href="{{ url('/aduanmasyarakat') }}">Pengaduan</a></li>
-          <li class="link">
-            
-            <a href="login.html" class="btn-link">
-              <button class="btn">Login</button>
-            </a>
-          </li>
-          <li class="link">
-            <a href="login.html" class="btn-link">
-              <button class="btn">Daftar</button>
-            </a>
-          </li>
+            @if(auth()->check() && auth()->user()->role === 'pasien')
+            <li class="link"><a href="{{ route('pasien.dashboard') }}">Beranda</a></li>
+            <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
+            <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
+            <li class="link"><a href="{{ url('/') }}">Alur Pelayanan</a></li>
+            @endif
+            @if(!auth()->check() || (auth()->check() && auth()->user()->role !== 'pasien'))
+            <li class="link"><a href="{{ url('/') }}">Beranda</a></li>
+            <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
+            <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
+            <li class="link"><a href="{{ url('/') }}">Alur Pelayanan</a></li>
+            @endif
+            <li class="link"><a class="@unless(auth()->check() && auth()->user()->role === 'pasien') disabled-link @endunless" href="{{ url('/aduanmasyarakat') }}">Pengaduan</a></li>
+            @if(!auth()->check() || (auth()->check() && auth()->user()->role !== 'pasien'))
+            <li class="link">
+                <a href="{{ url('/login') }}" class="btn-link">
+                <button class="btn">Login</button>
+                </a>
+            </li>
+            <li class="link">
+                <a href="{{ url('/login') }}" class="btn-link">
+                <button class="btn">Daftar</button>
+                </a>
+            </li>
+            @endif
+            @if(auth()->check() && auth()->user()->role === 'pasien')
+            <li class="link">
+                <div class="flex items-center space-x-4">
+                    <button class="flex items-center space-x-3">
+                        <i class="ri-user-fill text-xl"></i>
+                        <span>{{ auth()->user()->name }}</span>
+                    </button>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="text-white hover:text-gray-300">
+                            <i class="ri-logout-box-r-line text-xl"></i>
+                        </button>
+                    </form>
+                </div>
+            </li>
+            @endif
         </ul>
       </nav>
     </header>
-    
+
 
     <section class="about">
         <div class="container">
@@ -61,7 +86,7 @@
           </div>
         </div>
       </section>
-      
+
       <section class="visi-misi">
         <div class="container">
           <div class="visi-misi__content">
@@ -75,7 +100,7 @@
           </div>
         </div>
       </section>
-      
+
       <section class="struktur-organisasi">
         <div class="container">
           <h2>Struktur Organisasi</h2>
@@ -84,32 +109,32 @@
               <img src="assets/Kepalapuskesmas.png" alt="dr. Iqbal Kurniawadi">
               <h3>dr. Iqbal Kurniawadi</h3>
               <p>Kepala Puskesmas Kraksaan</p>
-              
+
             </div>
             <div class="struktur-row">
               <div class="struktur-item">
                 <img src="assets/dokter.png" alt="Cholidun">
                 <h3>Cholidun</h3>
                 <p>Dokter Umum</p>
-                
+
               </div>
               <div class="struktur-item">
                 <img src="assets/tatausaha.png" alt="Fajiz Ilyasri">
                 <h3>Fajiz Ilyasri</h3>
                 <p>Bidan</p>
-                
+
               </div>
               <div class="struktur-item">
                 <img src="assets/dokter.png" alt="Ferdi Kurniawan">
                 <h3>Ferdi Kurniawan</h3>
                 <p>Pengelola Keuangan</p>
-                
+
               </div>
             </div>
           </div>
         </div>
       </section>
-      
+
         <!--Footer-->
         <footer class="footer">
             <div class="section__container footer__container">
@@ -118,9 +143,9 @@
                   <a href="#"><img src="assets/11.png" alt="logo" />Puskesmas Kraksaan</a>
                 </div>
                 <p>
-                  layanan digital seperti jadwal praktik dokter, 
-                  daftar tenaga medis profesional, 
-                  rincian tarif layanan, hingga artikel 
+                  layanan digital seperti jadwal praktik dokter,
+                  daftar tenaga medis profesional,
+                  rincian tarif layanan, hingga artikel
                   edukasi kesehatan yang bermanfaat.
                 </p>
                 <div class="footer__socials">
@@ -156,11 +181,10 @@
             </div>
           </footer>
           <!--End Footer-->
-      
+
           <script src="https://unpkg.com/scrollreveal"></script>
           <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-          <script src="main.js"></script>
-      
+
         </body>
       </html>
 

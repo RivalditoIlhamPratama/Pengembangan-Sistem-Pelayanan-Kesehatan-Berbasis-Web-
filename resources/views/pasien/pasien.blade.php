@@ -12,42 +12,46 @@
       href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
     />
     <link rel="stylesheet" href="{{ asset('assets/styles.css') }}">
-    <script src="{{ asset('assets/main.js') }}" defer></script>
     <title>Puskesmas Kraksaan</title>
   </head>
   <body>
     <header class="header">
-      <nav>
-        <div class="nav__header">
-          <div class="nav__logo">
-            <a href="{{ url('/') }}"><img src="assets/11.png" alt="logo" />Puskesmas Kraksaan</a>
-          </div>
-          <div class="nav__menu__btn" id="menu-btn">
-            <span><i class="ri-menu-line"></i></span>
-          </div>
-        </div>
-        <ul class="nav__links" id="nav-links">
-          <li class="link"><a href="{{ url('/') }}">Beranda</a></li>
-          <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
-          <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
-          <li class="link"><a href="{{ url('/') }}">Alur Pelayanan</a></li>
-          <li class="link"><a class="disabled-link" href="{{ url('/aduanmasyarakat') }}">Pengaduan</a></li>
-          <li class="link">
-
-            <a href="{{ url('/login') }}" class="btn-link">
-              <button class="btn">Login</button>
-            </a>
-          </li>
-          <li class="link">
-            <a href="{{ url('/login') }}" class="btn-link">
-              <button class="btn">Daftar</button>
-            </a>
-          </li>
-        </ul>
-      </nav>
+        <nav>
+            <div class="nav__header">
+                <div class="nav__logo">
+                    <a href="{{ route('pasien.dashboard') }}"><img src="{{ asset('assets/11.png') }}" alt="logo" />Puskesmas Kraksaan</a>
+                </div>
+                <div class="nav__menu__btn" id="menu-btn">
+                    <span><i class="ri-menu-line"></i></span>
+                </div>
+            </div>
+            <ul class="nav__links" id="nav-links">
+                <li class="link"><a href="{{ route('pasien.dashboard') }}">Beranda</a></li>
+                <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
+                <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
+                <li class="link"><a href="{{ url('/') }}">Alur Pelayanan</a></li>
+                <li class="link"><a href="{{route('pasien.reports') }}">Pelayanan</a></li>
+                @if(auth()->check() && auth()->user()->role === 'pasien')
+                <li class="link">
+                    <div class="flex items-center space-x-4">
+                        <button class="flex items-center space-x-3">
+                            <i class="ri-user-fill text-xl"></i>
+                            <span>{{ auth()->user()->name }}</span>
+                        </button>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="text-white hover:text-gray-300">
+                                <i class="ri-logout-box-r-line text-xl"></i>
+                            </button>
+                        </form>
+                    </div>
+                </li>
+                @endif
+            </ul>
+        </nav>
       <div class="section__container header__container" id="home">
         <div class="header__image">
-          <img src="assets/icon Header.png" alt="header" />
+          <img src="{{ asset('assets/icon Header.png') }}" alt="header" />
         </div>
         <div class="header__content">
           <h4>Pelayanan Masyarakat</h4>
@@ -99,7 +103,7 @@
         <h2>Dokter Puskesmas Kraksaan</h2> <br>
         <div class="doctor-card-container">
           <div class="doctor-card">
-            <img src="assets/dokter.png" alt="Dr. Komang Ayu" class="doctor-img" />
+            <img src="{{ asset('assets/dokter.png') }}" alt="Dr. Komang Ayu" class="doctor-img" />
             <div class="doctor-info">
               <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
               <br>
@@ -109,7 +113,7 @@
             </div>
           </div>
           <div class="doctor-card">
-            <img src="assets/Dokter1.jpg" alt="Dr. Ni Made Maya" class="doctor-img" />
+            <img src="{{ asset('assets/Dokter1.jpg') }}" alt="Dr. Ni Made Maya" class="doctor-img" />
             <div class="doctor-info">
               <h3>dr. Ni Made Maya Purnama Wulandari, Sp.A</h3>
               <br>
@@ -119,7 +123,7 @@
             </div>
           </div>
           <div class="doctor-card">
-            <img src="assets/dokter.png" alt="Dr. Muhammad Reza" class="doctor-img" />
+            <img src="{{ asset('assets/dokter.png') }}" alt="Dr. Muhammad Reza" class="doctor-img" />
             <div class="doctor-info">
               <h3>dr. Muhammad Reza, M.Biomed, Sp.A.(K)</h3>
               <br>
@@ -129,7 +133,7 @@
             </div>
           </div>
           <div class="doctor-card">
-            <img src="assets/dokter.png" alt="Dr. Yessi Rahmawati" class="doctor-img" />
+            <img src="{{ asset('assets/dokter.png') }}" alt="Dr. Yessi Rahmawati" class="doctor-img" />
             <div class="doctor-info">
               <h3>dr. Yessi Rahmawati, Sp.OG. (K)</h3>
               <br>
@@ -156,7 +160,7 @@
           <br>
           <div class="berita-container">
               <div class="news-card">
-                  <img src="assets/Berita.jpeg" alt="Puskesmas Image">
+                  <img src="{{ asset('assets/Berita.jpeg') }}" alt="Puskesmas Image">
                   <div class="news-info">
                       <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
                       <p>SEMENTARA: Banner yang terpasang di pintu masuk Puskesmas Pakuriran. Puskesmas Pakuriran menutup layanan kesehatan...</p>
@@ -167,7 +171,7 @@
 
               <!-- Repeat the news-card for other entries -->
               <div class="news-card">
-                  <img src="assets/berita.jpg" alt="Puskesmas Image">
+                  <img src="{{ asset('assets/berita.jpg') }}" alt="Puskesmas Image">
                   <div class="news-info">
                       <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
                       <p>SEMENTARA: Banner yang terpasang di pintu masuk Puskesmas Pakuriran. Puskesmas Pakuriran menutup layanan kesehatan...</p>
@@ -178,7 +182,7 @@
 
               <!-- Repeat the news-card for other entries -->
               <div class="news-card">
-                <img src="assets/Berita.jpeg" alt="Puskesmas Image">
+                <img src="{{ asset('assets/Berita.jpeg') }}" alt="Puskesmas Image">
                 <div class="news-info">
                     <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
                     <p>SEMENTARA: Banner yang terpasang di pintu masuk Puskesmas Pakuriran. Puskesmas Pakuriran menutup layanan kesehatan...</p>
@@ -189,7 +193,7 @@
 
 
             <div class="news-card">
-              <img src="assets/Berita.jpeg" alt="Puskesmas Image">
+              <img src="{{ asset('assets/Berita.jpeg') }}" alt="Puskesmas Image">
               <div class="news-info">
                   <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
                   <p>SEMENTARA: Banner yang terpasang di pintu masuk Puskesmas Pakuriran. Puskesmas Pakuriran menutup layanan kesehatan...</p>
@@ -199,7 +203,7 @@
           </div>
 
           <div class="news-card">
-            <img src="assets/Berita.jpeg" alt="Puskesmas Image">
+            <img src="{{ asset('assets/Berita.jpeg') }}" alt="Puskesmas Image">
             <div class="news-info">
                 <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
                 <p>SEMENTARA: Banner yang terpasang di pintu masuk Puskesmas Pakuriran. Puskesmas Pakuriran menutup layanan kesehatan...</p>
@@ -210,7 +214,7 @@
 
 
         <div class="news-card">
-          <img src="assets/Berita.jpeg" alt="Puskesmas Image">
+          <img src="{{ asset('assets/Berita.jpeg') }}" alt="Puskesmas Image">
           <div class="news-info">
               <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
               <p>SEMENTARA: Banner yang terpasang di pintu masuk Puskesmas Pakuriran. Puskesmas Pakuriran menutup layanan kesehatan...</p>
@@ -239,7 +243,7 @@
       <div class="section__container footer__container">
         <div class="footer__col">
           <div class="footer__logo">
-            <a href="#"><img src="assets/11.png" alt="logo" />Puskesmas Kraksaan</a>
+            <a href="#"><img src="{{ asset('assets/11.png') }}" alt="logo" />Puskesmas Kraksaan</a>
           </div>
           <p>
             layanan digital seperti jadwal praktik dokter,
@@ -283,7 +287,7 @@
 
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-
+    <script src="{{ asset('assets/main.js') }}"></script>
 
   </body>
 </html>

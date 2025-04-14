@@ -21,7 +21,21 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                $user = Auth::guard($guard)->user();
+                switch($user->role) {
+                case 'pasien':
+                    return redirect()->intended('/pasien/dashboard');
+                case 'admin':
+                    return redirect()->intended('/admin/dashboard');
+                case 'klinik':
+                    return redirect()->intended('/klinik/dashboard');
+                case 'dokter':
+                    return redirect()->intended('/dokter/dashboard');
+                case 'staffrekmedis':
+                    return redirect()->intended('/rekam-medis/dashboard');
+                default:
+                    return redirect()->intended('/');
+            }
             }
         }
 

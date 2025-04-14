@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('pasiens', function (Blueprint $table) {
             $table->id('idPasien');
-            $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('user_id');
             $table->string('namaPasien');
             $table->enum('jenisKelamin',['Pria', 'Wanita']);
             $table->string('noHp');
             $table->text('alamatPasien');
             $table->string('email');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');
         });
     }
 

@@ -1,6 +1,11 @@
 <?php
+
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DokterController;
+use App\Http\Controllers\PasienController;
+use App\Http\Controllers\PengaduanController;
+use App\Http\Controllers\RekammedisController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,99 +20,42 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index'); // Akan mencari file index.blade.php di resources/views
+    return view('index');
 });
 
+Route::get('/login', function () {
+    return view('auth/login');
+})->name('login');
+
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login.post');
+Route::post('/logout', [\App\Http\Controllers\Auth\LogoutController::class, 'post'])->name('logout');
+
 Route::get('/profil', function () {
-    return view('profil'); // Akan mencari profil.blade.php di resources/views
+    return view('profil');
 });
 
 Route::get('/dokter', function () {
-    return view('daftardokter'); // Akan menampilkan daftardokter.blade.php
+    return view('daftardokter');
 });
 
-
-Route::get('/aduanmasyarakat', function () {
-    return view('aduanmasyarakat'); // Akan menampilkan aduanmasyarakat.blade.php
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::get('/data-pengaduan', [AdminController::class, 'data_pengaduan'])->name('admin.data_pengaduan');
+    Route::get('/laporan-klinik', [AdminController::class, 'laporan_klinik'])->name('admin.laporan_klinik');
+    Route::get('/data-dokter', [AdminController::class, 'data_dokter'])->name('admin.data_dokter');
 });
 
-
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+Route::middleware(['auth', 'pasien'])->prefix('pasien')->group(function () {
+    Route::get('/dashboard', [PasienController::class, 'dashboard'])->name('pasien.dashboard');
+    Route::get('/aduan', [PasienController::class, 'reports'])->name('pasien.reports');
+    Route::post('/submit-pengaduan', [PengaduanController::class, 'store'])->name('pasien.reports.submit');
 });
 
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::middleware(['auth', 'dokter'])->prefix('dokter')->group(function () {
+    Route::get('/dashboard', [DokterController::class, 'dashboard'])->name('dokter.dashboard');
+    Route::get('/data_dokter', [DokterController::class, 'data_dokter'])->name('dokter.data_dokter');
+    Route::get('/data_dokter/tambah', [DokterController::class, 'store'])->name('dokter.data_dokter.store');
+    Route::get('/rekam_medis', [DokterController::class, 'rekam_medis'])->name('dokter.rekam_medis');
+    Route::get('/rekam_medis/tambah', [RekammedisController::class, 'store'])->name('dokter.rekam_medis.submit');
 });
-
-
-
-// Halaman "admin/"
- 
-Route::prefix('admin')->group(function () {  // Semua route di dalam group ini akan memiliki prefix "admin/"
-    
-    // Route untuk halaman Dashboard Admin
-    Route::get('/dashboard', function () {   // Menangani permintaan GET ke "admin/dashboard"
-        return view('admin.dashboard');      // Menampilkan view "resources/views/admin/dashboard.blade.php"
-    })->name('admin.dashboard');             // Memberikan nama "admin.dashboard" untuk route ini
-    
-    // Route untuk halaman Data Pengguna
-    Route::get('/users', function () {       // Menangani permintaan GET ke "admin/users"
-        return view('admin.users');          // Menampilkan view "resources/views/admin/users.blade.php"
-    })->name('admin.users');                 // Nama route: "admin.users"
-
-    // Route untuk halaman Data Pengaduan
-    Route::get('/data-pengaduan', function () {   // Menangani permintaan GET ke "admin/data-pengaduan"
-        return view('admin.data_pengaduan');      // Menampilkan view "resources/views/admin/data_pengaduan.blade.php"
-    })->name('admin.data_pengaduan');             // Nama route: "admin.data_pengaduan"
-
-    // Route untuk halaman Laporan Klinik
-    Route::get('laporan-klinik', function () {   // Menangani permintaan GET ke "admin/laporan-klinik"
-        return view('admin.laporan_klinik');     // Menampilkan view "resources/views/admin/laporan_klinik.blade.php"
-    })->name('admin.laporan_klinik');            // Nama route: "admin.laporan_klinik"
-
-    // Route untuk halaman Data Dokter
-    Route::get('data-dokter', function () {   // Menangani permintaan GET ke "admin/data-dokter"
-        return view('admin.data_dokter');     // Menampilkan view "resources/views/admin/data_dokter.blade.php"
-    })->name('admin.data_dokter');            // Nama route: "admin.data_dokter"
-    
-});
-
-
-// halaman Dokter
-
-Route::prefix('dokter')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dokter.dashboard');
-    })->name('dokter.dashboard');
-
-    Route::get('/data-dokter', function () {
-        return view('dokter.data_dokter');
-    })->name('dokter.data_dokter');
-
-    Route::prefix('dokter')->group(function () {
-        Route::get('/rekam-medis', function () {
-            return view('dokter.rekam_medis');
-        })->name('dokter.rekam_medis');
-    });
-    
-    Route::prefix('dokter')->group(function () {
-    Route::get('/rekam-medis', function () {
-        return view('dokter.rekam_medis');
-    })->name('dokter.rekam_medis');
-
-    Route::get('/rekam-medis/tambah', function () {
-        return view('dokter.tambah_rekam_medis');
-    })->name('dokter.tambah_rekam_medis');
-});
-Route::get('/tambah-dokter', function () {
-    return view('dokter.tambah_dokter');
-})->name('dokter.tambah_dokter');
-
-});
-
-
-
-
-
