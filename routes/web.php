@@ -105,7 +105,20 @@ Route::get('/tambah-dokter', function () {
     return view('dokter.tambah_dokter');
 })->name('dokter.tambah_dokter');
 
+
+
 });
+
+Route::prefix('staff')->group(function () {
+    Route::get('/rekam-medis', function () {
+        return view('staff.rm');
+    })->name('staff.rm');
+});
+
+
+
+
+
 
 
 
