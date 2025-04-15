@@ -7,19 +7,14 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations
      */
     public function up(): void
     {
         Schema::create('waktus', function (Blueprint $table) {
             $table->id('idWaktu');
-            $table->unsignedBigInteger('dokter_id');
-            $table->string('hari');
             $table->time('jamMulai');
             $table->time('jamSelesai');
-            $table->timestamps();
-
-            $table->foreign('dokter_id')->references('idDokter')->on('dokters')->onDelete('cascade');
         });
     }
 

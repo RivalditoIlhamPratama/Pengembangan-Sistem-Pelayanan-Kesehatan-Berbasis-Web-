@@ -5,9 +5,6 @@
     <div class="card p-4 shadow-sm">
         <h2 class="mb-4 fw-bold">Data Dokter</h2>
 
-
-
-        
         <!-- Tabel Data Dokter -->
         <div class="table-responsive">
             <table id="dokterTable" class="table table-striped table-bordered table-hover">
@@ -23,35 +20,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php 
-                        $dokterList = [
-                            ['1', 'Dr Alamsyah Teguh', 'Umum', 'Laki Laki', 'Senin & Rabu, 08:00 - 12:00', '081234234223'],
-                        ];
-                    @endphp
-
-                    @foreach($dokterList as $dokter)
                     <tr class="align-middle text-center">
-                        <td>{{ $dokter[0] }}</td>
-                        <td class="text-start">{{ $dokter[1] }}</td>
-                        <td>{{ $dokter[2] }}</td>
-                        <td>{{ $dokter[3] }}</td>
-                        <td>{{ $dokter[4] }}</td>
-                        <td>{{ $dokter[5] }}</td>
+                        <td>1</td>
+                        <td class="text-start">{{ $dokter->namaDokter }}</td>
+                        <td>{{ $dokter->spesialis }}</td>
+                        <td>{{ $dokter->jenisKelamin }}</td>
+                        <td>{{ $dokter->jadwalPraktek ?? '-' }}</td>
+                        <td>{{ $dokter->noTelepon ?? '-' }}</td>
                         <td>
-                            <button class="btn btn-sm btn-warning edit-btn" 
-                                data-bs-toggle="modal" 
+                            <button class="btn btn-sm btn-warning edit-btn"
+                                data-bs-toggle="modal"
                                 data-bs-target="#editModal"
-                                data-id="{{ $dokter[0] }}"
-                                data-nama="{{ $dokter[1] }}"
-                                data-spesialis="{{ $dokter[2] }}"
-                                data-kelamin="{{ $dokter[3] }}"
-                                data-jadwal="{{ $dokter[4] }}"
-                                data-telepon="{{ $dokter[5] }}">
+                                data-id="{{ $dokter->idDokter }}"
+                                data-nama="{{ $dokter->namaDokter }}"
+                                data-spesialis="{{ $dokter->spesialis }}"
+                                data-kelamin="{{ $dokter->jenisKelamin }}"
+                                data-jadwal="{{ $dokter->jadwalPraktek ?? '' }}"
+                                data-telepon="{{ $dokter->noTelepon ?? '' }}">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </td>
                     </tr>
-                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -114,7 +103,6 @@ document.querySelectorAll(".edit-btn").forEach(button => {
         document.getElementById("editTelepon").value = this.getAttribute("data-telepon");
     });
 });
-
 </script>
 
 @endsection

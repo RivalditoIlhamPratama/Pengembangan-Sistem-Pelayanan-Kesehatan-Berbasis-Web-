@@ -11,8 +11,7 @@ class waktu extends Model
 
     protected $fillable =['jamMulai','jamSelesai'];
 
-    public function dokter()
-    {
-        return $this->belongsTo(Dokter::class, 'dokter_id', 'idDokter');
+    public function jadwal(){
+        return $this->hasMany(hari::class,'Waktu_id','idWaktu');
     }
 }

@@ -13,25 +13,22 @@ class PasienSeeder extends Seeder
     {
         // Create 10 unique patient users
         for ($i = 1; $i <= 10; $i++) {
-            try {
-                $user = User::create([
-                    'username' => 'pasien' . $i,
-                    'password' => Hash::make('password123'),
-                    'role' => 'pasien'
-                ]);
+            $user = User::create([
+                'username' => 'pasien' . $i,
+                'password' => Hash::make('password123'),
+                'role' => 'pasien'
+            ]);
+            echo "Created user: " . $user->username . "\n";
 
-                pasien::create([
-                    'user_id' => $user->id_user,
-                    'namaPasien' => 'Patient ' . $i,
-                    'jenisKelamin' => $i % 2 ? 'Pria' : 'Wanita',
-                    'noHp' => '0812345678' . $i,
-                    'alamatPasien' => 'Jl. Example No.' . $i,
-                    'email' => 'patient' . $i . '@example.com'
-                ]);
-            } catch (\Exception $e) {
-                // Skip duplicate entries
-                continue;
-            }
+            $pasien = pasien::create([
+                'user_id' => $user->id_user,
+                'namaPasien' => 'Patient ' . $i,
+                'jenisKelamin' => $i  % 2 ? 'Laki-laki' : 'Perempuan',
+                'noHp' => '0812345678' . $i,
+                'alamatPasien' => 'Jl. Example No.' . $i,
+                'email' => 'patient' . $i . '@example.com'
+            ]);
+            echo "Created pasien: " . $pasien->namaPasien . "\n";
         }
 
         echo "Created 10 patient records\n";

@@ -11,6 +11,8 @@ class dokter extends Model
 
     protected $fillable =['namaDokter','spesialis','jenisKelamin','jadwalPraktek','tglLahir','alamatDokter'];
 
+    public $timestamps = false;
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id_user');

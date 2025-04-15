@@ -9,7 +9,9 @@ class pasien extends Model
 {
     use HasFactory;
 
-    protected $fillable =['namaPasien','jenisKelamin','noHp','alamatPasien','email'];
+    public $timestamps = false;
+
+    protected $fillable = ['user_id', 'namaPasien', 'jenisKelamin', 'noHp', 'alamatPasien', 'email'];
 
     public function user()
     {

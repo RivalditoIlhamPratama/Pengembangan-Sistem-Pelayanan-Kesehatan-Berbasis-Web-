@@ -56,15 +56,15 @@ class LoginController extends Controller
             $user = Auth::user();
             switch($user->role) {
                 case 'pasien':
-                    return redirect()->intended('/pasien/dashboard');
+                    return redirect()->intended('/pasien/dashboard')->with('login_success', true);
                 case 'admin':
-                    return redirect()->intended('/admin/dashboard');
+                    return redirect()->intended('/admin/dashboard')->with('login_success', true);
                 case 'klinik':
-                    return redirect()->intended('/klinik/dashboard');
+                    return redirect()->intended('/klinik/dashboard')->with('login_success', true);
                 case 'dokter':
-                    return redirect()->intended('/dokter/dashboard');
+                    return redirect()->intended('/dokter/dashboard')->with('login_success', true);
                 case 'staffrekmedis':
-                    return redirect()->intended('/rekam-medis/dashboard');
+                    return redirect()->intended('/rekam-medis/dashboard')->with('login_success', true);
                 default:
                     return redirect()->intended('/');
             }

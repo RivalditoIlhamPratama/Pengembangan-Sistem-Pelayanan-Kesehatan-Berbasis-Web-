@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Dokter;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class DokterSeeder extends Seeder
 {
@@ -14,34 +15,24 @@ class DokterSeeder extends Seeder
     public function run()
     {
         // Create specific test users
-        Dokter::create([
-            'namaDokter' => 'Siti Jamila, Amd. Keb',
-            'spesialis' => 'KLASTER 2',
-            'jenisKelamin' => 'Perempuan',
-            'jadwalPraktek' => 'KLASTER 2',
-            'tglLahir' => '2002-04-16',
-            'alamatDokter' => 'wqwqqwqwq'
-        ],
-        [
-            'namaDokter' => 'drg. Dwi Wahyudi',
-            'spesialis' => 'LINTAS KLASTER GIGI',
-            'jenisKelamin' => 'Laki-laki',
-            'jadwalPraktek' => 'KLASTER 2',
-            'tglLahir' => '2002-04-16',
-            'alamatDokter' => 'wqwqqwqwq'
-        ],
-        ['namaDokter' => 'test',
-        'spesialis' => 'test123',
-        'jenisKelamin' => 'admin',
-        'tglLahir' => 'admin',
-        'alamatDokter' => 'admin'
-        ],
-        ['namaDokter' => 'test',
-            'spesialis' => 'test123',
-            'jenisKelamin' => 'admin',
-            'tglLahir' => 'admin',
-            'alamatDokter' => 'admin'
-        ],
-    );
+        $nama = ['Siti Jamila, Amd. Keb','drg. Dwi Wahyudi',' dr. Heni Rahmawati',' dr. Fathullah Huda'];
+        for ($i = 0; $i < count($nama); $i++) {
+            $user = User::create([
+                'username' => 'dokter' . ($i + 1),
+                'password' => Hash::make('password'),
+                'role' => 'dokter'
+            ]);
+            echo "Created user: " . $user->username . "\n";
+
+            $dokter = Dokter::create([
+                'user_id' => $user->id_user,
+                'namaDokter' => $nama[$i],
+                'spesialis' => 'Spesialis',
+                'jenisKelamin' => ($i + 1) % 2 ? 'Laki-laki' : 'Perempuan',
+                'tglLahir' => '2002-04-16',
+                'alamatDokter' => 'Jl. Example No.' . ($i + 1),
+            ]);
+            echo "Created dokter: " . $dokter->namaDokter . "\n";
+        }
     }
 }

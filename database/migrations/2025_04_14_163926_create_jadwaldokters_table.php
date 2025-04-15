@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('jadwaldokters', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('Dokter_id');
+            $table->unsignedBigInteger('Hari_id');
+            $table->unsignedBigInteger('Waktu_id');
+
+            $table->foreign('Dokter_id')->references('idDokter')->on('dokters')->onDelete('cascade');
+            $table->foreign('Hari_id')->references('idHari')->on('haris')->onDelete('restrict');
+            $table->foreign('Waktu_id')->references('idWaktu')->on('waktus')->onDelete('restrict');
         });
     }
 

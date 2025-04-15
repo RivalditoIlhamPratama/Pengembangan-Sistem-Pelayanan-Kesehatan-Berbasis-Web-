@@ -4,46 +4,46 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
-  }
-  
-  /* Background styling */
-  body {
+}
+
+/* Background styling */
+body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: #f5f5f5;
-  }
-  
-  /* Container styling */
-  .login-container {
+}
+
+/* Container styling */
+.login-container {
     background: white;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 400px;
-  }
-  
-  /* Title styling */
-  .login-container h2 {
+}
+
+/* Title styling */
+.login-container h2 {
     margin-bottom: 20px;
     font-size: 20px;
     font-weight: bold;
     color: #4a4a4a;
-  }
-  
-  /* Label styling */
-  .login-container label {
+}
+
+/* Label styling */
+.login-container label {
     display: block;
     text-align: left;
     font-size: 14px;
     margin-bottom: 5px;
     color: #555;
-  }
-  
-  /* Input styling */
-  .login-container input {
+}
+
+/* Input styling */
+.login-container input {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -51,15 +51,15 @@
     border-radius: 5px;
     font-size: 14px;
     background-color: #f7f7f7;
-  }
-  
-  /* Disabled input styling */
-  .login-container input:disabled {
+}
+
+/* Disabled input styling */
+.login-container input:disabled {
     color: #a0a0a0;
-  }
-  
-  /* Button styling */
-  .login-container button {
+}
+
+/* Button styling */
+.login-container button {
     width: 100%;
     padding: 10px;
     background-color: #007bff;
@@ -69,28 +69,33 @@
     cursor: pointer;
     font-size: 14px;
     margin-top: 10px;
-  }
-  
-  .login-container button:hover {
+}
+
+.login-container button:hover {
     background-color: #0056b3;
-  }
-  
-  /* Paragraph styling */
-  .login-container p {
+}
+
+/* Paragraph styling */
+.login-container p {
     font-size: 12px;
     margin-top: 15px;
     color: #555;
-  }
-  
-  /* Link styling */
-  .login-container a {
+}
+
+/* Link styling */
+.login-container a {
     text-decoration: none;
     color: #ffffff;
     font-weight: bold;
-  }
-  
-  
-  .custom-select-container {
+}
+.toggle-password {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+.spinner-border {
+    vertical-align: middle;
+}
+.custom-select-container {
     width: 100%;
     display: flex;
     align-items: center;
@@ -98,9 +103,9 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-  }
-  
-  .custom-select {
+}
+
+.custom-select {
     width: 100%;
     border: none;
     background: none;
@@ -108,11 +113,10 @@
     outline: none;
     appearance: none;
     cursor: pointer;
-  }
-  
-  
-  /* Styling untuk pop-up */
-  .popup {
+}
+
+/* Styling untuk pop-up */
+.popup {
     display: none;
     position: fixed;
     top: 0;
@@ -123,17 +127,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .popup-content {
+}
+
+.popup-content {
     background: white;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .popup-content button {
+}
+
+.popup-content button {
     margin-top: 10px;
     padding: 10px;
     border: none;
@@ -141,14 +145,13 @@
     color: white;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .popup-content button:hover {
+}
+
+.popup-content button:hover {
     background-color: #0056b3;
-  }
-  
-  
-  .login-button {
+}
+
+.login-button {
     display: block;
     text-align: center;
     width: 100%;
@@ -159,9 +162,8 @@
     text-decoration: none;
     font-size: 14px;
     margin-top: 10px;
-  }
-  
-  .login-button:hover {
+}
+
+.login-button:hover {
     background-color: #0056b3;
-  }
-  
+}
