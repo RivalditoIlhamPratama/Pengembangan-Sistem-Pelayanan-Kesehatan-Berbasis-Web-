@@ -18,4 +18,7 @@ class dokter extends Model
     public function rekammedis(){
         return $this->hasMany(Rekammedis::class, 'idDokter', 'Dokter_id');
     }
+    public function waktu(){
+        return $this->hasMany(Waktu::class, 'idDokter', 'Dokter_id');
+    }
 }

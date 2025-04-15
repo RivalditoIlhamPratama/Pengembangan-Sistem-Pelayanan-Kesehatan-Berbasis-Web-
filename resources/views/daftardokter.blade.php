@@ -15,8 +15,8 @@
   <title>Puskesmas Kraksaan</title>
 </head>
 <body>
-    <header class="header">
-        <nav>
+    <header class="header mt-0">
+        <nav class="mt-0">
             <div class="nav__header">
             <div class="nav__logo">
                 <a href="{{ url('/') }}"><img src="assets/11.png" alt="logo" />Puskesmas Kraksaan</a>
@@ -71,7 +71,7 @@
         </nav>
     </header>
 
-    <div>
+    <div class="container">
         <h2>Dokter Puskesmas Kraksaan</h2>
         <div class="doctor-card-container">
             <!-- Card Dokter -->
