@@ -34,14 +34,11 @@
           <li class="link"><a class="disabled-link" href="{{ url('/aduanmasyarakat') }}">Pengaduan</a></li>
           <li class="link">
 
-            <a href="{{ url('/login') }}" class="btn-link">
+            <a href="{{ route('login') }}" class="btn-link">
               <button class="btn">Login</button>
             </a>
-          </li>
-          <li class="link">
-            <a href="{{ url('/login') }}" class="btn-link">
-              <button class="btn">Daftar</button>
-            </a>
+
+
           </li>
         </ul>
       </nav>
