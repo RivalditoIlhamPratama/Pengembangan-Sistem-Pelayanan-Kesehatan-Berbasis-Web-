@@ -5,15 +5,7 @@
     <div class="card p-4 shadow-sm">
         <h2 class="mb-4 fw-bold">Data Dokter</h2>
 
-        <!-- Pencarian -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <div class="input-group w-25">
-                <input type="text" class="form-control" id="searchInput" placeholder="Search">
-                <button class="btn btn-outline-secondary" type="button">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </div>
+
 
         
         <!-- Tabel Data Dokter -->

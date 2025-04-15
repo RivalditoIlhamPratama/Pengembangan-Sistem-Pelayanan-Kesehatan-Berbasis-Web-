@@ -33,14 +33,11 @@
           <li class="link"><a href="{{ url('/aduanmasyarakat') }}">Pengaduan</a></li>
           <li class="link">
             
-            <a href="login.html" class="btn-link">
+            <a href="{{ route('login') }}" class="btn-link">
               <button class="btn">Login</button>
             </a>
-          </li>
-          <li class="link">
-            <a href="login.html" class="btn-link">
-              <button class="btn">Daftar</button>
-            </a>
+
+            
           </li>
         </ul>
       </nav>

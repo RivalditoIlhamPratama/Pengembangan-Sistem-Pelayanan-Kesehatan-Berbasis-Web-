@@ -14,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+
+
+
 Route::get('/', function () {
     return view('index'); // Akan mencari file index.blade.php di resources/views
 });
@@ -114,6 +125,9 @@ Route::prefix('staff')->group(function () {
         return view('staff.rm');
     })->name('staff.rm');
 });
+
+
+
 
 
 
