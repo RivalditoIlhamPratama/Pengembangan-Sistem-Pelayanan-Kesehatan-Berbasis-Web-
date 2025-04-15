@@ -9,6 +9,8 @@ class waktu extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable =['jamMulai','jamSelesai'];
 
     public function jadwal(){

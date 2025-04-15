@@ -69,5 +69,6 @@ Route::middleware(['auth', 'dokter'])->prefix('dokter')->group(function () {
     Route::get('/data_dokter/tambah', [DokterController::class, 'store'])->name('dokter.data_dokter.store');
     Route::post('/data_dokter/update', [DokterController::class, 'update'])->name('dokter.data_dokter.update');
     Route::get('/rekam_medis', [DokterController::class, 'rekam_medis'])->name('dokter.rekam_medis');
-    Route::get('/rekam_medis/tambah', [RekammedisController::class, 'store'])->name('dokter.rekam_medis.submit');
+    Route::get('/rekam_medis/tambah', [DokterController::class, 'tambah_rekam_medis'])->name('dokter.tambah_rekam_medis');
+    Route::get('/rekam_medis/submit', [RekammedisController::class, 'store'])->name('dokter.rekam_medis.submit');
 });

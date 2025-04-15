@@ -19,6 +19,11 @@ class DokterController extends Controller
     public function rekam_medis() {
         return view('dokter.rekam_medis');
     }
+    public function tambah_rekam_medis() {
+        $user = auth()->user();
+        $dokter = Dokter::where('user_id', $user->id_user)->first();
+        return view('dokter.tambah_rekam_medis', ['dokter' => $dokter]);
+    }
 
     public function update(Request $request)
     {
