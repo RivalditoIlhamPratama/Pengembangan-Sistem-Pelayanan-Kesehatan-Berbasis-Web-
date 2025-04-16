@@ -53,7 +53,7 @@ class User extends Authenticatable
     }
     public function dokter()
     {
-        return $this->hasMany(dokter::class, 'id_user', 'user_id');
+    return $this->hasMany(dokter::class, 'user_id', 'id_user');
     }
     public function staffrekmedis()
     {

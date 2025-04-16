@@ -9,7 +9,9 @@ class rekammedis extends Model
 {
     use HasFactory;
 
-    protected $fillable =['namaPasien','NIK','alamatPasien','tanggalRekamMedis','tekananDarah','nadi','suhu','tinggiBadan','beratBadan','diagnosaMedis'];
+    public $timestamps = false;
+
+    protected $fillable = ['StaffRm_id','Dokter_id', 'noRm', 'namaPasien', 'NIK', 'tanggalPeriksa', 'tekananDarah', 'nadi', 'suhu', 'tinggiBadan', 'beratBadan', 'diagnosaMedis'];
 
     public function staffrekammedis()
     {

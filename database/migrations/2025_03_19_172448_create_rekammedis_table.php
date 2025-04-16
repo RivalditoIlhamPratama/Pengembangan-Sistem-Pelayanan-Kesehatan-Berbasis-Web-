@@ -15,17 +15,16 @@ return new class extends Migration
             $table->id('idRekamMedis');
             $table->unsignedBigInteger('Dokter_id')->nullable();
             $table->unsignedBigInteger('StaffRm_id')->nullable();
+            $table->string('noRm');
             $table->string('namaPasien');
             $table->string('NIK');
-            $table->string('alamatPasien');
-            $table->date('tanggalRekamMedis');
+            $table->date('tanggalPeriksa');
             $table->string('tekananDarah');
             $table->string('nadi');
             $table->string('suhu');
             $table->string('tinggiBadan');
             $table->string('beratBadan');
             $table->string('diagnosaMedis');
-            $table->timestamps();
 
             $table->foreign('Dokter_id')->references('idDokter')->on('dokters')->onDelete('cascade');
             $table->foreign('StaffRm_id')->references('idStaffRm')->on('staffrekammedis')->onDelete('cascade');

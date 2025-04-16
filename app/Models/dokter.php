@@ -9,7 +9,9 @@ class dokter extends Model
 {
     use HasFactory;
 
-    protected $fillable =['namaDokter','spesialis','jenisKelamin','jadwalPraktek','tglLahir','alamatDokter'];
+    protected $primaryKey = 'idDokter';
+
+    protected $fillable =['user_id','namaDokter','spesialis','jenisKelamin','jadwalPraktek','tglLahir','alamatDokter'];
 
     public $timestamps = false;
 
