@@ -3,9 +3,14 @@
 @section('content')
 <div class="container-fluid mt-5">
     <div class="card p-4 shadow-sm">
-        <h2 class="mb-4 fw-bold">Data Rekam Medis</h2>
+            <h2 class="mb-4 fw-bold">Data Rekam Medis</h2>
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
 
-
+        @if($rekammedis->isEmpty())
+            <p>Tidak ada data rekam medis.</p>
+        @else
         <!-- Pencarian dan Tombol Tambah -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="input-group w-25">
@@ -15,7 +20,7 @@
                 </button>
             </div>
             <div>
-                <a href="{{ route('dokter.tambah_rekam_medis') }}" class="btn btn-primary">
+                <a href="#" class="btn btn-primary">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
                 <button id="exportPdf" class="btn btn-danger">
@@ -26,60 +31,52 @@
                 </button>
             </div>
         </div>
-
-        <!-- Tabel Data Rekam Medis -->
-        <div class="table-responsive">
-            <table id="rekamMedisTable" class="table table-striped table-bordered table-hover">
-                <thead class="table-light">
-                    <tr class="text-center">
-                        <th>No</th>
-                        <th>NIK</th>
-                        <th>Date</th>
+        <table id="rekamMedisTable" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>No RM</th>
                         <th>Nama Pasien</th>
-                        <th>Nama Dokter</th>
-                        <th>Suhu</th>
-                        <th>TD</th>
+                        <th>NIK</th>
+                        <th>Tanggal Periksa</th>
+                        <th>Tekanan Darah</th>
+                        <th>RR</th>
                         <th>Nadi</th>
-                        <th>TB</th>
-                        <th>BB</th>
-                        <th>Diagnosa</th>
+                        <th>Suhu</th>
+                        <th>Tinggi Badan</th>
+                        <th>Berat Badan</th>
+                        <th>Diagnosa Medis</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        $rekamMedis = [
-                            ['RM01', '315237128', '2025-01-10', 'Tn. A', 'Dr. Maya Rahma', '36.8°C', '120/80 mmHg', '75 bpm', '170 cm', '65 kg', 'Sehat'],
-                            ['RM02', '315237129', '2025-01-11', 'Ny. B', 'Dr. Alamsyah Teguh', '37.5°C', '130/85 mmHg', '78 bpm', '165 cm', '60 kg', 'Flu'],
-                            ['RM03', '315237130', '2025-02-01', 'Tn. C', 'Dr. Hargianto', '39.2°C', '140/90 mmHg', '82 bpm', '175 cm', '80 kg', 'Demam'],
-                            ['RM04', '315237131', '2025-02-05', 'Ny. D', 'Dr. Sheila Aqillah', '37.0°C', '125/85 mmHg', '76 bpm', '160 cm', '58 kg', 'Hipertensi'],
-                            ['RM05', '315237132', '2025-03-01', 'Tn. E', 'Dr. Bima Saptaji', '38.5°C', '135/80 mmHg', '80 bpm', '168 cm', '72 kg', 'Diabetes'],
-                            ['RM06', '315237133', '2025-03-10', 'Tn. F', 'Dr. Maya Rahma', '36.9°C', '120/85 mmHg', '74 bpm', '172 cm', '66 kg', 'Sehat'],
-                            ['RM07', '315237134', '2025-03-15', 'Ny. G', 'Dr. Alamsyah Teguh', '37.8°C', '128/86 mmHg', '79 bpm', '163 cm', '62 kg', 'Tonsilitis'],
-                        ];
-                    @endphp
-
-                    @foreach($rekamMedis as $data)
-                    <tr class="align-middle text-center">
-                        <td>{{ $data[0] }}</td>
-                        <td>{{ $data[1] }}</td>
-                        <td><strong>{{ $data[2] }}</strong></td>
-                        <td>{{ $data[3] }}</td>
-                        <td>{{ $data[4] }}</td>
-                        <td>{{ $data[5] }}</td>
-                        <td>{{ $data[6] }}</td>
-                        <td>{{ $data[7] }}</td>
-                        <td>{{ $data[8] }}</td>
-                        <td>{{ $data[9] }}</td>
-                        <td><strong>{{ $data[10] }}</strong></td>
+                    @foreach($rekammedis as $rekam)
+                    <tr>
+                        <td>{{ $rekam->noRm }}</td>
+                        <td>{{ $rekam->namaPasien }}</td>
+                        <td>{{ $rekam->NIK }}</td>
+                        <td>{{ \Carbon\Carbon::parse($rekam->tanggalPeriksa)->format('d-m-Y') }}</td>
+                        <td>{{ $rekam->tekananDarah }}</td>
+                        <td>{{ $rekam->RR }}</td>
+                        <td>{{ $rekam->nadi }}</td>
+                        <td>{{ $rekam->suhu }}</td>
+                        <td>{{ $rekam->tinggiBadan }}</td>
+                        <td>{{ $rekam->beratBadan }}</td>
+                        <td>{{ $rekam->diagnosaMedis }}</td>
                         <td>
                             <button class="btn btn-sm btn-info detail-btn"
                                 data-bs-toggle="modal"
                                 data-bs-target="#detailModal"
-                                data-no="{{ $data[0] }}" data-nik="{{ $data[1] }}" data-date="{{ $data[2] }}"
-                                data-pasien="{{ $data[3] }}" data-dokter="{{ $data[4] }}" data-suhu="{{ $data[5] }}"
-                                data-td="{{ $data[6] }}" data-nadi="{{ $data[7] }}" data-tb="{{ $data[8] }}"
-                                data-bb="{{ $data[9] }}" data-diagnosa="{{ $data[10] }}">
+                                data-id="{{ $rekam->noRm }}"
+                                data-nama="{{ $rekam->namaPasien }}"
+                                data-spesialis="{{ $rekam->NIK }}"
+                                data-tanggal="{{ $rekam->tanggalPeriksa }}"
+                                data-tekananDarah="{{ $rekam->tekananDarah ?? '' }}"
+                                data-rr="{{ $rekam->RR ?? '' }}"
+                                data-nadi="{{ $rekam->nadi ?? '' }}"
+                                data-suhu="{{ $rekam->suhu ?? '' }}"
+                                data-tinggi="{{ $rekam->tinggiBadan ?? '' }}"
+                                data-berat="{{ $rekam->beratBadan ?? '' }}"
+                                data-diagnosa="{{ $rekam->diagnosaMedis ?? '' }}">
                                 <i class="fas fa-eye"></i> Detail
                             </button>
                         </td>
@@ -87,7 +84,7 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
+        @endif
     </div>
 </div>
 
@@ -113,6 +110,7 @@
                 <hr>
                 <h5>Hasil Lab</h5>
                 <p><strong>Tekanan Darah:</strong> <span id="detailTD"></span></p>
+                <p><strong>RR:</strong> <span id="detailRR"></span></p>
                 <p><strong>Suhu:</strong> <span id="detailSuhu"></span></p>
                 <p><strong>Nadi:</strong> <span id="detailNadi"></span></p>
                 <p><strong>Tinggi Badan:</strong> <span id="detailTB"></span></p>
@@ -150,8 +148,36 @@ document.getElementById("exportExcel").addEventListener("click", function() {
     XLSX.utils.book_append_sheet(wb, ws, "Data Rekam Medis");
     XLSX.writeFile(wb, "Data_Rekam_Medis.xlsx");
 });
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".detail-btn").forEach(button => {
+        button.addEventListener("click", function() {
+            document.getElementById("detailNo").innerText = this.getAttribute("data-id");
+            document.getElementById("detailPasien").innerText = this.getAttribute("data-nama");
+            document.getElementById("detailDokter").innerText = this.getAttribute("data-spesialis");
+            document.getElementById("detailDate").innerText = this.getAttribute("data-tanggal"); // Catatan: ini nama atributnya aneh, lihat poin 3
+            document.getElementById("detailTD").innerText = this.getAttribute("data-tekananDarah");
+            document.getElementById("detailRR").innerText = this.getAttribute("data-rr");
+            document.getElementById("detailNadi").innerText = this.getAttribute("data-nadi");
+            document.getElementById("detailSuhu").innerText = this.getAttribute("data-suhu");
+            document.getElementById("detailTB").innerText = this.getAttribute("data-tinggi");
+            document.getElementById("detailBB").innerText = this.getAttribute("data-berat");
+            document.getElementById("detailDiagnosa").innerText = this.getAttribute("data-diagnosa");
+        });
+    });
+});
+
+document.getElementById("printDetail").addEventListener("click", function() {
+    let printContents = document.getElementById("printArea").innerHTML;
+    let originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+    location.reload(); // Reload to reset the view
+});
+
 </script>
 
 @endsection
-
-

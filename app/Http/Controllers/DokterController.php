@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dokter;
+use App\Models\rekammedis;
+use Illuminate\Support\Facades\Auth;
 
 class DokterController extends Controller
 {
@@ -17,8 +19,12 @@ class DokterController extends Controller
         return view('dokter.data_dokter', ['dokter' => $dokter]);
     }
     public function rekam_medis() {
-        return view('dokter.rekam_medis');
-    }
+        $user = Auth::user();
+        $dokter = Dokter::where('user_id', $user->id_user)->first();
+        $rekammedis = rekammedis::where('Dokter_id', $dokter->idDokter)->get();
+        return view('dokter.rekam_medis', ['rekammedis' => $rekammedis]);
+        }
+
     public function tambah_rekam_medis() {
         $user = auth()->user();
         $dokter = Dokter::where('user_id', $user->id_user)->first();

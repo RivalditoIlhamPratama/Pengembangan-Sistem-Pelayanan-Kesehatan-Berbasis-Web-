@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\dokter;
 use App\Models\rekammedis;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,5 +42,41 @@ class RekammedisController extends Controller
     ]);
 
     return back()->with('success', 'Rekam medis berhasil disimpan!');
+}
+public function edit($id)
+{
+$rekammedis = rekammedis::findOrFail($id);
+return view('dokter.edit_rekam_medis', compact('rekammedis'));
+}
+
+public function update(Request $request, $id)
+{
+$validated = $request->validate([
+'namaPasien' => 'required|string',
+'noRm' => 'required|string',
+'NIK' => 'required|string',
+'alamatPasien' => 'required|string',
+'tanggalPeriksa' => 'required|date',
+'tekananDarah' => 'required|string',
+'RR' => 'required|string',
+'nadi' => 'required|string',
+'suhu' => 'required|string',
+'tinggiBadan' => 'required|string',
+'beratBadan' => 'required|string',
+'diagnosaMedis' => 'required|string',
+]);
+
+$rekammedis = rekammedis::findOrFail($id);
+$rekammedis->update($validated);
+
+return redirect()->route('dokter.rekam_medis')->with('success', 'Rekam medis berhasil diperbarui!');
+}
+
+public function destroy($id)
+{
+$rekammedis = rekammedis::findOrFail($id);
+$rekammedis->delete();
+
+return redirect()->route('dokter.rekam_medis')->with('success', 'Rekam medis berhasil dihapus!');
 }
 }
