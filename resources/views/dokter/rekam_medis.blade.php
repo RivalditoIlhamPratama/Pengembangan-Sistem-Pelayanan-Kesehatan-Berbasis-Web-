@@ -17,7 +17,7 @@
                 </button>
             </div>
             <div>
-                <a href="#" class="btn btn-primary">
+                <a href="{{route('dokter.tambah_rekam_medis')}}" class="btn btn-primary">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
                 <button id="exportPdf" class="btn btn-danger">
@@ -39,7 +39,7 @@
                 </button>
             </div>
             <div>
-                <a href="#" class="btn btn-primary">
+                <a href="{{route}}" class="btn btn-primary">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
                 <button id="exportPdf" class="btn btn-danger">
