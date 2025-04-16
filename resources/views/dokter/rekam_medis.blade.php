@@ -9,6 +9,25 @@
         @endif
 
         @if($rekammedis->isEmpty())
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="input-group w-25">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search">
+                <button class="btn btn-outline-secondary" type="button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <div>
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Tambah
+                </a>
+                <button id="exportPdf" class="btn btn-danger">
+                    <i class="fas fa-file-pdf"></i> Export PDF
+                </button>
+                <button id="exportExcel" class="btn btn-success">
+                    <i class="fas fa-file-excel"></i> Export Excel
+                </button>
+            </div>
+        </div>
             <p>Tidak ada data rekam medis.</p>
         @else
         <!-- Pencarian dan Tombol Tambah -->
