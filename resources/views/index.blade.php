@@ -248,18 +248,9 @@
           </div>
         </div>
         <div class="footer__col">
-          <h4>Company</h4>
+          <h4>Alamat</h4>
           <div class="footer__links">
-            <a href="#">Business</a>
-            <a href="#">Franchise</a>
-          </div>
-        </div>
-        <div class="footer__col">
-          <h4>About Us</h4>
-          <div class="footer__links">
-            <a href="#">Blogs</a>
-            <a href="#">Security</a>
-            <a href="#">Careers</a>
+            <a href="https://maps.app.goo.gl/5LGfjh614MNkghsi8">Alamat Detail</a>
           </div>
         </div>
         <div class="footer__col">

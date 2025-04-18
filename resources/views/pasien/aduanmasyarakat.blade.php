@@ -101,7 +101,7 @@
         <div class="contact-info">
             <p><i class="ri-map-pin-line"></i> <strong>Lokasi:</strong><br>Jl. Mayjend Sungkono No.10, Kraksaan, Probolinggo</p>
             <p><i class="ri-mail-line"></i> <strong>Email:</strong><br>contact@puskesmaskraksaan.com</p>
-            <p><i class="ri-phone-line"></i> <strong>Hubungi Kami:</strong><br>+628123123123</p>
+            <p><i class="ri-phone-line"></i> <strong>Hubungi Kami:</strong><br>+0811 3373 119</p>
         </div>
     </div>
 </section>

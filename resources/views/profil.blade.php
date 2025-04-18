@@ -46,10 +46,6 @@
                 <button class="btn">Login</button>
                 </a>
             </li>
-            <li class="link">
-                <a href="{{ url('/login') }}" class="btn-link">
-                <button class="btn">Daftar</button>
-                </a>
             </li>
             @endif
             @if(auth()->check() && auth()->user()->role === 'pasien')
@@ -107,27 +103,27 @@
           <div class="struktur-container">
             <div class="struktur-item">
               <img src="assets/Kepalapuskesmas.png" alt="dr. Iqbal Kurniawadi">
-              <h3>dr. Iqbal Kurniawadi</h3>
+              <h3>dr. HENI RAHMAWATI</h3>
               <p>Kepala Puskesmas Kraksaan</p>
 
             </div>
             <div class="struktur-row">
               <div class="struktur-item">
                 <img src="assets/dokter.png" alt="Cholidun">
-                <h3>Cholidun</h3>
-                <p>Dokter Umum</p>
+                <h3>CHUSAIMI</h3>
+                <p>PJ UKM</p>
 
               </div>
               <div class="struktur-item">
                 <img src="assets/tatausaha.png" alt="Fajiz Ilyasri">
-                <h3>Fajiz Ilyasri</h3>
+                <h3>Fajar Ariani</h3>
                 <p>Bidan</p>
 
               </div>
               <div class="struktur-item">
                 <img src="assets/dokter.png" alt="Ferdi Kurniawan">
-                <h3>Ferdi Kurniawan</h3>
-                <p>Pengelola Keuangan</p>
+                <h3>FERINDY KURNIAWAN</h3>
+                <p>Pengelola Pengaduan</p>
 
               </div>
             </div>
@@ -155,18 +151,9 @@
                 </div>
               </div>
               <div class="footer__col">
-                <h4>Company</h4>
+                <h4>Alamat</h4>
                 <div class="footer__links">
-                  <a href="#">Business</a>
-                  <a href="#">Franchise</a>
-                </div>
-              </div>
-              <div class="footer__col">
-                <h4>About Us</h4>
-                <div class="footer__links">
-                  <a href="#">Blogs</a>
-                  <a href="#">Security</a>
-                  <a href="#">Careers</a>
+                  <a href="https://maps.app.goo.gl/5LGfjh614MNkghsi8">Alamat Detail</a>
                 </div>
               </div>
               <div class="footer__col">

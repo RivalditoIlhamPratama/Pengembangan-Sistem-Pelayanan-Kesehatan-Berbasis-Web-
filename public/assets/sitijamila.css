@@ -288,6 +288,87 @@ h2 {
 }
 
 
+.doctor-detail {
+    max-width: 1200px;
+    margin: auto;
+    padding: 3rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .doctor-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5rem;
+  }
+  
+  .doctor-info {
+    flex: 1;
+    max-width: 600px;
+  }
+  
+  .doctor-info h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .specialization {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+  
+  .schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+  }
+  
+  .schedule-table th, .schedule-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .schedule-table th {
+    background-color: #f0f0ff;
+  }
+  
+  .schedule-note {
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: 1rem;
+  }
+  
+  .doctor-image {
+    flex: 1;
+    max-width: 300px;
+  }
+  
+  .doctor-image img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  
+  .btn-back {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 10px 20px;
+    background-color: #1771ca;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .btn-back:hover {
+    background-color: #004f9e;
+  }
 
 /* ----------End DOkter------- */
 

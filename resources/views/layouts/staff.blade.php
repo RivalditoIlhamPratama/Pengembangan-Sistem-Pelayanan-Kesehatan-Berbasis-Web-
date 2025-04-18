@@ -23,6 +23,7 @@
                 <li>
                     <a href="{{ route('staff.rm') }}" class="block py-2 px-4">Rekam Medis</a>
                 </li>
+                
             </ul>
         </div>
 

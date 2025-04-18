@@ -11,7 +11,7 @@
         <h2>Masuk ke Akun Anda</h2>
         <form method="POST" action="{{ route('login.post') }}" id="loginForm">
             @csrf
-            <label for="username">Email</label>
+            <label for="username">Username</label>
 <input type="text" id="username" name="username" value="{{ old('username') }}" class="form-control @error('username') is-invalid @enderror"
             required autocomplete="username" autofocus
             minlength="3" maxlength="30"

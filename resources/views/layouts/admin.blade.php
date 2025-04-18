@@ -58,6 +58,14 @@
                     <i class="ri-user-fill text-xl"></i>
                     <span>Admin</span>
                 </div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="text-black hover:text-gray-300">
+                        <i class="ri-logout-box-r-line text-xl"></i>
+                    </button>
+                </form>
+            </div>
+                </div>
             </div>
 
             <div>

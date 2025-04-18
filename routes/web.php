@@ -45,6 +45,9 @@ Route::get('/profil', function () {
     return view('profil');
 });
 
+
+
+
 Route::get('/dokter', function () {
     return view('daftardokter');
 });
@@ -78,3 +81,8 @@ Route::middleware(['auth', 'dokter'])->prefix('dokter')->group(function () {
         Route::delete('/rekam_medis/delete/{id}', [RekammedisController::class, 'destroy'])->name('dokter.rekam_medis.delete');
     });
 });
+
+
+Route::get('/dokter/siti-jamila', function () {
+    return view('siti_jamila');
+})->name('dokter.siti_jamila');
