@@ -12,7 +12,7 @@
         <form method="POST" action="{{ route('login.post') }}" id="loginForm">
             @csrf
             <label for="username">Username</label>
-<input type="text" id="username" name="username" value="{{ old('username') }}" class="form-control @error('username') is-invalid @enderror"
+            <input type="text" id="username" name="username" class="form-control @error('username') is-invalid @enderror"
             required autocomplete="username" autofocus
             minlength="3" maxlength="30"
             pattern="[a-zA-Z0-9]+" title="Only alphanumeric characters allowed">
@@ -31,20 +31,8 @@
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
-
-            <label for="login-as">Login Sebagai</label>
-            <div class="custom-select-container">
-<select id="login-as" name="login-as" class="custom-select">
-                    <option value="pasien">Pasien</option>
-                    <option value="dokter">Dokter</option>
-                    <option value="staff">Staff</option>
-                    <option value="admin">Admin</option>
-                </select>
-            </div>
-
             <button type="submit" class="btn btn-primary" id="loginButton">
                 <span class="button-text">{{ __('Login') }}</span>
-                <span class="spinner-border spinner-border-sm d-none" role="status"></span>
             </button>
 
             <script>
