@@ -43,7 +43,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\dokter::class,
         ],
-        'staffrekammedis' => [  // Add this new provider
+        'stafrekammedis' => [  // Add this new provider
             'driver' => 'eloquent',
             'model' => App\Models\Staffrekammedis::class,
         ],

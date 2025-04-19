@@ -21,9 +21,9 @@
             </div>
             <ul class="space-y-2 px-4">
                 <li>
-                    <a href="{{ route('staff.rm') }}" class="block py-2 px-4">Rekam Medis</a>
+                    <a href="{{ route('stafrekammedis.dashboard') }}" class="block py-2 px-4">Rekam Medis</a>
                 </li>
-                
+
             </ul>
         </div>
 
@@ -36,6 +36,12 @@
                     <i class="ri-user-fill text-xl"></i>
                     <span>Staff</span>
                 </div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="text-black hover:text-gray-300">
+                        <i class="ri-logout-box-r-line text-xl"></i>
+                    </button>
+                </form>
             </div>
 
             <div>
