@@ -26,7 +26,7 @@ class PasienLoginTest extends TestCase
         Pasien::factory()->create([
             'user_id' => $user->id_user,
             'namaPasien' => 'Test Patient',
-            'jenisKelamin' => 'Pria',
+            'jenisKelamin' => 'Laki-Laki',
             'noHp' => '08123456789',
             'alamatPasien' => 'Test Address',
             'email' => 'pasien@example.com'
@@ -56,7 +56,7 @@ class PasienLoginTest extends TestCase
         Pasien::factory()->create([
             'user_id' => $user->id_user,
             'namaPasien' => 'Test Patient',
-            'jenisKelamin' => 'Pria',
+            'jenisKelamin' => 'Laki-Laki',
             'noHp' => '08123456789',
             'alamatPasien' => 'Test Address',
             'email' => 'pasien@example.com'

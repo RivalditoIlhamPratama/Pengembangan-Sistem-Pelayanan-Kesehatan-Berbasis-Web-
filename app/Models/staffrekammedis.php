@@ -9,7 +9,7 @@ class staffrekammedis extends Model
 {
     use HasFactory;
 
-    protected $fillable =['namaStaff','jenisKelamin','noHp','alamatStaff','email'];
+    protected $fillable =['user_id','namaStaff','jenisKelamin','noHp','alamatStaff','email'];
 
     public function user()
     {

@@ -20,6 +20,14 @@ return [
             'driver' => 'session',
             'provider' => 'dokters',
         ],
+        'stafrekammedis' => [
+            'driver' => 'session',
+            'provider' => 'staffrekammedis',
+        ],
+        'klinik' => [
+            'driver' => 'session',
+            'provider' => 'kliniks',
+        ],
     ],
 
     'providers' => [
@@ -34,6 +42,14 @@ return [
         'dokters' => [  // Add this new provider
             'driver' => 'eloquent',
             'model' => App\Models\dokter::class,
+        ],
+        'staffrekammedis' => [  // Add this new provider
+            'driver' => 'eloquent',
+            'model' => App\Models\Staffrekammedis::class,
+        ],
+        'kliniks' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\klinik::class,
         ],
     ],
 

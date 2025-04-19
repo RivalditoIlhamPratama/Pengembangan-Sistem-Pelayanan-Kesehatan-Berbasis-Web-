@@ -63,10 +63,10 @@ class LoginController extends Controller
                     return redirect()->intended('/klinik/dashboard')->with('login_success', true);
                 case 'dokter':
                     return redirect()->intended('/dokter/dashboard')->with('login_success', true);
-                case 'staffrekmedis':
-                    return redirect()->intended('/rekam-medis/dashboard')->with('login_success', true);
+                case 'stafrekammedis':
+                    return redirect()->intended('/stafrekammedis/dashboard')->with('login_success', true);
                 default:
-                    return redirect()->intended('/');
+                    return redirect()->intended('/login');
             }
         }
 
