@@ -64,7 +64,7 @@
           <div class="service">
               <img src="{{ asset('assets/service 1.png') }}" alt="Pendaftaran Online">
               <h3>Daftar Dokter</h3>
-              <p>Dberkonsultasi dengan dokter pilihan.</p>
+              <p>berkonsultasi dengan dokter pilihan.</p>
           </div>
           <div class="service">
               <img src="{{ asset('assets/service 2.png') }}" alt="Jadwal Dokter">
@@ -95,41 +95,41 @@
           <div class="doctor-card">
             <img src="assets/dokter.png" alt="Dr. Komang Ayu" class="doctor-img" />
             <div class="doctor-info">
-              <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
+              <h3>dr. Siti Jamila</h3>
               <br>
               <p>Dokter Spesialis Anak</p>
               <br>
-              <a href="doctor-details.html" class="btn">Selengkapnya</a>
+
             </div>
           </div>
           <div class="doctor-card">
             <img src="assets/Dokter1.jpg" alt="Dr. Ni Made Maya" class="doctor-img" />
             <div class="doctor-info">
-              <h3>dr. Ni Made Maya Purnama Wulandari, Sp.A</h3>
+              <h3>dr. Dwi Wahyudi</h3>
               <br>
               <p>Dokter Spesialis Anak</p>
               <br>
-              <a href="doctor-details.html" class="btn">Selengkapnya</a>
+
             </div>
           </div>
           <div class="doctor-card">
             <img src="assets/dokter.png" alt="Dr. Muhammad Reza" class="doctor-img" />
             <div class="doctor-info">
-              <h3>dr. Muhammad Reza, M.Biomed, Sp.A.(K)</h3>
+              <h3>dr. Heni Rahmawati(K)</h3>
               <br>
               <p>Dokter Spesialis Anak</p>
               <br>
-              <a href="doctor-details.html" class="btn">Selengkapnya</a>
+
             </div>
           </div>
           <div class="doctor-card">
             <img src="assets/dokter.png" alt="Dr. Yessi Rahmawati" class="doctor-img" />
             <div class="doctor-info">
-              <h3>dr. Yessi Rahmawati, Sp.OG. (K)</h3>
+              <h3>dr. Fathullah Wahyudi(K)</h3>
               <br>
               <p>Dokter Spesialis Obstetri </p>
               <br>
-              <a href="doctor-details.html" class="btn">Selengkapnya</a>
+              
             </div>
           </div>
 
@@ -166,7 +166,8 @@
                       <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
                       <p>SEMENTARA: Banner yang terpasang di pintu masuk Puskesmas Pakuriran. Puskesmas Pakuriran menutup layanan kesehatan...</p>
                       <p class="date">Thursday, 21 November 2024</p>
-                      <a href="#" class="read-more">Selengkapnya</a>
+                      <a href="{{ route('berita.usg') }}" class="read-more">Selengkapnya</a>
+
                   </div>
               </div>
 

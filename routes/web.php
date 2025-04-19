@@ -86,3 +86,20 @@ Route::middleware(['auth', 'dokter'])->prefix('dokter')->group(function () {
 Route::get('/dokter/siti-jamila', function () {
     return view('siti_jamila');
 })->name('dokter.siti_jamila');
+
+Route::get('/dokter/heni-rahmawati', function () {
+    return view('heni_rahmawati');
+})->name('dokter.heni_rahmawati');
+
+Route::get('/dokter/dwi-wahyudi', function () {
+    return view('dwi_wahyudi');
+})->name('dokter.dwi_wahyudi');
+
+Route::get('/dokter/fathullah-huda', function () {
+    return view('fathullah_huda');
+})->name('dokter.fathullah_huda');
+
+
+Route::get('/berita-usg-puskesmas', function () {
+    return view('berita_usg_puskesmas');
+})->name('berita.usg');

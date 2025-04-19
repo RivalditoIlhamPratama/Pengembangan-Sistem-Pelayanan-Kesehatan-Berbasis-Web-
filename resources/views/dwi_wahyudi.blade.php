@@ -10,7 +10,7 @@
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
   />
-  <link rel="stylesheet" href="{{ asset('assets/daftardokter.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/sitijamila.css') }}">
   <script src="{{ asset('assets/main.js') }}" defer></script>
   <title>Puskesmas Kraksaan</title>
 </head>
@@ -68,105 +68,65 @@
         </nav>
     </header>
 
-    <div class="container">
-        <h2>Dokter Puskesmas Kraksaan</h2>
-        <div class="doctor-card-container">
-            <!-- Card Dokter -->
-            <div class="doctor-card">
-            <img src="assets/dr.Sagung.png" alt="Dr. Komang Ayu" class="doctor-img">
-            <div class="doctor-info">
-                <h3>Dr. Siti Jamila, Amd. Keb</h3>
-                <p>Dokter Spesialis Anak</p>
-                <div class="btn-container">
-                    <a href="{{ route('dokter.siti_jamila') }}" class="btn">Jadwal</a>
-                <button class="btn">Poll</button>
-                </div>
-            </div>
-            </div>
-
-            <div class="doctor-card">
-            <img src="assets/Dr.Ninda.png" alt="Dr. Komang Ayu" class="doctor-img">
-            <div class="doctor-info">
-                <h3>drg. Dwi Wahyudi</h3>
-                <p>Dokter Umum</p>
-                <div class="btn-container">
-                    <a href="{{ route('dokter.dwi_wahyudi') }}" class="btn">Jadwal</a>
-                <button class="btn">Poll</button>
-                </div>
-            </div>
-            </div>
-            <div class="doctor-card">
-            <img src="assets/Kepalapuskesmas.png" alt="Dr. Komang Ayu" class="doctor-img">
-            <div class="doctor-info">
-                <h3>dr. Heni Rahmawati</h3>
-                <p>Dokter Spesialis Anak</p>
-                <div class="btn-container">
-                    <a href="{{ route('dokter.heni_rahmawati') }}" class="btn">Jadwal</a>
-                <button class="btn">Poll</button>
-                </div>
-            </div>
-            </div>
-            <div class="doctor-card">
-            <img src="assets/dr.Made.png" alt="Dr. Komang Ayu" class="doctor-img">
-            <div class="doctor-info">
-                <h3>dr. Fathullah Huda</h3>
-                <p>Dokter Spesialis Anak</p>
-                <div class="btn-container">
-                    <a href="{{ route('dokter.fathullah_huda') }}" class="btn">Jadwal</a>
-                <button class="btn">Poll</button>
-                </div>
-            </div>
-            </div>
-
-            <div class="doctor-card">
-            <img src="assets/dokter.png" alt="Dr. Komang Ayu" class="doctor-img">
-            <div class="doctor-info">
-                <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
-                <p>Dokter Spesialis Anak</p>
-                <div class="btn-container">
-                <a href="#" class="btn">Jadwal</a>
-                <button class="btn">Poll</button>
-                </div>
-            </div>
-            </div>
-
-            <div class="doctor-card">
-            <img src="assets/dokter.png" alt="Dr. Komang Ayu" class="doctor-img">
-            <div class="doctor-info">
-                <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
-                <p>Dokter Spesialis Anak</p>
-                <div class="btn-container">
-                <a href="#" class="btn">Jadwal</a>
-                <button class="btn">Poll</button>
-                </div>
-            </div>
-            </div>
-
-            <div class="doctor-card">
-            <img src="assets/dokter.png" alt="Dr. Komang Ayu" class="doctor-img">
-            <div class="doctor-info">
-                <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
-                <p>Dokter Spesialis Anak</p>
-                <div class="btn-container">
-                <a href="#" class="btn">Jadwal</a>
-                <button class="btn">Poll</button>
-                </div>
-            </div>
-            </div>
-
-            <div class="doctor-card">
-            <img src="assets/dokter.png" alt="Dr. Komang Ayu" class="doctor-img">
-            <div class="doctor-info">
-                <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
-                <p>Dokter Spesialis Anak</p>
-                <div class="btn-container">
-                <a href="#" class="btn">Jadwal</a>
-                <button class="btn">Poll</button>
-                </div>
-            </div>
-            </div>
-        </div>
+<!-- Section Detail Dokter -->
+<section class="doctor-detail">
+    <div class="doctor-container">
+      <div class="doctor-info">
+        <h1>Dr. Dwi Wahyudi</h1>
+        <p class="specialization">Dokter Spesialis Anak</p>
+  
+        <h3>Jadwal Pelayanan :</h3>
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th>Hari Pelayanan</th>
+              <th>Waktu Pelayanan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Senin | Poli Umum</td>
+              <td>10:00 - 12:00 WIB</td>
+            </tr>
+            <tr>
+              <td>Selasa | Poli Umum</td>
+              <td>10:00 - 12:00 WIB</td>
+            </tr>
+            <tr>
+              <td>Rabu | Poli Umum</td>
+              <td>10:00 - 12:00 WIB</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="schedule-note">*Mohon Maaf, Jadwal sewaktu-waktu dapat berubah</p>
+  
+        <button onclick="goBack()" class="btn btn-back">Kembali</button>
+      </div>
+  
+      <div class="doctor-image">
+        <img src="{{ asset('assets/dr.Sagung.png') }}" alt="Dr. Siti Jamila">
+      </div>
     </div>
+  </section>
+  
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <br>
