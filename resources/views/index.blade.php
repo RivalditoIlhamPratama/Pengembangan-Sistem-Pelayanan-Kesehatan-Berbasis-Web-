@@ -150,9 +150,9 @@
           <br>
           <div class="berita-container">
               <div class="news-card">
-                  <img src="assets/Berita.jpeg" alt="Puskesmas Image">
+                  <img src="assets/berita.jpg" alt="Puskesmas Image">
                   <div class="news-info">
-                      <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
+                      <h3>Tim PKRS Gelar Penyuluhan Kanker Payudara dalam Rangka Hari Kanker Sedunia</h3>
                       <p>SEMENTARA: Banner yang terpasang di pintu masuk Puskesmas Pakuriran. Puskesmas Pakuriran menutup layanan kesehatan...</p>
                       <p class="date">Thursday, 21 November 2024</p>
                       <a href="#" class="read-more">Selengkapnya</a>
@@ -163,8 +163,8 @@
               <div class="news-card">
                   <img src="assets/berita.jpg" alt="Puskesmas Image">
                   <div class="news-info">
-                      <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
-                      <p>SEMENTARA: Banner yang terpasang di pintu masuk Puskesmas Pakuriran. Puskesmas Pakuriran menutup layanan kesehatan...</p>
+                      <h3>Tim PKRS Gelar Penyuluhan Kanker Payudara dalam Rangka Hari Kanker Sedunia</h3>
+                      <p>Dalam rangka memperingati Hari Kanker Sedunia, Tim Promosi Kesehatan Rumah Sakit (PKRS) mengadakan penyuluhan edukasi tentang kanker payudara di ruang tunggu pasien...</p>
                       <p class="date">Thursday, 21 November 2024</p>
                       <a href="{{ route('berita.usg') }}" class="read-more">Selengkapnya</a>
 

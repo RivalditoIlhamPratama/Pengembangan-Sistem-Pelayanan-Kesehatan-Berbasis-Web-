@@ -70,41 +70,64 @@
 
     <section class="news-section">
         <article class="main-content">
-          <h1>Tim PKRS Gelar Penyuluhan Kanker Payudara dalam Rangka Hari Kanker Sedunia</h1>
+          <h1>Puskesmas Kraksaan Kini Buka Layanan USG bagi Ibu Hamil</h1>
           <div class="meta">
             <span>📅 6 Februari 2025</span>
-            <span>👁️ 27 Kali dilihat</span>
+
           </div>
-          <img src="gambar-utama.jpg" alt="Foto kegiatan">
+          <img src="assets/berita.jpg" alt="Foto kegiatan">
           <p><strong>Probolinggo, 06 Februari 2025</strong> - Dalam rangka memperingati Hari Kanker Sedunia, Tim Promosi Kesehatan Rumah Sakit (PKRS) mengadakan penyuluhan edukasi tentang kanker payudara di ruang tunggu pasien poli bedah pada Kamis (06/02). Dengan menghadirkan dr. Syahrudi, Sp.B sebagai narasumber.</p>
           <p>dr. Syahrudi, Sp.B, memberikan penjelasan mengenai kanker payudara. Dalam paparannya, dr. Syahrudi menjelaskan tentang faktor risiko, gejala, metode deteksi dini, serta langkah-langkah pencegahan kanker payudara. Ia juga menekankan pentingnya kesadaran akan pemeriksaan payudara sendiri (SADARI) sebagai salah satu upaya deteksi dini.</p>
           <p>"Deteksi dini kanker payudara sangat penting karena semakin cepat ditemukan, semakin besar peluang untuk mendapatkan pengobatan yang efektif," ujar dr. Syahrudi, Sp.B.</p>
           <p>Peserta penyuluhan, yang terdiri dari pasien dan keluarga pendamping, tampak aktif dalam sesi tanya jawab. Mereka mengajukan berbagai pertanyaan seputar kanker payudara, termasuk mengenai pengobatan yang tersedia dan pola hidup sehat.</p>
           <p>Dengan adanya kegiatan ini, diharapkan semakin banyak masyarakat yang memiliki pemahaman lebih baik tentang kanker payudara dan pentingnya deteksi dini.</p>
         </article>
+
+        
     
         <aside class="sidebar">
           <h3>Berita Sebelumnya</h3>
           <div class="news-item">
-            <img src="thumb1.jpg" alt="">
+            <img src="assets/berita.jpg" alt="">
             <p>RSUD Waluyo Jati Mengucapkan Selamat Menunaikan Ibadah Puasa Ramadhan 1446 H</p>
           </div>
           <div class="news-item">
-            <img src="thumb2.jpg" alt="">
+            <img src="assets/berita.jpg" alt="">
             <p>HARI ULANG TAHUN RSUD WALUYO JATI KE 43</p>
           </div>
           <div class="news-item">
-            <img src="thumb3.jpg" alt="">
+            <img src="assets/berita.jpg" alt="">
             <p>Penandatanganan Perjanjian Kerja Sama RSUD Waluyo Jati & Universitas Hafshawaty</p>
           </div>
           <div class="news-item">
-            <img src="thumb4.jpg" alt="">
+            <img src="assets/berita.jpg" alt="">
+            <p>Operasi Gratis Bibir Sumbing & Celah Langit-langit oleh Smile Train</p>
+          </div>
+          <div class="news-item">
+            <img src="assets/berita.jpg" alt="">
+            <p>RSUD Waluyo Jati Mengucapkan Selamat Menunaikan Ibadah Puasa Ramadhan 1446 H</p>
+          </div>
+          <div class="news-item">
+            <img src="assets/berita.jpg" alt="">
+            <p>HARI ULANG TAHUN RSUD WALUYO JATI KE 43</p>
+          </div>
+          <div class="news-item">
+            <img src="assets/berita.jpg" alt="">
+            <p>Penandatanganan Perjanjian Kerja Sama RSUD Waluyo Jati & Universitas Hafshawaty</p>
+          </div>
+          <div class="news-item">
+            <img src="assets/berita.jpg" alt="">
             <p>Operasi Gratis Bibir Sumbing & Celah Langit-langit oleh Smile Train</p>
           </div>
         </aside>
       </section>
 
-
+      <button onclick="goBack()" class="btn btn-back">Kembali</button>
+      <script>
+        function goBack() {
+          window.history.back();
+        }
+      </script>
 
 
     <br>
