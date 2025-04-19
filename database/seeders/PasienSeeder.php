@@ -15,7 +15,7 @@ class PasienSeeder extends Seeder
         for ($i = 1; $i <= 10; $i++) {
             $user = User::create([
                 'username' => 'pasien' . $i,
-                'password' => Hash::make('password123'),
+                'password' => Hash::make('password'),
                 'role' => 'pasien'
             ]);
             echo "Created user: " . $user->username . "\n";

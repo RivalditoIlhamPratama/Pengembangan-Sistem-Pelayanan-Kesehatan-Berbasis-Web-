@@ -3,43 +3,44 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use App\Models\dokter;
+use App\Models\staffrekammedis;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
-class DokterLoginTest extends TestCase
+class StafrekammedisLoginTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function dokter_can_login()
+    public function stafrekammedis_can_login()
     {
-        // Create user with dokter role
+        // Create user with stafrekammedis role
         $user = User::factory()->create([
-            'username' => 'dokteruser',
+            'username' => 'stafuser',
             'password' => bcrypt('password123'),
-            'role' => 'dokter'
+            'role' => 'stafrekammedis'
         ]);
 
-        // Create complete dokter record
-        dokter::factory()->create([
+        // Create related stafrekammedis record
+        staffrekammedis::factory()->create([
             'user_id' => $user->id_user,
-            'namaDokter' => 'Test Dokter',
-            'spesialis' => 'Umum',
+            'namaStaff' => 'Test Staff',
             'jenisKelamin' => 'Laki-Laki',
-            'tglLahir' => '1980-01-01',
-            'alamatDokter' => 'Test Address'
+            'noHp' => '08123456789',
+            'alamatStaff' => 'Test Address',
+            'email' => 'teststaff@example.com',
         ]);
 
         // Attempt login
         $response = $this->post('/login', [
-            'username' => 'dokteruser',
+            'username' => 'stafuser',
             'password' => 'password123'
         ]);
 
-        // Verify authentication
+        // Verify authentication and redirection
         $response->assertStatus(302);
+        $response->assertRedirect('/stafrekammedis/dashboard');
         $this->assertTrue(Auth::check());
         $this->assertEquals($user->id_user, Auth::id());
     }
@@ -48,23 +49,23 @@ class DokterLoginTest extends TestCase
     public function invalid_credentials_fail()
     {
         $user = User::factory()->create([
-            'username' => 'dokteruser',
+            'username' => 'stafuser',
             'password' => bcrypt('password123'),
-            'role' => 'dokter'
+            'role' => 'stafrekammedis'
         ]);
 
-        dokter::factory()->create([
+        staffrekammedis::factory()->create([
             'user_id' => $user->id_user,
-            'namaDokter' => 'Test Dokter',
-            'spesialis' => 'Umum',
+            'namaStaff' => 'Test Staff',
             'jenisKelamin' => 'Laki-Laki',
-            'tglLahir' => '1980-01-01',
-            'alamatDokter' => 'Test Address'
+            'noHp' => '08123456789',
+            'alamatStaff' => 'Test Address',
+            'email' => 'teststaff@example.com',
         ]);
 
         // Attempt login with wrong password
         $response = $this->post('/login', [
-            'username' => 'dokteruser',
+            'username' => 'stafuser',
             'password' => 'wrongpassword'
         ]);
 
