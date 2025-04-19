@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('idStaffRm');
             $table->unsignedBigInteger('user_id');
             $table->string('namaStaff');
-            $table->enum('jenisKelamin',['Laki-laki', 'Perempuan']);
+            $table->enum('jenisKelamin',['Pria', 'Wanita']);
             $table->string('noHp');
             $table->text('alamatStaff');
             $table->string('email');

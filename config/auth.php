@@ -20,14 +20,6 @@ return [
             'driver' => 'session',
             'provider' => 'dokters',
         ],
-        'stafrekammedis' => [
-            'driver' => 'session',
-            'provider' => 'staffrekammedis',
-        ],
-        'klinik' => [
-            'driver' => 'session',
-            'provider' => 'kliniks',
-        ],
     ],
 
     'providers' => [

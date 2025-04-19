@@ -6,7 +6,6 @@ use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\RekammedisController;
-use App\Http\Controllers\StaffrekammedisController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,12 +23,19 @@ Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
 
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+
+
+
 Route::get('/', function () {
     return view('index');
 });
 
 Route::get('/login', function () {
-    return view('auth.login');
+    return view('auth/login');
 })->name('login');
 
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.post');
@@ -68,25 +74,32 @@ Route::middleware(['auth', 'dokter'])->prefix('dokter')->group(function () {
     Route::get('/rekam_medis', [DokterController::class, 'rekam_medis'])->name('dokter.rekam_medis');
     Route::get('/rekam_medis/tambah', [DokterController::class, 'tambah_rekam_medis'])->name('dokter.tambah_rekam_medis');
     Route::post('/rekam_medis/submit', [RekammedisController::class, 'store'])->name('dokter.rekam_medis.submit');
-    Route::get('/rekam_medis/edit/{id}', [RekammedisController::class, 'edit'])->name('dokter.rekam_medis.edit');
-    Route::put('/rekam_medis/update/{id}', [RekammedisController::class, 'update'])->name('dokter.rekam_medis.update');
-    Route::delete('/rekam_medis/delete/{id}', [RekammedisController::class, 'destroy'])->name('dokter.rekam_medis.delete');
-});
 
-Route::middleware(['auth', 'stafrekammedis'])->prefix('stafrekammedis')->group(function () {
-    Route::get('/dashboard', [StaffrekammedisController::class, 'dashboard'])->name('stafrekammedis.dashboard');
-    // Route::get('/data_dokter', [StaffrekammedisController::class, 'data_dokter'])->name('stafrekammedis.data_dokter');
-    // Route::get('/data_dokter/tambah', [StaffrekammedisController::class, 'store'])->name('stafrekammedis.data_dokter.store');
-    // Route::post('/data_dokter/update', [StaffrekammedisController::class, 'update'])->name('stafrekammedis.data_dokter.update');
-    // Route::get('/rekam_medis', [StaffrekammedisController::class, 'rekam_medis'])->name('stafrekammedis.rekam_medis');
-    // Route::get('/rekam_medis/tambah', [StaffrekammedisController::class, 'tambah_rekam_medis'])->name('stafrekammedis.tambah_rekam_medis');
-    // Route::post('/rekam_medis/submit', [RekammedisController::class, 'store'])->name('stafrekammedis.rekam_medis.submit');
-    // Route::get('/rekam_medis/edit/{id}', [RekammedisController::class, 'edit'])->name('stafrekammedis.rekam_medis.edit');
-    // Route::put('/rekam_medis/update/{id}', [RekammedisController::class, 'update'])->name('stafrekammedis.rekam_medis.update');
-    // Route::delete('/rekam_medis/delete/{id}', [RekammedisController::class, 'destroy'])->name('stafrekammedis.rekam_medis.delete');
+    Route::middleware(['auth', 'dokter'])->prefix('dokter')->group(function () {
+        Route::get('/rekam_medis/edit/{id}', [RekammedisController::class, 'edit'])->name('dokter.rekam_medis.edit');
+        Route::put('/rekam_medis/update/{id}', [RekammedisController::class, 'update'])->name('dokter.rekam_medis.update');
+        Route::delete('/rekam_medis/delete/{id}', [RekammedisController::class, 'destroy'])->name('dokter.rekam_medis.delete');
+    });
 });
 
 
 Route::get('/dokter/siti-jamila', function () {
     return view('siti_jamila');
 })->name('dokter.siti_jamila');
+
+Route::get('/dokter/heni-rahmawati', function () {
+    return view('heni_rahmawati');
+})->name('dokter.heni_rahmawati');
+
+Route::get('/dokter/dwi-wahyudi', function () {
+    return view('dwi_wahyudi');
+})->name('dokter.dwi_wahyudi');
+
+Route::get('/dokter/fathullah-huda', function () {
+    return view('fathullah_huda');
+})->name('dokter.fathullah_huda');
+
+
+Route::get('/berita-usg-puskesmas', function () {
+    return view('berita_usg_puskesmas');
+})->name('berita.usg');
