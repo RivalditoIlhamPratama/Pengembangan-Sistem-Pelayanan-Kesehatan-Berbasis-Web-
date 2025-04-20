@@ -53,18 +53,56 @@ class User extends Authenticatable
     }
     public function dokter()
     {
-    return $this->hasMany(dokter::class, 'user_id', 'id_user');
+        return $this->hasMany(dokter::class, 'user_id', 'id_user');
     }
-    public function staffrekmedis()
+    public function stafrekammedis()
     {
-        return $this->hasMany(staffrekammedis::class, 'id_user', 'user_id');
+        return $this->hasMany(staffrekammedis::class, 'user_id', 'id_user');
     }
     public function admin()
     {
-        return $this->hasMany(adminpuskesmas::class, 'id_user', 'user_id');
+        return $this->hasMany(adminpuskesmas::class, 'user_id', 'id_user');
     }
     public function klinik()
     {
-        return $this->hasMany(klinik::class, 'id_user', 'user_id');
+        return $this->hasMany(klinik::class, 'user_id', 'id_user');
+    }
+
+    // Accessor to get name according to role
+    public function getNameAttribute()
+    {
+        switch ($this->role) {
+            case 'admin':
+                return optional($this->admin->first())->namaAdmin ?? 'N/A';
+            case 'dokter':
+                return optional($this->dokter->first())->namaDokter ?? 'N/A';
+            case 'pasien':
+                return $this->pasien->namaPasien ?? 'N/A';
+            case 'stafrekammedis':
+                return optional($this->stafrekammedis->first())->namaStaff ?? 'N/A';
+            case 'klinik':
+                return optional($this->klinik->first())->namaKlinik ?? 'N/A';
+            default:
+                return 'N/A';
+        }
+    }
+
+    // Accessor to get email according to role
+    public function getEmailAttribute()
+    {
+        switch ($this->role) {
+            case 'admin':
+                return optional($this->admin->first())->email ?? 'N/A';
+            case 'dokter':
+                return optional($this->dokter->first())->email ?? 'N/A';
+            case 'pasien':
+                return $this->pasien->email ?? 'N/A';
+            case 'stafrekammedis':
+                return optional($this->stafrekammedis->first())->email ?? 'N/A';
+            case 'klinik':
+                return optional($this->klinik->first())->email ?? 'N/A';
+            default:
+                return 'N/A';
+        }
     }
 }

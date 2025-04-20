@@ -1,6 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\adminpuskesmas;
+use App\Models\dokter;
+use App\Models\klinik;
+use App\Models\pasien;
+use App\Models\staffrekammedis;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,8 +19,8 @@ class AdminController extends Controller
 
     public function users()
     {
-        $users = User::all();
-        return view('admin.users', compact('users'));
+    $users = User::with(['admin','stafrekammedis','pasien','klinik', 'dokter'])->get();
+    return view('admin.users', compact('users'));
     }
 
     public function doctors() {
@@ -28,11 +34,5 @@ class AdminController extends Controller
     public function reports() {
         return view('admin.reports');
     }
-    
+
 }
-
-
-
-
-
-

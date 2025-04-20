@@ -176,7 +176,7 @@
                       <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
                       <p>SEMENTARA: Banner yang terpasang di pintu masuk Puskesmas Pakuriran. Puskesmas Pakuriran menutup layanan kesehatan...</p>
                       <p class="date">Thursday, 21 November 2024</p>
-                      <a href="#" class="read-more">Selengkapnya</a>
+                      <a href="{{ route('berita.usg') }}" class="read-more">Selengkapnya</a>
                   </div>
               </div>
 

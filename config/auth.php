@@ -20,6 +20,10 @@ return [
             'driver' => 'session',
             'provider' => 'dokters',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
     ],
 
     'providers' => [
@@ -34,6 +38,10 @@ return [
         'dokters' => [  // Add this new provider
             'driver' => 'eloquent',
             'model' => App\Models\dokter::class,
+        ],
+        'admins' => [  // Add this new provider
+            'driver' => 'eloquent',
+            'model' => App\Models\adminpuskesmas::class,
         ],
         'stafrekammedis' => [  // Add this new provider
             'driver' => 'eloquent',

@@ -40,7 +40,7 @@
         <li>
             <a href="{{ route('admin.laporan_klinik') }}" class="block py-2 px-4">Data Laporan Klinik</a>
         </li>
-        
+
     </ul>
 </div>
 
@@ -52,22 +52,19 @@
         <!-- Content -->
         <div class="flex-1 p-10">
             <!-- Header -->
-            <div class="flex justify-between items-center mb-6">
-                <button class="text-2xl"><i class="ri-menu-line"></i></button>
-                <div class="flex items-center space-x-3">
-                    <i class="ri-user-fill text-xl"></i>
-                    <span>Admin</span>
+                <div class="flex justify-between items-center mb-6">
+                    <button class="text-2xl"><i class="ri-menu-line"></i></button>
+                    <div class="flex items-center space-x-3">
+                        <i class="ri-user-fill text-xl"></i>
+                        <span>Admin</span>
+                    </div>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="text-black hover:text-gray-300">
+                            <i class="ri-logout-box-r-line text-xl"></i>
+                        </button>
+                    </form>
                 </div>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="text-black hover:text-gray-300">
-                        <i class="ri-logout-box-r-line text-xl"></i>
-                    </button>
-                </form>
-            </div>
-                </div>
-            </div>
-
             <div>
                 @yield('content')
             </div>

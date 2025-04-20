@@ -46,8 +46,9 @@ Route::get('/profil', function () {
     return view('profil');
 });
 
-
-
+Route::get('/berita-usg-puskesmas', function () {
+    return view('berita_usg_puskesmas');
+})->name('berita.usg');
 
 Route::get('/dokter', function () {
     return view('daftardokter');
@@ -92,9 +93,7 @@ Route::middleware(['auth', 'stafrekammedis'])->prefix('stafrekammedis')->group(f
     // Route::get('/rekam_medis/edit/{id}', [RekammedisController::class, 'edit'])->name('dokter.rekam_medis.edit');
     // Route::put('/rekam_medis/update/{id}', [RekammedisController::class, 'update'])->name('dokter.rekam_medis.update');
     // Route::delete('/rekam_medis/delete/{id}', [RekammedisController::class, 'destroy'])->name('dokter.rekam_medis.delete');
-
 });
-
 
 Route::get('/dokter/siti-jamila', function () {
     return view('siti_jamila');
@@ -111,8 +110,3 @@ Route::get('/dokter/dwi-wahyudi', function () {
 Route::get('/dokter/fathullah-huda', function () {
     return view('fathullah_huda');
 })->name('dokter.fathullah_huda');
-
-
-Route::get('/berita-usg-puskesmas', function () {
-    return view('berita_usg_puskesmas');
-})->name('berita.usg');

@@ -31,21 +31,17 @@
                 </thead>
                 <tbody>
                     @php $no = 1; @endphp
-                    @foreach([
-                        ['Dr hargianto Sucipto SE SKOM', 'Hargianto', 'har@gmail.com', 'Dokter'],
-                        ['Dr Sheilla Ayu Aqillah', 'Sheilla', 'Sheill@gmail.com', 'Dokter'],
-                        ['Dr Bima Yuna Saptaji', 'Bimaa', 'har@gmail.com', 'Dokter'],
-                        ['Klinik Gigi', 'Kgigi', 'KlinikGigi@gmail.com', 'Klinik'],
-                        ['Klinik Umum', 'Kumum', 'KlinikUmum@gmail.com', 'Klinik'],
-                    ] as $user)
+                    @foreach($users as $user)
                     <tr class="align-middle text-center">
                         <td>{{ $no++ }}</td>
-                        <td class="text-start">{{ $user[0] }}</td>
-                        <td>{{ $user[1] }}</td>
-                        <td>{{ $user[2] }}</td>
+                        <td class="text-start">
+                            {{ $user->name }}
+                        </td>
+                        <td>{{ $user->username ?? 'N/A' }}</td>
+                        <td>{{ $user->email ?? 'N/A' }}</td>
                         <td>
-                            <span class="badge {{ $user[3] == 'Dokter' ? 'bg-primary' : 'bg-secondary' }} text-white">
-                                {{ $user[3] }}
+                            <span class="badge {{ strtolower($user->role) == 'dokter' ? 'bg-primary' : 'bg-secondary' }} text-white">
+                                {{ $user->role ?? 'N/A' }}
                             </span>
                         </td>
                         <td>
