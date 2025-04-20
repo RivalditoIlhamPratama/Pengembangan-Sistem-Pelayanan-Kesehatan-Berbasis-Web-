@@ -12,7 +12,7 @@
             </div>
             <div class="ml-4">
                 <h2 class="text-lg font-bold text-gray-700">Total Pengguna</h2>
-                <p class="text-3xl font-semibold">6</p>
+                <p class="text-3xl font-semibold">{{ $user }}</p>
             </div>
         </div>
 
@@ -23,7 +23,7 @@
             </div>
             <div class="ml-4">
                 <h2 class="text-lg font-bold text-gray-700">Total Dokter</h2>
-                <p class="text-3xl font-semibold">4</p>
+                <p class="text-3xl font-semibold">{{$user_dokter}}</p>
             </div>
         </div>
 
@@ -34,7 +34,7 @@
             </div>
             <div class="ml-4">
                 <h2 class="text-lg font-bold text-gray-700">Total Pengaduan</h2>
-                <p class="text-3xl font-semibold">3</p>
+                <p class="text-3xl font-semibold">{{$pengaduan}}</p>
             </div>
         </div>
     </div>

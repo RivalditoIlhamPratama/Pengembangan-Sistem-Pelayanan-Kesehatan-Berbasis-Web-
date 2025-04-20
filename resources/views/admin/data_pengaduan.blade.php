@@ -4,8 +4,12 @@
 <div class="container-fluid mt-5">
     <div class="card p-4 shadow-sm">
         <h2 class="mb-4 fw-bold">Data Pengaduan</h2>
+        @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
 
-        <!-- Pencarian -->
+
+        @if($pengaduan->isEmpty())
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="input-group w-25">
                 <input type="text" class="form-control" placeholder="Search">
@@ -14,7 +18,16 @@
                 </button>
             </div>
         </div>
-
+            <p>Tidak ada data Pengaduan.</p>
+        @else
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="input-group w-25">
+                <input type="text" class="form-control" placeholder="Search">
+                <button class="btn btn-outline-secondary" type="button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
         <!-- Tabel Data Pengaduan -->
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover">
@@ -30,21 +43,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php $no = 1; @endphp
-                    @foreach([
-                        ['Bima Yuna Saptaji', 'Pelayanan', 'Pelayanan Kurang Baik...', '081234234223', '2025-01-15'],
-                        ['Bima Yuna Saptaji', 'Pelayanan', 'Pelayanan Kurang Baik...', '081234234223', '2025-01-15'],
-                        ['Bima Yuna Saptaji', 'Pelayanan', 'Pelayanan Kurang Baik...', '081234234223', '2025-01-15'],
-                        ['Bima Yuna Saptaji', 'Pelayanan', 'Pelayanan Kurang Baik...', '081234234223', '2025-01-15'],
-                        ['Bima Yuna Saptaji', 'Pelayanan', 'Pelayanan Kurang Baik...', '081234234223', '2025-01-15'],
-                    ] as $pengaduan)
-                    <tr class="align-middle text-center">
-                        <td>{{ $no++ }}</td>
-                        <td>{{ $pengaduan[0] }}</td>
-                        <td><span class="badge bg-primary text-white">{{ $pengaduan[1] }}</span></td>
-                        <td class="text-start">{{ $pengaduan[2] }}</td>
-                        <td>{{ $pengaduan[3] }}</td>
-                        <td><strong>{{ $pengaduan[4] }}</strong></td>
+                    @foreach($pengaduan as $aduan)
+                    <tr>
+                        <td>{{ $aduan->idPengaduan }}</td>
+                        <td>{{ ($aduan->pasien)->namaPasien ?? 'N/A' }}</td>
+                        <td>{{ $aduan->jenisPengaduan }}</td>
+                        <td>{{ $aduan->isiPengaduan }}</td>
+                        <td>{{ $aduan->phone }}</td>
+                        <td>{{ \Carbon\Carbon::parse($aduan->created_at)->format('d-m-Y') }}</td>
                         <td>
                             <a href="#" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
                             <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
@@ -53,6 +59,7 @@
                     @endforeach
                 </tbody>
             </table>
+            @endif
         </div>
     </div>
 </div>

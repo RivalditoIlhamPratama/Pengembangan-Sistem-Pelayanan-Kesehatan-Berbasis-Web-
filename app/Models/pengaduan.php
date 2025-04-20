@@ -20,6 +20,6 @@ class pengaduan extends Model
 
     public function pasien()
     {
-        return $this->belongsTo(\App\Models\pasien::class);
+        return $this->belongsTo(\App\Models\pasien::class, 'Pasien_id', 'idPasien');
     }
 }
