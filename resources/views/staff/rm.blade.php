@@ -16,6 +16,7 @@
 
         <!-- Tombol Ekspor -->
         <div>
+            <a href="#" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah</a>
         <button id="exportPdf" class="btn btn-danger me-2">
             <i class="fas fa-file-pdf"></i> Export PDF
         </button>

@@ -98,6 +98,15 @@
                                 data-diagnosa="{{ $rekam->diagnosaMedis ?? '' }}">
                                 <i class="fas fa-eye"></i> Detail
                             </button>
+                            <!-- Edit Button -->
+                        <a href="#" class="btn btn-sm btn-warning">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+
+                        <!-- Delete Button -->
+                        <a href="#" class="btn btn-sm btn-danger">
+                            <i class="fas fa-trash"></i> Delete
+                        </a>
                         </td>
                     </tr>
                     @endforeach
@@ -138,6 +147,7 @@
                 <button id="printDetail" class="btn btn-primary mt-3">
                     <i class="fas fa-print"></i> Cetak
                 </button>
+                
             </div>
         </div>
     </div>
