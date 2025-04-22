@@ -82,30 +82,32 @@
                         <td>{{ $rekam->beratBadan }}</td>
                         <td>{{ $rekam->diagnosaMedis }}</td>
                         <td>
-                            <button class="btn btn-sm btn-info detail-btn"
-                                data-bs-toggle="modal"
-                                data-bs-target="#detailModal"
-                                data-id="{{ $rekam->noRm }}"
-                                data-nama="{{ $rekam->namaPasien }}"
-                                data-spesialis="{{ $rekam->NIK }}"
-                                data-tanggal="{{ $rekam->tanggalPeriksa }}"
-                                data-tekananDarah="{{ $rekam->tekananDarah ?? '' }}"
-                                data-rr="{{ $rekam->RR ?? '' }}"
-                                data-nadi="{{ $rekam->nadi ?? '' }}"
-                                data-suhu="{{ $rekam->suhu ?? '' }}"
-                                data-tinggi="{{ $rekam->tinggiBadan ?? '' }}"
-                                data-berat="{{ $rekam->beratBadan ?? '' }}"
-                                data-diagnosa="{{ $rekam->diagnosaMedis ?? '' }}">
-                                <i class="fas fa-eye"></i> Detail
-                            </button>
-                            <!-- Edit Button -->
-                        <a href="{{ route('dokter.rekam_medis.edit', $rekam->idRekamMedis) }}" class="btn btn-sm btn-warning">
-                                <i class="fas fa-edit"></i> Edit
-                        </a>
-                        <!-- Delete Button -->
-                        <a href="#" class="btn btn-sm btn-danger">
-                            <i class="fas fa-trash"></i> Delete
-                        </a>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-info detail-btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#detailModal"
+                                    data-id="{{ $rekam->noRm }}"
+                                    data-nama="{{ $rekam->namaPasien }}"
+                                    data-spesialis="{{ $rekam->NIK }}"
+                                    data-tanggal="{{ $rekam->tanggalPeriksa }}"
+                                    data-tekananDarah="{{ $rekam->tekananDarah ?? '' }}"
+                                    data-rr="{{ $rekam->RR ?? '' }}"
+                                    data-nadi="{{ $rekam->nadi ?? '' }}"
+                                    data-suhu="{{ $rekam->suhu ?? '' }}"
+                                    data-tinggi="{{ $rekam->tinggiBadan ?? '' }}"
+                                    data-berat="{{ $rekam->beratBadan ?? '' }}"
+                                    data-diagnosa="{{ $rekam->diagnosaMedis ?? '' }}">
+                                    <i class="fas fa-eye"></i> Detail
+                                </button>
+                                <!-- Edit Button -->
+                                <a href="{{ route('dokter.rekam_medis.edit', $rekam->idRekamMedis) }}" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <!-- Delete Button -->
+                                <a href="#" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-trash"></i> Delete
+                                </a>
+                            </div>
                         </td>
                     </tr>
                     @endforeach

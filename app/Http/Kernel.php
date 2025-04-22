@@ -35,6 +35,7 @@ class Kernel extends HttpKernel
         'pasien' => \App\Http\Middleware\PasienMiddleware::class,
         'dokter' => \App\Http\Middleware\DokterMiddleware::class,
         'stafrekammedis' => \App\Http\Middleware\StafrekammedisMiddleware::class,
+        'klinik' => \App\Http\Middleware\KlinikMiddleware::class,
     ];
 
     protected $middlewareGroups = [

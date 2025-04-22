@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DokterController;
+use App\Http\Controllers\KlinikController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\RekammedisController;
@@ -91,54 +92,13 @@ Route::middleware(['auth', 'dokter'])->prefix('dokter')->group(function () {
 
 Route::middleware(['auth', 'stafrekammedis'])->prefix('stafrekammedis')->group(function () {
     Route::get('/dashboard', [StaffrekammedisController::class, 'dashboard'])->name('stafrekammedis.dashboard');
-    // Route::get('/data_dokter', [DokterController::class, 'data_dokter'])->name('dokter.data_dokter');
-    // Route::get('/data_dokter/tambah', [DokterController::class, 'store'])->name('dokter.data_dokter.store');
-    // Route::post('/data_dokter/update', [DokterController::class, 'update'])->name('dokter.data_dokter.update');
     Route::get('/rekam_medis/tambah', [StaffrekammedisController::class, 'tambah_rekam_medis'])->name('stafrekammedis.tambah_rekam_medis');
     Route::post('/rekam_medis/submit', [RekammedisController::class, 'store'])->name('stafrekammedis.rekam_medis.submit');
-    // Route::get('/rekam_medis/edit/{id}', [RekammedisController::class, 'edit'])->name('dokter.rekam_medis.edit');
-    // Route::put('/rekam_medis/update/{id}', [RekammedisController::class, 'update'])->name('dokter.rekam_medis.update');
-    // Route::delete('/rekam_medis/delete/{id}', [RekammedisController::class, 'destroy'])->name('dokter.rekam_medis.delete');
 });
 
-
-// ini Klinik
-Route::get('/klinik/dashboard', function () {
-    return view('klinik.dashboard');
-})->name('klinik.dashboard');
-
-Route::get('/klinik/tambah-laporan', function () {
-    return view('klinik.tambah_laporan');
-})->name('klinik.tambah_laporan');
-
-// Halaman daftar laporan
-Route::get('/klinik/laporan', function () {
-    return view('klinik.laporan_klinik');
-})->name('klinik.laporan');
-
-// Simulasi proses POST dari form tambah (tanpa database, hanya redirect balik)
-Route::post('/klinik/tambah-laporan', function () {
-    return redirect()->route('klinik.laporan')->with('success', 'Data berhasil disimpan (dummy).');
-})->name('klinik.tambah_laporan.post');
-
-
-
-
-
-
-
-Route::get('/dokter/siti-jamila', function () {
-    return view('siti_jamila');
-})->name('dokter.siti_jamila');
-
-Route::get('/dokter/heni-rahmawati', function () {
-    return view('heni_rahmawati');
-})->name('dokter.heni_rahmawati');
-
-Route::get('/dokter/dwi-wahyudi', function () {
-    return view('dwi_wahyudi');
-})->name('dokter.dwi_wahyudi');
-
-Route::get('/dokter/fathullah-huda', function () {
-    return view('fathullah_huda');
-})->name('dokter.fathullah_huda');
+Route::middleware(['auth', 'klinik'])->prefix('klinik')->group(function () {
+    Route::get('/dashboard', [KlinikController::class, 'dashboard'])->name('klinik.dashboard');
+    Route::get('/laporan', [KlinikController::class, 'laporan'])->name('klinik.laporan');
+    Route::get('/laporan/tambah', [KlinikController::class, 'tambah_laporan'])->name('klinik.laporan.tambah');
+    Route::post('/laporan/submit', [KlinikController::class, 'store'])->name('klinik.laporan.submit');
+});

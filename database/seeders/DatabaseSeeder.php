@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             HariSeeder::class,
             WaktuSeeder::class,
             StaffrekammedisSeeder::class,
+            KlinikSeeder::class,
         ]);
     }
 }

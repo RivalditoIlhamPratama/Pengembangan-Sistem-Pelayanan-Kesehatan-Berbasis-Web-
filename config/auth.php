@@ -24,6 +24,10 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+        'klinik' => [
+            'driver' => 'session',
+            'provider' => 'kliniks',
+        ],
     ],
 
     'providers' => [

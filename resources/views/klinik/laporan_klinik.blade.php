@@ -17,11 +17,11 @@
 
             <!-- Tombol Aksi -->
             <div class="d-flex gap-2">
-                <a href="{{ route('klinik.tambah_laporan') }}" class="btn btn-primary">
+                <a href="{{ route('klinik.laporan.tambah') }}" class="btn btn-primary">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
-                
-                
+
+
                 <button class="btn btn-danger d-flex align-items-center gap-1">
                     <i class="fas fa-file-pdf"></i> Export PDF
                 </button>
