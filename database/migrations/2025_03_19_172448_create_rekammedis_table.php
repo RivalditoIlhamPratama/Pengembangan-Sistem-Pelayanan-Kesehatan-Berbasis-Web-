@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('NIK');
             $table->date('tanggalPeriksa');
             $table->string('tekananDarah');
+            $table->string('rr');
             $table->string('nadi');
             $table->string('suhu');
             $table->string('tinggiBadan');

@@ -1,85 +1,118 @@
-@extends('layouts.dokter')
 
-@section('content')
-<div class="container mt-5">
-    <h2 class="mb-4">Edit Rekam Medis</h2>
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+<!-- MODAL EDIT REKAM MEDIS -->
+<div class="modal fade" id="editRekamModal" tabindex="-1" aria-labelledby="editRekamModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form id="editRekamForm" method="POST" action="">
+                @csrf
+                @method('PUT')
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editRekamModalLabel">Edit Rekam Medis</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="editId" name="id">
+                    <div class="mb-3">
+                        <label for="editNoRm" class="form-label">No RM</label>
+                        <input type="text" class="form-control" id="editNoRm" name="noRm" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editNamaPasien" class="form-label">Nama Pasien</label>
+                        <input type="text" class="form-control" id="editNamaPasien" name="namaPasien" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editNIK" class="form-label">NIK</label>
+                        <input type="text" class="form-control" id="editNIK" name="NIK" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTanggalPeriksa" class="form-label">Tanggal Periksa</label>
+                        <input type="date" class="form-control" id="editTanggalPeriksa" name="tanggalPeriksa" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTekananDarah" class="form-label">Tekanan Darah</label>
+                        <input type="text" class="form-control" id="editTekananDarah" name="tekananDarah" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editRR" class="form-label">RR</label>
+                        <input type="text" class="form-control" id="editRR" name="RR" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editNadi" class="form-label">Nadi</label>
+                        <input type="text" class="form-control" id="editNadi" name="nadi" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editSuhu" class="form-label">Suhu</label>
+                    <div class="input-group">
+                        <input name="suhu" id="editSuhu" type="number" class="form-control text-left" placeholder="Suhu" step="1" required >
+                    </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTinggiBadan" class="form-label">Tinggi Badan</label>
+                    <div class="input-group">
+                        <input name="tinggiBadan" id="editTinggiBadan" type="number" class="form-control text-left" placeholder="Tinggi Badan"  min="0" step="1"  required>
+                    </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editBeratBadan" class="form-label">Berat Badan</label>
+                        <div class="input-group">
+                            <input name="beratBadan" id="editBeratBadan" type="number" class="form-control text-left" placeholder="Berat Badan"  min="0" step="1" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editDiagnosaMedis" class="form-label">Diagnosa Medis</label>
+                        <textarea class="form-control" id="editDiagnosaMedis" name="diagnosaMedis" rows="3" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Update Rekam Medis</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                </div>
+            </form>
         </div>
-    @endif
-
-    <form action="{{ route('dokter.rekam_medis.update', $rekammedis->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-
-        <div class="mb-3">
-            <label for="noRm" class="form-label">No RM</label>
-            <input type="text" class="form-control" id="noRm" name="noRm" value="{{ old('noRm', $rekammedis->noRm) }}" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="namaPasien" class="form-label">Nama Pasien</label>
-            <input type="text" class="form-control" id="namaPasien" name="namaPasien" value="{{ old('namaPasien', $rekammedis->namaPasien) }}" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="NIK" class="form-label">NIK</label>
-            <input type="text" class="form-control" id="NIK" name="NIK" value="{{ old('NIK', $rekammedis->NIK) }}" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="alamatPasien" class="form-label">Alamat Pasien</label>
-            <input type="text" class="form-control" id="alamatPasien" name="alamatPasien" value="{{ old('alamatPasien', $rekammedis->alamatPasien) }}" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="tanggalPeriksa" class="form-label">Tanggal Periksa</label>
-            <input type="date" class="form-control" id="tanggalPeriksa" name="tanggalPeriksa" value="{{ old('tanggalPeriksa', $rekammedis->tanggalPeriksa) }}" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="tekananDarah" class="form-label">Tekanan Darah</label>
-            <input type="text" class="form-control" id="tekananDarah" name="tekananDarah" value="{{ old('tekananDarah', $rekammedis->tekananDarah) }}" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="RR" class="form-label">RR</label>
-            <input type="text" class="form-control" id="RR" name="RR" value="{{ old('RR', $rekammedis->RR) }}" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="nadi" class="form-label">Nadi</label>
-            <input type="text" class="form-control" id="nadi" name="nadi" value="{{ old('nadi', $rekammedis->nadi) }}" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="suhu" class="form-label">Suhu</label>
-            <input type="text" class="form-control" id="suhu" name="suhu" value="{{ old('suhu', $rekammedis->suhu) }}" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="tinggiBadan" class="form-label">Tinggi Badan</label>
-            <input type="text" class="form-control" id="tinggiBadan" name="tinggiBadan" value="{{ old('tinggiBadan', $rekammedis->tinggiBadan) }}" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="beratBadan" class="form-label">Berat Badan</label>
-            <input type="text" class="form-control" id="beratBadan" name="beratBadan" value="{{ old('beratBadan', $rekammedis->beratBadan) }}" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="diagnosaMedis" class="form-label">Diagnosa Medis</label>
-            <textarea class="form-control" id="diagnosaMedis" name="diagnosaMedis" rows="3" required>{{ old('diagnosaMedis', $rekammedis->diagnosaMedis) }}</textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Update Rekam Medis</button>
-        <a href="{{ route('dokter.rekam_medis') }}" class="btn btn-secondary">Batal</a>
-    </form>
+    </div>
 </div>
-@endsection
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Existing detail modal code...
+
+    // Edit modal population
+            document.querySelectorAll(".btn-warning").forEach(button => {
+                button.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    const row = this.closest("tr");
+                    const id = this.getAttribute("href").split('/').pop();
+
+                    // Set form action URL
+                    const form = document.getElementById("editRekamForm");
+                    form.action = `/dokter/rekam_medis/update/${id}`;
+
+                    // Populate form fields
+                    document.getElementById("editId").value = id;
+                    document.getElementById("editNoRm").value = row.querySelector("td:nth-child(1)").innerText.trim();
+                    document.getElementById("editNamaPasien").value = row.querySelector("td:nth-child(2)").innerText.trim();
+                    document.getElementById("editNIK").value = row.querySelector("td:nth-child(3)").innerText.trim();
+                    // Convert date from d-m-Y to Y-m-d for input[type=date]
+                    let dateText = row.querySelector("td:nth-child(4)").innerText.trim();
+                    let parts = dateText.split("-");
+                    if(parts.length === 3) {
+                        let formattedDate = parts[2] + "-" + parts[1].padStart(2, '0') + "-" + parts[0].padStart(2, '0');
+                        document.getElementById("editTanggalPeriksa").value = formattedDate;
+                    } else {
+                        document.getElementById("editTanggalPeriksa").value = "";
+                    }
+                    document.getElementById("editTekananDarah").value = row.querySelector("td:nth-child(5)").innerText.trim();
+                    document.getElementById("editRR").value = row.querySelector("td:nth-child(6)").innerText.trim();
+                    document.getElementById("editNadi").value = row.querySelector("td:nth-child(7)").innerText.trim();
+                    document.getElementById("editSuhu").value = row.querySelector("td:nth-child(8)").innerText.trim();
+                    document.getElementById("editTinggiBadan").value = row.querySelector("td:nth-child(9)").innerText.trim();
+                    document.getElementById("editBeratBadan").value = row.querySelector("td:nth-child(10)").innerText.trim();
+                    document.getElementById("editDiagnosaMedis").value = row.querySelector("td:nth-child(11)").innerText.trim();
+                    // Show modal
+                    var editModal = new bootstrap.Modal(document.getElementById('editRekamModal'));
+                    editModal.show();
+                });
+            });
+});
+</script>

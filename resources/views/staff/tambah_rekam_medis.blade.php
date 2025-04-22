@@ -6,7 +6,7 @@
         <h2 class="mb-4 fw-bold">Tambah Rekam Medis</h2>
 
         <!-- Form Tambah Rekam Medis -->
-        <form action="{{ route('dokter.rekam_medis.submit') }}" method="POST">
+        <form action="{{ route('stafrekammedis.rekam_medis.submit') }}" method="POST">
             @csrf
             <div class="row mb-3">
                 <div class="col-md-4">
@@ -29,8 +29,8 @@
                     <input name="tanggalPeriksa" type="date" class="form-control" required>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Nama Dokter</label>
-                    <input type="text"  class="form-control" value="{{ $dokter->namaDokter }}" readonly />
+                    <label class="form-label">Nama Staff Rekam Medis</label>
+                    <input type="text"  class="form-control" value="{{ $staff->namaStaff }}" readonly />
                 </div>
             </div>
 
@@ -38,7 +38,7 @@
                 <div class="col-md-2">
                     <label class="form-label">Suhu</label>
                     <div class="input-group">
-                        <input name="suhu" id="suhuInput" type="number" class="form-control text-center" placeholder="Suhu" step="1" required >
+                        <input name="suhu" id="suhuInput" type="number" class="form-control text-center" placeholder="Suhu"  min="0" max="100" step="1" required >
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -56,14 +56,14 @@
                 <div class="col-md-2">
                     <label class="form-label">Tinggi Badan</label>
                     <div class="input-group">
-                        <input name="tinggiBadan" id="tinggiBadan" type="number" class="form-control text-center" placeholder="Tinggi Badan"  min="0" step="1"  required>
+                        <input name="tinggiBadan" id="tinggiBadan" type="number" class="form-control text-center" placeholder="Tinggi Badan"  min="0" max="100" step="1"  required>
 
                     </div>
                 </div>
                 <div class="col-md-2">
                     <label class="form-label">Berat Badan</label>
                     <div class="input-group">
-                        <input name="beratBadan" id="beratBadan" type="number" class="form-control text-center" placeholder="Berat Badan"  min="0" step="1" required>
+                        <input name="beratBadan" id="beratBadan" type="number" class="form-control text-center" placeholder="Berat Badan"  min="0" max="100" step="1" required>
                     </div>
                 </div>
             </div>
@@ -76,10 +76,9 @@
             <!-- Tombol Simpan & Batal -->
             <div class="d-flex justify-content-start">
                 <button type="submit" class="btn btn-primary me-2">Simpan</button>
-                <a href="{{ route('dokter.rekam_medis') }}" class="btn btn-danger">Batal</a>
+                <a href="{{ route('stafrekammedis.dashboard') }}" class="btn btn-danger">Batal</a>
             </div>
         </form>
     </div>
 </div>
 @endsection
-

@@ -75,7 +75,7 @@
                         <td>{{ $rekam->NIK }}</td>
                         <td>{{ \Carbon\Carbon::parse($rekam->tanggalPeriksa)->format('d-m-Y') }}</td>
                         <td>{{ $rekam->tekananDarah }}</td>
-                        <td>{{ $rekam->RR }}</td>
+                        <td>{{ $rekam->rr }}</td>
                         <td>{{ $rekam->nadi }}</td>
                         <td>{{ $rekam->suhu }}</td>
                         <td>{{ $rekam->tinggiBadan }}</td>
@@ -99,10 +99,9 @@
                                 <i class="fas fa-eye"></i> Detail
                             </button>
                             <!-- Edit Button -->
-                        <a href="#" class="btn btn-sm btn-warning">
-                            <i class="fas fa-edit"></i> Edit
+                        <a href="{{ route('dokter.rekam_medis.edit', $rekam->idRekamMedis) }}" class="btn btn-sm btn-warning">
+                                <i class="fas fa-edit"></i> Edit
                         </a>
-
                         <!-- Delete Button -->
                         <a href="#" class="btn btn-sm btn-danger">
                             <i class="fas fa-trash"></i> Delete
@@ -115,7 +114,7 @@
         @endif
     </div>
 </div>
-
+@include('dokter.edit_rekam_medis')
 <!-- MODAL DETAIL REKAM MEDIS -->
 <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -131,7 +130,7 @@
                     <hr>
                     <h4>Resume Medis</h4>
                 </div>
-                <p><strong>Nomor MR:</strong> <span id="detailNo"></span></p>
+                <p><strong>Nomor RM:</strong> <span id="detailNo"></span></p>
                 <p><strong>Nama:</strong> <span id="detailPasien"></span></p>
                 <p><strong>Dokter:</strong> <span id="detailDokter"></span></p>
                 <p><strong>Tanggal Pemeriksaan:</strong> <span id="detailDate"></span></p>
@@ -147,7 +146,7 @@
                 <button id="printDetail" class="btn btn-primary mt-3">
                     <i class="fas fa-print"></i> Cetak
                 </button>
-                
+
             </div>
         </div>
     </div>

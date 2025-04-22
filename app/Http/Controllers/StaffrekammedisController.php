@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\rekammedis;
+use App\Models\staffrekammedis;
 use Illuminate\Http\Request;
 
 class StaffrekammedisController extends Controller
 {
     public function dashboard()
     {
-        return view('staff.rm');
+        $user = auth()->user();
+        $staff = Staffrekammedis::where('user_id', $user->id_user)->first();
+        $rekammedis = Rekammedis::where('StaffRm_id', $staff->idStaffRm)->get();
+        return view('staff.rm', ['rekammedis' => $rekammedis]);
     }
     // public function data_dokter() {
     //     $user = auth()->user();
@@ -22,11 +27,11 @@ class StaffrekammedisController extends Controller
     //     return view('dokter.rekam_medis', ['rekammedis' => $rekammedis]);
     //     }
 
-    // public function tambah_rekam_medis() {
-    //     $user = auth()->user();
-    //     $dokter = Dokter::where('user_id', $user->id_user)->first();
-    //     return view('dokter.tambah_rekam_medis', ['dokter' => $dokter]);
-    // }
+    public function tambah_rekam_medis() {
+        $user = auth()->user();
+        $staff = Staffrekammedis::where('user_id', $user->id_user)->first();
+        return view('staff.tambah_rekam_medis', ['staff' => $staff]);
+    }
 
     // public function update(Request $request)
     // {
