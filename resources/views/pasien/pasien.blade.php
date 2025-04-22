@@ -30,7 +30,7 @@
                 <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
                 <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
                 <li class="link"><a href="{{ url('/') }}">Alur Pelayanan</a></li>
-                <li class="link"><a href="{{route('pasien.reports') }}">Pelayanan</a></li>
+                <li class="link"><a href="{{route('pasien.reports') }}">Pengaduan</a></li>
                 @if(auth()->check() && auth()->user()->role === 'pasien')
                 <li class="link">
                     <div class="flex items-center space-x-4">
@@ -88,7 +88,7 @@
           </div>
           <div class="service">
               <img src="{{ asset('assets/service 4.png') }}" alt="Edukasi Kesehatan">
-              <h3>Edukasi Kesehatan</h3>
+              <h3>Berita Puskesmas</h3>
               <p>Dapatkan informasi kesehatan </p>
           </div>
       </div>
@@ -105,41 +105,41 @@
           <div class="doctor-card">
             <img src="{{ asset('assets/dokter.png') }}" alt="Dr. Komang Ayu" class="doctor-img" />
             <div class="doctor-info">
-              <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
+              <h3>dr. Siti Jamila</h3>
               <br>
               <p>Dokter Spesialis Anak</p>
               <br>
-              <a href="doctor-details.html" class="btn">Selengkapnya</a>
+    
             </div>
           </div>
           <div class="doctor-card">
             <img src="{{ asset('assets/Dokter1.jpg') }}" alt="Dr. Ni Made Maya" class="doctor-img" />
             <div class="doctor-info">
-              <h3>dr. Ni Made Maya Purnama Wulandari, Sp.A</h3>
+              <h3>dr. Dwi Wahyudi</h3>
               <br>
               <p>Dokter Spesialis Anak</p>
               <br>
-              <a href="doctor-details.html" class="btn">Selengkapnya</a>
+              
             </div>
           </div>
           <div class="doctor-card">
             <img src="{{ asset('assets/dokter.png') }}" alt="Dr. Muhammad Reza" class="doctor-img" />
             <div class="doctor-info">
-              <h3>dr. Muhammad Reza, M.Biomed, Sp.A.(K)</h3>
+              <h3>dr. Heni Rahmawati</h3>
               <br>
               <p>Dokter Spesialis Anak</p>
               <br>
-              <a href="doctor-details.html" class="btn">Selengkapnya</a>
+              
             </div>
           </div>
           <div class="doctor-card">
             <img src="{{ asset('assets/dokter.png') }}" alt="Dr. Yessi Rahmawati" class="doctor-img" />
             <div class="doctor-info">
-              <h3>dr. Yessi Rahmawati, Sp.OG. (K)</h3>
+              <h3>dr. Fathullah Wahyudi</h3>
               <br>
               <p>Dokter Spesialis Obstetri </p>
               <br>
-              <a href="doctor-details.html" class="btn">Selengkapnya</a>
+              
             </div>
           </div>
 
@@ -155,7 +155,7 @@
         <!-- Beita -->
         <div class="berita--container">
           <h2>Berita Terkait</h2>
-          <p class="centered-text">Berita Berita Puskesmas Kraksaan Terbaru</p>
+          <p class="centered-text">Berita Berita Puskesmas Kraksaan</p>
           <br>
           <br>
           <div class="berita-container">

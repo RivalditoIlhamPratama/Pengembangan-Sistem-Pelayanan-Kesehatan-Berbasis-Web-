@@ -31,13 +31,13 @@
             <li class="link"><a href="{{ route('pasien.dashboard') }}">Beranda</a></li>
             <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
             <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
-            <li class="link"><a href="{{ url('/alur-pelayanan') }}">Alur Pelayanan</a></li>
+            <li class="link"><a href="{{ url('/') }}">Alur Pelayanan</a></li>
             @endif
             @if(!auth()->check() || (auth()->check() && auth()->user()->role !== 'pasien'))
             <li class="link"><a href="{{ url('/') }}">Beranda</a></li>
             <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
             <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
-            <li class="link"><a href="{{ url('/alur-pelayanan') }}">Alur Pelayanan</a></li>
+            <li class="link"><a href="{{ url('/') }}">Alur Pelayanan</a></li>
             @endif
             <li class="link"><a class="@unless(auth()->check() && auth()->user()->role === 'pasien') disabled-link @endunless" href="{{ url('/aduanmasyarakat') }}">Pengaduan</a></li>
             @if(!auth()->check() || (auth()->check() && auth()->user()->role !== 'pasien'))
@@ -73,64 +73,32 @@
         <div class="container">
           <div class="about__content">
             <div class="about__image">
-              <img src="assets/11.png" alt="Logo Puskesmas Kraksaan">
+              <img src="assets/alur_pelayanan.png" alt="Logo Puskesmas Kraksaan" style="width: 110%; max-width: 1010px; height: auto;">
+
             </div>
+            <br>
+            <br>
             <div class="about__text">
-              <h2>Sejarah Puskesmas</h2>
-              <p>Puskesmas Kraksaan adalah pusat pelayanan kesehatan masyarakat di wilayah Kraksaan, Kabupaten Probolinggo, Jawa Timur. Sebagai fasilitas kesehatan tingkat pertama, Puskesmas ini menyediakan berbagai layanan.</p>
+              <h2>Alur Pelayanan</h2>
+              <p>
+                Alur pelayanan di Puskesmas Kraksaan dimulai dari pasien datang dan melakukan pendaftaran serta rekam medis. Setelah itu, pasien akan diarahkan ke berbagai jenis pelayanan sesuai kebutuhannya, seperti pelayanan umum, gigi, KIA & KB, TB, HIV, kusta, hepatitis, gizi, dan sanitasi. Jika diperlukan, pasien dapat dirujuk untuk pemeriksaan laboratorium. Setelah pelayanan selesai, pasien akan menuju farmasi untuk mengambil obat. Pasien kemudian dapat pulang atau dirujuk ke rumah sakit jika kondisi darurat atau membutuhkan penanganan lanjutan.
+              </p>
+              
             </div>
           </div>
         </div>
+        
       </section>
 
-      <section class="visi-misi">
-        <div class="container">
-          <div class="visi-misi__content">
-            <div class="visi-misi__image">
-              <img src="assets/visimisi.png" alt="Visi & Misi">
-            </div>
-            <div class="visi-misi__text">
-              <h2>Visi Dan Misi</h2>
-              <p>Puskesmas Kraksaan adalah pusat pelayanan kesehatan masyarakat di wilayah Kraksaan, Kabupaten Probolinggo, Jawa Timur. Sebagai fasilitas kesehatan tingkat pertama, Puskesmas ini menyediakan berbagai layanan.</p>
-            </div>
+      
           </div>
         </div>
       </section>
-
-      <section class="struktur-organisasi">
-        <div class="container">
-          <h2>Struktur Organisasi</h2>
-          <div class="struktur-container">
-            <div class="struktur-item">
-              <img src="assets/Kepalapuskesmas.png" alt="dr. Iqbal Kurniawadi">
-              <h3>dr. HENI RAHMAWATI</h3>
-              <p>Kepala Puskesmas Kraksaan</p>
-
-            </div>
-            <div class="struktur-row">
-              <div class="struktur-item">
-                <img src="assets/dokter.png" alt="Cholidun">
-                <h3>CHUSAIMI</h3>
-                <p>PJ UKM</p>
-
-              </div>
-              <div class="struktur-item">
-                <img src="assets/tatausaha.png" alt="Fajiz Ilyasri">
-                <h3>Fajar Ariani</h3>
-                <p>Bidan</p>
-
-              </div>
-              <div class="struktur-item">
-                <img src="assets/dokter.png" alt="Ferdi Kurniawan">
-                <h3>FERINDY KURNIAWAN</h3>
-                <p>Pengelola Pengaduan</p>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
         <!--Footer-->
         <footer class="footer">
             <div class="section__container footer__container">

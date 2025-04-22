@@ -5,15 +5,26 @@
     <div class="card p-4 shadow-sm">
         <h2 class="mb-4 fw-bold">Data Rekam Medis</h2>
 
-        <!-- Pencarian -->
+        <!-- Pencarian dan Tombol Ekspor -->
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <div class="input-group w-25">
-                <input type="text" class="form-control" id="searchInput" placeholder="Cari data...">
-                <button class="btn btn-outline-secondary" type="button">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
+        <div class="input-group w-25">
+        <input type="text" class="form-control" id="searchInput" placeholder="Cari data...">
+        <button class="btn btn-outline-secondary" type="button">
+            <i class="fas fa-search"></i>
+        </button>
         </div>
+
+        <!-- Tombol Ekspor -->
+        <div>
+        <button id="exportPdf" class="btn btn-danger me-2">
+            <i class="fas fa-file-pdf"></i> Export PDF
+        </button>
+        <button id="exportExcel" class="btn btn-success">
+            <i class="fas fa-file-excel"></i> Export Excel
+        </button>
+        </div>
+        </div>
+
 
         <!-- Tabel Data Rekam Medis -->
         <div class="table-responsive">
@@ -58,12 +69,6 @@
                         <td>
                             <a href="#" class="btn btn-sm btn-info">
                                 <i class="fas fa-eye"></i>
-                            </a>
-                            <a href="#" class="btn btn-sm btn-warning">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="#" class="btn btn-sm btn-danger">
-                                <i class="fas fa-trash"></i>
                             </a>
                         </td>
                     </tr>

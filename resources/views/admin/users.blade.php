@@ -49,9 +49,13 @@
                             <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
+
+                    
                     @endforeach
                 </tbody>
             </table>
+
+            
         </div>
     </div>
 </div>

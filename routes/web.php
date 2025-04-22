@@ -54,6 +54,12 @@ Route::get('/dokter', function () {
     return view('daftardokter');
 });
 
+Route::get('/alur-pelayanan', function () {
+    return view('alur_pelayanan');
+})->name('alur.pelayanan');
+
+
+
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
@@ -94,6 +100,32 @@ Route::middleware(['auth', 'stafrekammedis'])->prefix('stafrekammedis')->group(f
     // Route::put('/rekam_medis/update/{id}', [RekammedisController::class, 'update'])->name('dokter.rekam_medis.update');
     // Route::delete('/rekam_medis/delete/{id}', [RekammedisController::class, 'destroy'])->name('dokter.rekam_medis.delete');
 });
+
+
+// ini Klinik
+Route::get('/klinik/dashboard', function () {
+    return view('klinik.dashboard'); 
+})->name('klinik.dashboard');
+
+Route::get('/klinik/tambah-laporan', function () {
+    return view('klinik.tambah_laporan');
+})->name('klinik.tambah_laporan');
+
+// Halaman daftar laporan
+Route::get('/klinik/laporan', function () {
+    return view('klinik.laporan_klinik');
+})->name('klinik.laporan');
+
+// Simulasi proses POST dari form tambah (tanpa database, hanya redirect balik)
+Route::post('/klinik/tambah-laporan', function () {
+    return redirect()->route('klinik.laporan')->with('success', 'Data berhasil disimpan (dummy).');
+})->name('klinik.tambah_laporan.post');
+
+
+
+
+
+
 
 Route::get('/dokter/siti-jamila', function () {
     return view('siti_jamila');

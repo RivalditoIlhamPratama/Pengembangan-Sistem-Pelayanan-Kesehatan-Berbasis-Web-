@@ -30,7 +30,8 @@
           <li class="link"><a href="{{ url('/') }}">Beranda</a></li>
           <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
           <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
-          <li class="link"><a href="{{ url('/') }}">Alur Pelayanan</a></li>
+          <li class="link"><a href="{{ url('/alur-pelayanan') }}">Alur Pelayanan</a></li>
+
           <li class="link"><a class="disabled-link" href="{{ url('/aduanmasyarakat') }}">Pengaduan</a></li>
           <li class="link">
             <a href="{{ route('login') }}" class="btn-link">
@@ -78,7 +79,7 @@
           </div>
           <div class="service">
               <img src="{{ asset('assets/service 4.png') }}" alt="Edukasi Kesehatan">
-              <h3>Edukasi Kesehatan</h3>
+              <h3>Berita Puskesmas</h3>
               <p>Dapatkan informasi kesehatan </p>
           </div>
       </div>
@@ -145,7 +146,7 @@
         <!-- Beita -->
         <div class="berita--container">
           <h2>Berita Terkait</h2>
-          <p class="centered-text">Berita Berita Puskesmas Kraksaan Terbaru</p>
+          <p class="centered-text">Berita Berita Puskesmas Kraksaan</p>
           <br>
           <br>
           <div class="berita-container">
