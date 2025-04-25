@@ -29,8 +29,10 @@ class DokterSeeder extends Seeder
                 'namaDokter' => $nama[$i],
                 'spesialis' => 'Spesialis',
                 'jenisKelamin' => ($i + 1) % 2 ? 'Laki-laki' : 'Perempuan',
+                'jadwalPraktek' => '',
                 'tglLahir' => '2002-04-16',
                 'alamatDokter' => 'Jl. Example No.' . ($i + 1),
+                'noTelepon' => '0812345678' . $i,
             ]);
             echo "Created dokter: " . $dokter->namaDokter . "\n";
         }

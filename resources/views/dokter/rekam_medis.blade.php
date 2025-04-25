@@ -104,9 +104,12 @@
                                         <i class="fas fa-edit"></i> Edit
                                 </a>
                                 <!-- Delete Button -->
-                                <a href="#" class="btn btn-sm btn-danger">
-                                    <i class="fas fa-trash"></i> Delete
-                                </a>
+                                <form action="{{ route('dokter.rekam_medis.delete', $rekam->idRekamMedis) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus rekam medis ini?');">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>

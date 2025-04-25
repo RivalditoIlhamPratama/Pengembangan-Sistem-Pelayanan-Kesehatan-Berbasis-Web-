@@ -85,8 +85,22 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Jadwal</label>
-                            <input type="text" class="form-control" id="editJadwal" name="jadwalPraktek">
+                            <label class="form-label">Hari</label>
+                            <select class="form-control" id="editHari" name="hariPraktek" required>
+                                <option value="">Pilih Hari</option>
+                                @foreach($hari as $h)
+                                    <option value="{{ $h->namaHari }}">{{ $h->namaHari }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Jam</label>
+                            <select class="form-control" id="editJam" name="jamPraktek" required>
+                                <option value="">Pilih Jam</option>
+                                @foreach($waktu as $w)
+                                    <option value="{{ $w->jamMulai }} - {{ $w->jamSelesai }}">{{ $w->jamMulai }} - {{ $w->jamSelesai }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">No Telepon</label>
@@ -112,7 +126,21 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("editSpesialis").value = this.getAttribute("data-spesialis");
             // Set select value dynamically based on data-kelamin attribute
             document.getElementById("editKelamin").value = this.getAttribute("data-kelamin");
-            document.getElementById("editJadwal").value = this.getAttribute("data-jadwal");
+            // Parse jadwalPraktek string to set hari and jam selects
+            let jadwal = this.getAttribute("data-jadwal");
+            if (jadwal) {
+                let parts = jadwal.split(' ');
+                if (parts.length >= 2) {
+                    document.getElementById("editHari").value = parts[0];
+                    document.getElementById("editJam").value = parts.slice(1).join(' ');
+                } else {
+                    document.getElementById("editHari").value = jadwal;
+                    document.getElementById("editJam").value = '';
+                }
+            } else {
+                document.getElementById("editHari").value = '';
+                document.getElementById("editJam").value = '';
+            }
             document.getElementById("editTelepon").value = this.getAttribute("data-telepon");
         });
     });

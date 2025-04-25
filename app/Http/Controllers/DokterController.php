@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dokter;
-use App\Models\rekammedis;
+use App\Models\Hari;
+use App\Models\Rekammedis;
+use App\Models\Waktu;
 use Illuminate\Support\Facades\Auth;
 
 class DokterController extends Controller
@@ -15,8 +17,10 @@ class DokterController extends Controller
     }
     public function data_dokter() {
         $user = auth()->user();
+        $waktu = Waktu::all();
+        $hari = Hari::all();
         $dokter = Dokter::where('user_id', $user->id_user)->first();
-        return view('dokter.data_dokter', ['dokter' => $dokter]);
+        return view('dokter.data_dokter', ['dokter' => $dokter, 'waktu'=>$waktu, 'hari'=>$hari]);
     }
     public function rekam_medis() {
         $rekammedis = rekammedis::all();
@@ -38,14 +42,20 @@ class DokterController extends Controller
             'namaDokter' => 'required|string|max:255',
             'spesialis' => 'required|string|max:255',
             'jenisKelamin' => 'required|string|in:Laki Laki,Perempuan',
-            'jadwalPraktek' => 'nullable|string|max:255',
+            'hariPraktek' => 'nullable|string|max:255',
+            'jamPraktek' => 'nullable|string|max:255',
             'noTelepon' => 'nullable|string|max:20',
         ]);
 
         $dokter->namaDokter = $validatedData['namaDokter'];
         $dokter->spesialis = $validatedData['spesialis'];
         $dokter->jenisKelamin = $validatedData['jenisKelamin'];
-        $dokter->jadwalPraktek = $validatedData['jadwalPraktek'] ?? null;
+
+        // Combine hariPraktek and jamPraktek into jadwalPraktek string
+        $hari = $validatedData['hariPraktek'] ?? '';
+        $jam = $validatedData['jamPraktek'] ?? '';
+        $dokter->jadwalPraktek = trim($hari . ' ' . $jam);
+
         $dokter->noTelepon = $validatedData['noTelepon'] ?? null;
 
         $dokter->save();

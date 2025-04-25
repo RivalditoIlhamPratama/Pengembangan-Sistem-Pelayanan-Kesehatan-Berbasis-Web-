@@ -16,9 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('namaDokter');
             $table->string('spesialis');
+            $table->string('jadwalPraktek');
             $table->enum('jenisKelamin',['Laki-Laki', 'Perempuan']);
             $table->date('tglLahir');
             $table->string('alamatDokter');
+            $table->string('noTelepon');
 
             $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');
         });

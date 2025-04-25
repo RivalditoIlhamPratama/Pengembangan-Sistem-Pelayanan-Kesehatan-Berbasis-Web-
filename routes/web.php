@@ -86,7 +86,7 @@ Route::middleware(['auth', 'dokter'])->prefix('dokter')->group(function () {
     Route::post('/rekam_medis/submit', [RekammedisController::class, 'store'])->name('dokter.rekam_medis.submit');
     Route::get('/rekam_medis/edit/{id}', [RekammedisController::class, 'edit'])->name('dokter.rekam_medis.edit');
     Route::put('/rekam_medis/update/{id}', [RekammedisController::class, 'update'])->name('dokter.rekam_medis.update');
-    Route::delete('/rekam_medis/delete/{id}', [RekammedisController::class, 'destroy'])->name('dokter.rekam_medis.delete');
+    Route::post('/rekam_medis/delete/{id}', [RekammedisController::class, 'destroy'])->name('dokter.rekam_medis.delete');
 
 });
 

@@ -12,7 +12,7 @@ class PasienSeeder extends Seeder
     public function run()
     {
         // Create 10 unique patient users
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 2; $i++) {
             $user = User::create([
                 'username' => 'pasien' . $i,
                 'password' => Hash::make('password'),

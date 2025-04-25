@@ -16,7 +16,7 @@ class StaffrekammedisSeeder extends Seeder
     public function run(): void
     {
         // Create 10 unique patient users
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 2; $i++) {
             $user = User::create([
                 'username' => 'staff' . $i,
                 'password' => Hash::make('password'),
