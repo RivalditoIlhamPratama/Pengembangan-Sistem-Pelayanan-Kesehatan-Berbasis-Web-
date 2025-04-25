@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid mt-5">
     <div class="card p-4 shadow-sm">
-            <h2 class="mb-4 fw-bold">Data Rekam Medis</h2>
+        <h2 class="mb-4 fw-bold">Data Rekam Medis</h2>
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
@@ -91,7 +91,7 @@
                                     data-spesialis="{{ $rekam->NIK }}"
                                     data-tanggal="{{ $rekam->tanggalPeriksa }}"
                                     data-tekananDarah="{{ $rekam->tekananDarah ?? '' }}"
-                                    data-rr="{{ $rekam->RR ?? '' }}"
+                                    data-rr="{{ $rekam->rr ?? '' }}"
                                     data-nadi="{{ $rekam->nadi ?? '' }}"
                                     data-suhu="{{ $rekam->suhu ?? '' }}"
                                     data-tinggi="{{ $rekam->tinggiBadan ?? '' }}"
@@ -119,7 +119,7 @@
         @endif
     </div>
 </div>
-@include('dokter.edit_rekam_medis')
+
 <!-- MODAL DETAIL REKAM MEDIS -->
 <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -129,39 +129,84 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="printArea">
-                <div class="text-center mb-4">
-                    <h3>Puskesmas kraksaan</h3>
-                    <p>Jl. Mayjend Sungkono No.10, Patokan, Kec. Kraksaan, Kabupaten Probolinggo, Jawa Timur 67282</p>
-                    <hr>
-                    <h4>Resume Medis</h4>
+                <!-- Print Layout -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <img src="{{ asset('assets/11.png') }}" alt="Puskesmas Logo" style="max-width: 100px;">
+                    <div class="text-center ms-3">
+                        <h5 class="mb-0">PEMERINTAH KABUPATEN PROBOLINGGO DINAS KESEHATAN </h5>
+                        <h5 class="mb-0">PUSKESMAS KRAKSAAN</h5>
+                        <p>Jl. Mayjend Sungkono No.10, Patokan, Kec. Kraksaan, Kabupaten Probolinggo, Jawa Timur 67282</p>
+                    </div>
+                    <img src="{{ asset('assets/dinas.png') }}" alt="Second Logo" style="max-width: 55px;">
                 </div>
-                <p><strong>Nomor RM:</strong> <span id="detailNo"></span></p>
-                <p><strong>Nama:</strong> <span id="detailPasien"></span></p>
-                <p><strong>Dokter:</strong> <span id="detailDokter"></span></p>
-                <p><strong>Tanggal Pemeriksaan:</strong> <span id="detailDate"></span></p>
-                <hr>
-                <h5>Hasil Lab</h5>
-                <p><strong>Tekanan Darah:</strong> <span id="detailTD"></span></p>
-                <p><strong>RR:</strong> <span id="detailRR"></span></p>
-                <p><strong>Suhu:</strong> <span id="detailSuhu"></span></p>
-                <p><strong>Nadi:</strong> <span id="detailNadi"></span></p>
-                <p><strong>Tinggi Badan:</strong> <span id="detailTB"></span></p>
-                <p><strong>Berat Badan:</strong> <span id="detailBB"></span></p>
-                <p><strong>Diagnosa:</strong> <span id="detailDiagnosa"></span></p>
-                <button id="printDetail" class="btn btn-primary mt-3">
-                    <i class="fas fa-print"></i> Cetak
-                </button>
+                <div class="text-center mb-4">
+                    <hr>
+                    <h4>Formulir Identitas Pasien</h4>
+                    <p><strong>No RM:</strong> <span id="detailNo"></span></p>
+                </div>
 
+                <!-- Patient Information Table -->
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="2">A. Identitas Pasien</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Nama Pasien :</strong></td>
+                            <td id="detailPasien"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tanggal Periksa :</strong></td>
+                            <td id="detailDate"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dokter :</strong></td>
+                            <td id="detailDokter"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tekanan Darah :</strong></td>
+                            <td id="detailTD"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>RR :</strong></td>
+                            <td id="detailRR"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Suhu :</strong></td>
+                            <td id="detailSuhu"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nadi :</strong></td>
+                            <td id="detailNadi"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tinggi Badan :</strong></td>
+                            <td id="detailTB"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Berat Badan :</strong></td>
+                            <td id="detailBB"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Diagnosa :</strong></td>
+                            <td id="detailDiagnosa"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="text-center mt-4">
+                    <button id="printDetail" class="btn btn-primary">
+                        <i class="fas fa-print"></i> Cetak
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <!-- JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
-
 <script>
 document.getElementById("exportPdf").addEventListener("click", function() {
     const { jsPDF } = window.jspdf;
@@ -210,7 +255,6 @@ document.getElementById("printDetail").addEventListener("click", function() {
     document.body.innerHTML = originalContents;
     location.reload(); // Reload to reset the view
 });
-
 </script>
 
 @endsection
