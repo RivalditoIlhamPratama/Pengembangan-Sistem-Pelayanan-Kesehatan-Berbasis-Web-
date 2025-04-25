@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\pasien;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class PasienSeeder extends Seeder
 {
@@ -16,7 +17,8 @@ class PasienSeeder extends Seeder
             $user = User::create([
                 'username' => 'pasien' . $i,
                 'password' => Hash::make('password'),
-                'role' => 'pasien'
+                'role' => 'pasien',
+                'remember_token' => Str::random(10),
             ]);
             echo "Created user: " . $user->username . "\n";
 

@@ -14,6 +14,8 @@ class RekammedisController extends Controller
     {
         $validated = $request->validate([
             'namaPasien' => 'required|string',
+            'alamatPasien' => 'required|string',
+            'jenisKelamin' => 'required|string|in:Laki laki,Perempuan',
             'noRm' => 'required|string',
             'NIK' => 'required|string',
             'tanggalPeriksa' => 'required|date',
@@ -23,6 +25,7 @@ class RekammedisController extends Controller
             'suhu' => 'required|string',
             'tinggiBadan' => 'required|string',
             'beratBadan' => 'required|string',
+            'riwayatPenyakit' => 'required|string',
             'diagnosaMedis' => 'required|string',
         ]);
 
@@ -40,6 +43,8 @@ class RekammedisController extends Controller
             'noRm' => $validated['noRm'],
             'NIK' => $validated['NIK'],
             'namaPasien' => $validated['namaPasien'],
+            'alamatPasien' => $validated['alamatPasien'],
+            'jenisKelamin' => $validated['jenisKelamin'],
             'tanggalPeriksa' => $validated['tanggalPeriksa'],
             'tekananDarah' => $validated['tekananDarah'],
             'rr' => $validated['RR'],
@@ -47,6 +52,7 @@ class RekammedisController extends Controller
             'suhu' => $validated['suhu'],
             'tinggiBadan' => $validated['tinggiBadan'],
             'beratBadan' => $validated['beratBadan'],
+            'riwayatPenyakit' => $validated['riwayatPenyakit'],
             'diagnosaMedis' => $validated['diagnosaMedis'],
         ]);
 
@@ -67,6 +73,8 @@ class RekammedisController extends Controller
     {
         $validated = $request->validate([
         'namaPasien' => 'required|string',
+        'alamatPasien' => 'required|string',
+        'jenisKelamin' => 'required|string|in:Laki laki,Perempuan',
         'noRm' => 'required|string',
         'NIK' => 'required|string',
         'tanggalPeriksa' => 'required|date',
@@ -76,6 +84,7 @@ class RekammedisController extends Controller
         'suhu' => 'required|string',
         'tinggiBadan' => 'required|string',
         'beratBadan' => 'required|string',
+        'riwayatPenyakit' => 'required|string',
         'diagnosaMedis' => 'required|string',
         ]);
 

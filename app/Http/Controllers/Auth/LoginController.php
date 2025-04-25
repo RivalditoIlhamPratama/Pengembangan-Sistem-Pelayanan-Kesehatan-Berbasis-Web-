@@ -54,6 +54,18 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             $user = Auth::user();
+
+            // Create token for API usage
+            $token = $user->createToken('api-token')->plainTextToken;
+
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'message' => 'Authenticated',
+                    'token' => $token,
+                    'user' => $user,
+                ]);
+            }
+
             switch($user->role) {
                 case 'pasien':
                     return redirect()->intended('/pasien/dashboard')->with('login_success', true);
@@ -68,6 +80,12 @@ class LoginController extends Controller
                 default:
                     return redirect()->intended('/');
             }
+        }
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'message' => 'The provided credentials do not match our records.',
+            ], 401);
         }
 
         return back()->withErrors([

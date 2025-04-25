@@ -6,6 +6,7 @@ use App\Models\adminpuskesmas;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -18,7 +19,8 @@ class AdminSeeder extends Seeder
             $user = User::create([
                 'username' => 'admin' . $i,
                 'password' => Hash::make('password'),
-                'role' => 'admin'
+                'role' => 'admin',
+                'remember_token' => Str::random(10),
             ]);
             echo "Created user: " . $user->username . "\n";
 

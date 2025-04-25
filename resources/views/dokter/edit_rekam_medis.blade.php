@@ -1,7 +1,7 @@
 
 <!-- MODAL EDIT REKAM MEDIS -->
 <div class="modal fade" id="editRekamModal" tabindex="-1" aria-labelledby="editRekamModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
             <form id="editRekamForm" method="POST" action="">
                 @csrf
@@ -19,6 +19,14 @@
                     <div class="mb-3">
                         <label for="editNamaPasien" class="form-label">Nama Pasien</label>
                         <input type="text" class="form-control" id="editNamaPasien" name="namaPasien" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAlamatPasien" class="form-label">Alamat Pasien</label>
+                        <input type="text" class="form-control" id="editAlamatPasien" name="alamatPasien" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editJenisKelaminPasien" class="form-label">Jenis Kelamin Pasien</label>
+                        <input type="text" class="form-control" id="editJenisKelaminPasien" name="jenisKelamin" required>
                     </div>
                     <div class="mb-3">
                         <label for="editNIK" class="form-label">NIK</label>
@@ -59,6 +67,10 @@
                         </div>
                     </div>
                     <div class="mb-3">
+                        <label for="editRiwayatPenyakit" class="form-label">Riwayat Penyakit</label>
+                        <textarea class="form-control" id="editRiwayatPenyakit" name="riwayatPenyakit" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
                         <label for="editDiagnosaMedis" class="form-label">Diagnosa Medis</label>
                         <textarea class="form-control" id="editDiagnosaMedis" name="diagnosaMedis" rows="3" required></textarea>
                     </div>
@@ -92,7 +104,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     document.getElementById("editId").value = id;
                     document.getElementById("editNoRm").value = row.querySelector("td:nth-child(1)").innerText.trim();
                     document.getElementById("editNamaPasien").value = row.querySelector("td:nth-child(2)").innerText.trim();
-                    document.getElementById("editNIK").value = row.querySelector("td:nth-child(3)").innerText.trim();
+                    document.getElementById("editAlamatPasien").value = this.getAttribute("data-alamat");
+                    document.getElementById("editJenisKelaminPasien").value = this.getAttribute("data-kelamin");
+                    document.getElementById("editNIK").value = row.querySelector("td:nth-child(5)").innerText.trim();
                     // Convert date from d-m-Y to Y-m-d for input[type=date]
                     let dateText = row.querySelector("td:nth-child(4)").innerText.trim();
                     let parts = dateText.split("-");
@@ -108,6 +122,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     document.getElementById("editSuhu").value = row.querySelector("td:nth-child(8)").innerText.trim();
                     document.getElementById("editTinggiBadan").value = row.querySelector("td:nth-child(9)").innerText.trim();
                     document.getElementById("editBeratBadan").value = row.querySelector("td:nth-child(10)").innerText.trim();
+                    document.getElementById("editRiwayatPenyakit").value = this.getAttribute("data-riwayat");
                     document.getElementById("editDiagnosaMedis").value = row.querySelector("td:nth-child(11)").innerText.trim();
                     // Show modal
                     var editModal = new bootstrap.Modal(document.getElementById('editRekamModal'));

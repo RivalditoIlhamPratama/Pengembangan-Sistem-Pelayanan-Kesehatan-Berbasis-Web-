@@ -42,7 +42,7 @@
             </button>
             <div class="flex items-center space-x-3">
                 <i class="ri-user-fill text-xl"></i>
-                <span>Staff Rekam Medis</span>
+                <span>{{$staff->namaStaff}}</span>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="text-black hover:text-gray-500 ml-3">

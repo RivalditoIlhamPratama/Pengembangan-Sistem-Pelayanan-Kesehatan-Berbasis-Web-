@@ -17,6 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('StaffRm_id')->nullable();
             $table->string('noRm');
             $table->string('namaPasien');
+            $table->string('alamatPasien');
+            $table->enum('jenisKelamin',['Laki laki', 'Perempuan']);
             $table->string('NIK');
             $table->date('tanggalPeriksa');
             $table->string('tekananDarah');
@@ -25,6 +27,7 @@ return new class extends Migration
             $table->string('suhu');
             $table->string('tinggiBadan');
             $table->string('beratBadan');
+            $table->string('riwayatPenyakit');
             $table->string('diagnosaMedis');
 
             $table->foreign('Dokter_id')->references('idDokter')->on('dokters')->onDelete('cascade');

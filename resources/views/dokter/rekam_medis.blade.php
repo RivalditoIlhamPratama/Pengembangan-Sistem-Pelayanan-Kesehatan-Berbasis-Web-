@@ -1,5 +1,4 @@
 @extends('layouts.dokter')
-
 @section('content')
 <div class="container-fluid mt-5">
     <div class="card p-4 shadow-sm">
@@ -88,6 +87,8 @@
                                     data-bs-target="#detailModal"
                                     data-id="{{ $rekam->noRm }}"
                                     data-nama="{{ $rekam->namaPasien }}"
+                                    data-alamat="{{ $rekam->alamatPasien }}"
+                                    data-kelamin="{{ $rekam->jenisKelamin }}"
                                     data-spesialis="{{ $rekam->NIK }}"
                                     data-tanggal="{{ $rekam->tanggalPeriksa }}"
                                     data-tekananDarah="{{ $rekam->tekananDarah ?? '' }}"
@@ -96,13 +97,17 @@
                                     data-suhu="{{ $rekam->suhu ?? '' }}"
                                     data-tinggi="{{ $rekam->tinggiBadan ?? '' }}"
                                     data-berat="{{ $rekam->beratBadan ?? '' }}"
+                                    data-riwayat="{{ $rekam->riwayatPenyakit ?? '' }}"
                                     data-diagnosa="{{ $rekam->diagnosaMedis ?? '' }}">
                                     <i class="fas fa-eye"></i> Detail
                                 </button>
                                 <!-- Edit Button -->
-                                <a href="{{ route('dokter.rekam_medis.edit', $rekam->idRekamMedis) }}" class="btn btn-sm btn-warning">
-                                        <i class="fas fa-edit"></i> Edit
-                                </a>
+                                <a href="{{ route('dokter.rekam_medis.edit', $rekam->idRekamMedis) }}" class="btn btn-sm btn-warning"
+                                    data-alamat="{{ $rekam->alamatPasien }}"
+                                    data-kelamin="{{ $rekam->jenisKelamin }}"
+                                    data-riwayat="{{ $rekam->riwayatPenyakit }}">
+                                    <i class="fas fa-edit"></i> Edit
+                                 </a>
                                 <!-- Delete Button -->
                                 <form action="{{ route('dokter.rekam_medis.delete', $rekam->idRekamMedis) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus rekam medis ini?');">
                                     @csrf
@@ -119,7 +124,7 @@
         @endif
     </div>
 </div>
-
+@include('dokter.edit_rekam_medis')
 <!-- MODAL DETAIL REKAM MEDIS -->
 <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -158,6 +163,14 @@
                             <td id="detailPasien"></td>
                         </tr>
                         <tr>
+                            <td><strong>Alamat Pasien :</strong></td>
+                            <td id="detailAlamat"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Jenis Kelamin Pasien :</strong></td>
+                            <td id="detailKelamin"></td>
+                        </tr>
+                        <tr>
                             <td><strong>Tanggal Periksa :</strong></td>
                             <td id="detailDate"></td>
                         </tr>
@@ -190,6 +203,10 @@
                             <td id="detailBB"></td>
                         </tr>
                         <tr>
+                            <td><strong>Riwayat Penyakit :</strong></td>
+                            <td id="detailRiwayat"></td>
+                        </tr>
+                        <tr>
                             <td><strong>Diagnosa :</strong></td>
                             <td id="detailDiagnosa"></td>
                         </tr>
@@ -197,7 +214,7 @@
                 </table>
 
                 <div class="text-center mt-4">
-                    <button id="printDetail" class="btn btn-primary">
+                    <button id="printDetail" class="btn btn-primary print:hidden">
                         <i class="fas fa-print"></i> Cetak
                     </button>
                 </div>
@@ -233,14 +250,17 @@ document.addEventListener("DOMContentLoaded", function() {
         button.addEventListener("click", function() {
             document.getElementById("detailNo").innerText = this.getAttribute("data-id");
             document.getElementById("detailPasien").innerText = this.getAttribute("data-nama");
+            document.getElementById("detailAlamat").innerText = this.getAttribute("data-alamat");
+            document.getElementById("detailKelamin").innerText = this.getAttribute("data-kelamin");
             document.getElementById("detailDokter").innerText = this.getAttribute("data-spesialis");
-            document.getElementById("detailDate").innerText = this.getAttribute("data-tanggal"); // Catatan: ini nama atributnya aneh, lihat poin 3
+            document.getElementById("detailDate").innerText = this.getAttribute("data-tanggal");
             document.getElementById("detailTD").innerText = this.getAttribute("data-tekananDarah");
             document.getElementById("detailRR").innerText = this.getAttribute("data-rr");
             document.getElementById("detailNadi").innerText = this.getAttribute("data-nadi");
             document.getElementById("detailSuhu").innerText = this.getAttribute("data-suhu");
             document.getElementById("detailTB").innerText = this.getAttribute("data-tinggi");
             document.getElementById("detailBB").innerText = this.getAttribute("data-berat");
+            document.getElementById("detailRiwayat").innerText = this.getAttribute("data-riwayat");
             document.getElementById("detailDiagnosa").innerText = this.getAttribute("data-diagnosa");
         });
     });

@@ -12,8 +12,8 @@ class StaffrekammedisController extends Controller
     {
         $user = auth()->user();
         $staff = Staffrekammedis::where('user_id', $user->id_user)->first();
-        $rekammedis = Rekammedis::where('StaffRm_id', $staff->idStaffRm)->get();
-        return view('staff.rm', ['rekammedis' => $rekammedis]);
+        $rekammedis = rekammedis::all();
+        return view('staff.rm', ['staff'=>$staff, 'rekammedis' => $rekammedis]);
     }
     // public function data_dokter() {
     //     $user = auth()->user();

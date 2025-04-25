@@ -13,7 +13,9 @@ class DokterController extends Controller
 {
     public function dashboard()
     {
-        return view('dokter.dashboard');
+        $user = auth()->user();
+        $dokter = Dokter::where('user_id', $user->id_user)->first();
+        return view('dokter.dashboard',['dokter' => $dokter]);
     }
     public function data_dokter() {
         $user = auth()->user();

@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class StaffrekammedisSeeder extends Seeder
 {
@@ -20,7 +21,8 @@ class StaffrekammedisSeeder extends Seeder
             $user = User::create([
                 'username' => 'staff' . $i,
                 'password' => Hash::make('password'),
-                'role' => 'stafrekammedis'
+                'role' => 'stafrekammedis',
+                'remember_token' => Str::random(10),
             ]);
             echo "Created staff: " . $user->username . "\n";
 
