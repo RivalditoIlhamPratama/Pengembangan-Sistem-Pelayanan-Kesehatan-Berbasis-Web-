@@ -25,8 +25,10 @@ class DokterController extends Controller
         return view('dokter.data_dokter', ['dokter' => $dokter, 'waktu'=>$waktu, 'hari'=>$hari]);
     }
     public function rekam_medis() {
+        $user = auth()->user();
         $rekammedis = rekammedis::all();
-        return view('dokter.rekam_medis', ['rekammedis' => $rekammedis]);
+        $dokter = Dokter::where('user_id', $user->id_user)->first();
+        return view('dokter.rekam_medis', ['rekammedis' => $rekammedis, 'dokter' => $dokter]);
     }
 
     public function tambah_rekam_medis() {
