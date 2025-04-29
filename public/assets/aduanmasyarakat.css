@@ -724,3 +724,126 @@ p {
       max-width: 90%; /* Sesuaikan dengan layar lebih kecil */
     }
   }
+
+
+
+
+  .user-action {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .user-btn,
+  .logout-btn {
+    background-color: #1976d2;
+    color: white;
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 11px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logout-btn {
+    background-color: #e53935;
+  }
+  
+  .user-btn:hover {
+    background-color: #1565c0;
+  }
+  
+  .logout-btn:hover {
+    background-color: #c62828;
+  }
+  
+
+
+  .slider-wrapper {
+    position: relative;
+    overflow: hidden;
+    padding: 40px 20px;
+    background: #dfedfb;
+  }
+  
+  .slider-track {
+    display: flex;
+    transition: transform 0.4s ease;
+    gap: 20px;
+    will-change: transform;
+  }
+  
+  .slider-card {
+    flex: 0 0 280px; /* Kecilkan ukurannya */
+    max-width: 280px; /* Batasi maksimal */
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    min-height: 160px;
+  }
+  
+  .slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 26px;
+    background: white;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    color: #0071e3;
+    border-radius: 50%;
+    padding: 8px 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  
+  .prev-btn {
+    left: 10px;
+  }
+  .next-btn {
+    right: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .slider-card {
+      flex: 0 0 80%;
+      max-width: 80%;
+    }
+  }
+  
+  
+  .pengaduan-search-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  #pengaduan-search-input {
+    padding: 8px 12px;
+    width: 40%;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-right: 10px;
+  }
+  
+  #pengaduan-search-btn {
+    padding: 8px 16px;
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  #pengaduan-search-btn:hover {
+    background-color: #125ca1;
+  }
+  

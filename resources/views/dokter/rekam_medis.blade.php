@@ -225,24 +225,67 @@
 
 <!-- JavaScript -->
 <script>
-document.getElementById("exportPdf").addEventListener("click", function() {
+// PDF EXPORT FILTERED
+document.getElementById("exportPdf").addEventListener("click", function () {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
     doc.text("Data Rekam Medis", 14, 10);
-    doc.autoTable({ html: "#rekamMedisTable" });
 
-    doc.save("Data_Rekam_Medis.pdf");
+    const headers = [];
+    document.querySelectorAll("#rekamMedisTable thead th").forEach((th, index) => {
+        // Skip kolom aksi terakhir
+        if (index < 11) headers.push(th.innerText);
+    });
+
+    const data = [];
+    document.querySelectorAll("#rekamMedisTable tbody tr").forEach((row) => {
+        if (row.style.display !== "none") {
+            const rowData = [];
+            row.querySelectorAll("td").forEach((cell, index) => {
+                if (index < 11) rowData.push(cell.innerText.trim()); // skip aksi
+            });
+            data.push(rowData);
+        }
+    });
+
+    doc.autoTable({
+        head: [headers],
+        body: data,
+        startY: 20
+    });
+
+    const today = new Date().toISOString().slice(0, 10);
+    doc.save(`Data_Rekam_Medis_${today}.pdf`);
 });
 
-document.getElementById("exportExcel").addEventListener("click", function() {
-    let table = document.getElementById("rekamMedisTable");
-    let wb = XLSX.utils.book_new();
-    let ws = XLSX.utils.table_to_sheet(table);
+// EXCEL EXPORT FILTERED
+document.getElementById("exportExcel").addEventListener("click", function () {
+    const wb = XLSX.utils.book_new();
+    const wsData = [];
 
+    const headerCells = document.querySelectorAll("#rekamMedisTable thead th");
+    const headers = Array.from(headerCells).slice(0, 11).map(cell => cell.innerText.trim()); // Skip aksi
+    wsData.push(headers);
+
+    document.querySelectorAll("#rekamMedisTable tbody tr").forEach((row) => {
+        if (row.style.display !== "none") {
+            const rowData = [];
+            row.querySelectorAll("td").forEach((cell, index) => {
+                if (index < 11) rowData.push(cell.innerText.trim());
+            });
+            wsData.push(rowData);
+        }
+    });
+
+    const ws = XLSX.utils.aoa_to_sheet(wsData);
     XLSX.utils.book_append_sheet(wb, ws, "Data Rekam Medis");
-    XLSX.writeFile(wb, "Data_Rekam_Medis.xlsx");
+
+    const today = new Date().toISOString().slice(0, 10);
+    XLSX.writeFile(wb, `Data_Rekam_Medis_${today}.xlsx`);
 });
+
+
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -276,5 +319,43 @@ document.getElementById("printDetail").addEventListener("click", function() {
     location.reload(); // Reload to reset the view
 });
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.getElementById("searchInput");
+        const table = document.getElementById("rekamMedisTable").getElementsByTagName("tbody")[0];
+        const searchButton = document.querySelector('.btn-outline-secondary');
+    
+        function filterTable() {
+            const searchText = searchInput.value.toLowerCase();
+            const rows = table.getElementsByTagName("tr");
+    
+            for (let i = 0; i < rows.length; i++) {
+                const rowText = rows[i].innerText.toLowerCase();
+                if (rowText.includes(searchText)) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    
+        // Trigger saat tombol klik
+        searchButton.addEventListener("click", function() {
+            filterTable();
+        });
+    
+        // Opsional: Kalau mau auto filter sambil ngetik langsung (tanpa klik tombol)
+        // searchInput.addEventListener("keyup", filterTable);
+    });
+    </script>
+
+    
+<!-- PDF: jsPDF dan autoTable -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+<!-- Excel: SheetJS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 @endsection

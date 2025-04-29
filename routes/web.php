@@ -48,9 +48,25 @@ Route::get('/profil', function () {
     return view('profil');
 });
 
+
+
 Route::get('/berita-usg-puskesmas', function () {
     return view('berita_usg_puskesmas');
 })->name('berita.usg');
+
+Route::get('/berita-slb-puskesmas', function () {
+    return view('berita_slb_puskesmas');
+})->name('berita.slb');
+
+Route::get('/berita-vaksin-puskesmas', function () {
+    return view('berita_vaksin_puskesmas');
+})->name('berita.vaksin');
+
+
+
+
+
+
 
 Route::get('/dokter', function () {
     return view('daftardokter');
@@ -102,3 +118,21 @@ Route::middleware(['auth', 'klinik'])->prefix('klinik')->group(function () {
     Route::get('/laporan/tambah', [KlinikController::class, 'tambah_laporan'])->name('klinik.laporan.tambah');
     Route::post('/laporan/submit', [KlinikController::class, 'store'])->name('klinik.laporan.submit');
 });
+
+
+Route::get('/dokter/siti-jamila', function () {
+    return view('siti_jamila');
+})->name('dokter.siti_jamila');
+
+Route::get('/dokter/dwi-wahyudi', function () {
+    return view('dwi_wahyudi');
+})->name('dokter.dwi_wahyudi');
+
+Route::get('/dokter/heni-rahmawati', function () {
+    return view('heni_rahmawati');
+})->name('dokter.heni_rahmawati');
+
+Route::get('/dokter/fathullah-huda', function () {
+    return view('fathullah_huda');
+})->name('dokter.fathullah_huda');
+

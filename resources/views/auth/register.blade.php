@@ -8,7 +8,14 @@
 </head>
 <body>
     <div class="register-container">
+        
+        <!-- Tambahkan Logo di sini -->
+        <div class="logo-container">
+            <img src="{{ asset('assets/11.png') }}" alt="Logo Puskesmas Kraksaan" class="logo-img">
+        </div>
+        
         <h2>Buat Akun Baru</h2>
+        
         <form>
             <label for="nama">Nama</label>
             <input type="text" id="nama" placeholder="">

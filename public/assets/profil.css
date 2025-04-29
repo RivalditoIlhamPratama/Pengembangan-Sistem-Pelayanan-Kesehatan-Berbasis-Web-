@@ -693,3 +693,40 @@ p {
         max-width: 250px;
     }
 }
+
+
+
+.user-action {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .user-btn,
+  .logout-btn {
+    background-color: #1976d2;
+    color: white;
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 11px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logout-btn {
+    background-color: #e53935;
+  }
+  
+  .user-btn:hover {
+    background-color: #1565c0;
+  }
+  
+  .logout-btn:hover {
+    background-color: #c62828;
+  }
+  
