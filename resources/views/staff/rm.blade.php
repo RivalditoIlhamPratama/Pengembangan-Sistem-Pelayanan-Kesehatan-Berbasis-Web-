@@ -32,17 +32,17 @@
             <table id="rekamMedisTable" class="table table-striped table-bordered table-hover">
                 <thead class="table-light">
                     <tr class="text-center">
-                        <th>No</th>
-                        <th>NIK</th>
-                        <th>Date</th>
+                        <th>No RM</th>
                         <th>Nama Pasien</th>
-                        <th>Nama Dokter</th>
-                        <th>Suhu</th>
-                        <th>TD</th>
+                        <th>NIK</th>
+                        <th>Tanggal Periksa</th>
+                        <th>Tekanan Darah</th>
+                        <th>RR</th>
                         <th>Nadi</th>
-                        <th>TB</th>
-                        <th>BB</th>
-                        <th>Diagnosa</th>
+                        <th>Suhu</th>
+                        <th>Tinggi Badan</th>
+                        <th>Berat Badan</th>
+                        <th>Diagnosa Medis</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -54,29 +54,35 @@
                         <td>{{ $rekam->NIK }}</td>
                         <td>{{ \Carbon\Carbon::parse($rekam->tanggalPeriksa)->format('d-m-Y') }}</td>
                         <td>{{ $rekam->tekananDarah }}</td>
-                        <td>{{ $rekam->RR }}</td>
+                        <td>{{ $rekam->rr }}</td>
                         <td>{{ $rekam->nadi }}</td>
                         <td>{{ $rekam->suhu }}</td>
                         <td>{{ $rekam->tinggiBadan }}</td>
                         <td>{{ $rekam->beratBadan }}</td>
                         <td>{{ $rekam->diagnosaMedis }}</td>
                         <td>
-                            <button class="btn btn-sm btn-info detail-btn"
-                                data-bs-toggle="modal"
-                                data-bs-target="#detailModal"
-                                data-id="{{ $rekam->noRm }}"
-                                data-nama="{{ $rekam->namaPasien }}"
-                                data-spesialis="{{ $rekam->NIK }}"
-                                data-tanggal="{{ $rekam->tanggalPeriksa }}"
-                                data-tekananDarah="{{ $rekam->tekananDarah ?? '' }}"
-                                data-rr="{{ $rekam->RR ?? '' }}"
-                                data-nadi="{{ $rekam->nadi ?? '' }}"
-                                data-suhu="{{ $rekam->suhu ?? '' }}"
-                                data-tinggi="{{ $rekam->tinggiBadan ?? '' }}"
-                                data-berat="{{ $rekam->beratBadan ?? '' }}"
-                                data-diagnosa="{{ $rekam->diagnosaMedis ?? '' }}">
-                                <i class="fas fa-eye"></i> Detail
-                            </button>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-info detail-btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#detailModal"
+                                    data-id="{{ $rekam->noRm }}"
+                                    data-nama="{{ $rekam->namaPasien }}"
+                                    data-alamat="{{ $rekam->alamatPasien }}"
+                                    data-kelamin="{{ $rekam->jenisKelamin }}"
+                                    data-spesialis="{{ $rekam->NIK }}"
+                                    data-tanggal="{{ $rekam->tanggalPeriksa }}"
+                                    data-tekananDarah="{{ $rekam->tekananDarah ?? '' }}"
+                                    data-rr="{{ $rekam->rr ?? '' }}"
+                                    data-nadi="{{ $rekam->nadi ?? '' }}"
+                                    data-suhu="{{ $rekam->suhu ?? '' }}"
+                                    data-tinggi="{{ $rekam->tinggiBadan ?? '' }}"
+                                    data-berat="{{ $rekam->beratBadan ?? '' }}"
+                                    data-riwayat="{{ $rekam->riwayatPenyakit ?? '' }}"
+                                    data-diagnosa="{{ $rekam->diagnosaMedis ?? '' }}">
+                                    <i class="fas fa-eye"></i> Detail
+                                </button>
+
+                            </div>
                         </td>
                     </tr>
                     @endforeach
@@ -175,7 +181,6 @@ document.getElementById("printDetail").addEventListener("click", function() {
     document.body.innerHTML = originalContents;
     location.reload(); // Reload to reset the view
 });
-
 </script>
 
 @endsection

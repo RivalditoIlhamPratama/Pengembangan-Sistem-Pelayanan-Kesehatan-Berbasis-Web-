@@ -35,6 +35,19 @@
             </div>
 
             <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Alamat Pasien</label>
+                    <input name="alamatPasien" type="text" class="form-control" placeholder="Alamat Pasien" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Jenis Kelamin</label>
+                    <select class="form-control" id="jenisKelamin" name="jenisKelamin" required>
+                        <option value="Laki laki">Laki-laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col-md-2">
                     <label class="form-label">Suhu</label>
                     <div class="input-group">
@@ -68,6 +81,10 @@
                 </div>
             </div>
 
+            <div class="mb-3">
+                <label class="form-label">Riwayat Penyakit</label>
+                <textarea name="riwayatPenyakit" class="form-control" rows="3" placeholder="riwayatPenyakit" required></textarea>
+            </div>
             <div class="mb-3">
                 <label class="form-label">Diagnosa</label>
                 <textarea name="diagnosaMedis" class="form-control" rows="3" placeholder="Diagnosa" required></textarea>

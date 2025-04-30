@@ -22,9 +22,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
+use App\Http\Controllers\Auth\RegisterController;
+
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
 
 Route::get('/login', function () {
     return view('auth.login');
@@ -135,4 +136,3 @@ Route::get('/dokter/heni-rahmawati', function () {
 Route::get('/dokter/fathullah-huda', function () {
     return view('fathullah_huda');
 })->name('dokter.fathullah_huda');
-

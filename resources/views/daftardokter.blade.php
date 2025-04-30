@@ -38,17 +38,17 @@
                 <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
                 <li class="link"><a href="{{ url('/alur-pelayanan') }}">Alur Pelayanan</a></li>
                 @endif
-                <li class="link"><a class="@unless(auth()->check() && auth()->user()->role === 'pasien') disabled-link @endunless" href="{{ url('/aduanmasyarakat') }}">Pengaduan</a></li>
+                <li class="link"><a class="@unless(auth()->check() && auth()->user()->role === 'pasien') disabled-link @endunless" href="{{route('pasien.reports') }}">Pengaduan</a></li>
                 @if(!auth()->check() || (auth()->check() && auth()->user()->role !== 'pasien'))
                 <li class="link">
                     <a href="{{ url('/login') }}" class="btn-link">
                     <button class="btn">Login</button>
                     </a>
                 </li>
-                
+
                 </li>
                 @endif
-                
+
                 @if(auth()->check() && auth()->user()->role === 'pasien')
                 <li class="link">
                     <div class="user-action">
@@ -190,17 +190,17 @@
                 <a href="https://www.youtube.com/@puskesmaskraksaan6927"><i class="ri-youtube-fill"></i></a>
             </div>
           </div>
-      
+
           <div class="footer__col">
             <h4>Alamat :</h4>
             <div class="footer__links">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.124710643871!2d113.41036907410655!3d-7.759615477628249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd701af20f8ae5d%3A0x8ccde8d2ff8aed0c!2sPuskesmas%20Kraksaan!5e0!3m2!1sid!2sid!4v1714445262765!5m2!1sid!2sid" 
-                width="220%" 
-                height="270" 
-                style="border:0; border-radius:10px; margin-top:10px;" 
-                allowfullscreen="" 
-                loading="lazy" 
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.124710643871!2d113.41036907410655!3d-7.759615477628249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd701af20f8ae5d%3A0x8ccde8d2ff8aed0c!2sPuskesmas%20Kraksaan!5e0!3m2!1sid!2sid!4v1714445262765!5m2!1sid!2sid"
+                width="220%"
+                height="270"
+                style="border:0; border-radius:10px; margin-top:10px;"
+                allowfullscreen=""
+                loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade">
               </iframe>
             </div>
@@ -218,9 +218,9 @@
               </a>
             </div>
           </div>
-          
+
         </div>
-      
+
         <div class="footer__bar">
           Copyright © 2024 Puskesmas Kraksaan. All rights reserved.
         </div>

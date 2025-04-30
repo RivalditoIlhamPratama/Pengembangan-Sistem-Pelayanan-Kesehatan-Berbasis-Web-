@@ -23,7 +23,7 @@
             <li class="link"><a href="{{ route('pasien.dashboard') }}">Beranda</a></li>
             <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
             <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
-            <li class="link"><a href="{{ url('/') }}">Alur Pelayanan</a></li>
+            <li class="link"><a href="{{ url('/alur-pelayanan') }}">Alur Pelayanan</a></li>
             <li class="link"><a href="{{route('pasien.reports') }}">Pengaduan</a></li>
             @if(auth()->check() && auth()->user()->role === 'pasien')
                 <li class="link">
@@ -117,65 +117,65 @@
     <button id="pengaduan-search-btn"><i class="ri-search-line"></i> Cari</button>
   </div>
 
-  
+
     <div class="slider-wrapper">
       <button class="slider-btn prev-btn">&#10094;</button>
       <div class="slider-track">
-        
+
         <div class="slider-card">
           <p class="pengaduan-isi">"Pelayanan sangat ramah dan cepat. Terima kasih!"</p>
           <p class="pengaduan-jenis"><em>Jenis Pengaduan:</em> Pelayanan</p>
           <strong>- Ahmad Fauzi</strong>
         </div>
-  
+
         <div class="slider-card">
           <p class="pengaduan-isi">"Kebersihan ruang tunggu sudah sangat baik."</p>
           <p class="pengaduan-jenis"><em>Jenis Pengaduan:</em> Fasilitas</p>
           <strong>- Siti Aisyah</strong>
         </div>
-  
+
         <div class="slider-card">
           <p class="pengaduan-isi">"Semoga jam operasional bisa diperpanjang."</p>
           <p class="pengaduan-jenis"><em>Jenis Pengaduan:</em> Fasilitas</p>
           <strong>- Budi Hartono</strong>
         </div>
-  
+
         <div class="slider-card">
           <p class="pengaduan-isi">"Fasilitas laboratorium lengkap dan nyaman."</p>
           <p class="pengaduan-jenis"><em>Jenis Pengaduan:</em> Fasilitas</p>
           <strong>- Nur Hidayah</strong>
         </div>
-  
+
         <div class="slider-card">
           <p class="pengaduan-isi">"Dokter sangat komunikatif dan informatif."</p>
           <p class="pengaduan-jenis"><em>Jenis Pengaduan:</em> Dokter</p>
           <strong>- Dimas Saputra</strong>
         </div>
-  
+
         <div class="slider-card">
           <p class="pengaduan-isi">"Antrian di poli terlalu lama."</p>
           <p class="pengaduan-jenis"><em>Jenis Pengaduan:</em> Pelayanan</p>
           <strong>- Lilis Mariana</strong>
         </div>
-  
+
         <div class="slider-card">
           <p class="pengaduan-isi">"AC di ruang tunggu mati."</p>
           <p class="pengaduan-jenis"><em>Jenis Pengaduan:</em> Fasilitas</p>
           <strong>- Agus Prasetyo</strong>
         </div>
-  
+
         <div class="slider-card">
           <p class="pengaduan-isi">"Dokter menjelaskan dengan sangat sabar."</p>
           <p class="pengaduan-jenis"><em>Jenis Pengaduan:</em> Dokter</p>
           <strong>- Yuni Rahma</strong>
         </div>
-  
+
       </div>
       <button class="slider-btn next-btn">&#10095;</button>
     </div>
   </section>
-  
-  
+
+
   <footer class="footer">
     <div class="section__container footer__container">
       <div class="footer__col">
@@ -192,17 +192,17 @@
           <a href="#"><i class="ri-twitter-fill"></i></a>
         </div>
       </div>
-  
+
       <div class="footer__col">
         <h4>Alamat</h4>
         <div class="footer__links">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.124710643871!2d113.41036907410655!3d-7.759615477628249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd701af20f8ae5d%3A0x8ccde8d2ff8aed0c!2sPuskesmas%20Kraksaan!5e0!3m2!1sid!2sid!4v1714445262765!5m2!1sid!2sid" 
-            width="220%" 
-            height="270" 
-            style="border:0; border-radius:10px; margin-top:10px;" 
-            allowfullscreen="" 
-            loading="lazy" 
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.124710643871!2d113.41036907410655!3d-7.759615477628249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd701af20f8ae5d%3A0x8ccde8d2ff8aed0c!2sPuskesmas%20Kraksaan!5e0!3m2!1sid!2sid!4v1714445262765!5m2!1sid!2sid"
+            width="220%"
+            height="270"
+            style="border:0; border-radius:10px; margin-top:10px;"
+            allowfullscreen=""
+            loading="lazy"
             referrerpolicy="no-referrer-when-downgrade">
           </iframe>
         </div>
@@ -218,9 +218,9 @@
           <a href="https://wa.me/628113373119" target="_blank" class="btn-wa">Chat WhatsApp</a>
         </div>
       </div>
-      
+
     </div>
-  
+
     <div class="footer__bar">
       Copyright © 2024 Puskesmas Kraksaan. All rights reserved.
     </div>
@@ -238,26 +238,26 @@
     const cards = document.querySelectorAll('.slider-card');
     let currentIndex = 0;
     const cardsToShow = 3;
-  
+
     function updateSlider() {
       const cardWidth = cards[0].offsetWidth + 20; // +gap
       track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
     }
-  
+
     nextBtn.addEventListener('click', () => {
       if (currentIndex + cardsToShow < cards.length) {
         currentIndex += cardsToShow;
         updateSlider();
       }
     });
-  
+
     prevBtn.addEventListener('click', () => {
       if (currentIndex - cardsToShow >= 0) {
         currentIndex -= cardsToShow;
         updateSlider();
       }
     });
-  
+
     window.addEventListener('resize', updateSlider);
 
 
@@ -277,8 +277,8 @@
 });
 
   </script>
-  
 
-  
+
+
 </body>
 </html>
