@@ -136,3 +136,19 @@ Route::get('/dokter/heni-rahmawati', function () {
 Route::get('/dokter/fathullah-huda', function () {
     return view('fathullah_huda');
 })->name('dokter.fathullah_huda');
+
+
+
+Route::get('/admin/pengguna/create', function () {
+    return view('admin.create');
+});
+
+
+// Route untuk masing masing profil
+Route::get('/admin/profil', function () {
+    return view('admin.profil'); 
+})->name('admin.profil');
+
+
+
+

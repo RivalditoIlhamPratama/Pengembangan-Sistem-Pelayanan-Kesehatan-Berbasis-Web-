@@ -40,14 +40,14 @@
 
     <!-- Main content -->
     <div class="flex-1 flex flex-col overflow-hidden">
-        <!-- Header -->
         <header class="flex justify-between items-center p-4 bg-white border-b">
             <button class="text-2xl text-gray-700">
                 <i class="ri-menu-line"></i>
             </button>
             <div class="flex items-center space-x-3">
-                <i class="ri-user-fill text-xl"></i>
-                <span>{{$dokter->namaDokter}}</span>
+                <a href="{{ route('dokter.data_dokter') }}" class="text-decoration-none text-dark fw-semibold">
+                    <i class="ri-user-fill text-xl me-1"></i> {{ $dokter->namaDokter }}
+                </a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="text-black hover:text-gray-500 ml-3">
@@ -56,6 +56,7 @@
                 </form>
             </div>
         </header>
+        
 
         <!-- Page Content -->
         <main class="p-6 overflow-auto">

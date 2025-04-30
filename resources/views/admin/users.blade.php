@@ -13,7 +13,9 @@
                     <i class="fas fa-search"></i>
                 </button>
             </div>
-            <a href="#" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah</a>
+            <a href="{{ url('/admin/pengguna/create') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Tambah
+            </a>            
         </div>
 
         <!-- Tabel Data Pengguna -->
@@ -45,7 +47,17 @@
                             </span>
                         </td>
                         <td>
-                            <a href="#" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                            <button class="btn btn-sm btn-warning edit-btn"
+                                data-bs-toggle="modal"
+                                data-bs-target="#editModal"
+                                data-id="{{ $user->id }}"
+                                data-name="{{ $user->name }}"
+                                data-username="{{ $user->username }}"
+                                data-email="{{ $user->email }}"
+                                data-role="{{ $user->role }}">
+                            <i class="fas fa-edit"></i>
+                            </button>
+
                             <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
@@ -59,4 +71,43 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Edit Pengguna -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Edit Pengguna</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editUserForm">
+            <input type="hidden" id="edit-id">
+            <div class="mb-3">
+              <label for="edit-name" class="form-label">Nama Pengguna</label>
+              <input type="text" class="form-control" id="edit-name">
+            </div>
+            <div class="mb-3">
+              <label for="edit-username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="edit-username">
+            </div>
+            <div class="mb-3">
+              <label for="edit-email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="edit-email">
+            </div>
+            <div class="mb-3">
+              <label for="edit-role" class="form-label">Role</label>
+              <select class="form-select" id="edit-role">
+                <option value="Admin">Admin</option>
+                <option value="Dokter">Dokter</option>
+                <option value="Klinik">Klinik</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-primary">Simpan Perubahan</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 @endsection

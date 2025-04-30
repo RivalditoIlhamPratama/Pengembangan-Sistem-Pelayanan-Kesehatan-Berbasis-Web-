@@ -101,86 +101,230 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="printArea">
-                <div class="text-center mb-4">
-                    <h3>Puskesmas kraksaan</h3>
-                    <p>Jl. Mayjend Sungkono No.10, Patokan, Kec. Kraksaan, Kabupaten Probolinggo, Jawa Timur 67282</p>
-                    <hr>
-                    <h4>Resume Medis</h4>
+                <!-- Print Layout -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <img src="{{ asset('assets/11.png') }}" alt="Puskesmas Logo" style="max-width: 100px;">
+                    <div class="text-center ms-3">
+                        <h5 class="mb-0">PEMERINTAH KABUPATEN PROBOLINGGO DINAS KESEHATAN </h5>
+                        <h5 class="mb-0">PUSKESMAS KRAKSAAN</h5>
+                        <p>Jl. Mayjend Sungkono No.10, Patokan, Kec. Kraksaan, Kabupaten Probolinggo, Jawa Timur 67282</p>
+                    </div>
+                    <img src="{{ asset('assets/dinas.png') }}" alt="Second Logo" style="max-width: 55px;">
                 </div>
-                <p><strong>Nomor MR:</strong> <span id="detailNo"></span></p>
-                <p><strong>Nama:</strong> <span id="detailPasien"></span></p>
-                <p><strong>Dokter:</strong> <span id="detailDokter"></span></p>
-                <p><strong>Tanggal Pemeriksaan:</strong> <span id="detailDate"></span></p>
-                <hr>
-                <h5>Hasil Lab</h5>
-                <p><strong>Tekanan Darah:</strong> <span id="detailTD"></span></p>
-                <p><strong>RR:</strong> <span id="detailRR"></span></p>
-                <p><strong>Suhu:</strong> <span id="detailSuhu"></span></p>
-                <p><strong>Nadi:</strong> <span id="detailNadi"></span></p>
-                <p><strong>Tinggi Badan:</strong> <span id="detailTB"></span></p>
-                <p><strong>Berat Badan:</strong> <span id="detailBB"></span></p>
-                <p><strong>Diagnosa:</strong> <span id="detailDiagnosa"></span></p>
-                <button id="printDetail" class="btn btn-primary mt-3">
-                    <i class="fas fa-print"></i> Cetak
-                </button>
+                <div class="text-center mb-4">
+                    <hr>
+                    <h4>Formulir Identitas Pasien</h4>
+                    <p><strong>No RM:</strong> <span id="detailNo"></span></p>
+                </div>
+
+                <!-- Patient Information Table -->
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="2">A. Identitas Pasien</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Nama Pasien :</strong></td>
+                            <td id="detailPasien"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Alamat Pasien :</strong></td>
+                            <td id="detailAlamat"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Jenis Kelamin Pasien :</strong></td>
+                            <td id="detailKelamin"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tanggal Periksa :</strong></td>
+                            <td id="detailDate"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dokter :</strong></td>
+                            <td id="detailDokter"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tekanan Darah :</strong></td>
+                            <td id="detailTD"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>RR :</strong></td>
+                            <td id="detailRR"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Suhu :</strong></td>
+                            <td id="detailSuhu"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nadi :</strong></td>
+                            <td id="detailNadi"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tinggi Badan :</strong></td>
+                            <td id="detailTB"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Berat Badan :</strong></td>
+                            <td id="detailBB"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Riwayat Penyakit :</strong></td>
+                            <td id="detailRiwayat"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Diagnosa :</strong></td>
+                            <td id="detailDiagnosa"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="text-center mt-4">
+                    <button id="printDetail" class="btn btn-primary print:hidden">
+                        <i class="fas fa-print"></i> Cetak
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <!-- JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
 
+<!-- JavaScript -->
 <script>
-document.getElementById("exportPdf").addEventListener("click", function() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-
-    doc.text("Data Rekam Medis", 14, 10);
-    doc.autoTable({ html: "#rekamMedisTable" });
-
-    doc.save("Data_Rekam_Medis.pdf");
-});
-
-document.getElementById("exportExcel").addEventListener("click", function() {
-    let table = document.getElementById("rekamMedisTable");
-    let wb = XLSX.utils.book_new();
-    let ws = XLSX.utils.table_to_sheet(table);
-
-    XLSX.utils.book_append_sheet(wb, ws, "Data Rekam Medis");
-    XLSX.writeFile(wb, "Data_Rekam_Medis.xlsx");
-});
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll(".detail-btn").forEach(button => {
-        button.addEventListener("click", function() {
-            document.getElementById("detailNo").innerText = this.getAttribute("data-id");
-            document.getElementById("detailPasien").innerText = this.getAttribute("data-nama");
-            document.getElementById("detailDokter").innerText = this.getAttribute("data-spesialis");
-            document.getElementById("detailDate").innerText = this.getAttribute("data-tanggal"); // Catatan: ini nama atributnya aneh, lihat poin 3
-            document.getElementById("detailTD").innerText = this.getAttribute("data-tekananDarah");
-            document.getElementById("detailRR").innerText = this.getAttribute("data-rr");
-            document.getElementById("detailNadi").innerText = this.getAttribute("data-nadi");
-            document.getElementById("detailSuhu").innerText = this.getAttribute("data-suhu");
-            document.getElementById("detailTB").innerText = this.getAttribute("data-tinggi");
-            document.getElementById("detailBB").innerText = this.getAttribute("data-berat");
-            document.getElementById("detailDiagnosa").innerText = this.getAttribute("data-diagnosa");
+    // PDF EXPORT FILTERED
+    document.getElementById("exportPdf").addEventListener("click", function () {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+    
+        doc.text("Data Rekam Medis", 14, 10);
+    
+        const headers = [];
+        document.querySelectorAll("#rekamMedisTable thead th").forEach((th, index) => {
+            // Skip kolom aksi terakhir
+            if (index < 11) headers.push(th.innerText);
+        });
+    
+        const data = [];
+        document.querySelectorAll("#rekamMedisTable tbody tr").forEach((row) => {
+            if (row.style.display !== "none") {
+                const rowData = [];
+                row.querySelectorAll("td").forEach((cell, index) => {
+                    if (index < 11) rowData.push(cell.innerText.trim()); // skip aksi
+                });
+                data.push(rowData);
+            }
+        });
+    
+        doc.autoTable({
+            head: [headers],
+            body: data,
+            startY: 20
+        });
+    
+        const today = new Date().toISOString().slice(0, 10);
+        doc.save(`Data_Rekam_Medis_${today}.pdf`);
+    });
+    
+    // EXCEL EXPORT FILTERED
+    document.getElementById("exportExcel").addEventListener("click", function () {
+        const wb = XLSX.utils.book_new();
+        const wsData = [];
+    
+        const headerCells = document.querySelectorAll("#rekamMedisTable thead th");
+        const headers = Array.from(headerCells).slice(0, 11).map(cell => cell.innerText.trim()); // Skip aksi
+        wsData.push(headers);
+    
+        document.querySelectorAll("#rekamMedisTable tbody tr").forEach((row) => {
+            if (row.style.display !== "none") {
+                const rowData = [];
+                row.querySelectorAll("td").forEach((cell, index) => {
+                    if (index < 11) rowData.push(cell.innerText.trim());
+                });
+                wsData.push(rowData);
+            }
+        });
+    
+        const ws = XLSX.utils.aoa_to_sheet(wsData);
+        XLSX.utils.book_append_sheet(wb, ws, "Data Rekam Medis");
+    
+        const today = new Date().toISOString().slice(0, 10);
+        XLSX.writeFile(wb, `Data_Rekam_Medis_${today}.xlsx`);
+    });
+    
+    
+    
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".detail-btn").forEach(button => {
+            button.addEventListener("click", function() {
+                document.getElementById("detailNo").innerText = this.getAttribute("data-id");
+                document.getElementById("detailPasien").innerText = this.getAttribute("data-nama");
+                document.getElementById("detailAlamat").innerText = this.getAttribute("data-alamat");
+                document.getElementById("detailKelamin").innerText = this.getAttribute("data-kelamin");
+                document.getElementById("detailDokter").innerText = this.getAttribute("data-spesialis");
+                document.getElementById("detailDate").innerText = this.getAttribute("data-tanggal");
+                document.getElementById("detailTD").innerText = this.getAttribute("data-tekananDarah");
+                document.getElementById("detailRR").innerText = this.getAttribute("data-rr");
+                document.getElementById("detailNadi").innerText = this.getAttribute("data-nadi");
+                document.getElementById("detailSuhu").innerText = this.getAttribute("data-suhu");
+                document.getElementById("detailTB").innerText = this.getAttribute("data-tinggi");
+                document.getElementById("detailBB").innerText = this.getAttribute("data-berat");
+                document.getElementById("detailRiwayat").innerText = this.getAttribute("data-riwayat");
+                document.getElementById("detailDiagnosa").innerText = this.getAttribute("data-diagnosa");
+            });
         });
     });
-});
-
-document.getElementById("printDetail").addEventListener("click", function() {
-    let printContents = document.getElementById("printArea").innerHTML;
-    let originalContents = document.body.innerHTML;
-
-    document.body.innerHTML = printContents;
-    window.print();
-    document.body.innerHTML = originalContents;
-    location.reload(); // Reload to reset the view
-});
-</script>
+    
+    document.getElementById("printDetail").addEventListener("click", function() {
+        let printContents = document.getElementById("printArea").innerHTML;
+        let originalContents = document.body.innerHTML;
+    
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+        location.reload(); // Reload to reset the view
+    });
+    </script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const searchInput = document.getElementById("searchInput");
+            const table = document.getElementById("rekamMedisTable").getElementsByTagName("tbody")[0];
+            const searchButton = document.querySelector('.btn-outline-secondary');
+        
+            function filterTable() {
+                const searchText = searchInput.value.toLowerCase();
+                const rows = table.getElementsByTagName("tr");
+        
+                for (let i = 0; i < rows.length; i++) {
+                    const rowText = rows[i].innerText.toLowerCase();
+                    if (rowText.includes(searchText)) {
+                        rows[i].style.display = "";
+                    } else {
+                        rows[i].style.display = "none";
+                    }
+                }
+            }
+        
+            // Trigger saat tombol klik
+            searchButton.addEventListener("click", function() {
+                filterTable();
+            });
+        
+            // Opsional: Kalau mau auto filter sambil ngetik langsung (tanpa klik tombol)
+            // searchInput.addEventListener("keyup", filterTable);
+        });
+        </script>
+    
+        
+    <!-- PDF: jsPDF dan autoTable -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    
+    <!-- Excel: SheetJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 @endsection

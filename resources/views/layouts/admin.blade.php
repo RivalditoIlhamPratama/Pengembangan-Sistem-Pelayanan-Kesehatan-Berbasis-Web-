@@ -51,7 +51,9 @@
                 </button>
                 <div class="flex items-center space-x-3">
                     <i class="ri-user-fill text-xl"></i>
-                    <span>Admin</span>
+                    <a href="{{ route('admin.profil') }}" class="hover:text-blue-600 font-medium">
+                        Admin
+                    </a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="text-black hover:text-gray-500 ml-3">
@@ -70,5 +72,23 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    @push('scripts')
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const editButtons = document.querySelectorAll('.edit-btn');
+        editButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                document.getElementById('edit-id').value = this.dataset.id;
+                document.getElementById('edit-name').value = this.dataset.name;
+                document.getElementById('edit-username').value = this.dataset.username;
+                document.getElementById('edit-email').value = this.dataset.email;
+                document.getElementById('edit-role').value = this.dataset.role;
+            });
+        });
+    });
+    </script>
+    @endpush
+
 </body>
 </html>

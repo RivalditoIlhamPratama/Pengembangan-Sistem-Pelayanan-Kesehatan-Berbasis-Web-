@@ -577,6 +577,37 @@ p {
     }
 }
 
+.floating {
+    animation: float 2s ease-in-out infinite;
+    display: inline-block;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px); /* lebih tinggi */
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
+
+  .floating {
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+  
+
+
 /* Modifikasi button logout dan user*/
 .nav__links .user-action {
     display: flex;

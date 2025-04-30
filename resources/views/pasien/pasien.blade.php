@@ -50,9 +50,9 @@
             </ul>
         </nav>
       <div class="section__container header__container" id="home">
-        <div class="header__image">
+        <div class="header__image floating">
           <img src="{{ asset('assets/icon Header.png') }}" alt="header" />
-        </div>
+        </div>       
         <div class="header__content">
           <h4>Pelayanan Masyarakat</h4>
           <h1 class="section__header">Puskesmas Kraksaan</h1>
@@ -71,27 +71,28 @@
       <p>Kami menyediakan berbagai layanan kesehatan digital untuk kenyamanan Anda, mulai dari pendaftaran dokter hingga edukasi kesehatan.</p>
       <br>
       <div class="services-container">
-          <div class="service">
-              <img src="{{ asset('assets/service 1.png') }}" alt="Pendaftaran Online">
-              <h3>Daftar Dokter</h3>
-              <p>Dapat melihat dokter yang ada di puskesmas Kraksaan</p>
-          </div>
-          <div class="service">
-              <img src="{{ asset('assets/service 2.png') }}" alt="Jadwal Dokter">
-              <h3>Jadwal Dokter</h3>
-              <p>Lihat jadwal dokter </p>
-          </div>
-          <div class="service">
-              <img src="{{ asset('assets/service 3.png') }}" alt="Pengaduan Online">
-              <h3>Layanan Pengaduan</h3>
-              <p>Laporkan keluhan </p>
-          </div>
-          <div class="service">
-              <img src="{{ asset('assets/service 4.png') }}" alt="Edukasi Kesehatan">
-              <h3>Berita Puskesmas</h3>
-              <p>Dapatkan informasi kesehatan </p>
-          </div>
-      </div>
+        <div class="service">
+            <img src="{{ asset('assets/service 1.png') }}" alt="Pendaftaran Online" class="floating">
+            <h3>Daftar Dokter</h3>
+            <p>Dapat melihat dokter yang ada di puskesmas Kraksaan</p>
+        </div>
+        <div class="service">
+            <img src="{{ asset('assets/service 2.png') }}" alt="Jadwal Dokter" class="floating">
+            <h3>Jadwal Dokter</h3>
+            <p>Lihat jadwal dokter</p>
+        </div>
+        <div class="service">
+            <img src="{{ asset('assets/service 3.png') }}" alt="Pengaduan Online" class="floating">
+            <h3>Layanan Pengaduan</h3>
+            <p>Laporkan keluhan</p>
+        </div>
+        <div class="service">
+            <img src="{{ asset('assets/service 4.png') }}" alt="Edukasi Kesehatan" class="floating">
+            <h3>Berita Puskesmas</h3>
+            <p>Dapatkan informasi kesehatan</p>
+        </div>
+    </div>
+    
     </div>
     <!-- End Service Section -->
 
@@ -310,7 +311,7 @@
             <p><i class="ri-mail-line"></i> Email: <a href="mailto:puskesmaskraksaan@gmail.com">puskesmaskraksaan@gmail.com</a></p>
             <p><i class="ri-phone-line"></i> Telp: <a href="tel:+628113373119">0811-3373-119</a></p>
             <p><i class="ri-time-line"></i> Jam Operasional: <br>Senin - Jumat, 07.00 - 14.00</p>
-            <a href="https://wa.me/628113373119" target="_blank" class="btn-wa">
+            <a href="https://wa.me/08113122777" target="_blank" class="btn-wa">
               <i class="ri-whatsapp-line"></i> Chat WhatsApp
             </a>
           </div>
