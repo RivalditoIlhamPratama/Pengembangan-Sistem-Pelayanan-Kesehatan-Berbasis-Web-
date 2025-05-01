@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\LaporanController;
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
@@ -117,7 +118,7 @@ Route::middleware(['auth', 'klinik'])->prefix('klinik')->group(function () {
     Route::get('/dashboard', [KlinikController::class, 'dashboard'])->name('klinik.dashboard');
     Route::get('/laporan', [KlinikController::class, 'laporan'])->name('klinik.laporan');
     Route::get('/laporan/tambah', [KlinikController::class, 'tambah_laporan'])->name('klinik.laporan.tambah');
-    Route::post('/laporan/submit', [KlinikController::class, 'store'])->name('klinik.laporan.submit');
+    Route::post('/laporan/submit', [LaporanController::class, 'store'])->name('klinik.laporan.submit');
 });
 
 
@@ -146,7 +147,7 @@ Route::get('/admin/pengguna/create', function () {
 
 // Route untuk masing masing profil
 Route::get('/admin/profil', function () {
-    return view('admin.profil'); 
+    return view('admin.profil');
 })->name('admin.profil');
 
 
