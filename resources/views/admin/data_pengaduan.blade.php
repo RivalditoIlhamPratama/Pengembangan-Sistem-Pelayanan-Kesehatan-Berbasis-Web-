@@ -51,9 +51,19 @@
                         <td>{{ $aduan->isiPengaduan }}</td>
                         <td>{{ $aduan->phone }}</td>
                         <td>{{ \Carbon\Carbon::parse($aduan->created_at)->format('d-m-Y') }}</td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                        <td class="text-center">
+                            @php
+                                $nohp = preg_replace('/^0/', '62', preg_replace('/[^0-9]/', '', $aduan->phone)); 
+                                $pesan = urlencode("Halo *{$aduan->pasien->namaPasien}*, kami telah menerima pengaduan Anda mengenai *{$aduan->jenisPengaduan}*. Terima kasih telah menghubungi Puskesmas Kraksaan.");
+                            @endphp
+                        
+                            
                             <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                            @if($aduan->phone)
+                                <a href="https://wa.me/{{ $nohp }}?text={{ $pesan }}" target="_blank" class="btn btn-sm btn-success">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            @endif
                         </td>
                     </tr>
                     @endforeach
