@@ -89,8 +89,9 @@
                                     data-nama="{{ $rekam->namaPasien }}"
                                     data-alamat="{{ $rekam->alamatPasien }}"
                                     data-kelamin="{{ $rekam->jenisKelamin }}"
-                                    data-spesialis="{{ $rekam->NIK }}"
+                                    data-nik="{{ $rekam->NIK }}"
                                     data-tanggal="{{ $rekam->tanggalPeriksa }}"
+                                    data-penulis="{{ optional($rekam->dokter)->namaDokter ?? optional($rekam->staffrekammedis)->namaStaff ?? '' }}"
                                     data-tekananDarah="{{ $rekam->tekananDarah ?? '' }}"
                                     data-rr="{{ $rekam->rr ?? '' }}"
                                     data-nadi="{{ $rekam->nadi ?? '' }}"
@@ -163,6 +164,10 @@
                             <td id="detailPasien"></td>
                         </tr>
                         <tr>
+                            <td><strong>NIK Pasien :</strong></td>
+                            <td id="detailNikPasien"></td>
+                        </tr>
+                        <tr>
                             <td><strong>Alamat Pasien :</strong></td>
                             <td id="detailAlamat"></td>
                         </tr>
@@ -175,8 +180,8 @@
                             <td id="detailDate"></td>
                         </tr>
                         <tr>
-                            <td><strong>Dokter :</strong></td>
-                            <td id="detailDokter"></td>
+                            <td><strong>Penanggung Jawab :</strong></td>
+                            <td id="detailPenanggungJawab"></td>
                         </tr>
                         <tr>
                             <td><strong>Tekanan Darah :</strong></td>
@@ -293,10 +298,17 @@ document.addEventListener("DOMContentLoaded", function() {
         button.addEventListener("click", function() {
             document.getElementById("detailNo").innerText = this.getAttribute("data-id");
             document.getElementById("detailPasien").innerText = this.getAttribute("data-nama");
+            document.getElementById("detailNikPasien").innerText = this.getAttribute("data-nik");
             document.getElementById("detailAlamat").innerText = this.getAttribute("data-alamat");
             document.getElementById("detailKelamin").innerText = this.getAttribute("data-kelamin");
-            document.getElementById("detailDokter").innerText = this.getAttribute("data-spesialis");
             document.getElementById("detailDate").innerText = this.getAttribute("data-tanggal");
+            const dokterName = this.getAttribute("data-dokter");
+            const penulisName = this.getAttribute("data-penulis");
+            if (dokterName) {
+                document.getElementById("detailPenanggungJawab").innerText = dokterName;
+            } else {
+                document.getElementById("detailPenanggungJawab").innerText = penulisName;
+            }
             document.getElementById("detailTD").innerText = this.getAttribute("data-tekananDarah");
             document.getElementById("detailRR").innerText = this.getAttribute("data-rr");
             document.getElementById("detailNadi").innerText = this.getAttribute("data-nadi");
@@ -325,11 +337,11 @@ document.getElementById("printDetail").addEventListener("click", function() {
         const searchInput = document.getElementById("searchInput");
         const table = document.getElementById("rekamMedisTable").getElementsByTagName("tbody")[0];
         const searchButton = document.querySelector('.btn-outline-secondary');
-    
+
         function filterTable() {
             const searchText = searchInput.value.toLowerCase();
             const rows = table.getElementsByTagName("tr");
-    
+
             for (let i = 0; i < rows.length; i++) {
                 const rowText = rows[i].innerText.toLowerCase();
                 if (rowText.includes(searchText)) {
@@ -339,18 +351,18 @@ document.getElementById("printDetail").addEventListener("click", function() {
                 }
             }
         }
-    
+
         // Trigger saat tombol klik
         searchButton.addEventListener("click", function() {
             filterTable();
         });
-    
+
         // Opsional: Kalau mau auto filter sambil ngetik langsung (tanpa klik tombol)
         // searchInput.addEventListener("keyup", filterTable);
     });
     </script>
 
-    
+
 <!-- PDF: jsPDF dan autoTable -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>

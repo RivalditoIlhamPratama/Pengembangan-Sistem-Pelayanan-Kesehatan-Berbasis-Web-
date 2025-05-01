@@ -27,18 +27,18 @@
             <li class="link"><a href="{{route('pasien.reports') }}">Pengaduan</a></li>
             @if(auth()->check() && auth()->user()->role === 'pasien')
                 <li class="link">
-                <div class="user-action">
-                    <span class="user-btn">
-                    <i class="ri-user-fill"></i> {{ auth()->user()->name }}
-                    </span>
-                <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="logout-btn">
-                  <i class="ri-logout-box-r-line"></i> Logout
-                 </button>
-                </form>
+                    <div class="user-action">
+                        <span class="user-btn">
+                            <i class="ri-user-fill"></i> {{ auth()->user()->name }}
+                        </span>
+                        <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="logout-btn">
+                            <i class="ri-logout-box-r-line"></i> Logout
+                        </button>
+                        </form>
                     </div>
-                    </li>
+                </li>
             @endif
 
         </ul>
