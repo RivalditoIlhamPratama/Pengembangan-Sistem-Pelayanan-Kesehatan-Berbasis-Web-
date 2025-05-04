@@ -151,72 +151,108 @@
                     <p><strong>No RM:</strong> <span id="detailNo"></span></p>
                 </div>
 
-                <!-- Patient Information Table -->
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th colspan="2">A. Identitas Pasien</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Nama Pasien :</strong></td>
-                            <td id="detailPasien"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>NIK Pasien :</strong></td>
-                            <td id="detailNikPasien"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Alamat Pasien :</strong></td>
-                            <td id="detailAlamat"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Jenis Kelamin Pasien :</strong></td>
-                            <td id="detailKelamin"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Tanggal Periksa :</strong></td>
-                            <td id="detailDate"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Penanggung Jawab :</strong></td>
-                            <td id="detailPenanggungJawab"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Tekanan Darah :</strong></td>
-                            <td id="detailTD"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>RR :</strong></td>
-                            <td id="detailRR"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Suhu :</strong></td>
-                            <td id="detailSuhu"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Nadi :</strong></td>
-                            <td id="detailNadi"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Tinggi Badan :</strong></td>
-                            <td id="detailTB"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Berat Badan :</strong></td>
-                            <td id="detailBB"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Riwayat Penyakit :</strong></td>
-                            <td id="detailRiwayat"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Diagnosa :</strong></td>
-                            <td id="detailDiagnosa"></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <!-- Tabel A: Identitas Pasien -->
+    <table class="table table-bordered" style="table-layout: fixed; width: 100%;">
+        <colgroup>
+            <col style="width: 22%;">
+            <col style="width: 60%;">
+        </colgroup>
+    <thead>
+        <tr>
+            <th colspan="2">A. Identitas Pasien</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Nama Pasien :</strong></td>
+            <td id="detailPasien"></td>
+        </tr>
+        <tr>
+            <td><strong>NIK Pasien :</strong></td>
+            <td id="detailNikPasien"></td>
+        </tr>
+        <tr>
+            <td><strong>Alamat Pasien :</strong></td>
+            <td id="detailAlamat"></td>
+        </tr>
+        <tr>
+            <td><strong>Jenis Kelamin :</strong></td>
+            <td id="detailKelamin"></td>
+        </tr>
+        <tr>
+            <td><strong>Tanggal Periksa :</strong></td>
+            <td id="detailDate"></td>
+        </tr>
+        <tr>
+            <td><strong>Penanggung Jawab :</strong></td>
+            <td id="detailPenanggungJawab"></td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Tabel B: Pemeriksaan Fisik -->
+<table class="table table-bordered" style="table-layout: fixed; width: 100%;">
+    <colgroup>
+        <col style="width: 22%;">
+        <col style="width: 60%;">
+    </colgroup>
+    <thead>
+        <tr>
+            <th colspan="2">B. Pemeriksaan Fisik</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Tekanan Darah :</strong></td>
+            <td id="detailTD"></td>
+        </tr>
+        <tr>
+            <td><strong>RR :</strong></td>
+            <td id="detailRR"></td>
+        </tr>
+        <tr>
+            <td><strong>Nadi :</strong></td>
+            <td id="detailNadi"></td>
+        </tr>
+        <tr>
+            <td><strong>Suhu :</strong></td>
+            <td id="detailSuhu"></td>
+        </tr>
+        <tr>
+            <td><strong>Tinggi Badan :</strong></td>
+            <td id="detailTB"></td>
+        </tr>
+        <tr>
+            <td><strong>Berat Badan :</strong></td>
+            <td id="detailBB"></td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Tabel C: Pemeriksaan & Tindakan -->
+<table class="table table-bordered" style="table-layout: fixed; width: 100%;">
+    <colgroup>
+        <col style="width: 22%;">
+        <col style="width: 60%;">
+    </colgroup>
+    <thead>
+        <tr>
+            <th colspan="2">C. Pemeriksaan dan Tindakan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Riwayat Penyakit :</strong></td>
+            <td id="detailRiwayat"></td>
+        </tr>
+        <tr>
+            <td><strong>Diagnosa Medis :</strong></td>
+            <td id="detailDiagnosa"></td>
+        </tr>
+    </tbody>
+</table>
+
+
 
                 <div class="text-center mt-4">
                     <button id="printDetail" class="btn btn-primary print:hidden">

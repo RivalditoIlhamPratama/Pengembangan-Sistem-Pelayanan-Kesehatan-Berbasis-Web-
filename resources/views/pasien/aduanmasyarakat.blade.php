@@ -180,7 +180,7 @@
     <div class="section__container footer__container">
       <div class="footer__col">
         <div class="footer__logo">
-          <a href="#"><img src="assets/11.png" alt="logo" />Puskesmas Kraksaan</a>
+          <a href="#"><img src="{{ asset('assets/11.png') }}" alt="logo" />Puskesmas Kraksaan</a>
         </div>
         <p>
           layanan digital seperti jadwal praktik dokter,

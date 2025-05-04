@@ -17,11 +17,12 @@
 <body>
     <div class="register-container">
         <!-- Tambahkan Logo di sini -->
-        <div class="logo-container">
+        <div class="logo-container d-flex justify-content-center mb-4">
             <img
                 src="{{ asset('assets/11.png') }}"
                 alt="Logo Puskesmas Kraksaan"
                 class="logo-img"
+                style="max-width: 100px;"
             />
         </div>
 
