@@ -23,4 +23,8 @@ class rekammedis extends Model
     {
         return $this->belongsTo(Dokter::class, 'Dokter_id', 'idDokter');
     }
+    public function laporan()
+    {
+        return $this->hasMany(Laporan::class, 'idRekamMedis', 'RekamMedis_id');
+    }
 }

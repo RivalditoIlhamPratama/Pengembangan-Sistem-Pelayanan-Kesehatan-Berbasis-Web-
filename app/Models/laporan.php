@@ -9,9 +9,14 @@ class laporan extends Model
 {
     use HasFactory;
 
-    protected $fillable =['tanggal','catatanPenyakit','jumlahPasien'];
+    public $timestamps = false;
+
+    protected $fillable =['Klinik_id','RekamMedis_id','tanggal','catatanPenyakit','jumlahPasien'];
 
     public function klinik(){
         return $this->belongsTo(Klinik::class,'Klinik_id','idKlinik');
+    }
+    public function rekam_medis(){
+        return $this->belongsTo(Rekammedis::class,'RekamMedis_id','idRekamMedis');
     }
 }

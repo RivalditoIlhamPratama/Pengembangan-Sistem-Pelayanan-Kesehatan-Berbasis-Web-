@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klinik Umum </title>
-    
+
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Remixicon -->
@@ -51,7 +51,7 @@
             </button>
             <div class="flex items-center space-x-3">
                 <i class="ri-user-fill text-xl"></i>
-                <span>Klinik Umum</span>
+                <span>{{ $klinik->namaKlinik }}</span>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="text-black hover:text-gray-500 ml-3">
