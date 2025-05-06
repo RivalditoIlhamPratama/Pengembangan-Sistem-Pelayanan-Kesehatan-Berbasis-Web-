@@ -459,6 +459,31 @@ p {
     color: var(--text-light);
     text-align: center;
 }
+/* Footer responsive di mobile */
+@media screen and (max-width: 768px) {
+    .footer__container {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .footer__col iframe {
+      width: 100% !important;
+    }
+  
+    .footer__logo a {
+      font-size: 1.2rem;
+    }
+  
+    .footer__links p, .footer__links a {
+      font-size: 0.95rem;
+    }
+  
+    .footer__socials a {
+      font-size: 1.5rem;
+      margin: 0 0.5rem;
+    }
+  }
 
 /*----End Footer----*/
 
@@ -652,4 +677,48 @@ p {
     word-wrap: break-word;
     white-space: normal;        /* Izinkan teks membungkus */
     max-width: 170px;           /* Batasi lebar teks agar tidak melewati gambar */
+}
+
+
+
+
+/* Modifikasi button logout dan user*/
+.nav__links .user-action {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-btn,
+.logout-btn {
+    background-color: #1976d2;
+    color: white;
+    font-size: 12px; /* slightly increased font size */
+    padding: 8px 15px; /* increased padding to make the button wider */
+    border-radius: 10px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px; /* increased gap between icon and text */
+    transition: all 0.3s ease;
+    width: auto; /* ensures it adjusts to the content width */
+    min-width: 100px; /* ensures a minimum width for consistency */
+}
+
+.logout-btn {
+    background-color: #e53935;
+}
+
+.user-btn:hover {
+    background-color: #1565c0;
+}
+
+.logout-btn:hover {
+    background-color: #c62828;
+}
+
+.hidden {
+    display: none !important;
 }

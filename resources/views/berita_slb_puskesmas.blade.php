@@ -43,21 +43,20 @@
       </li>
       @endif
       @if(auth()->check() && auth()->user()->role === 'pasien')
-      <li class="link">
-        <div class="flex items-center space-x-4">
-          <button class="flex items-center space-x-3">
-            <i class="ri-user-fill text-xl"></i>
-            <span>{{ auth()->user()->name }}</span>
-          </button>
-          <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" class="text-white hover:text-gray-300">
-              <i class="ri-logout-box-r-line text-xl"></i>
-            </button>
-          </form>
-        </div>
-      </li>
-      @endif
+                <li class="link">
+                    <div class="user-action">
+                        <span class="user-btn w-50">
+                            <i class="ri-user-fill"></i> {{ auth()->user()->name }}
+                        </span>
+                        <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="logout-btn">
+                            <i class="ri-logout-box-r-line"></i> Logout
+                        </button>
+                        </form>
+                    </div>
+                </li>
+                @endif
     </ul>
   </nav>
 </header>
@@ -110,6 +109,21 @@
             <p>Operasi Gratis Bibir Sumbing & Celah Langit-langit oleh Smile Train</p>
         </div>
     </a>
+
+    <a href="{{ route('berita.vaksin') }}" class="text-decoration-none text-dark">
+      <div class="news-item">
+          <img src="{{ asset('assets/sosialisasi.vaksin.png') }}" alt="Thumbnail Berita 3">
+          <p>Masifkan Sosialisasi Vaksin Melalui Video di Puskesmas</p>
+      </div>
+  </a>
+
+  <a href="" class="text-decoration-none text-dark">
+      <div class="news-item">
+          <img src="{{ asset('assets/berita.jpg') }}" alt="Thumbnail Berita 4">
+          <p>Operasi Gratis Bibir Sumbing & Celah Langit-langit oleh Smile Train</p>
+      </div>
+  </a>
+
 </aside>
 
 </section>
@@ -117,39 +131,40 @@
 <br><br><br>
 
 <footer class="footer">
-    <div class="section__container footer__container">
-      <div class="footer__col">
-        <div class="footer__logo">
-          <a href="#"><img src="assets/11.png" alt="logo" />Puskesmas Kraksaan</a>
-        </div>
-        <p>
-          layanan digital seperti jadwal praktik dokter,
-          rincian tarif layanan, berita terkait puskesmas kraksaan
-        </p>
-        <div class="footer__socials">
-            <a href="https://www.facebook.com/pkmkraksaan/?locale=id_ID"><i class="ri-facebook-fill"></i></a>
-            <a href="https://www.instagram.com/puskesmas_kraksaan/"><i class="ri-instagram-line"></i></a>
-            <a href="https://www.youtube.com/@puskesmaskraksaan6927"><i class="ri-youtube-fill"></i></a>
-        </div>
+  <div class="section__container footer__container">
+    <div class="footer__col">
+      <div class="footer__logo">
+        <a href="#"><img src="assets/11.png" alt="logo" />Puskesmas Kraksaan</a>
       </div>
-  
-      <div class="footer__col">
+      <p>
+        layanan digital seperti jadwal praktik dokter,
+        rincian tarif layanan, berita terkait puskesmas kraksaan
+      </p>
+      <div class="footer__socials">
+        <a href="https://www.facebook.com/pkmkraksaan/?locale=id_ID"><i class="ri-facebook-fill"></i></a>
+        <a href="https://www.instagram.com/puskesmas_kraksaan/"><i class="ri-instagram-line"></i></a>
+        <a href="https://www.youtube.com/@puskesmaskraksaan6927"><i class="ri-youtube-fill"></i></a>
+      </div>
+    </div>
+
+    <!-- dimodifikasi: bungkus alamat dan kontak dalam satu flex container -->
+    <div class="footer__col d-flex justify-content-between gap-4 flex-wrap" style="flex: 1 1 100%;">
+      <!-- Alamat -->
+      <div style="flex: 1 1 50%;">
         <h4>Alamat :</h4>
-        <div class="footer__links">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.124710643871!2d113.41036907410655!3d-7.759615477628249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd701af20f8ae5d%3A0x8ccde8d2ff8aed0c!2sPuskesmas%20Kraksaan!5e0!3m2!1sid!2sid!4v1714445262765!5m2!1sid!2sid" 
-            width="220%" 
-            height="270" 
-            style="border:0; border-radius:10px; margin-top:10px;" 
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        </div>
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.124710643871!2d113.41036907410655!3d-7.759615477628249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd701af20f8ae5d%3A0x8ccde8d2ff8aed0c!2sPuskesmas%20Kraksaan!5e0!3m2!1sid!2sid!4v1714445262765!5m2!1sid!2sid" 
+          width="100%" 
+          height="270"  
+          style="border:0; border-radius:10px; margin-top:10px;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
       </div>
-      <br>
-      <br>
-      <div class="footer__col">
+
+      <!-- Kontak -->
+      <div style="flex: 1 1 45%;">
         <h4>Contact :</h4>
         <div class="footer__links">
           <p><i class="ri-mail-line"></i> Email: <a href="mailto:puskesmaskraksaan@gmail.com">puskesmaskraksaan@gmail.com</a></p>
@@ -160,13 +175,14 @@
           </a>
         </div>
       </div>
-      
     </div>
-  
-    <div class="footer__bar">
-      Copyright © 2024 Puskesmas Kraksaan. All rights reserved.
-    </div>
-  </footer>
+  </div>
+
+  <div class="footer__bar">
+    Copyright © 2024 Puskesmas Kraksaan. All rights reserved.
+  </div>
+</footer>
+
 
 <script src="https://unpkg.com/scrollreveal"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>

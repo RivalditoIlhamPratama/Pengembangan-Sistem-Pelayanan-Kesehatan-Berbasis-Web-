@@ -43,21 +43,20 @@
       </li>
       @endif
       @if(auth()->check() && auth()->user()->role === 'pasien')
-      <li class="link">
-        <div class="flex items-center space-x-4">
-          <button class="flex items-center space-x-3">
-            <i class="ri-user-fill text-xl"></i>
-            <span>{{ auth()->user()->name }}</span>
-          </button>
-          <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" class="text-white hover:text-gray-300">
-              <i class="ri-logout-box-r-line text-xl"></i>
-            </button>
-          </form>
-        </div>
-      </li>
-      @endif
+                <li class="link">
+                    <div class="user-action">
+                        <span class="user-btn w-50">
+                            <i class="ri-user-fill"></i> {{ auth()->user()->name }}
+                        </span>
+                        <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="logout-btn">
+                            <i class="ri-logout-box-r-line"></i> Logout
+                        </button>
+                        </form>
+                    </div>
+                </li>
+                @endif
     </ul>
   </nav>
 </header>
@@ -83,23 +82,51 @@
 
   <aside class="sidebar">
     <h3>Berita Sebelumnya</h3>
-    <div class="news-item">
-      <img src="thumb1.jpg" alt="Thumbnail Berita 1">
-      <p>RSUD Waluyo Jati Mengucapkan Selamat Menunaikan Ibadah Puasa Ramadhan 1446 H</p>
-    </div>
-    <div class="news-item">
-      <img src="thumb2.jpg" alt="Thumbnail Berita 2">
-      <p>HARI ULANG TAHUN RSUD WALUYO JATI KE 43</p>
-    </div>
-    <div class="news-item">
-      <img src="thumb3.jpg" alt="Thumbnail Berita 3">
-      <p>Penandatanganan Perjanjian Kerja Sama RSUD Waluyo Jati & Universitas Hafshawaty</p>
-    </div>
-    <div class="news-item">
-      <img src="thumb4.jpg" alt="Thumbnail Berita 4">
-      <p>Operasi Gratis Bibir Sumbing & Celah Langit-langit oleh Smile Train</p>
-    </div>
-  </aside>
+
+    <a href="{{ route('berita.slb') }}" class="text-decoration-none text-dark">
+        <div class="news-item">
+            <img src="{{ asset('assets/berita.slb.png') }}" alt="Foto kegiatan SLB">
+            <p>Pemeriksaan Kesehatan di </p>
+            <p> Dharma Asih Kraksaan</p>
+        </div>
+    </a>
+
+    <a href="{{ route('berita.usg') }}" class="text-decoration-none text-dark">
+        <div class="news-item">
+            <img src="{{ asset('assets/berita.jpg') }}" alt="Foto USG di Puskesmas Kraksaan">
+            <p>Puskesmas Kraksaan Kini Buka Layanan USG bagi Ibu Hamil</p>
+        </div>
+    </a>
+
+    <a href="{{ route('berita.vaksin') }}" class="text-decoration-none text-dark">
+        <div class="news-item">
+            <img src="{{ asset('assets/sosialisasi.vaksin.png') }}" alt="Thumbnail Berita 3">
+            <p>Masifkan Sosialisasi Vaksin Melalui Video di Puskesmas</p>
+        </div>
+    </a>
+
+    <a href="" class="text-decoration-none text-dark">
+        <div class="news-item">
+            <img src="{{ asset('assets/berita.jpg') }}" alt="Thumbnail Berita 4">
+            <p>Operasi Gratis Bibir Sumbing & Celah Langit-langit oleh Smile Train</p>
+        </div>
+    </a>
+
+    <a href="{{ route('berita.vaksin') }}" class="text-decoration-none text-dark">
+      <div class="news-item">
+          <img src="{{ asset('assets/sosialisasi.vaksin.png') }}" alt="Thumbnail Berita 3">
+          <p>Masifkan Sosialisasi Vaksin Melalui Video di Puskesmas</p>
+      </div>
+  </a>
+
+  <a href="" class="text-decoration-none text-dark">
+      <div class="news-item">
+          <img src="{{ asset('assets/berita.jpg') }}" alt="Thumbnail Berita 4">
+          <p>Operasi Gratis Bibir Sumbing & Celah Langit-langit oleh Smile Train</p>
+      </div>
+  </a>
+
+</aside>
 </section>
 
 <br><br><br>
