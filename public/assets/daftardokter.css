@@ -287,6 +287,25 @@ h2 {
     margin-bottom: 1rem;
 }
 
+
+.section-title {
+    text-align: center;
+    position: relative;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .section-title::after {
+    content: "";
+    display: block;
+    width: 440px;
+    height: 2px;
+    background-color: #5294d6; 
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+  }
+  
+
 /* ----------End DOkter------- */
 
 /* General styles */
@@ -376,6 +395,32 @@ p {
     color: var(--text-light);
     text-align: center;
 }
+
+/* Footer responsive di mobile */
+@media screen and (max-width: 768px) {
+    .footer__container {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .footer__col iframe {
+      width: 100% !important;
+    }
+  
+    .footer__logo a {
+      font-size: 1.2rem;
+    }
+  
+    .footer__links p, .footer__links a {
+      font-size: 0.95rem;
+    }
+  
+    .footer__socials a {
+      font-size: 1.5rem;
+      margin: 0 0.5rem;
+    }
+  }
 
 /*----End Footer----*/
 

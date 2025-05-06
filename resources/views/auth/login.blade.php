@@ -8,12 +8,19 @@
     <style>
         /* Add background image */
         body {
-            background-image: url('{{ asset('assets/11.jpg') }}'); /* Change the image URL */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            height: 100vh;
-        }
+        background-image: url('{{ asset('assets/background.jpg') }}'); /* Pastikan file ada di /public/assets */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 10px;
+        font-family: Arial, sans-serif;
+    }
 
         .login-container {
             width: 100%;

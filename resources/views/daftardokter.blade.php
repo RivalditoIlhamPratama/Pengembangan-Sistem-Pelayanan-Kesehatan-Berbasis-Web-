@@ -70,7 +70,8 @@
     </header>
 
     <div class="container">
-        <h2>Dokter Puskesmas Kraksaan</h2>
+      <h2 class="section-title">Dokter Puskesmas Kraksaan</h2>
+      <br>
         <div class="doctor-card-container">
             <!-- Card Dokter -->
             <div class="doctor-card">

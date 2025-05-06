@@ -1,92 +1,103 @@
 body {
-    background-color: #f5f5f5;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
+    background-color: #f5f5f5; /* Warna latar belakang utama */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Font default */
+    margin: 0; /* Hilangkan margin default browser */
+    padding: 0; /* Hilangkan padding default browser */
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none; /* Hilangkan garis bawah pada link */
 }
 
 .register-container {
-    max-width: 420px;
-    margin: 80px auto;
-    padding: 40px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    max-width: 420px; /* Lebar maksimum container */
+    margin: 80px auto; /* Jarak dari atas dan tengah horizontal */
+    padding: 40px; /* Ruang dalam container */
+    background-color: #ffffff; /* Warna latar putih */
+    border-radius: 10px; /* Sudut melengkung */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+    text-align: center; /* Teks di tengah */
 }
 
 .register-container h2 {
-    margin-bottom: 30px;
-    font-size: 22px;
-    font-weight: bold;
-    color: #333;
+    margin-bottom: 30px; /* Jarak bawah heading */
+    font-size: 22px; /* Ukuran font heading */
+    font-weight: bold; /* Ketebalan font */
+    color: #333; /* Warna teks */
 }
 
 .register-container form {
-    text-align: left;
+    text-align: left; /* Konten form rata kiri */
 }
 
 .register-container label {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 6px;
-    display: block;
+    font-size: 13px; /* Ukuran font label */
+    font-weight: 500; /* Ketebalan font sedang */
+    margin-bottom: 4px; /* Jarak bawah label */
+    display: block; /* Tampilkan sebagai blok */
 }
 
 .register-container input {
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-    box-sizing: border-box;
+    width: 100%; /* Lebar penuh */
+    padding: 10px 12px; /* Padding dalam input */
+    margin-bottom: 15px; /* Jarak bawah antar input */
+    border: 1px solid #ccc; /* Border abu-abu */
+    border-radius: 6px; /* Sudut input melengkung */
+    font-size: 14px; /* Ukuran teks input */
+    box-sizing: border-box; /* Padding tidak menambah lebar total */
 }
 
 .register-container .btn-daftar {
-    background-color: #e53935;
-    display: block;
-    text-align: center;
-    margin-top: 12px;
-    color: white;
-    border: none;
-    width: 100%;
-    padding: 10px;
-
-    font-size: 15px;
-    font-weight: 600;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 5px;
+    background-color: #e53935; /* Warna merah tombol daftar */
+    display: block; /* Tampilkan sebagai blok */
+    text-align: center; /* Teks di tengah */
+    margin-top: 12px; /* Jarak atas tombol */
+    color: white; /* Warna teks putih */
+    border: none; /* Tanpa border */
+    width: 100%; /* Tombol selebar kontainer */
+    padding: 10px; /* Padding tombol */
+    font-size: 15px; /* Ukuran teks tombol */
+    font-weight: 600; /* Ketebalan teks tombol */
+    border-radius: 6px; /* Sudut melengkung tombol */
+    cursor: pointer; /* Ubah kursor saat hover */
+    margin-top: 5px; /* Jarak atas (ditimpa dari sebelumnya) */
 }
 
 .register-container .btn-masuk {
-    display: block;
-    text-align: center;
-    margin-top: 12px;
-    background-color: #1976d2;
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    font-size: 15px;
-    font-weight: 600;
-    border-radius: 6px;
+    display: block; /* Tampilkan sebagai blok */
+    text-align: center; /* Teks di tengah */
+    margin-top: 12px; /* Jarak atas tombol masuk */
+    background-color: #1976d2; /* Warna biru tombol masuk */
+    color: white; /* Warna teks putih */
+    text-decoration: none; /* Hilangkan garis bawah */
+    padding: 10px; /* Padding tombol */
+    font-size: 15px; /* Ukuran teks tombol */
+    font-weight: 600; /* Ketebalan teks tombol */
+    border-radius: 6px; /* Sudut melengkung tombol */
 }
 
 .logo-container {
-    text-align: center;
-    margin-bottom: 20px;
+    text-align: center; /* Logo di tengah */
+    margin-bottom: 20px; /* Jarak bawah logo */
 }
 
 .logo-img {
-    width: 100px; /* Atur ukuran logo sesuai keinginan */
-    height: auto;
+    width: 100px; /* Lebar logo */
+    height: auto; /* Tinggi menyesuaikan proporsi */
 }
 
 .hidden {
-    display: none !important;
+    display: none !important; /* Sembunyikan elemen paksa */
+}
+
+.register-container input,
+.register-container select {
+    width: 100%; /* Input dan select selebar container */
+    padding: 6px 10px; /* Padding lebih kecil dari default */
+    margin-bottom: 12px; /* Jarak bawah antar elemen */
+    border: 1px solid #ccc; /* Border abu-abu */
+    border-radius: 6px; /* Sudut melengkung */
+    font-size: 13px; /* Ukuran teks lebih kecil */
+    height: 34px; /* Tinggi input dan select */
+    box-sizing: border-box; /* Hitung padding dan border dalam width */
 }

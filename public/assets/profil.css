@@ -505,6 +505,32 @@ p {
     text-align: center;
 }
 
+/* Footer responsive di mobile */
+@media screen and (max-width: 768px) {
+    .footer__container {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .footer__col iframe {
+      width: 100% !important;
+    }
+  
+    .footer__logo a {
+      font-size: 1.2rem;
+    }
+  
+    .footer__links p, .footer__links a {
+      font-size: 0.95rem;
+    }
+  
+    .footer__socials a {
+      font-size: 1.5rem;
+      margin: 0 0.5rem;
+    }
+  }
+
 /*----End Footer----*/
 
 @media (width > 480px) {
@@ -729,3 +755,22 @@ p {
 .logout-btn:hover {
     background-color: #c62828;
 }
+
+
+/* 👇 Media query untuk mobile - posisi gambar di bawah teks */
+@media screen and (max-width: 768px) {
+    .about__content {
+      flex-direction: column-reverse; /* 🔄 gambar di bawah teks */
+      text-align: center;
+    }
+  
+    .about__image img {
+      width: 90%;
+      max-width: 100%;
+      margin-top: 1.5rem;
+    }
+  
+    .about__text {
+      padding: 0 1rem;
+    }
+  }

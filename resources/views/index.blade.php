@@ -47,9 +47,9 @@
         <div class="header__content">
           <h4>Pelayanan Masyarakat</h4>
           <h1 class="section__header">Puskesmas Kraksaan</h1>
-          <p>
-            layanan digital seperti jadwal praktik dokter, 
-            rincian tarif layanan, berita berita terkait puskesmas kraksaan
+          <p id="typing-text">
+
+            Puskesmas Kraksaan
           </p>
 
         </div>
@@ -58,7 +58,7 @@
 
     <!-- Service Section -->
     <div class="services-section">
-      <h2>Layanan Unggulan Kami</h2><br>
+      <h2>Layanan Kami</h2><br>
       <p>Kami menyediakan berbagai layanan kesehatan digital untuk kenyamanan Anda, mulai dari pendaftaran dokter hingga edukasi kesehatan.</p>
       <br>
       <div class="services-container">
@@ -216,42 +216,39 @@
           </div>
       </div>
 
-      <div class="news-card">
-        <img src="assets/Berita.jpeg" alt="Puskesmas Image">
-        <div class="news-info">
-            <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
-            <p>SEMENTARA: Banner yang terpasang di pintu masuk Puskesmas Pakuriran. Puskesmas Pakuriran menutup layanan kesehatan...</p>
-            <p class="date">Thursday, 21 November 2024</p>
-            <a href="#" class="read-more">Selengkapnya</a>
-        </div>
-    </div>
 
-    <div class="news-card">
-      <img src="assets/Berita.jpeg" alt="Puskesmas Image">
-      <div class="news-info">
-          <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
-          <p>SEMENTARA: Banner yang terpasang di pintu masuk Puskesmas Pakuriran. Puskesmas Pakuriran menutup layanan kesehatan...</p>
-          <p class="date">Thursday, 21 November 2024</p>
-          <a href="#" class="read-more">Selengkapnya</a>
-      </div>
-  </div>
-
-
-  <div class="news-card">
-    <img src="assets/Berita.jpeg" alt="Puskesmas Image">
-    <div class="news-info">
-        <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
-        <p>SEMENTARA: Banner yang terpasang di pintu masuk Puskesmas Pakuriran. Puskesmas Pakuriran menutup layanan kesehatan...</p>
-        <p class="date">Thursday, 21 November 2024</p>
-        <a href="#" class="read-more">Selengkapnya</a>
-    </div>
-</div>
 
               <!-- Add more cards as needed -->
           </div>
       </div>
 
       <!-- End Berita -->
+<!-- Video Section -->
+<div class="video-section">
+  <h2>Video Dokumentasi</h2>
+  <p class="centered-text">Tonton video dari Puskesmas Kraksaan</p>
+  <br><br>
+  <div class="video-row">
+    <div class="video-item">
+      <iframe width="100%" height="215" src="https://www.youtube.com/embed/iStZfrQE6ZA" title="Video Puskesmas Kraksaan" frameborder="0" allowfullscreen></iframe>
+      <p class="video-caption">Video Profil Puskesmas Kraksaan</p>
+    </div>
+    <div class="video-item">
+      <iframe width="100%" height="215" src="https://www.youtube.com/embed/zESpcFZG3YU" title="Video Edukasi 2" frameborder="0" allowfullscreen></iframe>
+      <p class="video-caption">Pembacaan ikrar</p>
+    </div>
+    <div class="video-item">
+      <iframe width="100%" height="215" src="https://www.youtube.com/embed/i-WB1NV0orM" title="Video Edukasi 3" frameborder="0" allowfullscreen></iframe>
+      <p class="video-caption">VAKSINASI COVID 19 TAHAP 1,PUSKESMAS KRAKSAAN</p>
+    </div>
+    <div class="video-item">
+      <iframe width="100%" height="215" src="https://www.youtube.com/embed/RXjnWGMRcHc" title="Video Edukasi 3" frameborder="0" allowfullscreen></iframe>
+      <p class="video-caption">Kampanya Adaptasi</p>
+    </div>
+    
+  </div>
+</div>
+
 
       <br>
       <br>
@@ -299,9 +296,9 @@
           <h4>Contact :</h4>
           <div class="footer__links">
             <p><i class="ri-mail-line"></i> Email: <a href="mailto:puskesmaskraksaan@gmail.com">puskesmaskraksaan@gmail.com</a></p>
-            <p><i class="ri-phone-line"></i> Telp: <a href="tel:+628113373119">0811-3373-119</a></p>
+            <p><i class="ri-phone-line"></i> Telp: <a href="tel:+62 822-3428-5513">+62 822-3428-5513</a></p>
             <p><i class="ri-time-line"></i> Jam Operasional: <br>Senin - Jumat, 07.00 - 14.00</p>
-            <a href="https://wa.me/628113373119" target="_blank" class="btn-wa">
+            <a href="https://wa.me/6282234285513" target="_blank" class="btn-wa">
               <i class="ri-whatsapp-line"></i> Chat WhatsApp
             </a>
             
@@ -320,6 +317,21 @@
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
-
+    <script>
+      const text = "layanan digital seperti jadwal praktik dokter, rincian tarif layanan, berita berita terkait puskesmas kraksaan";
+      let index = 0;
+      const speed = 100; // kecepatan mengetik dalam ms
+    
+      function typeWriter() {
+        if (index < text.length) {
+          document.getElementById("typing-text").innerHTML += text.charAt(index);
+          index++;
+          setTimeout(typeWriter, speed);
+        }
+      }
+    
+      window.addEventListener("load", typeWriter);
+    </script>
+    
   </body>
 </html>
