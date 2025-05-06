@@ -48,7 +48,7 @@ a {
 }
 
 .register-container .btn-daftar {
-    background-color: #e53935; /* Warna merah tombol daftar */
+    background-color: #f22e2ef7; /* Warna merah tombol daftar */
     display: block; /* Tampilkan sebagai blok */
     text-align: center; /* Teks di tengah */
     margin-top: 12px; /* Jarak atas tombol */

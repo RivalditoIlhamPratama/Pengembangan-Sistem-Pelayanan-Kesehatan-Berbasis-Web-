@@ -130,7 +130,7 @@
             height="270" 
             style="border:0; border-radius:10px; margin-top:10px;" 
             allowfullscreen="" 
-            loading="lazy" 
+            loading="lazy"   
             referrerpolicy="no-referrer-when-downgrade">
           </iframe>
         </div>

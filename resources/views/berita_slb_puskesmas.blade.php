@@ -81,23 +81,37 @@
 
   <aside class="sidebar">
     <h3>Berita Sebelumnya</h3>
-    <div class="news-item">
-        <img src="{{ asset('assets/berita.slb.png') }}" alt="Foto kegiatan SLB">
-      <p>Pemeriksaan Kesehatan di SLB Dharma Asih Kraksaan</p>
-    </div>
-    <div class="news-item">
-        <img src="{{ asset('assets/berita.jpg') }}" alt="Foto USG di Puskesmas Kraksaan">
-      <p>Puskesmas Kraksaan Kini Buka Layanan USG bagi Ibu Hamil</p>
-    </div>
-    <div class="news-item">
-      <img src="thumb3.jpg" alt="Thumbnail Berita 3">
-      <p>Penandatanganan Perjanjian Kerja Sama RSUD Waluyo Jati & Universitas Hafshawaty</p>
-    </div>
-    <div class="news-item">
-      <img src="thumb4.jpg" alt="Thumbnail Berita 4">
-      <p>Operasi Gratis Bibir Sumbing & Celah Langit-langit oleh Smile Train</p>
-    </div>
-  </aside>
+
+    <a href="{{ route('berita.slb') }}" class="text-decoration-none text-dark">
+        <div class="news-item">
+            <img src="{{ asset('assets/berita.slb.png') }}" alt="Foto kegiatan SLB">
+            <p>Pemeriksaan Kesehatan di </p>
+            <p> Dharma Asih Kraksaan</p>
+        </div>
+    </a>
+
+    <a href="{{ route('berita.usg') }}" class="text-decoration-none text-dark">
+        <div class="news-item">
+            <img src="{{ asset('assets/berita.jpg') }}" alt="Foto USG di Puskesmas Kraksaan">
+            <p>Puskesmas Kraksaan Kini Buka Layanan USG bagi Ibu Hamil</p>
+        </div>
+    </a>
+
+    <a href="{{ route('berita.vaksin') }}" class="text-decoration-none text-dark">
+        <div class="news-item">
+            <img src="{{ asset('assets/sosialisasi.vaksin.png') }}" alt="Thumbnail Berita 3">
+            <p>Masifkan Sosialisasi Vaksin Melalui Video di Puskesmas</p>
+        </div>
+    </a>
+
+    <a href="" class="text-decoration-none text-dark">
+        <div class="news-item">
+            <img src="{{ asset('assets/berita.jpg') }}" alt="Thumbnail Berita 4">
+            <p>Operasi Gratis Bibir Sumbing & Celah Langit-langit oleh Smile Train</p>
+        </div>
+    </a>
+</aside>
+
 </section>
 
 <br><br><br>

@@ -151,12 +151,12 @@
                     <p><strong>No RM:</strong> <span id="detailNo"></span></p>
                 </div>
 
-                <!-- Tabel A: Identitas Pasien -->
-    <table class="table table-bordered" style="table-layout: fixed; width: 100%;">
-        <colgroup>
-            <col style="width: 22%;">
-            <col style="width: 60%;">
-        </colgroup>
+    <!-- Tabel A: Identitas Pasien -->
+<table class="table table-bordered" style="table-layout: fixed; width: 100%;">
+    <colgroup>
+        <col style="width: 22%;">
+        <col style="width: 60%;">
+    </colgroup>
     <thead>
         <tr>
             <th colspan="2">A. Identitas Pasien</th>
@@ -178,6 +178,18 @@
         <tr>
             <td><strong>Jenis Kelamin :</strong></td>
             <td id="detailKelamin"></td>
+        </tr>
+        <tr>
+            <td><strong>Usia :</strong></td>
+            <td id="detailUsia"></td>
+        </tr>
+        <tr>
+            <td><strong>Agama :</strong></td>
+            <td id="detailAgama"></td>
+        </tr>
+        <tr>
+            <td><strong>Status Pernikahan :</strong></td>
+            <td id="detailStatusNikah"></td>
         </tr>
         <tr>
             <td><strong>Tanggal Periksa :</strong></td>
@@ -249,8 +261,13 @@
             <td><strong>Diagnosa Medis :</strong></td>
             <td id="detailDiagnosa"></td>
         </tr>
+        <tr>
+            <td><strong>Resep Obat :</strong></td>
+            <td id="detailResepObat"></td>
+        </tr>
     </tbody>
 </table>
+
 
 
 
