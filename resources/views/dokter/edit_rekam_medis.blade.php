@@ -21,14 +21,6 @@
                         <input type="text" class="form-control" id="editNamaPasien" name="namaPasien" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editAgamaPasien" class="form-label">Agama Pasien</label>
-                        <input type="text" class="form-control" id="editAgamaPasien" name="agamaPasien" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editStatusPernikahan" class="form-label">Status Pernikahan Pasien</label>
-                        <input type="text" class="form-control" id="editStatusPernikahan" name="statusPernikahan" required>
-                    </div>
-                    <div class="mb-3">
                         <label for="editAlamatPasien" class="form-label">Alamat Pasien</label>
                         <input type="text" class="form-control" id="editAlamatPasien" name="alamatPasien" required>
                     </div>
@@ -47,11 +39,6 @@
                     <div class="mb-3">
                         <label for="editTekananDarah" class="form-label">Tekanan Darah</label>
                         <input type="text" class="form-control" id="editTekananDarah" name="tekananDarah" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editUsiaPasien" class="form-label">Usia Pasien</label>
-                    <div class="input-group">
-                        <input name="usiaPasien" id="editUsiaPasien" type="number" class="form-control text-left" placeholder="Usia Pasien" step="1" required >
                     </div>
                     <div class="mb-3">
                         <label for="editRR" class="form-label">RR</label>
@@ -82,10 +69,6 @@
                     <div class="mb-3">
                         <label for="editRiwayatPenyakit" class="form-label">Riwayat Penyakit</label>
                         <textarea class="form-control" id="editRiwayatPenyakit" name="riwayatPenyakit" rows="3" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editResepObat" class="form-label">Resep Obat</label>
-                        <textarea class="form-control" id="editResepObat" name="resepObat" rows="3" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="editDiagnosaMedis" class="form-label">Diagnosa Medis</label>
@@ -121,8 +104,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     document.getElementById("editId").value = id;
                     document.getElementById("editNoRm").value = row.querySelector("td:nth-child(1)").innerText.trim();
                     document.getElementById("editNamaPasien").value = row.querySelector("td:nth-child(2)").innerText.trim();
-                    document.getElementById("editAgamaPasien").value = this.getAttribute("data-agama");
-                    document.getElementById("editStatusPernikahan").value = this.getAttribute("data-pernikahan");
                     document.getElementById("editAlamatPasien").value = this.getAttribute("data-alamat");
                     document.getElementById("editJenisKelaminPasien").value = this.getAttribute("data-kelamin");
                     document.getElementById("editNIK").value = row.querySelector("td:nth-child(5)").innerText.trim();
@@ -137,13 +118,11 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                     document.getElementById("editTekananDarah").value = row.querySelector("td:nth-child(5)").innerText.trim();
                     document.getElementById("editRR").value = row.querySelector("td:nth-child(6)").innerText.trim();
-                    document.getElementById("editUsiaPasien").value = this.getAttribute("data-usia");
                     document.getElementById("editNadi").value = row.querySelector("td:nth-child(7)").innerText.trim();
                     document.getElementById("editSuhu").value = row.querySelector("td:nth-child(8)").innerText.trim();
                     document.getElementById("editTinggiBadan").value = row.querySelector("td:nth-child(9)").innerText.trim();
                     document.getElementById("editBeratBadan").value = row.querySelector("td:nth-child(10)").innerText.trim();
                     document.getElementById("editRiwayatPenyakit").value = this.getAttribute("data-riwayat");
-                    document.getElementById("editResepObat").value = this.getAttribute("data-obat");
                     document.getElementById("editDiagnosaMedis").value = row.querySelector("td:nth-child(11)").innerText.trim();
                     // Show modal
                     var editModal = new bootstrap.Modal(document.getElementById('editRekamModal'));

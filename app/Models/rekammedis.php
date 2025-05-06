@@ -13,7 +13,7 @@ class rekammedis extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['StaffRm_id','Dokter_id', 'noRm', 'namaPasien','agamaPasien','statusPernikahan','alamatPasien','jenisKelamin', 'NIK', 'tanggalPeriksa', 'tekananDarah','usiaPasien','rr', 'nadi', 'suhu', 'tinggiBadan', 'beratBadan', 'riwayatPenyakit' , 'resepObat','resepObat', 'diagnosaMedis'];
+    protected $fillable = ['StaffRm_id','Dokter_id', 'noRm', 'namaPasien','alamatPasien','jenisKelamin', 'NIK', 'tanggalPeriksa', 'tekananDarah','rr', 'nadi', 'suhu', 'tinggiBadan', 'beratBadan', 'riwayatPenyakit' , 'diagnosaMedis'];
 
     public function staffrekammedis()
     {
