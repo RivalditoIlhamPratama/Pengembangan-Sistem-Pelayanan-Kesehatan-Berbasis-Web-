@@ -14,18 +14,22 @@ class RekammedisController extends Controller
     {
         $validated = $request->validate([
             'namaPasien' => 'required|string',
+            'agamaPasien' => 'required|string|in:Islam,Kristen Protestan,Kristen Katolik,Hindu,Buddha,Konghucu',
+            'statusPernikahan' => 'required|string|in:Belum Kawin,Kawin,Cerai Hidup,Cerai Mati',
             'alamatPasien' => 'required|string',
             'jenisKelamin' => 'required|string|in:Laki laki,Perempuan',
             'noRm' => 'required|string',
             'NIK' => 'required|string',
             'tanggalPeriksa' => 'required|date',
             'tekananDarah' => 'required|string',
+            'usiaPasien' => 'required|string',
             'RR' => 'required|string',
             'nadi' => 'required|string',
             'suhu' => 'required|string',
             'tinggiBadan' => 'required|string',
             'beratBadan' => 'required|string',
             'riwayatPenyakit' => 'required|string',
+            'resepObat' => 'required|string',
             'diagnosaMedis' => 'required|string',
         ]);
 
@@ -43,16 +47,20 @@ class RekammedisController extends Controller
             'noRm' => $validated['noRm'],
             'NIK' => $validated['NIK'],
             'namaPasien' => $validated['namaPasien'],
+            'agamaPasien' => $validated['agamaPasien'],
+            'statusPernikahan' => $validated['statusPernikahan'],
             'alamatPasien' => $validated['alamatPasien'],
             'jenisKelamin' => $validated['jenisKelamin'],
             'tanggalPeriksa' => $validated['tanggalPeriksa'],
             'tekananDarah' => $validated['tekananDarah'],
+            'usiaPasien' => $validated['usiaPasien'],
             'rr' => $validated['RR'],
             'nadi' => $validated['nadi'],
             'suhu' => $validated['suhu'],
             'tinggiBadan' => $validated['tinggiBadan'],
             'beratBadan' => $validated['beratBadan'],
             'riwayatPenyakit' => $validated['riwayatPenyakit'],
+            'resepObat' => $validated['resepObat'],
             'diagnosaMedis' => $validated['diagnosaMedis'],
         ]);
 

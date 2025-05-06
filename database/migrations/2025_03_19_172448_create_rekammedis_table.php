@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('namaPasien');
             $table->string('alamatPasien');
             $table->enum('jenisKelamin',['Laki laki', 'Perempuan']);
+            $table->enum('agamaPasien',['Islam', 'Kristen Protestan','Kristen Katolik','Hindu','Buddha','Konghucu']);
+            $table->enum('statusPernikahan',['Belum Kawin', 'Kawin','Cerai Hidup','Cerai Mati']);
+            $table->string('resepObat');
+            $table->string('usiaPasien');
             $table->string('NIK');
             $table->date('tanggalPeriksa');
             $table->string('tekananDarah');
