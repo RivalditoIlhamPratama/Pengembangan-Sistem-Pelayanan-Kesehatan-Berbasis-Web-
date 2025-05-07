@@ -16,6 +16,9 @@ class RekammedisController extends Controller
             'namaPasien' => 'required|string',
             'alamatPasien' => 'required|string',
             'jenisKelamin' => 'required|string|in:Laki laki,Perempuan',
+            'usiaPasien' => 'required|string',
+            'agamaPasien' => 'required|string|in:Islam,Kristen,Katolik,Hindu,Buddha,Konghucu',
+            'statusNikah' => 'required|string|in:Belum Kawin,Kawin Tercatat,Kawin Belum Tercatat,Cerai Hidup,Cerai Mati',
             'noRm' => 'required|string',
             'NIK' => 'required|string',
             'tanggalPeriksa' => 'required|date',
@@ -27,6 +30,7 @@ class RekammedisController extends Controller
             'beratBadan' => 'required|string',
             'riwayatPenyakit' => 'required|string',
             'diagnosaMedis' => 'required|string',
+            'resepObat' => 'required|string',
         ]);
 
         $dokterId = null;
@@ -45,6 +49,9 @@ class RekammedisController extends Controller
             'namaPasien' => $validated['namaPasien'],
             'alamatPasien' => $validated['alamatPasien'],
             'jenisKelamin' => $validated['jenisKelamin'],
+            'usiaPasien' => $validated['usiaPasien'],
+            'agamaPasien' => $validated['agamaPasien'],
+            'statusNikah' => $validated['statusNikah'],
             'tanggalPeriksa' => $validated['tanggalPeriksa'],
             'tekananDarah' => $validated['tekananDarah'],
             'rr' => $validated['RR'],
@@ -54,6 +61,7 @@ class RekammedisController extends Controller
             'beratBadan' => $validated['beratBadan'],
             'riwayatPenyakit' => $validated['riwayatPenyakit'],
             'diagnosaMedis' => $validated['diagnosaMedis'],
+            'resepObat' => $validated['resepObat'],
         ]);
 
         if (Auth::user()->dokter && Auth::user()->dokter->first()) {
@@ -75,6 +83,9 @@ class RekammedisController extends Controller
         'namaPasien' => 'required|string',
         'alamatPasien' => 'required|string',
         'jenisKelamin' => 'required|string|in:Laki laki,Perempuan',
+        'usiaPasien' => 'required|string',
+        'agamaPasien' => 'required|string|in:Islam,Kristen,Katolik,Hindu,Buddha,Konghucu',
+        'statusNikah' => 'required|string|in:Belum Kawin,Kawin Tercatat,Kawin Belum Tercatat,Cerai Hidup,Cerai Mati',
         'noRm' => 'required|string',
         'NIK' => 'required|string',
         'tanggalPeriksa' => 'required|date',
@@ -86,6 +97,7 @@ class RekammedisController extends Controller
         'beratBadan' => 'required|string',
         'riwayatPenyakit' => 'required|string',
         'diagnosaMedis' => 'required|string',
+        'resepObat' => 'required|string',
         ]);
 
         $rekammedis = rekammedis::findOrFail($id);

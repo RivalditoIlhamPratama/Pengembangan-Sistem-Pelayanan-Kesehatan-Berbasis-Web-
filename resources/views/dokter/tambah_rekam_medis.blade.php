@@ -42,8 +42,40 @@
                 <div class="col-md-6">
                     <label class="form-label">Jenis Kelamin</label>
                     <select class="form-control" id="jenisKelamin" name="jenisKelamin" required>
+                        <option value="" disabled selected>Pilih Jenis Kelamin</option>
                         <option value="Laki laki">Laki-laki</option>
                         <option value="Perempuan">Perempuan</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label class="form-label">Usia Pasien</label>
+                    <div class="input-group">
+                        <input name="usiaPasien" id="usiaPasienInput" type="number" class="form-control text-center" placeholder="Usia Pasien" step="1" required >
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Agama Pasien</label>
+                    <select class="form-select" id="agamaPasien" name="agamaPasien" required>
+                        <option value="" disabled selected>Pilih Agama Pasien</option>
+                        <option value="Islam">Islam</option>
+                        <option value="Kristen">Kristen</option>
+                        <option value="Katolik">Katolik</option>
+                        <option value="Hindu">Hindu</option>
+                        <option value="Buddha">Buddha</option>
+                        <option value="Konghucu">Konghucu</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Status Nikah Pasien</label>
+                    <select class="form-select" id="statusNikah" name="statusNikah" required>
+                        <option value="" disabled selected>Pilih Status Nikah Pasien</option>
+                        <option value="Belum Kawin">Belum Kawin</option>
+                        <option value="Kawin Tercatat">Kawin Tercatat</option>
+                        <option value="Kawin Belum Tercatat">Kawin Belum Tercatat</option>
+                        <option value="Cerai Hidup">Cerai Hidup</option>
+                        <option value="Cerai Mati">Cerai Mati</option>
                     </select>
                 </div>
             </div>
@@ -90,6 +122,10 @@
             <div class="mb-3">
                 <label class="form-label">Diagnosa</label>
                 <textarea name="diagnosaMedis" class="form-control" rows="3" placeholder="Diagnosa" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Resep Obat</label>
+                <textarea name="resepObat" class="form-control" rows="3" placeholder="Resep Obat" required></textarea>
             </div>
 
             <!-- Tombol Simpan & Batal -->

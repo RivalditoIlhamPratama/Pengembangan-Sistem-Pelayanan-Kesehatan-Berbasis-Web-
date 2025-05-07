@@ -89,6 +89,9 @@
                                     data-nama="{{ $rekam->namaPasien }}"
                                     data-alamat="{{ $rekam->alamatPasien }}"
                                     data-kelamin="{{ $rekam->jenisKelamin }}"
+                                    data-usia="{{ $rekam->usiaPasien }}"
+                                    data-agama="{{ $rekam->agamaPasien }}"
+                                    data-nikah="{{ $rekam->statusNikah }}"
                                     data-nik="{{ $rekam->NIK }}"
                                     data-tanggal="{{ $rekam->tanggalPeriksa }}"
                                     data-penulis="{{ optional($rekam->dokter)->namaDokter ?? optional($rekam->staffrekammedis)->namaStaff ?? '' }}"
@@ -99,14 +102,19 @@
                                     data-tinggi="{{ $rekam->tinggiBadan ?? '' }}"
                                     data-berat="{{ $rekam->beratBadan ?? '' }}"
                                     data-riwayat="{{ $rekam->riwayatPenyakit ?? '' }}"
-                                    data-diagnosa="{{ $rekam->diagnosaMedis ?? '' }}">
+                                    data-diagnosa="{{ $rekam->diagnosaMedis ?? '' }}"
+                                    data-obat="{{ $rekam->resepObat }}">
                                     <i class="fas fa-eye"></i> Detail
                                 </button>
                                 <!-- Edit Button -->
                                 <a href="{{ route('dokter.rekam_medis.edit', $rekam->idRekamMedis) }}" class="btn btn-sm btn-warning"
                                     data-alamat="{{ $rekam->alamatPasien }}"
                                     data-kelamin="{{ $rekam->jenisKelamin }}"
-                                    data-riwayat="{{ $rekam->riwayatPenyakit }}">
+                                    data-usia="{{ $rekam->usiaPasien }}"
+                                    data-agama="{{ $rekam->agamaPasien }}"
+                                    data-nikah="{{ $rekam->statusNikah }}"
+                                    data-riwayat="{{ $rekam->riwayatPenyakit }}"
+                                    data-obat="{{ $rekam->resepObat }}">
                                     <i class="fas fa-edit"></i> Edit
                                  </a>
                                 <!-- Delete Button -->
@@ -150,127 +158,120 @@
                     <h4>Formulir Identitas Pasien</h4>
                     <p><strong>No RM:</strong> <span id="detailNo"></span></p>
                 </div>
-
-    <!-- Tabel A: Identitas Pasien -->
-<table class="table table-bordered" style="table-layout: fixed; width: 100%;">
-    <colgroup>
-        <col style="width: 22%;">
-        <col style="width: 60%;">
-    </colgroup>
-    <thead>
-        <tr>
-            <th colspan="2">A. Identitas Pasien</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Nama Pasien :</strong></td>
-            <td id="detailPasien"></td>
-        </tr>
-        <tr>
-            <td><strong>NIK Pasien :</strong></td>
-            <td id="detailNikPasien"></td>
-        </tr>
-        <tr>
-            <td><strong>Alamat Pasien :</strong></td>
-            <td id="detailAlamat"></td>
-        </tr>
-        <tr>
-            <td><strong>Jenis Kelamin :</strong></td>
-            <td id="detailKelamin"></td>
-        </tr>
-        <tr>
-            <td><strong>Usia :</strong></td>
-            <td id="detailUsia"></td>
-        </tr>
-        <tr>
-            <td><strong>Agama :</strong></td>
-            <td id="detailAgama"></td>
-        </tr>
-        <tr>
-            <td><strong>Status Pernikahan :</strong></td>
-            <td id="detailStatusNikah"></td>
-        </tr>
-        <tr>
-            <td><strong>Tanggal Periksa :</strong></td>
-            <td id="detailDate"></td>
-        </tr>
-        <tr>
-            <td><strong>Penanggung Jawab :</strong></td>
-            <td id="detailPenanggungJawab"></td>
-        </tr>
-    </tbody>
-</table>
-
-<!-- Tabel B: Pemeriksaan Fisik -->
-<table class="table table-bordered" style="table-layout: fixed; width: 100%;">
-    <colgroup>
-        <col style="width: 22%;">
-        <col style="width: 60%;">
-    </colgroup>
-    <thead>
-        <tr>
-            <th colspan="2">B. Pemeriksaan Fisik</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Tekanan Darah :</strong></td>
-            <td id="detailTD"></td>
-        </tr>
-        <tr>
-            <td><strong>RR :</strong></td>
-            <td id="detailRR"></td>
-        </tr>
-        <tr>
-            <td><strong>Nadi :</strong></td>
-            <td id="detailNadi"></td>
-        </tr>
-        <tr>
-            <td><strong>Suhu :</strong></td>
-            <td id="detailSuhu"></td>
-        </tr>
-        <tr>
-            <td><strong>Tinggi Badan :</strong></td>
-            <td id="detailTB"></td>
-        </tr>
-        <tr>
-            <td><strong>Berat Badan :</strong></td>
-            <td id="detailBB"></td>
-        </tr>
-    </tbody>
-</table>
-
-<!-- Tabel C: Pemeriksaan & Tindakan -->
-<table class="table table-bordered" style="table-layout: fixed; width: 100%;">
-    <colgroup>
-        <col style="width: 22%;">
-        <col style="width: 60%;">
-    </colgroup>
-    <thead>
-        <tr>
-            <th colspan="2">C. Pemeriksaan dan Tindakan</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Riwayat Penyakit :</strong></td>
-            <td id="detailRiwayat"></td>
-        </tr>
-        <tr>
-            <td><strong>Diagnosa Medis :</strong></td>
-            <td id="detailDiagnosa"></td>
-        </tr>
-        <tr>
-            <td><strong>Resep Obat :</strong></td>
-            <td id="detailResepObat"></td>
-        </tr>
-    </tbody>
-</table>
-
-
-
-
+                <!-- Tabel A: Identitas Pasien -->
+                <table class="table table-bordered" style="table-layout: fixed; width: 100%;">
+                    <colgroup>
+                        <col style="width: 22%;">
+                        <col style="width: 60%;">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th colspan="2">A. Identitas Pasien</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Nama Pasien :</strong></td>
+                            <td id="detailPasien"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>NIK Pasien :</strong></td>
+                            <td id="detailNikPasien"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Alamat Pasien :</strong></td>
+                            <td id="detailAlamat"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Jenis Kelamin :</strong></td>
+                            <td id="detailKelamin"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Usia :</strong></td>
+                            <td id="detailUsia"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Agama :</strong></td>
+                            <td id="detailAgama"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Status Pernikahan :</strong></td>
+                            <td id="detailStatusNikah"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tanggal Periksa :</strong></td>
+                            <td id="detailDate"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Penanggung Jawab :</strong></td>
+                            <td id="detailPenanggungJawab"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- Tabel B: Pemeriksaan Fisik -->
+                <table class="table table-bordered" style="table-layout: fixed; width: 100%;">
+                    <colgroup>
+                        <col style="width: 22%;">
+                        <col style="width: 60%;">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th colspan="2">B. Pemeriksaan Fisik</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Tekanan Darah :</strong></td>
+                            <td id="detailTD"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>RR :</strong></td>
+                            <td id="detailRR"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nadi :</strong></td>
+                            <td id="detailNadi"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Suhu :</strong></td>
+                            <td id="detailSuhu"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tinggi Badan :</strong></td>
+                            <td id="detailTB"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Berat Badan :</strong></td>
+                            <td id="detailBB"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- Tabel C: Pemeriksaan & Tindakan -->
+                <table class="table table-bordered" style="table-layout: fixed; width: 100%;">
+                    <colgroup>
+                        <col style="width: 22%;">
+                        <col style="width: 60%;">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th colspan="2">C. Pemeriksaan dan Tindakan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Riwayat Penyakit :</strong></td>
+                            <td id="detailRiwayat"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Diagnosa Medis :</strong></td>
+                            <td id="detailDiagnosa"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Resep Obat :</strong></td>
+                            <td id="detailResepObat"></td>
+                        </tr>
+                    </tbody>
+                </table>
                 <div class="text-center mt-4">
                     <button id="printDetail" class="btn btn-primary print:hidden">
                         <i class="fas fa-print"></i> Cetak
@@ -343,9 +344,6 @@ document.getElementById("exportExcel").addEventListener("click", function () {
     XLSX.writeFile(wb, `Data_Rekam_Medis_${today}.xlsx`);
 });
 
-
-
-
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll(".detail-btn").forEach(button => {
         button.addEventListener("click", function() {
@@ -354,6 +352,9 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("detailNikPasien").innerText = this.getAttribute("data-nik");
             document.getElementById("detailAlamat").innerText = this.getAttribute("data-alamat");
             document.getElementById("detailKelamin").innerText = this.getAttribute("data-kelamin");
+            document.getElementById("detailUsia").innerText = this.getAttribute("data-usia");
+            document.getElementById("detailAgama").innerText = this.getAttribute("data-agama");
+            document.getElementById("detailStatusNikah").innerText = this.getAttribute("data-nikah");
             document.getElementById("detailDate").innerText = this.getAttribute("data-tanggal");
             const dokterName = this.getAttribute("data-dokter");
             const penulisName = this.getAttribute("data-penulis");
@@ -370,6 +371,7 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("detailBB").innerText = this.getAttribute("data-berat");
             document.getElementById("detailRiwayat").innerText = this.getAttribute("data-riwayat");
             document.getElementById("detailDiagnosa").innerText = this.getAttribute("data-diagnosa");
+            document.getElementById("detailResepObat").innerText = this.getAttribute("data-obat");
         });
     });
 });
@@ -383,37 +385,35 @@ document.getElementById("printDetail").addEventListener("click", function() {
     document.body.innerHTML = originalContents;
     location.reload(); // Reload to reset the view
 });
-</script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const searchInput = document.getElementById("searchInput");
-        const table = document.getElementById("rekamMedisTable").getElementsByTagName("tbody")[0];
-        const searchButton = document.querySelector('.btn-outline-secondary');
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById("searchInput");
+    const table = document.getElementById("rekamMedisTable").getElementsByTagName("tbody")[0];
+    const searchButton = document.querySelector('.btn-outline-secondary');
 
-        function filterTable() {
-            const searchText = searchInput.value.toLowerCase();
-            const rows = table.getElementsByTagName("tr");
+    function filterTable() {
+        const searchText = searchInput.value.toLowerCase();
+        const rows = table.getElementsByTagName("tr");
 
-            for (let i = 0; i < rows.length; i++) {
-                const rowText = rows[i].innerText.toLowerCase();
-                if (rowText.includes(searchText)) {
-                    rows[i].style.display = "";
-                } else {
-                    rows[i].style.display = "none";
-                }
+        for (let i = 0; i < rows.length; i++) {
+            const rowText = rows[i].innerText.toLowerCase();
+            if (rowText.includes(searchText)) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
             }
         }
+    }
 
-        // Trigger saat tombol klik
-        searchButton.addEventListener("click", function() {
-            filterTable();
-        });
-
-        // Opsional: Kalau mau auto filter sambil ngetik langsung (tanpa klik tombol)
-        // searchInput.addEventListener("keyup", filterTable);
+    // Trigger saat tombol klik
+    searchButton.addEventListener("click", function() {
+        filterTable();
     });
-    </script>
+
+    // Opsional: Kalau mau auto filter sambil ngetik langsung (tanpa klik tombol)
+    // searchInput.addEventListener("keyup", filterTable);
+});
+</script>
 
 
 <!-- PDF: jsPDF dan autoTable -->
