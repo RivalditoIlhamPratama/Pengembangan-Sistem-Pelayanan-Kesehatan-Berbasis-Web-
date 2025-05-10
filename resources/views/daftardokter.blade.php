@@ -15,6 +15,16 @@
   <title>Puskesmas Kraksaan</title>
 </head>
 <body>
+
+  <!-- Loader -->
+<div id="loader" class="loader-wrapper">
+  <div class="loader-content">
+    <img src="{{ asset('assets/11.png') }}" alt="Logo Puskesmas" class="loader-logo" />
+    <div class="spinner"></div>
+    <p class="loading-text">Mohon Tunggu...</p>
+  </div>
+</div>
+
     <header class="header mt-0">
         <nav class="mt-0">
             <div class="nav__header">
@@ -30,13 +40,13 @@
                 <li class="link"><a href="{{ route('pasien.dashboard') }}">Beranda</a></li>
                 <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
                 <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
-                <li class="link"><a href="{{ url('/alur-pelayanan') }}">Alur Pelayanan</a></li>
+                <li class="link"><a href="{{ url('/alur-pelayanan') }}">Pelayanan</a></li>
                 @endif
                 @if(!auth()->check() || (auth()->check() && auth()->user()->role !== 'pasien'))
                 <li class="link"><a href="{{ url('/') }}">Beranda</a></li>
                 <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
                 <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
-                <li class="link"><a href="{{ url('/alur-pelayanan') }}">Alur Pelayanan</a></li>
+                <li class="link"><a href="{{ url('/alur-pelayanan') }}">Pelayanan</a></li>
                 @endif
                 <li class="link"><a class="@unless(auth()->check() && auth()->user()->role === 'pasien') disabled-link @endunless" href="{{route('pasien.reports') }}">Pengaduan</a></li>
                 @if(!auth()->check() || (auth()->check() && auth()->user()->role !== 'pasien'))
@@ -230,5 +240,25 @@
 
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const links = document.querySelectorAll("a:not(.read-more):not([target='_blank']):not(.btn-wa)");
+    
+        links.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            const href = link.getAttribute("href");
+            if (href && !href.startsWith("#") && !href.startsWith("javascript") && !link.classList.contains("disabled-link")) {
+              document.getElementById("loader").style.display = "flex";
+            }
+          });
+        });
+    
+        window.addEventListener("pageshow", function () {
+          document.getElementById("loader").style.display = "none";
+        });
+      });
+    </script>
+    
 </body>
 </html>

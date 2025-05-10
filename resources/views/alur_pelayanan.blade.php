@@ -16,6 +16,16 @@
     <title>Puskesmas Kraksaan</title>
   </head>
   <body>
+
+    <!-- Loader -->
+<div id="loader" class="loader-wrapper">
+  <div class="loader-content">
+    <img src="{{ asset('assets/11.png') }}" alt="Logo Puskesmas" class="loader-logo" />
+    <div class="spinner"></div>
+    <p class="loading-text">Mohon Tunggu...</p>
+  </div>
+</div>
+
     <header class="header">
       <nav>
         <div class="nav__header">
@@ -31,13 +41,13 @@
             <li class="link"><a href="{{ route('pasien.dashboard') }}">Beranda</a></li>
             <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
             <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
-            <li class="link"><a href="{{ url('/alur-pelayanan') }}">Alur Pelayanan</a></li>
+            <li class="link"><a href="{{ url('/alur-pelayanan') }}">Pelayanan</a></li>
             @endif
             @if(!auth()->check() || (auth()->check() && auth()->user()->role !== 'pasien'))
             <li class="link"><a href="{{ url('/') }}">Beranda</a></li>
             <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
             <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
-            <li class="link"><a href="{{ url('/alur-pelayanan') }}">Alur Pelayanan</a></li>
+            <li class="link"><a href="{{ url('/alur-pelayanan') }}">Pelayanan</a></li>
             @endif
             <li class="link"><a class="@unless(auth()->check() && auth()->user()->role === 'pasien') disabled-link @endunless" href="{{route('pasien.reports') }}">Pengaduan</a></li>
             @if(!auth()->check() || (auth()->check() && auth()->user()->role !== 'pasien'))
@@ -71,25 +81,105 @@
 
 
     <section class="about">
-        <div class="container">
-          <div class="about__content">
-            <div class="about__image">
-              <img src="assets/alur_pelayanan.png" alt="Logo Puskesmas Kraksaan" style="width: 110%; max-width: 1010px; height: auto;">
-
-            </div>
-            <br>
-            <br>
-            <div class="about__text">
-              <h2>Alur Pelayanan</h2>
-              <p>
-                Alur pelayanan di Puskesmas Kraksaan dimulai dari pasien datang dan melakukan pendaftaran serta rekam medis. Setelah itu, pasien akan diarahkan ke berbagai jenis pelayanan sesuai kebutuhannya, seperti pelayanan umum, gigi, KIA & KB, TB, HIV, kusta, hepatitis, gizi, dan sanitasi. Jika diperlukan, pasien dapat dirujuk untuk pemeriksaan laboratorium. Setelah pelayanan selesai, pasien akan menuju farmasi untuk mengambil obat. Pasien kemudian dapat pulang atau dirujuk ke rumah sakit jika kondisi darurat atau membutuhkan penanganan lanjutan.
-              </p>
-
-            </div>
+      <div class="container">
+        <div class="about__content">
+          <div class="about__image">
+            <img src="assets/alur pelayanan.png" alt="Logo Puskesmas Kraksaan" style="width: 110%; max-width: 1010px; height: auto;">
+          </div>
+          <br><br>
+          <div class="about__text">
+            <h2>Alur Pelayanan</h2>
+            <p>
+              Alur pelayanan di Puskesmas Kraksaan dimulai dari pasien datang dan melakukan pendaftaran serta rekam medis. Setelah itu, pasien akan diarahkan ke berbagai jenis pelayanan sesuai kebutuhannya, seperti pelayanan umum, gigi, KIA & KB, TB, HIV, kusta, hepatitis, gizi, dan sanitasi. Jika diperlukan, pasien dapat dirujuk untuk pemeriksaan laboratorium. Setelah pelayanan selesai, pasien akan menuju farmasi untuk mengambil obat. Pasien kemudian dapat pulang atau dirujuk ke rumah sakit jika kondisi darurat atau membutuhkan penanganan lanjutan.
+            </p>
           </div>
         </div>
-
-      </section>
+        <br>
+        <br>
+        <br>
+        <br>
+        <!-- Jenis Pelayanan -->
+        <h2 style="color: #1771ca; margin-top: 60px;">Jenis-Jenis Pelayanan</h2>
+        <table class="service-table">
+          <thead>
+            <tr>
+              <th>UKM Esensial</th>
+              <th>UKM Pengembangan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="service-title">1. Pelayanan Promosi Kesehatan</div>
+                <ul class="service-list">
+                  <li>Pemberdayaan Masyarakat dalam PHBS</li>
+                  <li>UKBM</li>
+                </ul>
+                <div class="service-title">2. Pelayanan Kesehatan Lingkungan</div>
+                <ul class="service-list">
+                  <li>Pembinaan Tempat Fasilitas Umum</li>
+                  <li>STBM Pemberdayaan Masyarakat</li>
+                </ul>
+                <div class="service-title">3. Pelayanan KIA & KB</div>
+                <ul class="service-list">
+                  <li>ANC Terpadu Ibu Hamil</li>
+                  <li>Kelas Ibu Hamil, Balita</li>
+                  <li>Konseling Catin</li>
+                  <li>SDIDTK</li>
+                </ul>
+                <div class="service-title">4. Pelayanan Kesehatan Lansia</div>
+                <ul class="service-list"><li>Posyandu Lansia</li></ul>
+                <div class="service-title">5. Pelayanan Kesehatan Anak Sekolah dan Remaja</div>
+                <ul class="service-list"><li>Screening Anak Sekolah dan Remaja</li></ul>
+                <div class="service-title">6. Pelayanan Gizi</div>
+                <ul class="service-list">
+                  <li>Pelayanan Gizi Masyarakat</li>
+                  <li>Penanggulangan Gangguan Gizi</li>
+                  <li>Pemantauan Status Gizi</li>
+                </ul>
+                <div class="service-title">7. Pelayanan Pencegahan dan Pengendalian Penyakit</div>
+                <ul class="service-list">
+                  <li>Pemantauan Pemberian Zinc</li>
+                  <li>Pencegahan Hepatitis B pada Ibu Hamil</li>
+                  <li>Screening Kusta/Frambusia</li>
+                  <li>Imunisasi Anak Sekolah</li>
+                  <li>Mobile Klinik VCT</li>
+                  <li>POPM Cacingan</li>
+                  <li>Pelacakan dan Penemuan Kasus TB</li>
+                </ul>
+                <div class="service-title">8. Pencegahan dan Penanggulangan Penyakit Tidak Menular</div>
+                <ul class="service-list">
+                  <li>Pelayanan POSBINDU</li>
+                  <li>Deteksi Dini Gangguan Indera</li>
+                </ul>
+                <div class="service-title">9. Pelayanan Kesehatan Jiwa</div>
+                <ul class="service-list"><li>Screening Kesehatan Jiwa</li></ul>
+                <div class="service-title">10. Pelayanan Keperawatan Kesehatan Masyarakat (PERKESMAS)</div>
+                <ul class="service-list"><li>Kunjungan Intervensi PIS-PK</li></ul>
+              </td>
+              <td>
+                <div class="service-title">1. Pelayanan Kesehatan Gigi Masyarakat</div>
+                <ul class="service-list">
+                  <li>Penyuluhan/Pemeriksaan gigi dan mulut di PAUD, TK dan POSYANDU</li>
+                </ul>
+                <div class="service-title">2. Pelayanan Kesehatan Tradisional</div>
+                <ul class="service-list"><li>Visitasi Kelompok ASMAN TOGA</li></ul>
+                <div class="service-title">3. Pelayanan Kesehatan Olahraga</div>
+                <ul class="service-list">
+                  <li>Pengukuran Kebugaran Calon Jamaah Haji</li>
+                  <li>Pengukuran Kebugaran Anak Sekolah</li>
+                </ul>
+                <div class="service-title">4. Pelayanan Kesehatan Kerja</div>
+                <ul class="service-list">
+                  <li>Pembinaan Kelompok Kesehatan Kerja Informal</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    </section>
 
 
           </div>
@@ -156,6 +246,25 @@
 
           <script src="https://unpkg.com/scrollreveal"></script>
           <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              const links = document.querySelectorAll("a:not(.read-more):not([target='_blank']):not(.btn-wa)");
+          
+              links.forEach((link) => {
+                link.addEventListener("click", function (e) {
+                  const href = link.getAttribute("href");
+                  if (href && !href.startsWith("#") && !href.startsWith("javascript") && !link.classList.contains("disabled-link")) {
+                    document.getElementById("loader").style.display = "flex";
+                  }
+                });
+              });
+          
+              window.addEventListener("pageshow", function () {
+                document.getElementById("loader").style.display = "none";
+              });
+            });
+          </script>
 
         </body>
       </html>

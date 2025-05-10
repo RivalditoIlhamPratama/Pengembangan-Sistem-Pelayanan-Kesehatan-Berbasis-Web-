@@ -151,5 +151,13 @@ Route::get('/admin/profil', function () {
 })->name('admin.profil');
 
 
+Route::get('/admin/dokter/tambah', function () {
+    return view('admin.tambah_dokter');
+});
+
+Route::get('/admin/dokter/edit', function () {
+    return view('admin.edit_dokter');
+});
+
 
 

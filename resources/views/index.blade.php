@@ -16,6 +16,17 @@
     <title>Puskesmas Kraksaan</title>
   </head>
   <body>
+
+<!-- Loader -->
+<div id="loader" class="loader-wrapper">
+  <div class="loader-content">
+    <img src="{{ asset('assets/11.png') }}" alt="Logo Puskesmas" class="loader-logo" />
+    <div class="spinner"></div>
+    <p class="loading-text">Mohon Tunggu...</p>
+  </div>
+</div>
+
+
     <header class="header">
       <nav>
         <div class="nav__header">
@@ -30,7 +41,7 @@
           <li class="link"><a href="{{ url('/') }}">Beranda</a></li>
           <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
           <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
-          <li class="link"><a href="{{ url('/alur-pelayanan') }}">Alur Pelayanan</a></li>
+          <li class="link"><a href="{{ url('/alur-pelayanan') }}">Pelayanan</a></li>
 
           <li class="link"><a class="disabled-link" href="{{ url('/aduanmasyarakat') }}">Pengaduan</a></li>
           <li class="link">
@@ -143,7 +154,6 @@
         <br>
         <br>
 
-
         <!-- Beita -->
         <div class="berita--container">
           <h2>Berita Terkait</h2>
@@ -246,14 +256,34 @@
       <p class="video-caption">Kampanya Adaptasi</p>
     </div>
     
-  </div>
-</div>
+    <div class="video-section">
+      <h2>Video Kesehatan</h2>
+      <p class="centered-text">Tonton video Kesehatan berikut ini</p>
+      <br><br>
+      <div class="video-row" style="display: flex; flex-wrap: wrap; gap: 20px;">
+        <div class="video-item" style="flex: 1 1 300px;">
+          <iframe width="100%" height="215" src="https://www.youtube.com/embed/jkS6glRPD_o" title="Video Puskesmas Kraksaan" frameborder="0" allowfullscreen></iframe>
+          <p class="video-caption">Animasi 5 Gerakan Sehat</p>
+        </div>
+        <div class="video-item" style="flex: 1 1 300px;">
+          <iframe width="100%" height="215" src="https://www.youtube.com/embed/MvSkn9svGGw" title="Video Edukasi 2" frameborder="0" allowfullscreen></iframe>
+          <p class="video-caption">Seberapa Penting Kesehatan Mental Untuk Kita?</p>
+        </div>
+        <div class="video-item" style="flex: 1 1 300px;">
+          <iframe width="100%" height="215" src="https://www.youtube.com/embed/2xdVIW9VAL8" title="Video Edukasi 3" frameborder="0" allowfullscreen></iframe>
+          <p class="video-caption">Ayo Cegah Diabetes Mellitus 60 detik</p>
+        </div>
+        <div class="video-item" style="flex: 1 1 300px;">
+          <iframe width="100%" height="215" src="https://www.youtube.com/embed/BtN-goy9VOY" title="Video Edukasi 4" frameborder="0" allowfullscreen></iframe>
+          <p class="video-caption">Tentang Virus Korona & Yang Harus Kamu Lakukan</p>
+        </div>
+      </div>
+    </div>
+    
 
 
-      <br>
-      <br>
-      <br>
-      <br>
+    <div style="margin-top: 20px;"></div>
+
 
 
 
@@ -331,6 +361,25 @@
       }
     
       window.addEventListener("load", typeWriter);
+    </script>
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const links = document.querySelectorAll("a:not(.read-more):not([target='_blank']):not(.btn-wa)");
+    
+        links.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            const href = link.getAttribute("href");
+            if (href && !href.startsWith("#") && !href.startsWith("javascript") && !link.classList.contains("disabled-link")) {
+              document.getElementById("loader").style.display = "flex";
+            }
+          });
+        });
+    
+        window.addEventListener("pageshow", function () {
+          document.getElementById("loader").style.display = "none";
+        });
+      });
     </script>
     
   </body>

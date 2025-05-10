@@ -33,7 +33,7 @@
           <li class="link"><a href="{{ url('/') }}">Beranda</a></li>
           <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
           <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
-          <li class="link"><a href="{{ url('/') }}">Alur Pelayanan</a></li>
+          <li class="link"><a href="{{ url('/') }}">Pelayanan</a></li>
         @endif
         <li class="link">
           <a class="@unless(auth()->check() && auth()->user()->role === 'pasien') disabled-link @endunless" href="{{ url('/aduanmasyarakat') }}">Pelayanan</a>

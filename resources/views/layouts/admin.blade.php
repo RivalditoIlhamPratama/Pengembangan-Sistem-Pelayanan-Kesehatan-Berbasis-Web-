@@ -54,14 +54,23 @@
                     <a href="{{ route('admin.profil') }}" class="hover:text-blue-600 font-medium">
                         Admin
                     </a>
-                    <form method="POST" action="{{ route('logout') }}">
+                    <form method="POST" action="{{ route('logout') }}" id="logout-form">
                         @csrf
-                        <button type="submit" class="text-black hover:text-gray-500 ml-3">
+                        <button type="button" onclick="confirmLogout()" class="text-black hover:text-gray-500 ml-3">
                             <i class="ri-logout-box-r-line text-xl"></i>
                         </button>
                     </form>
+                    
+                    <script>
+                        function confirmLogout() {
+                            if (confirm("Apakah Anda yakin ingin logout?")) {
+                                document.getElementById('logout-form').submit();
+                            }
+                        }
+                    </script>
+                    
                 </div>
-            </header>
+            </header> 
 
             <!-- Page Content -->
             <main class="p-6 overflow-auto">
