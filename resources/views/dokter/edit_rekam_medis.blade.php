@@ -108,8 +108,20 @@
                         <textarea class="form-control" id="editDiagnosaMedis" name="diagnosaMedis" rows="3" required></textarea>
                     </div>
                     <div class="mb-3">
+                        <label for="editTindakan" class="form-label">Tindakan</label>
+                        <textarea class="form-control" id="editTindakan" name="tindakan" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
                         <label for="editResepObat" class="form-label">Resep Obat</label>
                         <textarea class="form-control" id="editResepObat" name="resepObat" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editRujukan" class="form-label">Dirujuk ke</label>
+                        <textarea class="form-control" id="editRujukan" name="rujukan" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAlasanRujukan" class="form-label">Alasan Rujuk</label>
+                        <textarea class="form-control" id="editAlasanRujukan" name="alasanRujukan" rows="3" ></textarea>
                     </div>
 
                 </div>
@@ -185,7 +197,10 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("editBeratBadan").value = row.querySelector("td:nth-child(10)").innerText.trim();
             document.getElementById("editRiwayatPenyakit").value = this.getAttribute("data-riwayat");
             document.getElementById("editDiagnosaMedis").value = row.querySelector("td:nth-child(11)").innerText.trim();
+            document.getElementById("editTindakan").value =this.getAttribute("data-tindakan");
             document.getElementById("editResepObat").value =this.getAttribute("data-obat");
+            document.getElementById("editRujukan").value =this.getAttribute("data-rujuk");
+            document.getElementById("editAlasanRujukan").value =this.getAttribute("data-alasanrujuk");
             // Show modal
             var editModal = new bootstrap.Modal(document.getElementById('editRekamModal'));
             editModal.show();

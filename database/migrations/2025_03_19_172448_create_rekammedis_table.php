@@ -32,7 +32,10 @@ return new class extends Migration
             $table->string('beratBadan');
             $table->string('riwayatPenyakit');
             $table->string('diagnosaMedis');
+            $table->string('tindakan');
             $table->string('resepObat');
+            $table->string('rujukan');
+            $table->string('alasanRujukan')->nullable();
 
             $table->foreign('Dokter_id')->references('idDokter')->on('dokters')->onDelete('cascade');
             $table->foreign('StaffRm_id')->references('idStaffRm')->on('staffrekammedis')->onDelete('cascade');

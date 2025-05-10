@@ -49,13 +49,13 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label class="form-label">Usia Pasien</label>
                     <div class="input-group">
                         <input name="usiaPasien" id="usiaPasienInput" type="number" class="form-control text-center" placeholder="Usia Pasien" step="1" required >
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label class="form-label">Agama Pasien</label>
                     <select class="form-select" id="agamaPasien" name="agamaPasien" required>
                         <option value="" disabled selected>Pilih Agama Pasien</option>
@@ -67,7 +67,7 @@
                         <option value="Konghucu">Konghucu</option>
                     </select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label class="form-label">Status Nikah Pasien</label>
                     <select class="form-select" id="statusNikah" name="statusNikah" required>
                         <option value="" disabled selected>Pilih Status Nikah Pasien</option>
@@ -124,8 +124,24 @@
                 <textarea name="diagnosaMedis" class="form-control" rows="3" placeholder="Diagnosa" required></textarea>
             </div>
             <div class="mb-3">
+                <label class="form-label">Tindakan</label>
+                <textarea name="tindakan" class="form-control" rows="3" placeholder="Tindakan" required></textarea>
+            </div>
+            <div class="mb-3">
                 <label class="form-label">Resep Obat</label>
                 <textarea name="resepObat" class="form-control" rows="3" placeholder="Resep Obat" required></textarea>
+            </div>
+
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Dirujuk ke</label>
+                <textarea name="rujukan" class="form-control" rows="3" placeholder="Dirujuk ke" required></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Alasan Rujuk</label>
+                <textarea name="alasanRujukan" class="form-control" rows="3" placeholder="Alasan Rujuk" ></textarea>
+                </div>
             </div>
 
             <!-- Tombol Simpan & Batal -->

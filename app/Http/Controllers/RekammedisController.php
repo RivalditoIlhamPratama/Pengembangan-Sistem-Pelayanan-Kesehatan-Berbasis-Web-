@@ -30,7 +30,9 @@ class RekammedisController extends Controller
             'beratBadan' => 'required|string',
             'riwayatPenyakit' => 'required|string',
             'diagnosaMedis' => 'required|string',
+            'tindakan' => 'required|string',
             'resepObat' => 'required|string',
+            'rujukan' => 'required|string',
         ]);
 
         $dokterId = null;
@@ -61,7 +63,10 @@ class RekammedisController extends Controller
             'beratBadan' => $validated['beratBadan'],
             'riwayatPenyakit' => $validated['riwayatPenyakit'],
             'diagnosaMedis' => $validated['diagnosaMedis'],
+            'tindakan' => $validated['tindakan'],
             'resepObat' => $validated['resepObat'],
+            'rujukan' => $validated['rujukan'],
+            'alasanRujukan' => $validated['alasanRujukan'] ?? null,
         ]);
 
         if (Auth::user()->dokter && Auth::user()->dokter->first()) {
@@ -97,11 +102,16 @@ class RekammedisController extends Controller
         'beratBadan' => 'required|string',
         'riwayatPenyakit' => 'required|string',
         'diagnosaMedis' => 'required|string',
+        'tindakan' => 'required|string',
         'resepObat' => 'required|string',
+        'rujukan' => 'required|string',
         ]);
 
         $rekammedis = rekammedis::findOrFail($id);
-        $rekammedis->update($validated);
+        $rekammedis->update([
+            ...$validated,
+            'alasanRujukan' => $validated['alasanRujukan'] ?? null,
+        ]);
 
         return redirect()->route('dokter.rekam_medis')->with('success', 'Rekam medis berhasil diperbarui!');
     }

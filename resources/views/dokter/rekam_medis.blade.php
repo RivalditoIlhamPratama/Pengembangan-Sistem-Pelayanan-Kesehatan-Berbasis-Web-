@@ -114,7 +114,10 @@
                                     data-agama="{{ $rekam->agamaPasien }}"
                                     data-nikah="{{ $rekam->statusNikah }}"
                                     data-riwayat="{{ $rekam->riwayatPenyakit }}"
-                                    data-obat="{{ $rekam->resepObat }}">
+                                    data-tindakan="{{ $rekam->tindakan }}"
+                                    data-obat="{{ $rekam->resepObat }}"
+                                    data-rujuk="{{ $rekam->rujukan }}"
+                                    data-alasanrujuk="{{ $rekam->alasanRujukan }}">
                                     <i class="fas fa-edit"></i> Edit
                                  </a>
                                 <!-- Delete Button -->
