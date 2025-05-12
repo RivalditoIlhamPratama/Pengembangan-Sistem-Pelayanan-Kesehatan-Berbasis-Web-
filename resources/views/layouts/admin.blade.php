@@ -52,7 +52,7 @@
                 <div class="flex items-center space-x-3">
                     <i class="ri-user-fill text-xl"></i>
                     <a href="{{ route('admin.profil') }}" class="hover:text-blue-600 font-medium">
-                        Admin
+                        {{ $admin->namaAdmin }}
                     </a>
                     <form method="POST" action="{{ route('logout') }}" id="logout-form">
                         @csrf
@@ -60,7 +60,7 @@
                             <i class="ri-logout-box-r-line text-xl"></i>
                         </button>
                     </form>
-                    
+
                     <script>
                         function confirmLogout() {
                             if (confirm("Apakah Anda yakin ingin logout?")) {
@@ -68,9 +68,9 @@
                             }
                         }
                     </script>
-                    
+
                 </div>
-            </header> 
+            </header>
 
             <!-- Page Content -->
             <main class="p-6 overflow-auto">

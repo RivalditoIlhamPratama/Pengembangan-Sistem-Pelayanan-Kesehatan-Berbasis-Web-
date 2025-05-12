@@ -9,11 +9,14 @@ class waktu extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'idWaktu';
+
     public $timestamps = false;
 
-    protected $fillable =['jamMulai','jamSelesai'];
+    protected $fillable = ['jamMulai', 'jamSelesai'];
 
-    public function jadwal(){
-        return $this->hasMany(hari::class,'Waktu_id','idWaktu');
+    public function jadwal()
+    {
+        return $this->hasMany(jadwaldokter::class, 'Waktu_id', 'idWaktu');
     }
 }

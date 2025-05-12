@@ -16,11 +16,10 @@
             <ul class="mt-5">
                 <li class="py-2"><a href="{{ route('admin.dashboard') }}" class="text-gray-300 hover:text-white">Dashboard</a></li>
                 <li class="py-2"><a href="{{ route('admin.users') }}" class="text-gray-300 hover:text-white">Data Pengguna</a></li>
-                <li class="py-2"><a href="{{ route('admin.doctors') }}" class="text-gray-300 hover:text-white">Data Dokter</a></li>
+                <li class="py-2"><a href="{{ route('admin.data_dokter') }}" class="text-gray-300 hover:text-white">Data Dokter</a></li>
                 <li class="py-2"><a href="{{ route('admin.reports') }}" class="text-gray-300 hover:text-white">Data Laporan Klinik</a></li>
             </ul>
         </div>
-        
         <!-- Main Content -->
         <div class="w-4/5 p-6">
             @yield('content')

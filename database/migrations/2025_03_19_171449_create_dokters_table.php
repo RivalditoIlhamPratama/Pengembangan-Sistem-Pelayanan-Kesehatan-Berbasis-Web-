@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('namaDokter');
             $table->string('spesialis');
-            $table->string('jadwalPraktek');
             $table->enum('jenisKelamin',['Laki-Laki', 'Perempuan']);
             $table->date('tglLahir');
             $table->string('alamatDokter');

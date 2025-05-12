@@ -9,13 +9,24 @@ class jadwaldokter extends Model
 {
     use HasFactory;
 
-    public function dokter(){
-        return $this->belongsTo(hari::class,'Dokter_id','idDokter');
+    protected $primaryKey = 'idJadwal';
+
+    protected $fillable = ['Hari_id', 'Waktu_id', 'Dokter_id'];
+
+    public $timestamps = false;
+
+    public function dokter()
+    {
+        return $this->belongsTo(dokter::class, 'Dokter_id', 'idDokter');
     }
-    public function hari(){
-        return $this->belongsTo(hari::class,'Hari_id','idHari');
+
+    public function hari()
+    {
+        return $this->belongsTo(hari::class, 'Hari_id', 'idHari');
     }
-    public function waktu(){
-        return $this->belongsTo(hari::class,'Waktu_id','idWaktu');
+
+    public function waktu()
+    {
+        return $this->belongsTo(waktu::class, 'Waktu_id', 'idWaktu');
     }
 }

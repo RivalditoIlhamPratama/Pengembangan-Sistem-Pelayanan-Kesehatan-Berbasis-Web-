@@ -20,7 +20,6 @@
                         <label class="form-label">Nama Dokter</label>
                         <input type="text" class="form-control" name="namaDokter" value="{{ $dokter->namaDokter }}">
                     </div>
-
                     <div class="mb-3">
                         <label class="form-label">Spesialis</label>
                         <input type="text" class="form-control" name="spesialis" value="{{ $dokter->spesialis }}">

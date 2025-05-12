@@ -86,6 +86,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/data-pengaduan', [AdminController::class, 'data_pengaduan'])->name('admin.data_pengaduan');
     Route::get('/laporan-klinik', [AdminController::class, 'laporan_klinik'])->name('admin.laporan_klinik');
     Route::get('/data-dokter', [AdminController::class, 'data_dokter'])->name('admin.data_dokter');
+    Route::get('/data-dokter/tambah', [AdminController::class, 'tambah_data_dokter'])->name('admin.data_dokter.tambah');
+    Route::get('/data-dokter/edit/{id}', [AdminController::class, 'edit_data_dokter'])->name('admin.data_dokter.edit');
+    Route::post('/data-dokter/store', [DokterController::class, 'store'])->name('admin.data_dokter.store');
+    Route::post('/data-dokter/update/{id}', [DokterController::class, 'update'])->name('admin.data_dokter.update');
+    Route::post('/data-dokter/delete/{id}', [DokterController::class, 'destroy'])->name('admin.data_dokter.delete');
+    Route::get('/reports', [AdminController::class, 'reports'])->name('admin.reports');
 });
 
 Route::middleware(['auth', 'pasien'])->prefix('pasien')->group(function () {
@@ -158,6 +164,3 @@ Route::get('/admin/dokter/tambah', function () {
 Route::get('/admin/dokter/edit', function () {
     return view('admin.edit_dokter');
 });
-
-
-
