@@ -36,7 +36,7 @@
                 <a href="{{ route('admin.data_dokter') }}" class="py-2 px-4 rounded hover:bg-gray-800 {{ request()->routeIs('admin.data_dokter') ? 'bg-gray-800' : '' }}">
                     <i class="ri-user-3-line mr-2"></i> Data Dokter
                 </a>
-                <a href="{{ route('admin.laporan_klinik') }}" class="py-2 px-4 rounded hover:bg-gray-800 {{ request()->routeIs('admin.laporan_klinik') ? 'bg-gray-800' : '' }}">
+                <a href="{{ route('admin.reports') }}" class="py-2 px-4 rounded hover:bg-gray-800 {{ request()->routeIs('admin.laporan_klinik') ? 'bg-gray-800' : '' }}">
                     <i class="ri-file-line mr-2"></i> Laporan Klinik
                 </a>
             </nav>

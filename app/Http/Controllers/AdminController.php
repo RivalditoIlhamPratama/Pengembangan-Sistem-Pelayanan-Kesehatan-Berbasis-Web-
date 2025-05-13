@@ -7,6 +7,7 @@ use App\Models\dokter;
 use App\Models\hari;
 use App\Models\jadwaldokter;
 use App\Models\klinik;
+use App\Models\laporan;
 use App\Models\pasien;
 use App\Models\pengaduan;
 use App\Models\staffrekammedis;
@@ -14,6 +15,8 @@ use App\Models\User;
 use App\Models\waktu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
 
 class AdminController extends Controller
 {
@@ -75,7 +78,12 @@ class AdminController extends Controller
     }
 
     public function reports() {
-        return view('admin.reports');
+        $user_auth = auth()->user();
+        $laporan = laporan::with(['rekam_medis', 'klinik'])->get();
+        Log::info('Fetched laporan count: ' . $laporan->count());
+        $klinik = Klinik::all();
+        $admin = Adminpuskesmas::where('user_id', $user_auth->id_user)->first();
+        return view('admin.laporan_klinik',['admin'=>$admin,'laporan'=>$laporan,'klinik'=>$klinik]);
     }
 
 }

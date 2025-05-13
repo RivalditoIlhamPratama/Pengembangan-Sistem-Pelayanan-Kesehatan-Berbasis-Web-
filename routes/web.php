@@ -91,7 +91,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/data-dokter/store', [DokterController::class, 'store'])->name('admin.data_dokter.store');
     Route::post('/data-dokter/update/{id}', [DokterController::class, 'update'])->name('admin.data_dokter.update');
     Route::post('/data-dokter/delete/{id}', [DokterController::class, 'destroy'])->name('admin.data_dokter.delete');
-    Route::get('/reports', [AdminController::class, 'reports'])->name('admin.reports');
+    Route::get('/laporan-klinik', [AdminController::class, 'reports'])->name('admin.reports');
 });
 
 Route::middleware(['auth', 'pasien'])->prefix('pasien')->group(function () {

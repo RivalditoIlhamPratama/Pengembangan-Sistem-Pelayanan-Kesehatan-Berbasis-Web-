@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Dokter;
 use App\Models\Hari;
 use App\Models\Rekammedis;
+use App\Models\User;
 use App\Models\Waktu;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class DokterController extends Controller
 {
@@ -51,7 +54,12 @@ class DokterController extends Controller
             'noTelepon' => 'nullable|string|max:20',
         ]);
 
-        $user = auth()->user();
+        $user = User::create([
+            'username' => $validated['namaDokter'],
+            'password' => Hash::make('password'),
+            'role' => 'dokter',
+            'remember_token' => Str::random(10),
+        ]);
 
         // Get Hari and Waktu names for jadwalPraktek string
         $hari = \App\Models\Hari::find($validated['hariPraktek']);

@@ -11,7 +11,7 @@ class laporan extends Model
 
     public $timestamps = false;
 
-    protected $fillable =['Klinik_id','RekamMedis_id','tanggal','catatanPenyakit','jumlahPasien'];
+    protected $fillable =['Klinik_id','RekamMedis_id'];
 
     public function klinik(){
         return $this->belongsTo(Klinik::class,'Klinik_id','idKlinik');

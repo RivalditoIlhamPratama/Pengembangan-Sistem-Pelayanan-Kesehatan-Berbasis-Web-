@@ -15,7 +15,7 @@ Route::middleware('auth:api')->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard']);
     Route::get('/users', [AdminController::class, 'users']);
     Route::get('/data-pengaduan', [AdminController::class, 'data_pengaduan']);
-    Route::get('/laporan-klinik', [AdminController::class, 'laporan_klinik']);
+    Route::get('/laporan-klinik', [AdminController::class, 'reports']);
     Route::get('/data-dokter', [AdminController::class, 'data_dokter']);
 });
 

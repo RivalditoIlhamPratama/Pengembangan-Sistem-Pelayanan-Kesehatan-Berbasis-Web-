@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const rekamSelect = document.getElementById("RekamMedis_id");
     const namaPasienInput = document.getElementById("namaPasien");
     const namaDokterInput = document.getElementById("namaDokter");
+    const NIKInput = document.getElementById("NIK");
+    const alamatPasienInput = document.getElementById("alamatPasien");
     const diagnosaInput = document.getElementById("diagnosa");
 
     rekamSelect.addEventListener("change", function () {
@@ -12,6 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
             selectedOption.getAttribute("data-namadokter") || "";
         diagnosaInput.value =
             selectedOption.getAttribute("data-diagnosa") || "";
+        NIKInput.value = selectedOption.getAttribute("data-nik") || "";
+        alamatPasienInput.value =
+            selectedOption.getAttribute("data-alamat") || "";
     });
 
     // Trigger change event on page load if a value is selected

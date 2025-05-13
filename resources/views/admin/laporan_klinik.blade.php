@@ -30,15 +30,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php $no = 1; @endphp
-                    @foreach(range(1,5) as $i)
+                    @foreach ($laporan as $lap)
                     <tr class="align-middle text-center">
-                        <td>{{ $no++ }}</td>
-                        <td><strong class="text-primary">Umum</strong></td>
-                        <td class="fw-bold">2025-01-15</td>
-                        <td>Ibnu Abdi Muslim</td>
-                        <td>Pemeriksaan Fisik</td>
-                        <td class="fw-bold">DR Hargianto</td>
+                        <td>{{$lap->idLaporan}}</td>
+                        <td><strong class="text-primary">{{$lap->klinik->namaKlinik}}</strong></td>
+                        <td class="fw-bold">{{$lap->rekam_medis->tanggalPeriksa}}</td>
+                        <td>{{$lap->rekam_medis->namaPasien}}</td>
+                        <td>{{$lap->rekam_medis->tindakan}}</td>
+                        <td class="fw-bold">{{optional($lap->rekam_medis->dokter)->namaDokter ?? optional($lap->rekam_medis->staffrekammedis)->namaStaff ?? ''}}</td>
                         <td>
                             <a href="#" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
                             <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>

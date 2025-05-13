@@ -68,8 +68,7 @@
             <label for="username">Username</label>
             <input type="text" id="username" name="username" value="{{ old('username') }}" class="form-control @error('username') is-invalid @enderror"
             required autocomplete="username" autofocus
-            minlength="3" maxlength="30"
-            pattern="[a-zA-Z0-9]+" title="Only alphanumeric characters allowed">
+            minlength="3" maxlength="30">
             @error('username')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

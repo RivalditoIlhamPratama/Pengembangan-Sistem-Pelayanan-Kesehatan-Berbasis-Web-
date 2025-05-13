@@ -18,6 +18,6 @@ class LaporanController extends Controller
     $laporan->RekamMedis_id = $validatedData['RekamMedis_id'];
     $laporan->save();
 
-    return redirect()->back()->with('success', 'Laporan berhasil disimpan.');
+    return redirect()->route('klinik.laporan')->with('success', 'Laporan berhasil disimpan.');
 }
 }

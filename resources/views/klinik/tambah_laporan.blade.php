@@ -27,23 +27,40 @@
                                 data-namapasien="{{ $rekam->namaPasien }}"
                                 data-namadokter="{{ optional($rekam->dokter)->namaDokter }}"
                                 data-diagnosa="{{ $rekam->diagnosaMedis }}"
+                                data-nik="{{ $rekam->NIK }}"
+                                data-alamat="{{ $rekam->alamatPasien }}"
                             >
                                 {{ $rekam->namaPasien }}
                             </option>
                         @endforeach
                     </select>
-                    <div class="mt-3">
-                        <label class="form-label">Nama Pasien</label>
-                        <input type="text" id="namaPasien" class="form-control" readonly>
-                    </div>
-                    <div class="mt-3">
-                        <label class="form-label">Nama Dokter</label>
-                        <input type="text" id="namaDokter" class="form-control" readonly>
-                    </div>
-                    <div class="mt-3">
-                        <label class="form-label">Diagnosa</label>
-                        <input type="text" id="diagnosa" class="form-control" readonly>
-                    </div>
+
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Nama Dokter</label>
+                    <input type="text"  class="form-control" id="namaDokter" readonly />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Nama Pasien</label>
+                    <input type="text" id="namaPasien" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">NIK Pasien</label>
+                    <input type="text"  class="form-control" id="NIK" readonly />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Alamat Pasien</label>
+                    <input type="text" id="alamatPasien" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <label class="form-label">Diagnosa Medis</label>
+                    <input type="text" id="diagnosa" class="form-control" readonly>
                 </div>
             </div>
 
@@ -60,4 +77,3 @@
 </div>
 @vite('resources/js/rekammedis-select.js')
 @endsection
-

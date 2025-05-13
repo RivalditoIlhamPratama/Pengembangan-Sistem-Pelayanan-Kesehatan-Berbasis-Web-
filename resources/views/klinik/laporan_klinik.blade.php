@@ -46,31 +46,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="align-middle text-center">
-                        <td>1</td>
-                        <td>Senin 12:00</td>
-                        <td>Samsul</td>
-                        <td>123456789</td>
-                        <td>Jl. Raya No.10</td>
-                        <td>sakit pinggang</td>
-                        <td>Klinik Umum</td>
-                        <td>Dr. Alamsyah Tegu</td>
-                        <td>
+                    @foreach ($laporan as $lap)
+                        <tr>
+                            <td>{{$lap->idLaporan}}</td>
+                            <td>{{$lap->rekam_medis->tanggalPeriksa}}</td>
+                            <td>{{$lap->rekam_medis->namaPasien}}</td>
+                            <td>{{$lap->rekam_medis->NIK}}</td>
+                            <td>{{$lap->rekam_medis->alamatPasien}}</td>
+                            <td>{{$lap->rekam_medis->diagnosaMedis}}</td>
+                            <td>{{optional($lap->rekam_medis->dokter)->namaDokter ?? optional($lap->rekam_medis->staffrekammedis)->namaStaff ?? ''}}</td>
+                            <td>{{$lap->klinik->namaKlinik}}</td>
+                            <td>
                             <button class="btn btn-sm btn-info detail-btn"
                                 data-bs-toggle="modal"
                                 data-bs-target="#detailModal"
-                                data-id="1"
-                                data-nama="Samsul"
-                                data-nik="123456789"
-                                data-alamat="Jl. Raya No.10"
-                                data-diagnosa="sakit pinggang"
-                                data-klinik="Klinik Umum"
-                                data-dokter="Dr. Alamsyah Tegu"
-                                data-tanggal="2025-04-21">
+                                data-id="{{$lap->idLaporan}}"
+                                data-nama="{{$lap->rekam_medis->namaPasien}}"
+                                data-nik="{{$lap->rekam_medis->NIK}}"
+                                data-alamat="{{$lap->rekam_medis->alamatPasien}}"
+                                data-diagnosa="{{$lap->rekam_medis->diagnosaMedis}}"
+                                data-klinik="{{$lap->klinik->namaKlinik}}"
+                                data-dokter="{{optional($lap->rekam_medis->dokter)->namaDokter ?? optional($lap->rekam_medis->staffrekammedis)->namaStaff ?? ''}}"
+                                data-tanggal="{{$lap->rekam_medis->tanggalPeriksa}}">
                                 <i class="fas fa-info-circle"></i> Detail
                             </button>
                         </td>
-                    </tr>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -182,9 +184,9 @@ document.getElementById("exportPdf").addEventListener("click", function() {
     const doc = new jsPDF();
 
     doc.text("Laporan Tindakan Klinik", 14, 10);
-    doc.autoTable({ 
-        html: "#rekamMedisTable", 
-        startY: 20, 
+    doc.autoTable({
+        html: "#rekamMedisTable",
+        startY: 20,
         theme: 'striped',
         headStyles: { fillColor: [22, 160, 133] },
         bodyStyles: { fontSize: 10 }

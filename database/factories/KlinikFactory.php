@@ -17,7 +17,10 @@ class KlinikFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'namaKlinik' => $this->faker->company(),
+            'user_id' => 1,
+            'alamatKlinik' => $this->faker->address(),
+            'email' => $this->faker->unique()->safeEmail(),
         ];
     }
 }
