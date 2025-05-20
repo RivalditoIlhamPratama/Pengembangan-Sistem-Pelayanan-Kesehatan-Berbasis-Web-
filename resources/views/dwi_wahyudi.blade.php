@@ -38,29 +38,21 @@
         <li class="link">
           <a class="@unless(auth()->check() && auth()->user()->role === 'pasien') disabled-link @endunless" href="{{ url('/aduanmasyarakat') }}">Pelayanan</a>
         </li>
-        @if(!auth()->check() || (auth()->check() && auth()->user()->role !== 'pasien'))
-          <li class="link">
-            <a href="{{ url('/login') }}" class="btn-link">
-              <button class="btn">Login</button>
-            </a>
-          </li>
-        @endif
         @if(auth()->check() && auth()->user()->role === 'pasien')
-          <li class="link">
-            <div class="flex items-center space-x-4">
-              <button class="flex items-center space-x-3">
-                <i class="ri-user-fill text-xl"></i>
-                <span>{{ auth()->user()->name }}</span>
-              </button>
-              <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="text-white hover:text-gray-300">
-                  <i class="ri-logout-box-r-line text-xl"></i>
-                </button>
-              </form>
-            </div>
-          </li>
-        @endif
+                <li class="link">
+                    <div class="user-action">
+                        <span class="user-btn">
+                            <i class="ri-user-fill"></i> {{ auth()->user()->name }}
+                        </span>
+                        <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="logout-btn">
+                            <i class="ri-logout-box-r-line"></i> Logout
+                        </button>
+                        </form>
+                    </div>
+                </li>
+            @endif
       </ul>
     </nav>
   </header>
@@ -104,7 +96,8 @@
   <div class="section__container footer__container">
     <div class="footer__col">
       <div class="footer__logo">
-        <a href="#"><img src="assets/11.png" alt="logo" />Puskesmas Kraksaan</a>
+        <a href="#"><img src="{{ asset('assets/11.png') }}" alt="logo" /> Puskesmas Kraksaan</a>
+
       </div>
       <p>
         layanan digital seperti jadwal praktik dokter,

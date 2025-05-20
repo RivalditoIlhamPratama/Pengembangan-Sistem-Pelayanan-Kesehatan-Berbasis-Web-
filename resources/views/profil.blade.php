@@ -97,7 +97,7 @@
         <div class="container">
           <div class="visi-misi__content">
             <div class="visi-misi__image">
-              <img src="assets/visimisi.png" alt="Visi & Misi">
+              <img src="assets/visimisi.png" alt="Visi & Misi" id="visiMisiImage" style="cursor: pointer;" />
             </div>
             <div class="visi-misi__text">
               <h2>Visi Dan Misi</h2>
@@ -217,6 +217,35 @@
             });
           </script>
           
+          <!-- Modal Gambar -->
+<div id="imageModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modalImage">
+</div>
+
+<script>
+  const visiImg = document.getElementById("visiMisiImage");
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImage");
+  const closeBtn = document.querySelector(".close");
+
+  visiImg.onclick = function () {
+    modal.style.display = "block";
+    modalImg.src = this.src;
+  }
+
+  closeBtn.onclick = function () {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function (e) {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
+
+
         </body>
       </html>
 

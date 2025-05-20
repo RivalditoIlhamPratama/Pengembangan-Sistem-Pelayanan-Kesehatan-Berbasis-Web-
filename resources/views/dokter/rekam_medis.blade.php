@@ -158,7 +158,9 @@
                 </div>
                 <div class="text-center mb-4">
                     <hr>
-                    <h4>Formulir Identitas Pasien</h4>
+                    <br>
+                    <h4>Formulir Rekam Medis Pasien</h4>
+                    
                     <p><strong>No RM:</strong> <span id="detailNo"></span></p>
                 </div>
                 <!-- Tabel A: Identitas Pasien -->

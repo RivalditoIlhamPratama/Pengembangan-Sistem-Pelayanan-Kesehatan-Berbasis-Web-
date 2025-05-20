@@ -535,3 +535,47 @@ p {
         grid-column: 1/3;
     }
 }
+
+
+
+
+/* Modifikasi button logout dan user*/
+.nav__links .user-action {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-btn,
+.logout-btn {
+    background-color: #1976d2;
+    color: white;
+    font-size: 12px; /* slightly increased font size */
+    padding: 8px 15px; /* increased padding to make the button wider */
+    border-radius: 10px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px; /* increased gap between icon and text */
+    transition: all 0.3s ease;
+    width: auto; /* ensures it adjusts to the content width */
+    min-width: 100px; /* ensures a minimum width for consistency */
+}
+
+.logout-btn {
+    background-color: #e53935;
+}
+
+.user-btn:hover {
+    background-color: #1565c0;
+}
+
+.logout-btn:hover {
+    background-color: #c62828;
+}
+
+.hidden {
+    display: none !important;
+}

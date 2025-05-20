@@ -269,10 +269,34 @@
   </div>
 </div>
 
-      <br>
-      <br>
-      <br>
-      <br>
+    
+    <div class="video-section">
+      <h2>Video Kesehatan</h2>
+      <p class="centered-text">Tonton video Kesehatan berikut ini</p>
+      <br><br>
+      <div class="video-row" style="display: flex; flex-wrap: wrap; gap: 20px;">
+        <div class="video-item" style="flex: 1 1 300px;">
+          <iframe width="100%" height="215" src="https://www.youtube.com/embed/jkS6glRPD_o" title="Video Puskesmas Kraksaan" frameborder="0" allowfullscreen></iframe>
+          <p class="video-caption">Animasi 5 Gerakan Sehat</p>
+        </div>
+        <div class="video-item" style="flex: 1 1 300px;">
+          <iframe width="100%" height="215" src="https://www.youtube.com/embed/MvSkn9svGGw" title="Video Edukasi 2" frameborder="0" allowfullscreen></iframe>
+          <p class="video-caption">Seberapa Penting Kesehatan Mental Untuk Kita?</p>
+        </div>
+        <div class="video-item" style="flex: 1 1 300px;">
+          <iframe width="100%" height="215" src="https://www.youtube.com/embed/2xdVIW9VAL8" title="Video Edukasi 3" frameborder="0" allowfullscreen></iframe>
+          <p class="video-caption">Ayo Cegah Diabetes Mellitus 60 detik</p>
+        </div>
+        <div class="video-item" style="flex: 1 1 300px;">
+          <iframe width="100%" height="215" src="https://www.youtube.com/embed/BtN-goy9VOY" title="Video Edukasi 4" frameborder="0" allowfullscreen></iframe>
+          <p class="video-caption">Tentang Virus Korona & Yang Harus Kamu Lakukan</p>
+        </div>
+      </div>
+    </div>
+    
+
+
+    <div style="margin-top: 20px;"></div>
 
 
 

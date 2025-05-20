@@ -97,13 +97,47 @@
     </div>
 
     <div class="hubungi-kami">
-        <h2>Hubungi Kami</h2>
-        <div class="contact-info">
-            <p><i class="ri-map-pin-line"></i> <strong>Lokasi:</strong><br>Jl. Mayjend Sungkono No.10, Kraksaan, Probolinggo</p>
-            <p><i class="ri-mail-line"></i> <strong>Email:</strong><br>contact@puskesmaskraksaan.com</p>
-            <p><i class="ri-phone-line"></i> <strong>Hubungi Kami:</strong><br>+0811 3373 119</p>
-        </div>
+      <div style="display: flex; justify-content: center; margin-top: 5px;">
+        <img 
+            src="{{ asset('assets/Pengaduan.png') }}" 
+            alt="Lokasi Puskesmas Kraksaan"
+            class="floating-image"
+            style="max-width: 55%; height: auto; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
     </div>
+    
+    
+        <h2>Hubungi Kami</h2>
+        <div class="contact-info-modern" style="margin-top: 20px;">
+          <div class="info-item">
+              <i class="ri-map-pin-line icon"></i>
+              <div class="info-text">
+                  <strong>Lokasi:</strong><br>
+                  <span>Jl. Mayjend Sungkono No.10, Kraksaan, Probolinggo</span>
+              </div>
+          </div>
+          <div class="info-item">
+              <i class="ri-mail-line icon"></i>
+              <div class="info-text">
+                  <strong>Email:</strong><br>
+                  <span>contact@puskesmaskraksaan.com</span>
+              </div>
+          </div>
+          <div class="info-item">
+              <i class="ri-phone-line icon"></i>
+              <div class="info-text">
+                  <strong>Hubungi Kami:</strong><br>
+                  <span>+0811 3373 119</span>
+              </div>
+          </div>
+      </div>
+      
+      
+
+      
+      
+      
+    </div>
+
 </section>
 
 
