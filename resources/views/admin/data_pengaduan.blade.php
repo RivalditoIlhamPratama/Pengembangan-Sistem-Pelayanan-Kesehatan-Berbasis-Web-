@@ -39,6 +39,7 @@
                         <th>Isi Pengaduan</th>
                         <th>No Telepon</th>
                         <th>Tanggal</th>
+                        <th>Gambar Pengaduan</th>
                         <th>✓ Dilihat</th> {{-- Tambahan kolom --}}
                         <th>Aksi</th>
                     </tr>
@@ -53,14 +54,21 @@
                         <td>{{ $aduan->phone }}</td>
                         <td>{{ \Carbon\Carbon::parse($aduan->created_at)->format('d-m-Y') }}</td>
                         <td class="text-center">
+                            @if($aduan->gambarPengaduan)
+                                <img src="{{ asset('storage/' . $aduan->gambarPengaduan) }}" alt="Gambar Pengaduan" style="max-width: 100px; max-height: 100px;">
+                            @else
+                                <span>Tidak ada gambar</span>
+                            @endif
+                        </td>
+                        <td class="text-center">
                             <input type="checkbox" class="centang-dilihat" data-id="{{ $aduan->idPengaduan }}">
                         </td>
                         <td class="text-center">
                             @php
-                                $nohp = preg_replace('/^0/', '62', preg_replace('/[^0-9]/', '', $aduan->phone)); 
+                                $nohp = preg_replace('/^0/', '62', preg_replace('/[^0-9]/', '', $aduan->phone));
                                 $pesan = urlencode("Halo *{$aduan->pasien->namaPasien}*, kami telah menerima pengaduan Anda mengenai *{$aduan->jenisPengaduan}*. Terima kasih telah menghubungi Puskesmas Kraksaan.");
                             @endphp
-                            
+
                             <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                             @if($aduan->phone)
                                 <a href="https://wa.me/{{ $nohp }}?text={{ $pesan }}" target="_blank" class="btn btn-sm btn-success">
