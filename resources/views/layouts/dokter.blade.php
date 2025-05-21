@@ -19,7 +19,8 @@
 
 <div class="flex h-screen">
     <!-- Sidebar -->
-    <aside class="w-64 bg-gray-900 text-white flex flex-col relative overflow-hidden">
+    <aside id="sidebar" class="w-64 bg-gray-900 text-white flex flex-col relative overflow-hidden transition-all duration-300">
+
 
         <!-- Background Ikon Acak -->
         <div class="absolute inset-0 z-0 pointer-events-none">
@@ -94,9 +95,10 @@
     <!-- Main content -->
     <div class="flex-1 flex flex-col overflow-hidden">
         <header class="flex justify-between items-center p-4 bg-white border-b">
-            <button class="text-2xl text-gray-700">
+            <button id="toggleSidebar" class="text-2xl text-gray-700">
                 <i class="ri-menu-line"></i>
             </button>
+            
             <div class="flex items-center space-x-3">
                 <a href="{{ route('dokter.data_dokter') }}" class="text-decoration-none text-dark fw-semibold">
                     <i class="ri-user-fill text-xl me-1"></i> {{ $dokter->namaDokter }}
@@ -120,6 +122,15 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const toggleBtn = document.getElementById('toggleSidebar');
+    const sidebar = document.getElementById('sidebar');
+
+    toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('hidden');
+    });
+</script>
 
 </body>
 </html>
