@@ -98,44 +98,39 @@
 
     <div class="hubungi-kami">
       <div style="display: flex; justify-content: center; margin-top: 5px;">
-        <img 
-            src="{{ asset('assets/Pengaduan.png') }}" 
+        <img
+            src="{{ asset('assets/Pengaduan.png') }}"
             alt="Lokasi Puskesmas Kraksaan"
             class="floating-image"
             style="max-width: 55%; height: auto; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
     </div>
-    
-    
+
+
         <h2>Hubungi Kami</h2>
         <div class="contact-info-modern" style="margin-top: 20px;">
-          <div class="info-item">
-              <i class="ri-map-pin-line icon"></i>
-              <div class="info-text">
-                  <strong>Lokasi:</strong><br>
-                  <span>Jl. Mayjend Sungkono No.10, Kraksaan, Probolinggo</span>
-              </div>
-          </div>
-          <div class="info-item">
-              <i class="ri-mail-line icon"></i>
-              <div class="info-text">
-                  <strong>Email:</strong><br>
-                  <span>contact@puskesmaskraksaan.com</span>
-              </div>
-          </div>
-          <div class="info-item">
-              <i class="ri-phone-line icon"></i>
-              <div class="info-text">
-                  <strong>Hubungi Kami:</strong><br>
-                  <span>+0811 3373 119</span>
-              </div>
-          </div>
-      </div>
-      
-      
+            <div class="info-item">
+                <i class="ri-map-pin-line icon"></i>
+                <div class="info-text">
+                    <strong>Lokasi:</strong><br>
+                    <span>Jl. Mayjend Sungkono No.10, Kraksaan, Probolinggo</span>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="ri-mail-line icon"></i>
+                <div class="info-text">
+                    <strong>Email:</strong><br>
+                    <span>contact@puskesmaskraksaan.com</span>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="ri-phone-line icon"></i>
+                <div class="info-text">
+                    <strong>Hubungi Kami:</strong><br>
+                    <span>+0811 3373 119</span>
+                </div>
+            </div>
+        </div>
 
-      
-      
-      
     </div>
 
 </section>
@@ -146,68 +141,25 @@
     <h2>Testimoni Pengaduan</h2>
 
     <!-- Pencarian -->
-<div class="pengaduan-search-container">
+    <div class="pengaduan-search-container">
     <input type="text" id="pengaduan-search-input" placeholder="Cari berdasarkan nama atau jenis pengaduan..." />
     <button id="pengaduan-search-btn"><i class="ri-search-line"></i> Cari</button>
-  </div>
-
+    </div>
 
     <div class="slider-wrapper">
-      <button class="slider-btn prev-btn">&#10094;</button>
-      <div class="slider-track">
-
-        <div class="slider-card">
-          <p class="pengaduan-isi">"Pelayanan sangat ramah dan cepat. Terima kasih!"</p>
-          <p class="pengaduan-jenis"><em>Jenis Pengaduan:</em> Pelayanan</p>
-          <strong>- Ahmad Fauzi</strong>
+        <button class="slider-btn prev-btn">&#10094;</button>
+        <div class="slider-track">
+            @foreach ($pengaduan as $item)
+            <div class="slider-card">
+                <p class="pengaduan-isi">"{{ $item->isiPengaduan }}"</p>
+                <p class="pengaduan-jenis"><em>Jenis Pengaduan:</em> {{ ucfirst($item->jenisPengaduan) }}</p>
+                <strong>- {{ $item->pasien->namaPasien ?? 'Anonymous' }}</strong>
+            </div>
+            @endforeach
         </div>
-
-        <div class="slider-card">
-          <p class="pengaduan-isi">"Kebersihan ruang tunggu sudah sangat baik."</p>
-          <p class="pengaduan-jenis"><em>Jenis Pengaduan:</em> Fasilitas</p>
-          <strong>- Siti Aisyah</strong>
-        </div>
-
-        <div class="slider-card">
-          <p class="pengaduan-isi">"Semoga jam operasional bisa diperpanjang."</p>
-          <p class="pengaduan-jenis"><em>Jenis Pengaduan:</em> Fasilitas</p>
-          <strong>- Budi Hartono</strong>
-        </div>
-
-        <div class="slider-card">
-          <p class="pengaduan-isi">"Fasilitas laboratorium lengkap dan nyaman."</p>
-          <p class="pengaduan-jenis"><em>Jenis Pengaduan:</em> Fasilitas</p>
-          <strong>- Nur Hidayah</strong>
-        </div>
-
-        <div class="slider-card">
-          <p class="pengaduan-isi">"Dokter sangat komunikatif dan informatif."</p>
-          <p class="pengaduan-jenis"><em>Jenis Pengaduan:</em> Dokter</p>
-          <strong>- Dimas Saputra</strong>
-        </div>
-
-        <div class="slider-card">
-          <p class="pengaduan-isi">"Antrian di poli terlalu lama."</p>
-          <p class="pengaduan-jenis"><em>Jenis Pengaduan:</em> Pelayanan</p>
-          <strong>- Lilis Mariana</strong>
-        </div>
-
-        <div class="slider-card">
-          <p class="pengaduan-isi">"AC di ruang tunggu mati."</p>
-          <p class="pengaduan-jenis"><em>Jenis Pengaduan:</em> Fasilitas</p>
-          <strong>- Agus Prasetyo</strong>
-        </div>
-
-        <div class="slider-card">
-          <p class="pengaduan-isi">"Dokter menjelaskan dengan sangat sabar."</p>
-          <p class="pengaduan-jenis"><em>Jenis Pengaduan:</em> Dokter</p>
-          <strong>- Yuni Rahma</strong>
-        </div>
-
-      </div>
-      <button class="slider-btn next-btn">&#10095;</button>
+        <button class="slider-btn next-btn">&#10095;</button>
     </div>
-  </section>
+</section>
 
 
   <footer class="footer">

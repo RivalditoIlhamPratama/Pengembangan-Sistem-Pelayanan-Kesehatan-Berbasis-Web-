@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\pengaduan;
 use Illuminate\Http\Request;
 
 class PasienController extends Controller
@@ -12,6 +13,7 @@ class PasienController extends Controller
     }
 
     public function reports() {
-        return view('pasien.aduanmasyarakat');
+        $pengaduan = pengaduan::all();
+        return view('pasien.aduanmasyarakat',['pengaduan' =>$pengaduan]);
     }
 }
