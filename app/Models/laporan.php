@@ -16,7 +16,9 @@ class laporan extends Model
     public function klinik(){
         return $this->belongsTo(Klinik::class,'Klinik_id','idKlinik');
     }
-    public function rekam_medis(){
-        return $this->belongsTo(Rekammedis::class,'RekamMedis_id','idRekamMedis');
+    public function rekam_medis()
+    {
+        return $this->belongsTo(\App\Models\rekammedis::class, 'RekamMedis_id', 'idRekamMedis');
     }
+
 }

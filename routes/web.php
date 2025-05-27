@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\LaporanController;
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
@@ -92,12 +93,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/data-dokter/update/{id}', [DokterController::class, 'update'])->name('admin.data_dokter.update');
     Route::post('/data-dokter/delete/{id}', [DokterController::class, 'destroy'])->name('admin.data_dokter.delete');
     Route::get('/laporan-klinik', [AdminController::class, 'reports'])->name('admin.reports');
+    Route::get('/chat/{userId}', [ChatController::class, 'adminChat'])->name('admin.chat');
 });
 
 Route::middleware(['auth', 'pasien'])->prefix('pasien')->group(function () {
     Route::get('/dashboard', [PasienController::class, 'dashboard'])->name('pasien.dashboard');
     Route::get('/aduan', [PasienController::class, 'reports'])->name('pasien.reports');
     Route::post('/submit-pengaduan', [PengaduanController::class, 'store'])->name('pasien.reports.submit');
+    Route::get('/chat/{userId}', [ChatController::class, 'pasienChat'])->name('pasien.chat');
 });
 
 Route::middleware(['auth', 'dokter'])->prefix('dokter')->group(function () {
@@ -111,7 +114,6 @@ Route::middleware(['auth', 'dokter'])->prefix('dokter')->group(function () {
     Route::get('/rekam_medis/edit/{id}', [RekammedisController::class, 'edit'])->name('dokter.rekam_medis.edit');
     Route::put('/rekam_medis/update/{id}', [RekammedisController::class, 'update'])->name('dokter.rekam_medis.update');
     Route::post('/rekam_medis/delete/{id}', [RekammedisController::class, 'destroy'])->name('dokter.rekam_medis.delete');
-
 });
 
 Route::middleware(['auth', 'stafrekammedis'])->prefix('stafrekammedis')->group(function () {
@@ -126,6 +128,14 @@ Route::middleware(['auth', 'klinik'])->prefix('klinik')->group(function () {
     Route::get('/laporan/tambah', [KlinikController::class, 'tambah_laporan'])->name('klinik.laporan.tambah');
     Route::post('/laporan/submit', [LaporanController::class, 'store'])->name('klinik.laporan.submit');
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/chat/{userId}', [ChatController::class, 'chatPage'])->name('chat.page');
+    Route::post('/chat/send', [ChatController::class, 'store'])->name('chat.send');
+    Route::get('/chat/fetch/{userId}', [ChatController::class, 'fetch'])->name('chat.fetch');
+});
+
+
 
 
 Route::get('/dokter/siti-jamila', function () {

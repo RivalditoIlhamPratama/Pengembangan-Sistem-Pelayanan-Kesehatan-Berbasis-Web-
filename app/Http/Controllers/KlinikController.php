@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\klinik;
 use App\Models\laporan;
+use App\Models\rekammedis;
 use Illuminate\Http\Request;
 
 class KlinikController extends Controller
@@ -24,7 +25,7 @@ class KlinikController extends Controller
     public function tambah_laporan()
     {
         $kliniks = \App\Models\klinik::all();
-        $rekammedis = \App\Models\rekammedis::with('dokter')->get();
+        $rekammedis = rekammedis::doesntHave('laporan')->get();
 
         return view('klinik.tambah_laporan', compact('kliniks', 'rekammedis'));
     }

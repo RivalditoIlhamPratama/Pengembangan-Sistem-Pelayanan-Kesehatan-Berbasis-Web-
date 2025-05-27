@@ -25,6 +25,7 @@ class rekammedis extends Model
     }
     public function laporan()
     {
-        return $this->hasMany(Laporan::class, 'idRekamMedis', 'RekamMedis_id');
+        return $this->hasOne(\App\Models\laporan::class, 'RekamMedis_id', 'idRekamMedis');
     }
+
 }

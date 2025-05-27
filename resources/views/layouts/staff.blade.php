@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,10 +18,11 @@
 
 <body class="bg-gray-100">
 
-<div class="flex h-screen">
+    <div class="flex h-screen">
 
-    <!-- Sidebar -->
-    <aside id="sidebar" class="w-64 bg-gray-900 text-white flex flex-col relative overflow-hidden transition-all duration-300">
+        <!-- Sidebar -->
+        <aside id="sidebar"
+            class="w-64 bg-gray-900 text-white flex flex-col relative overflow-hidden transition-all duration-300">
 
 
             <!-- Background Ikon Acak -->
@@ -43,79 +45,84 @@
                 <i class="ri-contrast-drop-line text-white text-lg absolute bottom-[70px] right-[80px] opacity-5"></i>
                 <i class="ri-aliens-line text-white text-lg absolute top-[450px] left-[40px] opacity-5"></i>
                 <i class="ri-drop-line text-white text-2xl absolute top-[360px] right-[30px] opacity-5"></i>
-                <i class="ri-medicine-bottle-line text-white text-xl absolute bottom-[180px] left-[100px] opacity-5"></i>
+                <i
+                    class="ri-medicine-bottle-line text-white text-xl absolute bottom-[180px] left-[100px] opacity-5"></i>
                 <i class="ri-brain-line text-white text-2xl absolute top-[220px] right-[100px] opacity-5"></i>
                 <i class="ri-bandage-line text-white text-xl absolute bottom-[130px] right-[50px] opacity-5"></i>
                 <i class="ri-eye-2-line text-white text-lg absolute top-[80px] left-[120px] opacity-5"></i>
                 <i class="ri-hospital-line text-white text-xl absolute bottom-[20px] right-[15px] opacity-5"></i>
             </div>
-            
-        <div class="p-5 flex items-center space-x-3 border-b border-gray-700">
-            <img src="{{ asset('assets/11.png') }}" alt="Logo Puskesmas" class="w-12 h-12">
-            <h1 class="text-xl font-bold">Puskesmas</h1>
-        </div>
 
-        <nav class="mt-4 flex flex-col gap-2 px-4">
-            <a href="{{ route('stafrekammedis.dashboard') }}" class="py-2 px-4 rounded hover:bg-gray-800 {{ request()->routeIs('stafrekammedis.dashboard') ? 'bg-gray-800' : '' }}">
-                <i class="ri-folder-user-line mr-2"></i> Rekam Medis
-            </a>
-        </nav>
-        <div class="mt-auto px-4 pb-4 border-t border-gray-700 pt-4">
-            <a href="" class="py-2 px-4 rounded hover:bg-gray-800 flex items-center {{ request()->routeIs('admin.activity_log') ? 'bg-gray-800' : '' }}">
-                <i class="ri-history-line mr-2"></i> Riwayat Aktivitas
-            </a>
-            <a href="" class="py-2 px-4 rounded hover:bg-gray-800 flex items-center mt-2 {{ request()->routeIs('admin.settings') ? 'bg-gray-800' : '' }}">
-                <i class="ri-settings-3-line mr-2"></i> Pengaturan Sistem
-            </a>
-        </div>
-
-        <div class="flex justify-center gap-4 mt-6 mb-4">
-            <i class="ri-heart-pulse-line text-red-400 text-2xl animate-pulse"></i>
-            <i class="ri-stethoscope-line text-green-400 text-2xl animate-bounce"></i>
-            <i class="ri-dna-line text-purple-400 text-2xl animate-spin"></i>
-            <i class="ri-first-aid-kit-line text-orange-400 text-2xl animate-pulse"></i>
-            <i class="ri-capsule-line text-pink-400 text-2xl animate-bounce"></i>
-        </div>
-
-    </aside>
-
-    <!-- Main content -->
-    <div class="flex-1 flex flex-col overflow-hidden">
-        <!-- Header -->
-        <header class="flex justify-between items-center p-4 bg-white border-b">
-            <button id="toggleSidebar" class="text-2xl text-gray-700">
-                <i class="ri-menu-line"></i>
-            </button>
-            <div class="flex items-center space-x-3">
-                <i class="ri-user-fill text-xl"></i>
-                <span>{{$staff->namaStaff}}</span>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="text-black hover:text-gray-500 ml-3">
-                        <i class="ri-logout-box-r-line text-xl"></i>
-                    </button>
-                </form>
+            <div class="p-5 flex items-center space-x-3 border-b border-gray-700">
+                <img src="{{ asset('assets/11.png') }}" alt="Logo Puskesmas" class="w-12 h-12">
+                <h1 class="text-xl font-bold">Puskesmas</h1>
             </div>
-        </header>
 
-        <!-- Page Content -->
-        <main class="p-6 overflow-auto">
-            @yield('content')
-        </main>
+            <nav class="mt-4 flex flex-col gap-2 px-4">
+                <a href="{{ route('stafrekammedis.dashboard') }}"
+                    class="py-2 px-4 rounded hover:bg-gray-800 {{ request()->routeIs('stafrekammedis.dashboard') ? 'bg-gray-800' : '' }}">
+                    <i class="ri-folder-user-line mr-2"></i> Rekam Medis
+                </a>
+            </nav>
+            <div class="mt-auto px-4 pb-4 border-t border-gray-700 pt-4">
+                <a href=""
+                    class="py-2 px-4 rounded hover:bg-gray-800 flex items-center {{ request()->routeIs('admin.activity_log') ? 'bg-gray-800' : '' }}">
+                    <i class="ri-history-line mr-2"></i> Riwayat Aktivitas
+                </a>
+                <a href=""
+                    class="py-2 px-4 rounded hover:bg-gray-800 flex items-center mt-2 {{ request()->routeIs('admin.settings') ? 'bg-gray-800' : '' }}">
+                    <i class="ri-settings-3-line mr-2"></i> Pengaturan Sistem
+                </a>
+            </div>
+
+            <div class="flex justify-center gap-4 mt-6 mb-4">
+                <i class="ri-heart-pulse-line text-red-400 text-2xl animate-pulse"></i>
+                <i class="ri-stethoscope-line text-green-400 text-2xl animate-bounce"></i>
+                <i class="ri-dna-line text-purple-400 text-2xl animate-spin"></i>
+                <i class="ri-first-aid-kit-line text-orange-400 text-2xl animate-pulse"></i>
+                <i class="ri-capsule-line text-pink-400 text-2xl animate-bounce"></i>
+            </div>
+
+        </aside>
+
+        <!-- Main content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header class="flex justify-between items-center p-4 bg-white border-b">
+                <button id="toggleSidebar" class="text-2xl text-gray-700">
+                    <i class="ri-menu-line"></i>
+                </button>
+                <div class="flex items-center space-x-3">
+                    <i class="ri-user-fill text-xl"></i>
+                    <span>{{ $staff->namaStaff }}</span>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="text-black hover:text-gray-500 ml-3">
+                            <i class="ri-logout-box-r-line text-xl"></i>
+                        </button>
+                    </form>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="p-6 overflow-auto">
+                @yield('content')
+            </main>
+        </div>
     </div>
-</div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-    const toggleBtn = document.getElementById('toggleSidebar');
-    const sidebar = document.getElementById('sidebar');
+    <script>
+        const toggleBtn = document.getElementById('toggleSidebar');
+        const sidebar = document.getElementById('sidebar');
 
-    toggleBtn.addEventListener('click', () => {
-        sidebar.classList.toggle('hidden');
-    });
-</script>
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+        });
+    </script>
 
 </body>
+
 </html>

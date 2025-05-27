@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,25 +9,27 @@
     <style>
         /* Add background image */
         body {
-        background-image: url('{{ asset('assets/background.jpg') }}'); /* Pastikan file ada di /public/assets */
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-        padding: 10px;
-        font-family: Arial, sans-serif;
-    }
+            background-image: url('{{ asset('assets/background.jpg') }}');
+            /* Pastikan file ada di /public/assets */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+        }
 
         .login-container {
             width: 100%;
             max-width: 400px;
             margin: 100px auto;
-            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            background-color: rgba(255, 255, 255, 0.8);
+            /* Semi-transparent background */
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -55,6 +58,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="login-container">
@@ -66,9 +70,9 @@
         <form method="POST" action="{{ route('login.post') }}" id="loginForm">
             @csrf
             <label for="username">Username</label>
-            <input type="text" id="username" name="username" value="{{ old('username') }}" class="form-control @error('username') is-invalid @enderror"
-            required autocomplete="username" autofocus
-            minlength="3" maxlength="30">
+            <input type="text" id="username" name="username" value="{{ old('username') }}"
+                class="form-control @error('username') is-invalid @enderror" required autocomplete="username" autofocus
+                minlength="3" maxlength="30">
             @error('username')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -77,8 +81,8 @@
 
             <label for="password">Password</label>
             <input type="password" id="password" class="form-control @error('password') is-invalid @enderror"
-            name="password" required autocomplete="current-password">
-                <i class="fa fa-eye"></i>
+                name="password" required autocomplete="current-password">
+            <i class="fa fa-eye"></i>
             @error('password')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -96,7 +100,7 @@
     </div>
 
     <!-- Popup div -->
-    @if(session('login_success'))
+    @if (session('login_success'))
         <div id="popup" class="popup" style="display:block;">
             <div class="popup-content">
                 <p>Login Berhasil!</p>
@@ -130,7 +134,8 @@
             document.querySelectorAll('.toggle-password').forEach(button => {
                 button.addEventListener('click', function() {
                     const passwordInput = this.previousElementSibling;
-                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' :
+                        'password';
                     passwordInput.setAttribute('type', type);
                     this.querySelector('i').classList.toggle('fa-eye-slash');
                 });
@@ -163,4 +168,5 @@
     </script>
 
 </body>
+
 </html>

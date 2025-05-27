@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -16,28 +17,23 @@
 
     <style>
         body {
-          background-image: url('{{ asset('assets/background.jpg') }}');
-          background-size: cover;
-          background-position: center;
-          background-repeat: no-repeat;
-          background-attachment: fixed;
+            background-image: url('{{ asset('assets/background.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
-      
-        
-      </style>
+    </style>
 
 
 </head>
+
 <body>
     <div class="register-container">
         <!-- Tambahkan Logo di sini -->
         <div class="logo-container d-flex justify-content-center mb-4">
-            <img
-                src="{{ asset('assets/11.png') }}"
-                alt="Logo Puskesmas Kraksaan"
-                class="logo-img"
-                style="max-width: 100px;"
-            />
+            <img src="{{ asset('assets/11.png') }}" alt="Logo Puskesmas Kraksaan" class="logo-img"
+                style="max-width: 100px;" />
         </div>
 
         <h2>Buat Akun Baru</h2>
@@ -45,14 +41,7 @@
         <form class="" method="POST" action="{{ route('register.post') }}">
             @csrf
             <label class="form-label" for="username">Nama Pasien</label>
-            <input
-            class="form-control"
-                type="text"
-                name="username"
-                id="username"
-                placeholder="Username"
-                required
-            />
+            <input class="form-control" type="text" name="username" id="username" placeholder="Username" required />
             <label class="form-label" for="jenisKelamin">Jenis Kelamin</label>
             <select class="form-control" name="jenisKelamin" id="jenisKelamin" required>
                 <option value="Laki-laki">Laki-laki</option>
@@ -70,28 +59,14 @@
 
             <label class="form-label" for="password">Password</label>
             <div style="position: relative;">
-                <input
-                    class="form-control"
-                type="password"
-                    name="password"
-                    id="password"
-                    placeholder="password"
-                    required
-                    style="padding-right: 30px;"
-                />
+                <input class="form-control" type="password" name="password" id="password" placeholder="password"
+                    required style="padding-right: 30px;" />
             </div>
 
             <label for="password_confirmation">Konfirmasi Password</label>
             <div style="position: relative;">
-                <input
-                class="form-control"
-                    type="password"
-                    name="password_confirmation"
-                    id="password_confirmation"
-                    placeholder="password_confirmation"
-                    required
-                    style="padding-right: 30px;"
-                />
+                <input class="form-control" type="password" name="password_confirmation" id="password_confirmation"
+                    placeholder="password_confirmation" required style="padding-right: 30px;" />
             </div>
 
             <div class="hidden">
@@ -103,4 +78,5 @@
         </form>
     </div>
 </body>
+
 </html>
