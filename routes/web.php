@@ -174,3 +174,14 @@ Route::get('/admin/dokter/tambah', function () {
 Route::get('/admin/dokter/edit', function () {
     return view('admin.edit_dokter');
 });
+
+
+
+Route::get('/admin/berita', function () {
+    return view('admin.data_berita');
+})->name('admin.berita');
+
+/*
+Route::get('/admin/berita', [BeritaController::class, 'index'])->name('admin.berita');
+Route::post('/admin/berita', [BeritaController::class, 'store'])->name('admin.berita.store');
+*/

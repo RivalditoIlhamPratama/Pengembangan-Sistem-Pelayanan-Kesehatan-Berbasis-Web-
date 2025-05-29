@@ -140,6 +140,74 @@
 
     </section>
 
+    <!-- Chat Section -->
+<!-- Chat Section (Modern Style with Photo) -->
+<section class="chat-container" style="
+    max-width: 500px;
+    margin: 30px auto 0;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e0e0e0;
+    font-family: 'Segoe UI', sans-serif;
+">
+    <!-- Header dengan foto admin -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h4 style="font-weight: 600; color: #333; margin: 0;">
+            Respon Admin Puskesmas Kraksaan
+        </h4>
+        <img src="{{ asset('assets/Pengaduan.png') }}" alt="Foto Admin" style="
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        ">
+    </div>
+
+    <!-- Chat Box -->
+    <div id="chat-box" style="
+        min-height: 120px;
+        max-height: 250px;
+        overflow-y: auto;
+        background-color: #f9f9f9;
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        font-size: 14px;
+        color: #444;
+    ">
+        <p><strong style="color: #2b6cb0;">Admin 1:</strong> terima kasih</p>
+        <p><strong style="color: #0d6efd;">Saya:</strong> terima atas responnya</p>
+    </div>
+
+    <!-- Chat Input -->
+    <div style="display: flex; gap: 10px;">
+        <input type="text" id="chat-message" placeholder="Tulis pesan..." style="
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+        ">
+        <button onclick="sendMessage()" style="
+            padding: 10px 18px;
+            background-color: #0d6efd;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        " onmouseover="this.style.backgroundColor='#0b5ed7'" onmouseout="this.style.backgroundColor='#0d6efd'">
+            Kirim
+        </button>
+    </div>
+</section>
+
+
+
 
     <!-- Testimoni Slider Tanpa Swiper -->
     <section class="pengaduan-slider">
@@ -266,6 +334,23 @@
             updateSlider();
         });
     </script>
+
+
+<script>
+    function sendMessage() {
+        const msgInput = document.getElementById("chat-message");
+        const msg = msgInput.value.trim();
+        if (msg) {
+            const chatBox = document.getElementById("chat-box");
+            const newMsg = document.createElement("p");
+            newMsg.innerHTML = `<strong style="color: #0d6efd;">Saya:</strong> ${msg}`;
+            chatBox.appendChild(newMsg);
+            msgInput.value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    }
+</script>
+
 
 
 

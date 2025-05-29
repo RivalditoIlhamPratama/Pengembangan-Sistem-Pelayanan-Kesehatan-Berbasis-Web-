@@ -33,12 +33,18 @@
             <form id="chat-form">
                 @csrf
                 <input type="hidden" name="to_id" value="{{ $chatWith->id_user }}">
-                <div class="input-group">
+                <div class="input-group mb-2">
                     <input type="text" name="message" class="form-control" id="message-input"
                         placeholder="Tulis pesan..." required>
                     <button class="btn btn-primary" type="submit">Kirim</button>
                 </div>
+            
+                {{-- Tombol Kembali --}}
+                <button onclick="window.history.back()" type="button" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </button>
             </form>
+            
         </div>
     </div>
 

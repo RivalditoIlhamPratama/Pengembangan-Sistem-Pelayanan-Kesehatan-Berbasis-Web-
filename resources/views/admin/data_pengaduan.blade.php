@@ -27,7 +27,7 @@
                         </button>
                     </div>
                 </div>
-
+                
                 <!-- Tabel Data Pengaduan -->
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover">
@@ -75,15 +75,24 @@
                                                 "Halo *{$aduan->pasien->namaPasien}*, kami telah menerima pengaduan Anda mengenai *{$aduan->jenisPengaduan}*. Terima kasih telah menghubungi Puskesmas Kraksaan.",
                                             );
                                         @endphp
-
+                                    
                                         <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                    
                                         @if ($aduan->phone)
                                             <a href="https://wa.me/{{ $nohp }}?text={{ $pesan }}"
-                                                target="_blank" class="btn btn-sm btn-success">
+                                                target="_blank" class="btn btn-sm btn-success" title="Kirim WhatsApp">
                                                 <i class="fab fa-whatsapp"></i>
                                             </a>
                                         @endif
+                                    
+                                        @if ($aduan->pasien && $aduan->pasien->user)
+                                            <a href="{{ route('admin.chat', ['userId' => $aduan->pasien->user->id_user]) }}"
+                                                class="btn btn-sm btn-primary" title="Chat Admin">
+                                                <i class="ri-chat-3-line"></i>
+                                            </a>
+                                        @endif
                                     </td>
+                                    
                                 </tr>
                             @endforeach
                         </tbody>

@@ -81,6 +81,13 @@
                     class="py-2 px-4 rounded hover:bg-gray-800 {{ request()->routeIs('admin.chat') ? 'bg-gray-800' : '' }}">
                     <i class="ri-file-line mr-2"></i> Chat
                 </a>
+                <a href="{{ route('admin.berita') }}"
+   class="py-2 px-4 rounded hover:bg-gray-800 {{ request()->routeIs('admin.berita') ? 'bg-gray-800' : '' }}">
+   <i class="ri-newspaper-line mr-2"></i> Data Berita
+</a>
+
+
+
             </nav>
 
             <!-- Tambahan menu di bawah -->
@@ -115,7 +122,8 @@
                 <div class="flex items-center space-x-3">
                     <i class="ri-user-fill text-xl"></i>
                     <a href="{{ route('admin.profil') }}" class="hover:text-blue-600 font-medium">
-                        {{ $admin->namaAdmin }}
+                        {{ $admin->namaAdmin ?? 'Admin' }}
+
                     </a>
                     <form method="POST" action="{{ route('logout') }}" id="logout-form">
                         @csrf
