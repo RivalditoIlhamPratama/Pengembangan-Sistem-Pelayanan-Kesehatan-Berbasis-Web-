@@ -40,8 +40,6 @@
                     <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
                     <li class="link"><a href="{{ url('/alur-pelayanan') }}">Alur Pelayanan</a></li>
                     <li class="link"><a href="{{ route('pasien.reports') }}">Pengaduan</a></li>
-                    <li class="link"><a
-                            href="{{ route('pasien.chat', ['userId' => auth()->user()->id_user]) }}">Chat</a>
                 @endif
                 @if (!auth()->check() || (auth()->check() && auth()->user()->role !== 'pasien'))
                     <li class="link"><a href="{{ url('/') }}">Beranda</a></li>

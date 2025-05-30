@@ -100,7 +100,6 @@ Route::middleware(['auth', 'pasien'])->prefix('pasien')->group(function () {
     Route::get('/dashboard', [PasienController::class, 'dashboard'])->name('pasien.dashboard');
     Route::get('/aduan', [PasienController::class, 'reports'])->name('pasien.reports');
     Route::post('/submit-pengaduan', [PengaduanController::class, 'store'])->name('pasien.reports.submit');
-    Route::get('/chat/{userId}', [ChatController::class, 'pasienChat'])->name('pasien.chat');
 });
 
 Route::middleware(['auth', 'dokter'])->prefix('dokter')->group(function () {
