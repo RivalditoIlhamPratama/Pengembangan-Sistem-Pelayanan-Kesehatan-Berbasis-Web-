@@ -141,8 +141,9 @@
     </section>
 
     <!-- Chat Section -->
-<!-- Chat Section (Modern Style with Photo) -->
-<section class="chat-container" style="
+    <!-- Chat Section (Modern Style with Photo) -->
+    <section class="chat-container"
+        style="
     max-width: 500px;
     margin: 30px auto 0;
     padding: 20px;
@@ -152,59 +153,38 @@
     border: 1px solid #e0e0e0;
     font-family: 'Segoe UI', sans-serif;
 ">
-    <!-- Header dengan foto admin -->
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-        <h4 style="font-weight: 600; color: #333; margin: 0;">
-            Respon Admin Puskesmas Kraksaan
-        </h4>
-        <img src="{{ asset('assets/Pengaduan.png') }}" alt="Foto Admin" style="
+        <!-- Header dengan foto admin -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h4 style="font-weight: 600; color: #333; margin: 0;">
+                Respon Admin Puskesmas Kraksaan
+            </h4>
+            <img src="{{ asset('assets/Pengaduan.png') }}" alt="Foto Admin"
+                style="
             width: 48px;
             height: 48px;
             border-radius: 50%;
             object-fit: cover;
             box-shadow: 0 0 5px rgba(0,0,0,0.1);
         ">
-    </div>
+        </div>
 
-    <!-- Chat Box -->
-    <div id="chat-box" style="
-        min-height: 120px;
-        max-height: 250px;
-        overflow-y: auto;
-        background-color: #f9f9f9;
-        padding: 10px 15px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        margin-bottom: 15px;
-        font-size: 14px;
-        color: #444;
-    ">
-        <p><strong style="color: #2b6cb0;">Admin 1:</strong> terima kasih</p>
-        <p><strong style="color: #0d6efd;">Saya:</strong> terima atas responnya</p>
-    </div>
+        <!-- Chat Box -->
+        <div id="chat-box">
+            <p><strong style="color: #2b6cb0;">Admin 1:</strong> terima kasih</p>
+            <p><strong style="color: #0d6efd;">Saya:</strong> terima atas responnya</p>
+        </div>
 
-    <!-- Chat Input -->
-    <div style="display: flex; gap: 10px;">
-        <input type="text" id="chat-message" placeholder="Tulis pesan..." style="
-            flex: 1;
-            padding: 10px 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 14px;
-        ">
-        <button onclick="sendMessage()" style="
-            padding: 10px 18px;
-            background-color: #0d6efd;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: background 0.2s ease;
-        " onmouseover="this.style.backgroundColor='#0b5ed7'" onmouseout="this.style.backgroundColor='#0d6efd'">
-            Kirim
-        </button>
-    </div>
-</section>
+        <!-- Chat Input -->
+
+        <div style="display: flex; gap: 10px;">
+            <form id="chat-form" action="{{ route('chat.send') }}" method="POST">
+                @csrf
+                <input type="hidden" name="to_id" value="{{ $chatWith->id_user }}">
+                <input type="text" name="message" id="message-input" placeholder="Tulis pesan..." required>
+                <button type="submit">Kirim</button>
+            </form>
+        </div>
+    </section>
 
 
 
@@ -336,24 +316,79 @@
     </script>
 
 
-<script>
-    function sendMessage() {
-        const msgInput = document.getElementById("chat-message");
-        const msg = msgInput.value.trim();
-        if (msg) {
-            const chatBox = document.getElementById("chat-box");
-            const newMsg = document.createElement("p");
-            newMsg.innerHTML = `<strong style="color: #0d6efd;">Saya:</strong> ${msg}`;
-            chatBox.appendChild(newMsg);
-            msgInput.value = "";
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-    }
-</script>
+    <script>
+        document.getElementById('chat-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+            const messageInput = form.querySelector('input[name="message"]');
+            const chatBox = document.getElementById('chat-box');
 
+            fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': form.querySelector('input[name="_token"]').value,
+                        'Accept': 'application/json',
+                    },
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === 'sent') {
+                        const newMsg = document.createElement('p');
+                        newMsg.innerHTML =
+                            `<strong style="color: #0d6efd;">Saya:</strong> ${messageInput.value}`;
+                        chatBox.appendChild(newMsg);
+                        messageInput.value = '';
+                        chatBox.scrollTop = chatBox.scrollHeight;
+                    } else {
+                        alert('Failed to send message');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error sending message');
+                });
+        });
+    </script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatBox = document.getElementById('chat-box');
+            const chatWithId = {{ $chatWith->id_user }};
+            const fetchUrl = "{{ route('chat.fetch', ['userId' => $chatWith->id_user]) }}";
 
+            function loadMessages() {
+                fetch(fetchUrl)
+                    .then(response => response.json())
+                    .then(messages => {
+                        chatBox.innerHTML = '';
+                        messages.forEach(msg => {
+                            const p = document.createElement('p');
+                            const sender = msg.from_id === chatWithId ? 'Admin' : 'Saya';
+                            const color = msg.from_id === chatWithId ? '#2b6cb0' : '#0d6efd';
+                            p.innerHTML =
+                                `<strong style="color: ${color};">${sender}:</strong> ${msg.message}`;
+                            chatBox.appendChild(p);
+                        });
+                        chatBox.scrollTop = chatBox.scrollHeight;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching messages:', error);
+                    });
+            }
 
+            loadMessages();
+
+            // Optionally, refresh messages every 5 seconds
+            setInterval(loadMessages, 5000);
+        });
+    </script>
 </body>
 
 </html>
