@@ -11,9 +11,15 @@ class adminpuskesmas extends Model
 
     public $timestamps = false;
 
-    protected $fillable =['user_id','namaAdmin','jenisKelamin','noHp','alamatAdmin','email'];
+    protected $fillable = ['user_id', 'namaAdmin', 'jenisKelamin', 'noHp', 'alamatAdmin', 'email'];
 
-    public function user(){
-        return $this->belongsTo(user::class,'user_id','id_user');
+    public function user()
+    {
+        return $this->belongsTo(user::class, 'user_id', 'id_user');
+    }
+
+    public function berita()
+    {
+        return $this->hasMany(berita::class, 'idAdmin', 'admin_id');
     }
 }

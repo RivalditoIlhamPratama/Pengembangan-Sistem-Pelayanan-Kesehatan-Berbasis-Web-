@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\LaporanController;
 
@@ -94,6 +95,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/data-dokter/delete/{id}', [DokterController::class, 'destroy'])->name('admin.data_dokter.delete');
     Route::get('/laporan-klinik', [AdminController::class, 'reports'])->name('admin.reports');
     Route::get('/chat/{userId}', [ChatController::class, 'adminChat'])->name('admin.chat');
+    //
+    Route::get('/berita', [BeritaController::class, 'index'])->name('admin.berita');
+    Route::get('/berita/edit/{id}', [BeritaController::class, 'edit_data_dokter'])->name('admin.berita.edit');
+    Route::post('/berita/store', [BeritaController::class, 'store'])->name('admin.berita.store');
+    Route::post('/berita/update/{id}', [BeritaController::class, 'update'])->name('admin.berita.update');
+    Route::post('/berita/delete/{id}', [BeritaController::class, 'destroy'])->name('admin.berita.delete');
 });
 
 Route::middleware(['auth', 'pasien'])->prefix('pasien')->group(function () {
@@ -173,14 +180,3 @@ Route::get('/admin/dokter/tambah', function () {
 Route::get('/admin/dokter/edit', function () {
     return view('admin.edit_dokter');
 });
-
-
-
-Route::get('/admin/berita', function () {
-    return view('admin.data_berita');
-})->name('admin.berita');
-
-/*
-Route::get('/admin/berita', [BeritaController::class, 'index'])->name('admin.berita');
-Route::post('/admin/berita', [BeritaController::class, 'store'])->name('admin.berita.store');
-*/

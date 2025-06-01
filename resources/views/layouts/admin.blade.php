@@ -82,9 +82,9 @@
                     <i class="ri-file-line mr-2"></i> Chat
                 </a>
                 <a href="{{ route('admin.berita') }}"
-   class="py-2 px-4 rounded hover:bg-gray-800 {{ request()->routeIs('admin.berita') ? 'bg-gray-800' : '' }}">
-   <i class="ri-newspaper-line mr-2"></i> Data Berita
-</a>
+                    class="py-2 px-4 rounded hover:bg-gray-800 {{ request()->routeIs('admin.berita') ? 'bg-gray-800' : '' }}">
+                    <i class="ri-newspaper-line mr-2"></i> Data Berita
+                </a>
 
 
 
