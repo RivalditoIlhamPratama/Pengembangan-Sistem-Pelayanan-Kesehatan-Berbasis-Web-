@@ -73,11 +73,7 @@
                     class="py-2 px-4 rounded hover:bg-gray-800 flex items-center {{ request()->routeIs('admin.activity_log') ? 'bg-gray-800' : '' }}">
                     <i class="ri-history-line mr-2"></i> Riwayat Aktivitas
                 </a>
-                <a href=""
-                    class="py-2 px-4 rounded hover:bg-gray-800 flex items-center mt-2 {{ request()->routeIs('admin.settings') ? 'bg-gray-800' : '' }}">
-                    <i class="ri-settings-3-line mr-2"></i> Pengaturan Sistem
-                </a>
-            </div>
+
 
             <div class="flex justify-center gap-4 mt-6 mb-4">
                 <i class="ri-heart-pulse-line text-red-400 text-2xl animate-pulse"></i>
@@ -88,9 +84,6 @@
             </div>
 
         </aside>
-
-
-
 
 
         <!-- Main content -->

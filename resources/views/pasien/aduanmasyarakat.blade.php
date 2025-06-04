@@ -96,8 +96,10 @@
 
                     <textarea name="aduan" placeholder="Isi Pengaduan" rows="4" required>{{ old('aduan') }}</textarea>
 
-                    <label for="gambar">Upload Gambar (optional):</label>
-                    <input type="file" id="gambar" name="gambar" accept="image/*" />
+                    <label for="gambar">Ambil Gambar (kamera/galeri):</label>
+<input type="file" id="gambar" name="gambar" accept="image/*" capture="environment">
+
+
 
                     <button type="submit" class="btn">Kirim Pengaduan</button>
                 </form>

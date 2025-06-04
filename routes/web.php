@@ -8,6 +8,7 @@ use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\RekammedisController;
 use App\Http\Controllers\StaffrekammedisController;
+use App\Http\Controllers\LandingController;
 use App\Models\staffrekammedis;
 use Illuminate\Support\Facades\Route;
 
@@ -101,6 +102,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/berita/store', [BeritaController::class, 'store'])->name('admin.berita.store');
     Route::post('/berita/update/{id}', [BeritaController::class, 'update'])->name('admin.berita.update');
     Route::post('/berita/delete/{id}', [BeritaController::class, 'destroy'])->name('admin.berita.delete');
+    Route::delete('/admin/berita/delete/{id}', [BeritaController::class, 'destroy'])->name('admin.berita.destroy');
 });
 
 Route::middleware(['auth', 'pasien'])->prefix('pasien')->group(function () {
@@ -180,3 +182,19 @@ Route::get('/admin/dokter/tambah', function () {
 Route::get('/admin/dokter/edit', function () {
     return view('admin.edit_dokter');
 });
+
+
+
+
+
+Route::get('/', [LandingController::class, 'index'])->name('landing');
+
+
+
+Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show');
+
+
+
+Route::delete('/admin/pengaduan/{id}', [AdminController::class, 'destroyPengaduan'])->name('admin.pengaduan.destroy');
+
+

@@ -39,14 +39,24 @@
                     <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
                     <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
                     <li class="link"><a href="{{ url('/alur-pelayanan') }}">Alur Pelayanan</a></li>
-                    <li class="link"><a href="{{ route('pasien.reports') }}">Pengaduan</a></li>
+                    <li class="link">
+                        <a href="javascript:void(0);" style="pointer-events: none; color: gray; opacity: 0.6; cursor: default;">
+                            Pengaduan
+                        </a>
+                    </li>
+                    
                 @endif
                 @if (!auth()->check() || (auth()->check() && auth()->user()->role !== 'pasien'))
                     <li class="link"><a href="{{ url('/') }}">Beranda</a></li>
                     <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
                     <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
                     <li class="link"><a href="{{ url('/alur-pelayanan') }}">Pelayanan</a></li>
-                    <li class="link"><a href="{{ route('pasien.reports') }} disabled-link">Pengaduan</a></li>
+                    <li class="link">
+                        <a href="javascript:void(0);" style="pointer-events: none; color: gray; opacity: 0.6; cursor: default;">
+                            Pengaduan
+                        </a>
+                    </li>
+                    
                 @endif
                 @if (!auth()->check() || (auth()->check() && auth()->user()->role !== 'pasien'))
                     <li class="link">
@@ -180,87 +190,28 @@
     <br>
     <br>
 
-    <!-- Beita -->
-    <div class="berita--container">
-        <h2>Berita Terkait</h2>
-        <p class="centered-text">Berita Berita Puskesmas Kraksaan</p>
-        <br>
-        <br>
-        <div class="berita-container">
+    <!-- Berita Terkait -->
+<div class="berita--container">
+    <h2>Berita Terkait</h2>
+    <p class="centered-text">Berita Berita Puskesmas Kraksaan</p>
+    <br><br>
+    <div class="berita-container">
+        @forelse ($berita as $item)
             <div class="news-card">
-                <img src="assets/berita.slb.png" alt="Puskesmas Image">
+                <img src="{{ asset('storage/' . $item->gambarBerita) }}" alt="Berita Image">
                 <div class="news-info">
-                    <h3>Pemeriksaan Kesehatan di SLB Dharma Asih Kraksaan : Upaya Dini Deteksi Masalah Kesehatan Siswa
-                    </h3>
-                    <p>Kraksaan, 20 Agustus 2024 – Dalam rangka meningkatkan kesadaran akan pentingnya kesehatan sejak
-                        dini, Puskesmas..</p>
-                    <p class="date">Thursday, 21 November 2024</p>
-                    <a href="{{ route('berita.slb') }}" class="read-more">Selengkapnya</a>
+                    <h3>{{ $item->judulBerita }}</h3>
+                    <p>{{ \Illuminate\Support\Str::limit($item->isiBerita, 100) }}</p>
+                    <p class="date">{{ \Carbon\Carbon::parse($item->tanggalBerita)->translatedFormat('l, d F Y') }}</p>
+                    <a href="{{ route('berita.show', $item->idBerita) }}" class="read-more">Selengkapnya</a>
                 </div>
             </div>
-
-            <!-- Repeat the news-card for other entries -->
-            <div class="news-card">
-                <img src="assets/berita.jpg" alt="Puskesmas Image">
-                <div class="news-info">
-                    <h3>Puskesmas Kraksaan Kini Buka Layanan USG bagi Ibu Hamil</h3>
-                    <p>Pelayanan ibu hamil di Puskesmas Kraksaan semakin maksimal. Pasalnya, Puskesmas Kraksaan kini
-                        dilengkapi layanan USG......</p>
-                    <p class="date">Thursday, 21 November 2024</p>
-                    <a href="{{ route('berita.usg') }}" class="read-more">Selengkapnya</a>
-                </div>
-            </div>
-
-            <!-- Repeat the news-card for other entries -->
-            <div class="news-card">
-                <img src="assets/sosialisasi.vaksin.png" alt="Puskesmas Image">
-                <div class="news-info">
-                    <h3>Masifkan Sosialisasi Vaksin Melalui Video di Puskesmas</h3>
-                    <p>SDinas Kesehatan (Dinkes) Kabupaten Probolinggo berencana melakukan sosialisasi vaksin Covid-19
-                        kepada masyarakat..</p>
-                    <p class="date">17 Jan 2021</p>
-                    <a href="{{ route('berita.vaksin') }}" class="read-more">Selengkapnya</a>
-                </div>
-            </div>
-
-
-            <div class="news-card">
-                <img src="assets/Berita.jpeg" alt="Puskesmas Image">
-                <div class="news-info">
-                    <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
-                    <p>SEMENTARA: Banner yang terpasang di pintu masuk Puskesmas Pakuriran. Puskesmas Pakuriran menutup
-                        layanan kesehatan...</p>
-                    <p class="date">Thursday, 21 November 2024</p>
-                    <a href="#" class="read-more">Selengkapnya</a>
-                </div>
-            </div>
-
-            <div class="news-card">
-                <img src="assets/Berita.jpeg" alt="Puskesmas Image">
-                <div class="news-info">
-                    <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
-                    <p>SEMENTARA: Banner yang terpasang di pintu masuk Puskesmas Pakuriran. Puskesmas Pakuriran menutup
-                        layanan kesehatan...</p>
-                    <p class="date">Thursday, 21 November 2024</p>
-                    <a href="#" class="read-more">Selengkapnya</a>
-                </div>
-            </div>
-
-
-            <div class="news-card">
-                <img src="assets/Berita.jpeg" alt="Puskesmas Image">
-                <div class="news-info">
-                    <h3>dr. Komang Ayu R.P., M.Sc. Sp.A</h3>
-                    <p>SEMENTARA: Banner yang terpasang di pintu masuk Puskesmas Pakuriran. Puskesmas Pakuriran menutup
-                        layanan kesehatan...</p>
-                    <p class="date">Thursday, 21 November 2024</p>
-                    <a href="#" class="read-more">Selengkapnya</a>
-                </div>
-            </div>
-
-
-
-            <!-- Add more cards as needed -->
+        @empty
+            <p class="text-center">Belum ada berita.</p>
+        @endforelse
+    </div>
+</div>
+    <!-- Add more cards as needed -->
         </div>
     </div>
 
@@ -291,6 +242,33 @@
                     title="Video Edukasi 3" frameborder="0" allowfullscreen></iframe>
                 <p class="video-caption">Kampanya Adaptasi</p>
             </div>
+
+            <div class="video-item">
+                <iframe width="100%" height="215" src="https://www.youtube.com/embed/iStZfrQE6ZA"
+                    title="Video Puskesmas Kraksaan" frameborder="0" allowfullscreen></iframe>
+                <p class="video-caption">Video Profil Puskesmas Kraksaan</p>
+            </div>
+            <div class="video-item">
+                <iframe width="100%" height="215" src="https://www.youtube.com/embed/zESpcFZG3YU"
+                    title="Video Edukasi 2" frameborder="0" allowfullscreen></iframe>
+                <p class="video-caption">Pembacaan ikrar</p>
+            </div>
+            <div class="video-item">
+                <iframe width="100%" height="215" src="https://www.youtube.com/embed/i-WB1NV0orM"
+                    title="Video Edukasi 3" frameborder="0" allowfullscreen></iframe>
+                <p class="video-caption">VAKSINASI COVID 19 TAHAP 1,PUSKESMAS KRAKSAAN</p>
+            </div>
+            <div class="video-item">
+                <iframe width="100%" height="215" src="https://www.youtube.com/embed/RXjnWGMRcHc"
+                    title="Video Edukasi 3" frameborder="0" allowfullscreen></iframe>
+                <p class="video-caption">Kampanya Adaptasi</p>
+            </div>
+            <div class="video-item">
+                <iframe width="100%" height="215" src="https://www.youtube.com/embed/RXjnWGMRcHc"
+                    title="Video Edukasi 3" frameborder="0" allowfullscreen></iframe>
+                <p class="video-caption">Kampanya Adaptasi</p>
+            </div>
+
 
             <div class="video-section">
                 <h2>Video Kesehatan</h2>

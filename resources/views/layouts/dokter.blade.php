@@ -79,10 +79,7 @@
                 <a href="#" class="py-2 px-4 rounded hover:bg-gray-800 flex items-center">
                     <i class="ri-history-line mr-2"></i> Riwayat Aktivitas
                 </a>
-                <a href="#" class="py-2 px-4 rounded hover:bg-gray-800 flex items-center mt-2">
-                    <i class="ri-settings-3-line mr-2"></i> Pengaturan Sistem
-                </a>
-            </div>
+
 
             <!-- Animated Icons Bar -->
             <div class="flex justify-center gap-4 mt-6 mb-4 relative z-10">

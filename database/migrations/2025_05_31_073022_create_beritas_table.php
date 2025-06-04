@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('idBerita');
             $table->unsignedBigInteger('admin_id');
             $table->string('judulBerita');
-            $table->string('isiBerita');
+            $table->longText('isiBerita');
             $table->string('tanggalBerita');
             $table->text('gambarBerita')->nullable();
             $table->timestamps();

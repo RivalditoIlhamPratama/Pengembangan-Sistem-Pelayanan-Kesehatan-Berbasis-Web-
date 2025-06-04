@@ -7,6 +7,8 @@ use App\Models\berita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+
 
 class BeritaController extends Controller
 {
@@ -53,6 +55,16 @@ class BeritaController extends Controller
         return redirect('/admin/berita')->with('success', 'Data berita berhasil ditambahkan.');
     }
 
+    public function show($id)
+    {
+        $berita = berita::findOrFail($id);
+        $berita_lain = berita::where('idBerita', '!=', $id)->latest()->take(5)->get();
+    
+        return view('berita.detail', compact('berita', 'berita_lain'));
+    }
+    
+
+
     public function update(Request $request, $id)
     {
         try {
@@ -79,4 +91,19 @@ class BeritaController extends Controller
             return back()->withErrors(['error' => 'Terjadi kesalahan saat memperbarui data berita.']);
         }
     }
+
+    public function destroy($id)
+    {
+        $berita = Berita::findOrFail($id);
+    
+        if ($berita->gambarBerita) {
+            Storage::disk('public')->delete($berita->gambarBerita);
+        }
+    
+        $berita->delete();
+    
+        return redirect()->back()->with('success', 'Berita berhasil dihapus.');
+    }
+    
+
 }

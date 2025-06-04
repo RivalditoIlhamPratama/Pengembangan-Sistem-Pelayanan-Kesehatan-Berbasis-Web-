@@ -86,4 +86,13 @@ class AdminController extends Controller
         return view('admin.laporan_klinik',['admin'=>$admin,'laporan'=>$laporan,'klinik'=>$klinik]);
     }
 
+    public function destroyPengaduan($id)
+{
+    $pengaduan = \App\Models\pengaduan::findOrFail($id);
+    $pengaduan->delete();
+
+    return redirect()->back()->with('success', 'Data pengaduan berhasil dihapus.');
+}
+
+
 }

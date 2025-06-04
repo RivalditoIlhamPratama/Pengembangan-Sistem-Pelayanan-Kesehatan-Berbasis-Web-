@@ -9,6 +9,12 @@ class berita extends Model
 {
     use HasFactory;
 
+    protected $table = 'beritas'; // optional, kalau nama model dan tabel beda
+
+    protected $primaryKey = 'idBerita'; // penting!
+    public $incrementing = true;
+    protected $keyType = 'int';
+
     protected $fillable = ['admin_id', 'judulBerita', 'isiBerita', 'gambarBerita', 'tanggalBerita'];
 
     public function admin()

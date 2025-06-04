@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puskesmas Kraksaan</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/berita.css') }}">
+    <script src="{{ asset('assets/main.js') }}" defer></script>
+</head>
+
+<body>
+    @php use Illuminate\Support\Str; use Carbon\Carbon; @endphp
+    <header class="header mt-0">
+        <nav class="mt-0">
+            <div class="nav__header">
+                <div class="nav__logo">
+                    <a href="{{ url('/') }}"><img src="{{ asset('assets/11.png') }}" alt="logo" />Puskesmas Kraksaan</a>
+                </div>
+                <div class="nav__menu__btn" id="menu-btn">
+                    <span><i class="ri-menu-line"></i></span>
+                </div>
+            </div>
+            <ul class="nav__links" id="nav-links">
+                @if (auth()->check() && auth()->user()->role === 'pasien')
+                    <li class="link"><a href="{{ route('pasien.dashboard') }}">Beranda</a></li>
+                    <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
+                    <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
+                    <li class="link"><a href="{{ url('/alur-pelayanan') }}">Alur Pelayanan</a></li>
+                    <li class="link"><a href="{{ route('pasien.reports') }}">Pengaduan</a></li>
+                @endif
+                @if (!auth()->check() || (auth()->check() && auth()->user()->role !== 'pasien'))
+                    <li class="link"><a href="{{ url('/') }}">Beranda</a></li>
+                    <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
+                    <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
+                    <li class="link"><a href="{{ url('/alur-pelayanan') }}">Pelayanan</a></li>
+                    <li class="link"><a href="{{ route('pasien.reports') }}" class="disabled-link">Pengaduan</a></li>
+                @endif
+                @if (!auth()->check() || (auth()->check() && auth()->user()->role !== 'pasien'))
+                    <li class="link">
+                        <a href="{{ url('/login') }}" class="btn-link">
+                            <button class="btn">Login</button>
+                        </a>
+                    </li>
+                @endif
+
+                @if (auth()->check() && auth()->user()->role === 'pasien')
+                    <li class="link">
+                        <div class="user-action">
+                            <span class="user-btn">
+                                <i class="ri-user-fill"></i> {{ auth()->user()->name }}
+                            </span>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="logout-btn">
+                                    <i class="ri-logout-box-r-line"></i> Logout
+                                </button>
+                            </form>
+                        </div>
+                    </li>
+                @endif
+
+            </ul>
+        </nav>
+    </header>
+
+    <section class="news-section">
+        <article class="main-content">
+            <h1>{{ $berita->judulBerita }}</h1>
+            <div class="meta">
+                <span>📅 {{ Carbon::parse($berita->tanggalBerita)->translatedFormat('d F Y') }}</span>
+            </div>
+            @if($berita->gambarBerita)
+                <img src="{{ asset('storage/' . $berita->gambarBerita) }}" alt="Foto Berita" class="img-fluid rounded mb-4">
+            @endif
+            <p style="white-space: pre-line;">{!! nl2br(e($berita->isiBerita)) !!}</p>
+        </article>
+
+        <aside class="sidebar">
+            <h3>Berita Sebelumnya</h3>
+            @foreach($berita_lain as $item)
+            <a href="{{ route('berita.show', $item->idBerita) }}" class="text-decoration-none text-dark mb-3 d-block">
+                <div class="news-item">
+                    <img src="{{ asset('storage/' . $item->gambarBerita) }}" alt="Thumbnail Berita">
+                    <div>
+                        <p class="mb-1 fw-semibold">{{ Str::limit($item->judulBerita, 40) }}</p>
+                        <small class="text-muted">
+                            📅 {{ \Carbon\Carbon::parse($item->tanggalBerita)->translatedFormat('d F Y') }}
+                        </small>
+                    </div>
+                </div>
+            </a>
+            
+            @endforeach
+        </aside>
+    </section>
+
+    <footer class="footer">
+        <div class="section__container footer__container">
+            <div class="footer__col">
+                <div class="footer__logo">
+                    <a href="#"><img src="{{ asset('assets/11.png') }}" alt="logo" />Puskesmas Kraksaan</a>
+                </div>
+                <p>
+                    layanan digital seperti jadwal praktik dokter,
+                    rincian tarif layanan, berita terkait puskesmas kraksaan
+                </p>
+                <div class="footer__socials">
+                    <a href="https://www.facebook.com/pkmkraksaan/?locale=id_ID"><i class="ri-facebook-fill"></i></a>
+                    <a href="https://www.instagram.com/puskesmas_kraksaan/"><i class="ri-instagram-line"></i></a>
+                    <a href="https://www.youtube.com/@puskesmaskraksaan6927"><i class="ri-youtube-fill"></i></a>
+                </div>
+            </div>
+    
+            <div class="footer__col d-flex justify-content-between gap-4 flex-wrap" style="flex: 1 1 100%;">
+                <!-- Alamat -->
+                <div style="flex: 1 1 50%;">
+                    <h4>Alamat :</h4>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.124710643871!2d113.41036907410655!3d-7.759615477628249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd701af20f8ae5d%3A0x8ccde8d2ff8aed0c!2sPuskesmas%20Kraksaan!5e0!3m2!1sid!2sid!4v1714445262765!5m2!1sid!2sid"
+                        width="100%" height="270" style="border:0; border-radius:10px; margin-top:10px;"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+    
+                <!-- Kontak -->
+                <div style="flex: 1 1 45%;">
+                    <h4>Contact :</h4>
+                    <div class="footer__links">
+                        <p><i class="ri-mail-line"></i> Email: <a href="mailto:puskesmaskraksaan@gmail.com">puskesmaskraksaan@gmail.com</a></p>
+                        <p><i class="ri-phone-line"></i> Telp: <a href="tel:+628113373119">0811-3373-119</a></p>
+                        <p><i class="ri-time-line"></i> Jam Operasional: <br>Senin - Jumat, 07.00 - 14.00</p>
+                        <a href="https://wa.me/628113373119" target="_blank" class="btn-wa">
+                            <i class="ri-whatsapp-line"></i> Chat WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="footer__bar">
+            Copyright © 2024 Puskesmas Kraksaan. All rights reserved.
+        </div>
+    </footer>
+    
+
+</body>
+
+</html>

@@ -33,7 +33,8 @@
         <!-- Tambahkan Logo di sini -->
         <div class="logo-container d-flex justify-content-center mb-4">
             <img src="{{ asset('assets/11.png') }}" alt="Logo Puskesmas Kraksaan" class="logo-img"
-                style="max-width: 100px;" />
+    style="max-width: 200px; width: 100%; height: auto;" />
+
         </div>
 
         <h2>Buat Akun Baru</h2>

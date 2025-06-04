@@ -42,7 +42,7 @@
         }
 
         .login-container img {
-            width: 120px;
+            width: 200px;
             display: block;
             margin: 0 auto 20px;
         }

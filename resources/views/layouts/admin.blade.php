@@ -16,6 +16,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <body class="bg-gray-100">
@@ -96,11 +98,7 @@
                     class="py-2 px-4 rounded hover:bg-gray-800 flex items-center {{ request()->routeIs('admin.activity_log') ? 'bg-gray-800' : '' }}">
                     <i class="ri-history-line mr-2"></i> Riwayat Aktivitas
                 </a>
-                <a href=""
-                    class="py-2 px-4 rounded hover:bg-gray-800 flex items-center mt-2 {{ request()->routeIs('admin.settings') ? 'bg-gray-800' : '' }}">
-                    <i class="ri-settings-3-line mr-2"></i> Pengaturan Sistem
-                </a>
-            </div>
+
 
             <div class="flex justify-center gap-4 mt-6 mb-4">
                 <i class="ri-heart-pulse-line text-red-400 text-2xl animate-pulse"></i>
@@ -116,7 +114,7 @@
         <div class="flex-1 flex flex-col overflow-hidden">
             <!-- Header -->
             <header class="flex justify-between items-center p-4 bg-white border-b">
-                <button class="text-2xl text-gray-700">
+                <button id="toggleSidebar" class="text-2xl text-gray-700">
                     <i class="ri-menu-line"></i>
                 </button>
                 <div class="flex items-center space-x-3">
