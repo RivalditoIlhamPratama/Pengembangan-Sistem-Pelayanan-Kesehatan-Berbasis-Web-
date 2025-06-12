@@ -16,10 +16,10 @@ class DokterSeeder extends Seeder
     public function run()
     {
         // Create specific test users
-        $nama = ['Siti Jamila, Amd. Keb','drg. Dwi Wahyudi',' dr. Heni Rahmawati',' dr. Fathullah Huda'];
+        $nama = ['Siti Jamila, Amd. Keb', 'drg. Dwi Wahyudi', ' dr. Heni Rahmawati', ' dr. Fathullah Huda'];
         for ($i = 0; $i < count($nama); $i++) {
             $user = User::create([
-                'username' => 'dokter' . ($i + 1),
+                'username' => $nama[$i],
                 'password' => Hash::make('password'),
                 'role' => 'dokter',
                 'remember_token' => Str::random(10),

@@ -21,8 +21,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Hari Praktek</label>
-                    <select class="form-select" name="hariPraktek" required>
-                        <option value="">Pilih Hari</option>
+                    <select class="form-select tomselect" name="hariPraktek[]" multiple="multiple" required>
                         @foreach ($hari as $h)
                             <option value="{{ $h->idHari }}">
                                 {{ $h->namaHari }}
@@ -75,4 +74,22 @@
             </form>
         </div>
     </div>
+
+    @push('styles')
+        <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.bootstrap5.min.css" rel="stylesheet" />
+    @endpush
+
+    @push('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                new TomSelect('.tomselect', {
+                    plugins: ['remove_button'],
+                    create: true,
+                    placeholder: "Pilih Hari",
+                    allowEmptyOption: true,
+                });
+            });
+        </script>
+    @endpush
 @endsection

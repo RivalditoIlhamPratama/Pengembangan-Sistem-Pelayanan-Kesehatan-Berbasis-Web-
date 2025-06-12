@@ -17,22 +17,23 @@ class KlinikSeeder extends Seeder
     public function run(): void
     {
         // Create specific test users
-        for ($i = 1; $i <=1; $i++) {
+        $nama = ['Gigi', 'Umum', ' Anak'];
+        for ($i = 0; $i < count($nama); $i++) {
             $user = User::create([
-                'username' => 'klinik' . ($i),
+                'username' => 'Klinik' . $nama[$i],
                 'password' => Hash::make('password'),
                 'role' => 'klinik',
                 'remember_token' => Str::random(10),
             ]);
-            echo "Created user: " . $user->username . "\n";
+            echo "Created klinik: " . $user->username . "\n";
 
-            $klinik = klinik::create([
+            $klinik = Klinik::create([
                 'user_id' => $user->id_user,
-                'namaKlinik' => 'Klinik ' . $i,
-                'alamatKlinik' => 'Jl. Example No.' . $i,
-                'email' => 'Klinik' . $i . '@example.com'
+                'namaKlinik' => 'Klinik ' . $nama[$i],
+                'alamatKlinik' => 'Jl. Example No.' . ($i + 1),
+                'email' => '0812345678' . $i,
             ]);
-            echo "Created pasien: " . $klinik->namaKlinik . "\n";
+            echo "Created Klinik: " . $klinik->namaKlinik . "\n";
         }
     }
 }

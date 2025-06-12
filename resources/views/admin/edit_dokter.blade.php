@@ -23,19 +23,18 @@
                         value="{{ old('spesialis', $dokter->spesialis) }}" required>
                 </div>
 
+                {{-- Hari Praktek --}}
                 <div class="mb-3">
-                    <label for="editHariPraktek" class="form-label">Hari Praktek</label>
-                    <select class="form-select" id="editHariPraktek" name="hariPraktek" required>
-                        <option value="">Pilih Hari</option>
+                    <label for="hariPraktek" class="form-label">Hari Praktek</label>
+                    <select id="hariPraktek" name="hariPraktek[]" multiple class="form-control">
                         @foreach ($hari as $h)
                             <option value="{{ $h->idHari }}"
-                                {{ old('hariPraktek', $dokter->jadwaldokters->first()->hari->idHari ?? '') == $h->idHari ? 'selected' : '' }}>
+                                {{ in_array($h->idHari, old('hariPraktek', $dokter->jadwaldokters->pluck('Hari_id')->toArray())) ? 'selected' : '' }}>
                                 {{ $h->namaHari }}
                             </option>
                         @endforeach
                     </select>
                 </div>
-
 
                 <div class="mb-3">
                     <label for="editJamPraktek" class="form-label">Jam Praktek</label>
@@ -50,7 +49,6 @@
                         @endforeach
                     </select>
                 </div>
-
 
                 <div class="mb-3">
                     <label for="editJenisKelaminDokter" class="form-label">Jenis Kelamin Dokter</label>
@@ -88,52 +86,33 @@
             </form>
         </div>
     </div>
+@endsection
 
+@push('styles')
+    <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.bootstrap5.min.css" rel="stylesheet">
+@endpush
 
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Edit modal population for edit_dokter form
-            document.querySelectorAll(".btn-warning").forEach(button => {
-                button.addEventListener("click", function(event) {
-                    event.preventDefault();
-                    const row = this.closest("tr");
-                    const id = this.getAttribute("href").split('/').pop();
-
-                    // Set form action URL for edit_dokter form
-                    const form = document.getElementById("editDataDokter");
-                    form.action = `/admin/data-dokter/update/${id}`;
-
-                    // Populate form fields
-                    document.getElementById("editId").value = id;
-                    document.getElementById("editNamaDokter").value = row.querySelector(
-                        "td:nth-child(2)").innerText.trim();
-                    document.getElementById("editSpesialis").value = row.querySelector(
-                        "td:nth-child(3)").innerText.trim();
-                    document.getElementById("editTglLahir").value = row.querySelector(
-                        "td:nth-child(5)").innerText.trim();
-                    document.getElementById("editAlamatDokter").value = row.querySelector(
-                        "td:nth-child(6)").innerText.trim();
-                    document.getElementById("editNoTelepon").value = row.querySelector(
-                        "td:nth-child(7)").innerText.trim();
-                    document.getElementById("editHariPraktek").value = this.getAttribute(
-                        "data-hari");
-                    document.getElementById("editJamPraktek").value = this.getAttribute("data-jam");
-
-                    // Populate jenis kelamin select
-                    const kelamin = this.getAttribute("data-kelamin");
-                    const selectKelamin = document.getElementById("editJenisKelaminDokter");
-                    if (kelamin === "Laki laki" || kelamin === "Perempuan") {
-                        selectKelamin.value = kelamin;
-                    } else {
-                        selectKelamin.value = "";
-                    }
-
-                    // Show modal
-                    var editModal = new bootstrap.Modal(document.getElementById(
-                        'editDataDokterModal'));
-                    editModal.show();
-                });
-            });
+        // Initialize TomSelect with tag-like behavior
+        new TomSelect('#hariPraktek', {
+            plugins: ['remove_button'],
+            create: false, // Disable creating new items
+            placeholder: 'Pilih hari praktek',
+            maxItems: 5, // Maximum number of selected items
+            searchField: ['text'], // Enable search within the dropdown
+            items: 3, // Number of items to display before scrolling
+            render: {
+                item: function(data, escape) {
+                    return '<div class="p-1 bg-gray-300 rounded-full text-sm mr-1 mb-1 text-center">' +
+                        escape(data.text) +
+                        ' <span class="text-xs text-gray-600 cursor-pointer" onclick="this.parentElement.remove()">x</span></div>';
+                },
+                option: function(data, escape) {
+                    return '<div class="p-2 hover:bg-gray-100">' + escape(data.text) + '</div>';
+                }
+            }
         });
     </script>
-@endsection
+@endpush
