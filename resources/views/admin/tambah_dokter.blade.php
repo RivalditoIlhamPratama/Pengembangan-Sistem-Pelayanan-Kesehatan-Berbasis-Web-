@@ -5,7 +5,7 @@
         <div class="card p-4 shadow-sm">
             <h3 class="mb-4">Form Tambah Dokter</h3>
 
-            <form action="{{ route('admin.data_dokter.store') }}" method="POST">
+            <form action="{{ route('admin.data_dokter.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="namaDokter" class="form-label">Nama Dokter</label>
@@ -67,6 +67,11 @@
                     <label for="noTelepon" class="form-label">No Telepon</label>
                     <input type="text" class="form-control" name="noTelepon" id="noTelepon"
                         placeholder="Contoh: 081234567890">
+                </div>
+
+                <div class="mb-3">
+                    <label for="gambarProfil" class="form-label">Foto</label>
+                    <input type="file" id="gambarProfil" name="gambarProfil" accept="image/*" capture="environment">
                 </div>
 
                 <button type="submit" class="btn btn-success">Simpan</button>

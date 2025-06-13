@@ -97,7 +97,7 @@
                     <textarea name="aduan" placeholder="Isi Pengaduan" rows="4" required>{{ old('aduan') }}</textarea>
 
                     <label for="gambar">Ambil Gambar (kamera/galeri):</label>
-<input type="file" id="gambar" name="gambar" accept="image/*" capture="environment">
+                    <input type="file" id="gambar" name="gambar" accept="image/*" capture="environment">
 
 
 

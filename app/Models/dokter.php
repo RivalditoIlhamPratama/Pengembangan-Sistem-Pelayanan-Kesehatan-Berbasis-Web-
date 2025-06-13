@@ -11,7 +11,8 @@ class dokter extends Model
 
     protected $primaryKey = 'idDokter';
 
-    protected $fillable =['user_id','namaDokter','spesialis','jenisKelamin','tglLahir','noTelepon','alamatDokter'];
+    protected $fillable = ['user_id', 'namaDokter', 'spesialis', 'jenisKelamin', 'tglLahir', 'noTelepon', 'alamatDokter', 'gambarProfil'];
+
 
     public $timestamps = false;
 
@@ -19,13 +20,13 @@ class dokter extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id_user');
     }
-    public function rekammedis(){
+    public function rekammedis()
+    {
         return $this->hasMany(Rekammedis::class, 'Dokter_id', 'idDokter');
     }
 
     public function jadwaldokters()
     {
         return $this->hasMany(jadwaldokter::class, 'Dokter_id', 'idDokter');
-
     }
 }

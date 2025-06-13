@@ -5,9 +5,10 @@
         <div class="card p-4 shadow-sm">
             <h3 class="mb-4">Form Edit Dokter</h3>
 
-            <form id="editDataDokter" method="POST"
+            <form id="editDataDokter" method="POST" enctype="multipart/form-data"
                 action="{{ route('admin.data_dokter.update', ['id' => $dokter->idDokter]) }}">
                 @csrf
+                @method('PUT')
 
                 <input type="hidden" id="editId" name="id" value="{{ $dokter->idDokter }}">
 
@@ -15,12 +16,18 @@
                     <label for="editNamaDokter" class="form-label">Nama Dokter</label>
                     <input type="text" class="form-control" id="editNamaDokter" name="namaDokter"
                         value="{{ old('namaDokter', $dokter->namaDokter) }}" required>
+                    @error('namaDokter')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label for="editSpesialis" class="form-label">Spesialis</label>
                     <input type="text" class="form-control" id="editSpesialis" name="spesialis"
                         value="{{ old('spesialis', $dokter->spesialis) }}" required>
+                    @error('spesialis')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 {{-- Hari Praktek --}}
@@ -48,6 +55,9 @@
                             </option>
                         @endforeach
                     </select>
+                    @error('jamPraktek')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
@@ -61,24 +71,45 @@
                             {{ old('jenisKelamin', $dokter->jenisKelamin) == 'Perempuan' ? 'selected' : '' }}>Perempuan
                         </option>
                     </select>
+                    @error('jenisKelamin')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label for="editTglLahir" class="form-label">Tanggal Lahir</label>
                     <input type="date" class="form-control" id="editTglLahir" name="tglLahir"
                         value="{{ old('tglLahir', $dokter->tglLahir) }}" required>
+                    @error('tglLahir')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label for="editAlamatDokter" class="form-label">Alamat Dokter</label>
                     <input type="text" class="form-control" id="editAlamatDokter" name="alamatDokter"
                         value="{{ old('alamatDokter', $dokter->alamatDokter) }}" required>
+                    @error('alamatDokter')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label for="editNoTelepon" class="form-label">No Telepon</label>
                     <input type="text" class="form-control" id="editNoTelepon" name="noTelepon"
                         value="{{ old('noTelepon', $dokter->noTelepon) }}">
+                    @error('noTelepon')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="editGambarProfil" class="form-label">Foto Profil</label>
+                    <img src="{{ asset('storage/' . $dokter->gambarProfil) }}" alt="Gambar Profil">
+                    <input type="file" id="editGambarProfil" name="gambarProfil" accept="image/*" capture="environment">
+                    @error('gambarProfil')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <button type="submit" class="btn btn-primary">Simpan Perubahan</button>

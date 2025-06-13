@@ -92,7 +92,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/data-dokter/tambah', [AdminController::class, 'tambah_data_dokter'])->name('admin.data_dokter.tambah');
     Route::get('/data-dokter/edit/{id}', [AdminController::class, 'edit_data_dokter'])->name('admin.data_dokter.edit');
     Route::post('/data-dokter/store', [DokterController::class, 'store'])->name('admin.data_dokter.store');
-    Route::post('/data-dokter/update/{id}', [DokterController::class, 'update'])->name('admin.data_dokter.update');
+    Route::put('/data-dokter/update/{id}', [DokterController::class, 'update'])->name('admin.data_dokter.update');
     Route::post('/data-dokter/delete/{id}', [DokterController::class, 'destroy'])->name('admin.data_dokter.delete');
     Route::get('/laporan-klinik', [AdminController::class, 'reports'])->name('admin.reports');
     Route::get('/chat/{userId}', [ChatController::class, 'adminChat'])->name('admin.chat');
@@ -196,5 +196,3 @@ Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show
 
 
 Route::delete('/admin/pengaduan/{id}', [AdminController::class, 'destroyPengaduan'])->name('admin.pengaduan.destroy');
-
-
