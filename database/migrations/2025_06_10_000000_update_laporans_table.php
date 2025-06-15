@@ -18,6 +18,7 @@ class UpdateLaporansTable extends Migration
             $table->string('diagnosaMedis')->nullable();
             $table->string('NIK')->nullable();
             $table->string('alamatPasien')->nullable();
+            $table->timestamps();
             // Add other rekammedis fields as needed
         });
     }

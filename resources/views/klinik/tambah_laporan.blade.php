@@ -7,6 +7,7 @@
 
             <form action="{{ route('klinik.laporan.submit') }}" method="POST">
                 @csrf
+                <input type="hidden" name="Klinik_id" value="{{ $klinik->idKlinik ?? '' }}" />
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <div class="col-md-3">

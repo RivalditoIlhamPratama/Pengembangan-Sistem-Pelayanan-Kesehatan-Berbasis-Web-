@@ -29,7 +29,23 @@ class LaporanController extends Controller
             })
             ->get();
 
-        return response()->json($laporans);
+        // Transform the data to include tanggal from laporan created_at and prefer rekammedis.dokter.namaDokter
+        $laporansTransformed = $laporans->map(function ($laporan) {
+            return [
+                'idLaporan' => $laporan->idLaporan,
+                'tanggal' => $laporan->created_at ? $laporan->created_at->format('Y-m-d') : null,
+                'namaPasien' => $laporan->namaPasien,
+                'NIK' => $laporan->NIK,
+                'alamatPasien' => $laporan->alamatPasien,
+                'diagnosaMedis' => $laporan->diagnosaMedis,
+                'namaDokter' => $laporan->rekam_medis && $laporan->rekam_medis->dokter
+                    ? $laporan->rekam_medis->dokter->namaDokter
+                    : $laporan->namaDokter,
+                'namaKlinik' => $laporan->klinik ? $laporan->klinik->namaKlinik : null,
+            ];
+        });
+
+        return response()->json($laporansTransformed);
     }
 
     public function store(Request $request)

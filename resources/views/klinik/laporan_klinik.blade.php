@@ -15,7 +15,6 @@
                     </button>
                 </div>
 
-
                 <!-- Tombol Aksi -->
                 <div class="d-flex gap-2">
                     <a href="{{ route('klinik.laporan.tambah') }}" class="btn btn-primary">
@@ -50,12 +49,12 @@
                         @foreach ($laporan as $lap)
                             <tr>
                                 <td>{{ $lap->idLaporan }}</td>
-                                <td>{{ $lap->rekam_medis ? $lap->rekam_medis->tanggalPeriksa : '' }}</td>
+                                <td>{{ $lap->created_at ? $lap->created_at->format('Y-m-d') : '' }}</td>
                                 <td>{{ $lap->rekam_medis ? $lap->rekam_medis->namaPasien : $lap->namaPasien }}</td>
                                 <td>{{ $lap->rekam_medis ? $lap->rekam_medis->NIK : $lap->NIK }}</td>
                                 <td>{{ $lap->rekam_medis ? $lap->rekam_medis->alamatPasien : $lap->alamatPasien }}</td>
                                 <td>{{ $lap->rekam_medis ? $lap->rekam_medis->diagnosaMedis : $lap->diagnosaMedis }}</td>
-                                <td>{{ $lap->rekam_medis ? optional($lap->rekam_medis->dokter)->namaDokter ?? (optional($lap->rekam_medis->staffrekammedis)->namaStaff ?? '') : '' }}
+                                <td>{{ optional($lap->rekam_medis)->dokter ? optional($lap->rekam_medis->dokter)->namaDokter : $lap->namaDokter ?? '' }}
                                 </td>
                                 <td>{{ $lap->klinik->namaKlinik }}</td>
                                 <td>
@@ -66,8 +65,8 @@
                                         data-alamat="{{ $lap->rekam_medis ? $lap->rekam_medis->alamatPasien : $lap->alamatPasien }}"
                                         data-diagnosa="{{ $lap->rekam_medis ? $lap->rekam_medis->diagnosaMedis : $lap->diagnosaMedis }}"
                                         data-klinik="{{ $lap->klinik->namaKlinik }}"
-                                        data-dokter="{{ $lap->rekam_medis ? optional($lap->rekam_medis->dokter)->namaDokter ?? (optional($lap->rekam_medis->staffrekammedis)->namaStaff ?? '') : '' }}"
-                                        data-tanggal="{{ $lap->rekam_medis ? $lap->rekam_medis->tanggalPeriksa : '' }}">
+                                        data-dokter="{{ optional($lap->rekam_medis)->dokter ? optional($lap->rekam_medis->dokter)->namaDokter : $lap->namaDokter ?? '' }}"
+                                        data-tanggal="{{ $lap->created_at ? $lap->created_at->format('Y-m-d') : '' }}">
                                         <i class="fas fa-info-circle"></i> Detail
                                     </button>
                                 </td>
@@ -179,7 +178,6 @@
             location.reload(); // Reload to reset the view
         });
 
-        // Export PDF
         // Export PDF
         document.getElementById("exportPdf").addEventListener("click", function() {
             const {

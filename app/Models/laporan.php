@@ -9,7 +9,7 @@ class laporan extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'Klinik_id',
