@@ -2,22 +2,69 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\laporan;
+use App\Models\rekammedis;
+use App\Models\dokter;
+use App\Models\klinik;
 use Illuminate\Http\Request;
 
 class LaporanController extends Controller
 {
+    public function create()
+    {
+        $kliniks = klinik::all();
+        $dokters = dokter::all();
+
+        return view('klinik.tambah_laporan', compact('kliniks', 'dokters'));
+    }
+
+    public function index(Request $request)
+    {
+        $klinikId = $request->query('klinik_id');
+
+        $laporans = laporan::with(['klinik', 'rekam_medis.dokter'])
+            ->where('Klinik_id', $klinikId)
+            ->orWhereHas('rekam_medis', function ($query) use ($klinikId) {
+                $query->where('Klinik_id', $klinikId);
+            })
+            ->get();
+
+        return response()->json($laporans);
+    }
+
     public function store(Request $request)
-{
-    $validatedData = $request->validate([
-        'Klinik_id' => 'required|exists:kliniks,idKlinik',
-        'RekamMedis_id' => 'required|exists:rekammedis,idRekamMedis',
-    ]);
+    {
+        $validatedData = $request->validate([
+            'Klinik_id' => 'required|exists:kliniks,idKlinik',
+            'RekamMedis_id' => 'nullable|exists:rekammedis,idRekamMedis',
+            'namaPasien' => 'nullable|string|max:255',
+            'namaDokter' => 'nullable|string|max:255',
+            'diagnosaMedis' => 'nullable|string|max:255',
+            'NIK' => 'nullable|string|max:20',
+            'alamatPasien' => 'nullable|string|max:255',
+        ]);
 
-    $laporan = new \App\Models\laporan();
-    $laporan->Klinik_id = $validatedData['Klinik_id'];
-    $laporan->RekamMedis_id = $validatedData['RekamMedis_id'];
-    $laporan->save();
+        // Verify that the dokter belongs to the klinik if RekamMedis_id is provided
+        if (!empty($validatedData['RekamMedis_id'])) {
+            $rekammedis = rekammedis::with('dokter')->find($validatedData['RekamMedis_id']);
+            if (!$rekammedis || $rekammedis->Klinik_id != $validatedData['Klinik_id']) {
+                return redirect()->back()->withErrors(['RekamMedis_id' => 'Rekammedis does not belong to the specified Klinik.'])->withInput();
+            }
+            if ($rekammedis->dokter && $rekammedis->dokter->Klinik_id != $validatedData['Klinik_id']) {
+                return redirect()->back()->withErrors(['Dokter_id' => 'Dokter does not belong to the specified Klinik.'])->withInput();
+            }
+        }
 
-    return redirect()->route('klinik.laporan')->with('success', 'Laporan berhasil disimpan.');
-}
+        $laporan = new laporan();
+        $laporan->Klinik_id = $validatedData['Klinik_id'];
+        $laporan->RekamMedis_id = $validatedData['RekamMedis_id'] ?? null;
+        $laporan->namaPasien = $validatedData['namaPasien'] ?? null;
+        $laporan->namaDokter = $validatedData['namaDokter'] ?? null;
+        $laporan->diagnosaMedis = $validatedData['diagnosaMedis'] ?? null;
+        $laporan->NIK = $validatedData['NIK'] ?? null;
+        $laporan->alamatPasien = $validatedData['alamatPasien'] ?? null;
+        $laporan->save();
+
+        return redirect()->route('klinik.laporan')->with('success', 'Laporan berhasil disimpan.');
+    }
 }

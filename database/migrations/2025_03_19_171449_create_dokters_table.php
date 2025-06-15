@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('dokters', function (Blueprint $table) {
             $table->id('idDokter');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('Klinik_id');
             $table->string('namaDokter');
             $table->string('spesialis');
             $table->enum('jenisKelamin', ['Laki-Laki', 'Perempuan']);
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->text('gambarProfil')->nullable();
 
             $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');
+            $table->foreign('Klinik_id')->references('idKlinik')->on('kliniks')->onDelete('cascade');
         });
     }
 

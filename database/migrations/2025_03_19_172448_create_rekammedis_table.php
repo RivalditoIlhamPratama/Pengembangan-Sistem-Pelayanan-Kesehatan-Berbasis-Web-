@@ -15,13 +15,14 @@ return new class extends Migration
             $table->id('idRekamMedis');
             $table->unsignedBigInteger('Dokter_id')->nullable();
             $table->unsignedBigInteger('StaffRm_id')->nullable();
+            $table->unsignedBigInteger('Klinik_id');
             $table->string('noRm');
             $table->string('namaPasien');
             $table->string('alamatPasien');
-            $table->enum('jenisKelamin',['Laki laki', 'Perempuan']);
+            $table->enum('jenisKelamin', ['Laki laki', 'Perempuan']);
             $table->string('usiaPasien');
-            $table->enum('agamaPasien',['Islam', 'Kristen','Katolik','Hindu','Buddha','Konghucu']);
-            $table->enum('statusNikah',['Belum Kawin', 'Kawin Tercatat','Kawin Belum Tercatat','Cerai Hidup','Cerai Mati']);
+            $table->enum('agamaPasien', ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu']);
+            $table->enum('statusNikah', ['Belum Kawin', 'Kawin Tercatat', 'Kawin Belum Tercatat', 'Cerai Hidup', 'Cerai Mati']);
             $table->string('NIK');
             $table->date('tanggalPeriksa');
             $table->string('tekananDarah');
@@ -39,6 +40,7 @@ return new class extends Migration
 
             $table->foreign('Dokter_id')->references('idDokter')->on('dokters')->onDelete('cascade');
             $table->foreign('StaffRm_id')->references('idStaffRm')->on('staffrekammedis')->onDelete('cascade');
+            $table->foreign('Klinik_id')->references('idKlinik')->on('kliniks')->onDelete('cascade');
         });
     }
 

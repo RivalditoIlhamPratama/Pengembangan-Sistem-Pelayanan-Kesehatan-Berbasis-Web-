@@ -15,11 +15,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdminSeeder::class,
             PasienSeeder::class,
-            DokterSeeder::class,
+            KlinikSeeder::class,
             HariSeeder::class,
             WaktuSeeder::class,
             StaffrekammedisSeeder::class,
-            KlinikSeeder::class,
+            DokterSeeder::class,
         ]);
     }
 }

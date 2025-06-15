@@ -9,17 +9,14 @@
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="Klinik_id" class="form-label">Klinik</label>
-                        <select name="Klinik_id" id="Klinik_id" class="form-control" required>
-                            <option value="">Pilih Klinik</option>
-                            @foreach ($kliniks as $klinik)
-                                <option value="{{ $klinik->idKlinik }}">{{ $klinik->namaKlinik ?? 'Nama Klinik' }}</option>
-                            @endforeach
-                        </select>
+                        <div class="col-md-3">
+                            <label for="Klinik_id" class="form-label">Klinik</label>
+                            <input type="text" value="{{ $klinik->namaKlinik ?? 'Nama Klinik' }}" readonly />
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <label for="RekamMedis_id" class="form-label">Rekam Medis</label>
-                        <select name="RekamMedis_id" id="RekamMedis_id" class="form-control" required>
+                        <select name="RekamMedis_id" id="RekamMedis_id" class="form-control">
                             <option value="">Pilih Rekam Medis</option>
                             @foreach ($rekammedis as $rekam)
                                 <option value="{{ $rekam->idRekamMedis }}" data-namapasien="{{ $rekam->namaPasien }}"
@@ -35,28 +32,33 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label class="form-label">Nama Dokter</label>
-                        <input type="text" class="form-control" id="namaDokter" readonly />
+                        <label for="namaDokter" class="form-label">Nama Dokter</label>
+                        <select name="namaDokter" id="namaDokter" class="form-control" required>
+                            <option value="">Pilih Dokter</option>
+                            @foreach ($dokters as $dokter)
+                                <option value="{{ $dokter->namaDokter }}">{{ $dokter->namaDokter }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Nama Pasien</label>
-                        <input type="text" id="namaPasien" class="form-control" readonly>
+                        <input type="text" id="namaPasien" name="namaPasien" class="form-control">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">NIK Pasien</label>
-                        <input type="text" class="form-control" id="NIK" readonly />
+                        <input type="text" class="form-control" id="NIK" name="NIK" />
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Alamat Pasien</label>
-                        <input type="text" id="alamatPasien" class="form-control" readonly>
+                        <input type="text" id="alamatPasien" name="alamatPasien" class="form-control">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label class="form-label">Diagnosa Medis</label>
-                        <input type="text" id="diagnosa" class="form-control" readonly>
+                        <input type="text" id="diagnosa" name="diagnosaMedis" class="form-control">
                     </div>
                 </div>
 

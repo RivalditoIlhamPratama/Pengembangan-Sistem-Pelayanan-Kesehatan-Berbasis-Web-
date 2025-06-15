@@ -28,6 +28,7 @@ class DokterSeeder extends Seeder
 
             $dokter = Dokter::create([
                 'user_id' => $user->id_user,
+                'Klinik_id' => '1',
                 'namaDokter' => $nama[$i],
                 'spesialis' => 'Spesialis',
                 'jenisKelamin' => ($i + 1) % 2 ? 'Laki-laki' : 'Perempuan',

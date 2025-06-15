@@ -50,24 +50,24 @@
                         @foreach ($laporan as $lap)
                             <tr>
                                 <td>{{ $lap->idLaporan }}</td>
-                                <td>{{ $lap->rekam_medis->tanggalPeriksa }}</td>
-                                <td>{{ $lap->rekam_medis->namaPasien }}</td>
-                                <td>{{ $lap->rekam_medis->NIK }}</td>
-                                <td>{{ $lap->rekam_medis->alamatPasien }}</td>
-                                <td>{{ $lap->rekam_medis->diagnosaMedis }}</td>
-                                <td>{{ optional($lap->rekam_medis->dokter)->namaDokter ?? (optional($lap->rekam_medis->staffrekammedis)->namaStaff ?? '') }}
+                                <td>{{ $lap->rekam_medis ? $lap->rekam_medis->tanggalPeriksa : '' }}</td>
+                                <td>{{ $lap->rekam_medis ? $lap->rekam_medis->namaPasien : $lap->namaPasien }}</td>
+                                <td>{{ $lap->rekam_medis ? $lap->rekam_medis->NIK : $lap->NIK }}</td>
+                                <td>{{ $lap->rekam_medis ? $lap->rekam_medis->alamatPasien : $lap->alamatPasien }}</td>
+                                <td>{{ $lap->rekam_medis ? $lap->rekam_medis->diagnosaMedis : $lap->diagnosaMedis }}</td>
+                                <td>{{ $lap->rekam_medis ? optional($lap->rekam_medis->dokter)->namaDokter ?? (optional($lap->rekam_medis->staffrekammedis)->namaStaff ?? '') : '' }}
                                 </td>
                                 <td>{{ $lap->klinik->namaKlinik }}</td>
                                 <td>
                                     <button class="btn btn-sm btn-info detail-btn" data-bs-toggle="modal"
                                         data-bs-target="#detailModal" data-id="{{ $lap->idLaporan }}"
-                                        data-nama="{{ $lap->rekam_medis->namaPasien }}"
-                                        data-nik="{{ $lap->rekam_medis->NIK }}"
-                                        data-alamat="{{ $lap->rekam_medis->alamatPasien }}"
-                                        data-diagnosa="{{ $lap->rekam_medis->diagnosaMedis }}"
+                                        data-nama="{{ $lap->rekam_medis ? $lap->rekam_medis->namaPasien : $lap->namaPasien }}"
+                                        data-nik="{{ $lap->rekam_medis ? $lap->rekam_medis->NIK : $lap->NIK }}"
+                                        data-alamat="{{ $lap->rekam_medis ? $lap->rekam_medis->alamatPasien : $lap->alamatPasien }}"
+                                        data-diagnosa="{{ $lap->rekam_medis ? $lap->rekam_medis->diagnosaMedis : $lap->diagnosaMedis }}"
                                         data-klinik="{{ $lap->klinik->namaKlinik }}"
-                                        data-dokter="{{ optional($lap->rekam_medis->dokter)->namaDokter ?? (optional($lap->rekam_medis->staffrekammedis)->namaStaff ?? '') }}"
-                                        data-tanggal="{{ $lap->rekam_medis->tanggalPeriksa }}">
+                                        data-dokter="{{ $lap->rekam_medis ? optional($lap->rekam_medis->dokter)->namaDokter ?? (optional($lap->rekam_medis->staffrekammedis)->namaStaff ?? '') : '' }}"
+                                        data-tanggal="{{ $lap->rekam_medis ? $lap->rekam_medis->tanggalPeriksa : '' }}">
                                         <i class="fas fa-info-circle"></i> Detail
                                     </button>
                                 </td>

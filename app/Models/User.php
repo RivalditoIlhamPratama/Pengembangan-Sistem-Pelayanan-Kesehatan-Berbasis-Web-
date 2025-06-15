@@ -65,7 +65,7 @@ class User extends Authenticatable
     }
     public function klinik()
     {
-        return $this->hasMany(klinik::class, 'user_id', 'id_user');
+        return $this->hasOne(klinik::class, 'user_id', 'id_user');
     }
 
     // Accessor to get name according to role
