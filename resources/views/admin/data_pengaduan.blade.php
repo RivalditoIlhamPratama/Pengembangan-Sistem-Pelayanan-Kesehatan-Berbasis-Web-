@@ -173,15 +173,21 @@ function centangOtomatis(id) {
     const checkbox = document.getElementById(`checkbox-${id}`);
     if (checkbox && !checkbox.checked) {
         checkbox.checked = true;
-        checkbox.disabled = true;
+
+        // Tambahkan warna hijau pada baris
         checkbox.closest('tr').classList.add('table-success');
 
+        // Simpan status ke localStorage
         const STORAGE_KEY = 'pengaduan_terbaca';
         let terbacaList = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
         if (!terbacaList.includes(id.toString())) {
             terbacaList.push(id.toString());
             localStorage.setItem(STORAGE_KEY, JSON.stringify(terbacaList));
         }
+
+        // Nonaktifkan checkbox agar tidak bisa diubah lagi
+        checkbox.disabled = true;
     }
 }
 

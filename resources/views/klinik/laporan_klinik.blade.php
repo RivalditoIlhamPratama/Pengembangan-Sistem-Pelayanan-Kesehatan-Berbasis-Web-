@@ -57,9 +57,11 @@
                                 <td>{{ optional($lap->rekam_medis)->dokter ? optional($lap->rekam_medis->dokter)->namaDokter : $lap->namaDokter ?? '' }}
                                 </td>
                                 <td>{{ $lap->klinik->namaKlinik }}</td>
-                                <td>
+                                <td class="text-center">
+                                    <!-- Tombol Detail -->
                                     <button class="btn btn-sm btn-info detail-btn" data-bs-toggle="modal"
-                                        data-bs-target="#detailModal" data-id="{{ $lap->idLaporan }}"
+                                        data-bs-target="#detailModal"
+                                        data-id="{{ $lap->idLaporan }}"
                                         data-nama="{{ $lap->rekam_medis ? $lap->rekam_medis->namaPasien : $lap->namaPasien }}"
                                         data-nik="{{ $lap->rekam_medis ? $lap->rekam_medis->NIK : $lap->NIK }}"
                                         data-alamat="{{ $lap->rekam_medis ? $lap->rekam_medis->alamatPasien : $lap->alamatPasien }}"
@@ -67,9 +69,24 @@
                                         data-klinik="{{ $lap->klinik->namaKlinik }}"
                                         data-dokter="{{ optional($lap->rekam_medis)->dokter ? optional($lap->rekam_medis->dokter)->namaDokter : $lap->namaDokter ?? '' }}"
                                         data-tanggal="{{ $lap->created_at ? $lap->created_at->format('Y-m-d') : '' }}">
-                                        <i class="fas fa-info-circle"></i> Detail
+                                        <i class="fas fa-info-circle"></i>
                                     </button>
+                                
+                                    <!-- Tombol Edit -->
+                                    <a href="" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                
+                                    <!-- Tombol Hapus -->
+                                    <form action="" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
                                 </td>
+                                
                             </tr>
                         @endforeach
                     </tbody>
@@ -178,115 +195,110 @@
             location.reload(); // Reload to reset the view
         });
 
-        // Export PDF
-        document.getElementById("exportPdf").addEventListener("click", function() {
-            const {
-                jsPDF
-            } = window.jspdf;
-            const doc = new jsPDF();
+// Export PDF
+document.getElementById("exportPdf").addEventListener("click", function () {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
 
-            const logoKiri = new Image();
-            const logoKanan = new Image();
+    const logoKiri = new Image();
+    const logoKanan = new Image();
+    logoKiri.src = "/assets/11.png";
+    logoKanan.src = "/assets/dinas.png";
 
-            // Ganti URL asset sesuai path publik Laravel Anda
-            logoKiri.src = "/assets/11.png";
-            logoKanan.src = "/assets/dinas.png";
+    logoKiri.onload = () => {
+        logoKanan.onload = () => {
+            doc.addImage(logoKiri, "PNG", 10, 10, 25, 25);
+            doc.addImage(logoKanan, "PNG", 170, 10, 25, 25);
+            doc.setFontSize(12);
+            doc.setFont(undefined, "bold");
+            doc.text("PEMERINTAH KABUPATEN PROBOLINGGO DINAS KESEHATAN", 105, 15, { align: "center" });
+            doc.text("PUSKESMAS KRAKSAAN", 105, 22, { align: "center" });
 
-            logoKiri.onload = () => {
-                logoKanan.onload = () => {
-                    // Tambah logo kiri
-                    doc.addImage(logoKiri, "PNG", 10, 10, 25, 25);
+            doc.setFontSize(10);
+            doc.setFont(undefined, "normal");
+            doc.text("Jl. Mayjend Sungkono No.10, Patokan, Kec. Kraksaan, Kabupaten Probolinggo,", 105, 28, { align: "center" });
+            doc.text("Jawa Timur 67282", 105, 33, { align: "center" });
+            doc.setLineWidth(0.5);
+            doc.line(10, 38, 200, 38);
+            doc.setFontSize(12);
+            doc.setFont(undefined, "bold");
+            doc.text("Laporan Tindakan Klinik", 105, 45, { align: "center" });
 
-                    // Tambah logo kanan
-                    doc.addImage(logoKanan, "PNG", 170, 10, 25, 25);
+            const tableHeaders = [["No", "Tanggal", "Nama Pasien", "NIK", "Alamat", "Diagnosa", "Nama Dokter", "Nama Klinik"]];
 
-                    // Tambah teks header di tengah
-                    doc.setFontSize(12);
-                    doc.setFont(undefined, "bold");
-                    doc.text("PEMERINTAH KABUPATEN PROBOLINGGO DINAS KESEHATAN", 105, 15, {
-                        align: "center"
-                    });
-                    doc.text("PUSKESMAS KRAKSAAN", 105, 22, {
-                        align: "center"
-                    });
-
-                    doc.setFontSize(10);
-                    doc.setFont(undefined, "normal");
-                    doc.text("Jl. Mayjend Sungkono No.10, Patokan, Kec. Kraksaan, Kabupaten Probolinggo,",
-                        105, 28, {
-                            align: "center"
-                        });
-                    doc.text("Jawa Timur 67282", 105, 33, {
-                        align: "center"
-                    });
-
-                    // Garis bawah header
-                    doc.setLineWidth(0.5);
-                    doc.line(10, 38, 200, 38);
-
-                    // Judul Laporan
-                    doc.setFontSize(12);
-                    doc.setFont(undefined, "bold");
-                    doc.text("Laporan Tindakan Klinik", 105, 45, {
-                        align: "center"
-                    });
-
-                    // Tabel dimulai dari posisi bawah header
-                    const tableHeaders = [
-                        ["No", "Tanggal", "Nama Pasien", "NIK", "Alamat", "Diagnosa", "Nama Dokter",
-                            "Nama Klinik"
-                        ]
+            // Ambil hanya baris yang masih terlihat (tidak tersembunyi karena filter)
+            const visibleRows = Array.from(document.querySelectorAll("#rekamMedisTable tbody tr"))
+                .filter(row => row.style.display !== "none")
+                .map(row => {
+                    const cells = row.querySelectorAll("td");
+                    return [
+                        cells[0]?.innerText || "",
+                        cells[1]?.innerText || "",
+                        cells[2]?.innerText || "",
+                        cells[3]?.innerText || "",
+                        cells[4]?.innerText || "",
+                        cells[5]?.innerText || "",
+                        cells[6]?.innerText || "",
+                        cells[7]?.innerText || ""
                     ];
+                });
 
-                    const tableBody = Array.from(document.querySelectorAll("#rekamMedisTable tbody tr"))
-                        .map((row) => {
-                            const cells = row.querySelectorAll("td");
-                            return [
-                                cells[0]?.innerText || "", // No
-                                cells[1]?.innerText || "", // Tanggal
-                                cells[2]?.innerText || "", // Nama Pasien
-                                cells[3]?.innerText || "", // NIK
-                                cells[4]?.innerText || "", // Alamat
-                                cells[5]?.innerText || "", // Diagnosa
-                                cells[6]?.innerText || "", // Nama Dokter
-                                cells[7]?.innerText || "", // Nama Klinik
-                            ];
-                        });
+                doc.autoTable({
+    head: tableHeaders,
+    body: visibleRows,
+    startY: 55,
+    theme: "striped",
+    headStyles: {
+        fillColor: [0, 120, 250],
+        textColor: [255, 255, 255],
+        halign: 'center',
+        valign: 'middle'
+    },
+    bodyStyles: {
+        fontSize: 10,
+        halign: 'left'
+    },
+});
 
-                    doc.autoTable({
-                        head: tableHeaders,
-                        body: tableBody,
-                        startY: 55,
-                        theme: "striped",
-                        headStyles: {
-                            fillColor: [0, 120, 250],
-                            textColor: [255, 255, 255],
-                            halign: 'center',
-                            valign: 'middle'
-                        },
-                        bodyStyles: {
-                            fontSize: 10,
-                            halign: 'left'
-                        },
-                    });
+// Tambahkan nama & TTD di pojok kanan bawah
+doc.setFontSize(10);
+doc.setFont(undefined, "normal");
 
+const pageHeight = doc.internal.pageSize.height;
+doc.text("Kraksaan, " + new Date().toLocaleDateString('id-ID'), 150, pageHeight - 40);
+doc.text("Petugas Klinik", 150, pageHeight - 33);
+doc.text("( Nama Petugas Klinik )", 150, pageHeight - 20);
+doc.line(150, pageHeight - 22, 200, pageHeight - 22);
 
+doc.save("Laporan_Tindakan.pdf");
 
-                    doc.save("Laporan_Tindakan.pdf");
-                };
-            };
-        });
+        };
+    };
+});
 
 
-        // Export Excel
-        document.getElementById("exportExcel").addEventListener("click", function() {
-            let table = document.getElementById("rekamMedisTable");
-            let wb = XLSX.utils.book_new();
-            let ws = XLSX.utils.table_to_sheet(table);
 
-            XLSX.utils.book_append_sheet(wb, ws, "Laporan Tindakan");
-            XLSX.writeFile(wb, "Laporan_Tindakan.xlsx");
-        });
+document.getElementById("exportExcel").addEventListener("click", function () {
+    const table = document.getElementById("rekamMedisTable");
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.table_to_sheet(table, { raw: true });
+
+    // Cek range data untuk memastikan baris dan kolom
+    const range = XLSX.utils.decode_range(ws['!ref']);
+    for (let row = range.s.r + 1; row <= range.e.r; ++row) {
+        const nikCellRef = XLSX.utils.encode_cell({ r: row, c: 3 }); // kolom ke-4 = NIK
+        const cell = ws[nikCellRef];
+
+        if (cell && typeof cell.v !== 'undefined') {
+            cell.v = cell.v.toString(); // ubah ke string
+            cell.t = 's'; // pastikan tipe string
+        }
+    }
+
+    XLSX.utils.book_append_sheet(wb, ws, "Laporan Tindakan");
+    XLSX.writeFile(wb, "Laporan_Tindakan.xlsx");
+});
+
     </script>
 
     <script>

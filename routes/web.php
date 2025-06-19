@@ -196,3 +196,6 @@ Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show
 
 
 Route::delete('/admin/pengaduan/{id}', [AdminController::class, 'destroyPengaduan'])->name('admin.pengaduan.destroy');
+
+
+

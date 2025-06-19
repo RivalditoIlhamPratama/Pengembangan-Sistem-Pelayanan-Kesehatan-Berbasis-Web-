@@ -88,7 +88,7 @@
                     <p>Dokter Spesialis Anak</p>
                     <div class="btn-container">
                         <a href="{{ route('dokter.siti_jamila') }}" class="btn">Jadwal</a>
-                        <button class="btn">Poll</button>
+                        
                     </div>
                 </div>
             </div>
@@ -100,7 +100,7 @@
                     <p>Dokter Umum</p>
                     <div class="btn-container">
                         <a href="{{ route('dokter.dwi_wahyudi') }}" class="btn">Jadwal</a>
-                        <button class="btn">Poll</button>
+                        
                     </div>
                 </div>
             </div>
@@ -111,7 +111,7 @@
                     <p>Dokter Spesialis Anak</p>
                     <div class="btn-container">
                         <a href="{{ route('dokter.heni_rahmawati') }}" class="btn">Jadwal</a>
-                        <button class="btn">Poll</button>
+                        
                     </div>
                 </div>
             </div>
@@ -122,7 +122,7 @@
                     <p>Dokter Spesialis Anak</p>
                     <div class="btn-container">
                         <a href="{{ route('dokter.fathullah_huda') }}" class="btn">Jadwal</a>
-                        <button class="btn">Poll</button>
+                        
                     </div>
                 </div>
             </div>
@@ -134,7 +134,7 @@
                     <p>Dokter Spesialis Anak</p>
                     <div class="btn-container">
                         <a href="#" class="btn">Jadwal</a>
-                        <button class="btn">Poll</button>
+                        
                     </div>
                 </div>
             </div>
@@ -146,7 +146,7 @@
                     <p>Dokter Spesialis Anak</p>
                     <div class="btn-container">
                         <a href="#" class="btn">Jadwal</a>
-                        <button class="btn">Poll</button>
+                        
                     </div>
                 </div>
             </div>
@@ -158,7 +158,7 @@
                     <p>Dokter Spesialis Anak</p>
                     <div class="btn-container">
                         <a href="#" class="btn">Jadwal</a>
-                        <button class="btn">Poll</button>
+                        
                     </div>
                 </div>
             </div>
@@ -170,7 +170,7 @@
                     <p>Dokter Spesialis Anak</p>
                     <div class="btn-container">
                         <a href="#" class="btn">Jadwal</a>
-                        <button class="btn">Poll</button>
+                        
                     </div>
                 </div>
             </div>

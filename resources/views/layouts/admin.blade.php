@@ -168,6 +168,8 @@
         </script>
     @endpush
 
+    @yield('scripts')
+
 </body>
 
 </html>
