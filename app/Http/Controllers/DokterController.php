@@ -33,8 +33,10 @@ class DokterController extends Controller
     public function rekam_medis()
     {
         $user = auth()->user();
-        $rekammedis = rekammedis::with(['dokter', 'staffrekammedis'])->get();
         $dokter = Dokter::where('user_id', $user->id_user)->first();
+        $rekammedis = Rekammedis::with(['dokter', 'staffrekammedis'])
+            ->where('dokter_id', $dokter->idDokter)
+            ->get();
         return view('dokter.rekam_medis', ['rekammedis' => $rekammedis, 'dokter' => $dokter]);
     }
 
