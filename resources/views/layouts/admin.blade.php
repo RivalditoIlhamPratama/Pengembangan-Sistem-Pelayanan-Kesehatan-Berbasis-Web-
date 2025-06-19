@@ -100,13 +100,13 @@
                 </a>
 
 
-            <div class="flex justify-center gap-4 mt-6 mb-4">
-                <i class="ri-heart-pulse-line text-red-400 text-2xl animate-pulse"></i>
-                <i class="ri-stethoscope-line text-green-400 text-2xl animate-bounce"></i>
-                <i class="ri-dna-line text-purple-400 text-2xl animate-spin"></i>
-                <i class="ri-first-aid-kit-line text-orange-400 text-2xl animate-pulse"></i>
-                <i class="ri-capsule-line text-pink-400 text-2xl animate-bounce"></i>
-            </div>
+                <div class="flex justify-center gap-4 mt-6 mb-4">
+                    <i class="ri-heart-pulse-line text-red-400 text-2xl animate-pulse"></i>
+                    <i class="ri-stethoscope-line text-green-400 text-2xl animate-bounce"></i>
+                    <i class="ri-dna-line text-purple-400 text-2xl animate-spin"></i>
+                    <i class="ri-first-aid-kit-line text-orange-400 text-2xl animate-pulse"></i>
+                    <i class="ri-capsule-line text-pink-400 text-2xl animate-bounce"></i>
+                </div>
 
         </aside>
 

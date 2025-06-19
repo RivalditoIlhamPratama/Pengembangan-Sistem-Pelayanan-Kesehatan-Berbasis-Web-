@@ -11,7 +11,7 @@ class dokter extends Model
 
     protected $primaryKey = 'idDokter';
 
-    protected $fillable = ['Klinik_id', 'user_id', 'namaDokter', 'spesialis', 'jenisKelamin', 'tglLahir', 'noTelepon', 'alamatDokter', 'gambarProfil'];
+    protected $fillable = ['Klinik_id', 'user_id', 'namaDokter', 'spesialis', 'jenisKelamin', 'tglLahir', 'noTelepon', 'alamatDokter', 'gambarProfil', 'email'];
 
 
     public $timestamps = false;

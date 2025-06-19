@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('tglLahir');
             $table->string('alamatDokter');
             $table->string('noTelepon');
+            $table->string('email');
             $table->text('gambarProfil')->nullable();
 
             $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');

@@ -103,6 +103,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/berita/update/{id}', [BeritaController::class, 'update'])->name('admin.berita.update');
     Route::post('/berita/delete/{id}', [BeritaController::class, 'destroy'])->name('admin.berita.delete');
     Route::delete('/admin/berita/delete/{id}', [BeritaController::class, 'destroy'])->name('admin.berita.destroy');
+
+    // Add user update route
+    Route::put('/pengguna/update', [\App\Http\Controllers\AdminController::class, 'updateUser'])->name('admin.pengguna.update');
+
+    // Add user delete route
+    Route::delete('/pengguna/{id}', [\App\Http\Controllers\AdminController::class, 'destroyUser'])->name('admin.pengguna.destroy');
 });
 
 Route::middleware(['auth', 'pasien'])->prefix('pasien')->group(function () {
@@ -164,9 +170,7 @@ Route::get('/dokter/fathullah-huda', function () {
 
 
 
-Route::get('/admin/pengguna/create', function () {
-    return view('admin.create');
-});
+Route::get('/admin/pengguna/create', [\App\Http\Controllers\AdminController::class, 'createUserForm'])->name('admin.pengguna.create');
 
 
 // Route untuk masing masing profil
@@ -183,6 +187,11 @@ Route::get('/admin/dokter/edit', function () {
     return view('admin.edit_dokter');
 });
 
+Route::get('/admin/pengguna/create', [AdminController::class, 'createUserForm'])->name('admin.pengguna.create');
+
+Route::post('/admin/pengguna/store', [AdminController::class, 'storeUser'])->name('admin.pengguna.store');
+
+
 
 
 
@@ -196,6 +205,3 @@ Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show
 
 
 Route::delete('/admin/pengaduan/{id}', [AdminController::class, 'destroyPengaduan'])->name('admin.pengaduan.destroy');
-
-
-

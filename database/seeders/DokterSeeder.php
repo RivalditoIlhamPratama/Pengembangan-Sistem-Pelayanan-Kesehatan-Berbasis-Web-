@@ -35,6 +35,7 @@ class DokterSeeder extends Seeder
                 'tglLahir' => '2002-04-16',
                 'alamatDokter' => 'Jl. Example No.' . ($i + 1),
                 'noTelepon' => '0812345678' . $i,
+                'email' => 'dokter ' . $nama[$i] . '@example.com'
             ]);
             echo "Created dokter: " . $dokter->namaDokter . "\n";
         }

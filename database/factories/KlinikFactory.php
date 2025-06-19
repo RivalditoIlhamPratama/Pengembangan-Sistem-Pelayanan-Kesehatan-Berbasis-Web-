@@ -2,25 +2,20 @@
 
 namespace Database\Factories;
 
+use App\Models\klinik;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\klinik>
- */
 class KlinikFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    protected $model = klinik::class;
+
+    public function definition()
     {
         return [
-            'namaKlinik' => $this->faker->company(),
-            'user_id' => 1,
-            'alamatKlinik' => $this->faker->address(),
-            'email' => $this->faker->unique()->safeEmail(),
+            'user_id' => \App\Models\User::factory()->create(['role' => 'klinik'])->id_user,
+            'namaKlinik' => $this->faker->company,
+            'alamatKlinik' => $this->faker->address,
+            'email' => $this->faker->unique()->safeEmail,
         ];
     }
 }

@@ -24,15 +24,15 @@ class AdminSeeder extends Seeder
             ]);
             echo "Created user: " . $user->username . "\n";
 
-            $pasien = adminpuskesmas::create([
+            $admin = adminpuskesmas::create([
                 'user_id' => $user->id_user,
                 'namaAdmin' => 'Admin ' . $i,
                 'jenisKelamin' => $i  % 2 ? 'Laki-laki' : 'Perempuan',
                 'noHp' => '0812345678' . $i,
                 'alamatAdmin' => 'Jl. Example No.' . $i,
-                'email' => 'patient' . $i . '@example.com'
+                'email' => 'admin' . $i . '@example.com'
             ]);
-            echo "Created admin: " . $pasien->namaPasien . "\n";
+            echo "Created admin: " . $admin->namaAdmin . "\n";
         }
 
         echo "Created 5 admin records\n";

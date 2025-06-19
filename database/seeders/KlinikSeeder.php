@@ -31,7 +31,7 @@ class KlinikSeeder extends Seeder
                 'user_id' => $user->id_user,
                 'namaKlinik' => 'Klinik ' . $nama[$i],
                 'alamatKlinik' => 'Jl. Example No.' . ($i + 1),
-                'email' => '0812345678' . $i,
+                'email' => 'klinik' . $nama[$i] . '@example.com'
             ]);
             echo "Created Klinik: " . $klinik->namaKlinik . "\n";
         }
