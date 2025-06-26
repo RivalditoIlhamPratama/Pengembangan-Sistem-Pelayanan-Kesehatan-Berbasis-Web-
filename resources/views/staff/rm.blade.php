@@ -15,9 +15,9 @@
             </div>
             <!-- Tombol Ekspor -->
             <div>
-                <a href="{{route('stafrekammedis.tambah_rekam_medis')}}" class="btn btn-primary">
+                  <!-- <a href="{{route('stafrekammedis.tambah_rekam_medis')}}" class="btn btn-primary">
                     <i class="fas fa-plus"></i> Tambah
-                </a>
+                </a> -->
                 <button id="exportPdf" class="btn btn-danger me-2">
                     <i class="fas fa-file-pdf"></i> Export PDF
                 </button>

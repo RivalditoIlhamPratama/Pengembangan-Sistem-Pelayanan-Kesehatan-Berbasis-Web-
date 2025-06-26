@@ -83,4 +83,8 @@ class LaporanController extends Controller
 
         return redirect()->route('klinik.laporan')->with('success', 'Laporan berhasil disimpan.');
     }
+
+
+
+
 }

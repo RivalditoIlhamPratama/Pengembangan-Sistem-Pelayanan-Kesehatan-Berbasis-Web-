@@ -14,6 +14,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
 </head>
 
 
@@ -96,12 +102,13 @@
                 <div class="flex items-center space-x-3">
                     <i class="ri-user-fill text-xl"></i>
                     <span>{{ $klinik->namaKlinik }}</span>
-                    <form method="POST" action="{{ route('logout') }}">
+                    <form id="logoutForm" method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="text-black hover:text-gray-500 ml-3">
+                        <button type="button" id="logoutBtn" class="text-black hover:text-gray-500 ml-3">
                             <i class="ri-logout-box-r-line text-xl"></i>
                         </button>
                     </form>
+                    
                 </div>
             </header>
 
@@ -123,6 +130,26 @@
             sidebar.classList.toggle('hidden');
         });
     </script>
+
+<script>
+    document.getElementById('logoutBtn').addEventListener('click', function (e) {
+        Swal.fire({
+            title: 'Yakin ingin logout?',
+            text: "Anda akan keluar dari sistem.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, logout',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('logoutForm').submit();
+            }
+        });
+    });
+</script>
+
 
 </body>
 

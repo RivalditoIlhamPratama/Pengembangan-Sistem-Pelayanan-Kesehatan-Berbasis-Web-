@@ -47,7 +47,7 @@
                         <tbody>
                             @foreach ($pengaduan as $aduan)
                                 <tr>
-                                    <td>{{ $aduan->idPengaduan }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $aduan->pasien->namaPasien ?? 'N/A' }}</td>
                                     <td>{{ $aduan->jenisPengaduan }}</td>
                                     <td>{{ $aduan->isiPengaduan }}</td>
@@ -67,9 +67,10 @@
                                             <span>Tidak ada gambar</span>
                                         @endif
                                     </td>
-                                    <td class="text-center">
-                                        <input type="checkbox" class="centang-dilihat" data-id="{{ $aduan->idPengaduan }}" id="checkbox-{{ $aduan->idPengaduan }}" disabled>
+                                    <td class="text-center" id="status-dilihat-{{ $aduan->idPengaduan }}">
+                                        <span class="badge bg-secondary">Belum Dilihat</span>
                                     </td>
+                                    
                                     
                                     <td class="text-center">
                                         @php
@@ -83,13 +84,16 @@
                                             );
                                         @endphp
                                     
+                                    {{--
                                     <form action="{{ route('admin.pengaduan.destroy', $aduan->idPengaduan) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Yakin ingin menghapus pengaduan ini?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
                                             <i class="fas fa-trash"></i>
-                                        </button>
+                                    </button>
                                     </form>
+                                    --}}
+
                                     
                                     
                                         @if ($aduan->phone)
@@ -102,9 +106,11 @@
                                         @if ($aduan->pasien && $aduan->pasien->user)
                                         <a href="{{ route('admin.chat', ['userId' => $aduan->pasien->user->id_user]) }}"
                                             class="btn btn-sm btn-primary" title="Chat Admin"
-                                            onclick="centangOtomatis('{{ $aduan->idPengaduan }}')">
+                                            onclick="handleChatClick(event, '{{ $aduan->idPengaduan }}', '{{ route('admin.chat', ['userId' => $aduan->pasien->user->id_user]) }}')">
                                             <i class="ri-chat-3-line"></i>
                                          </a>
+                                         
+                                         
                                          
                                         @endif
                                     </td>
@@ -130,39 +136,45 @@
         </div>
     </div>
 
-    {{-- Script untuk menyimpan centang di localStorage --}}
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+            // Jalankan saat halaman dimuat
+            document.addEventListener('DOMContentLoaded', function () {
+        const STORAGE_KEY = 'pengaduan_terbaca';
+        let terbacaList = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+        // Tampilkan status "Sudah Dilihat" hanya jika sudah pernah dibalas (klik chat)
+        terbacaList.forEach(id => {
+            const el = document.getElementById(`status-dilihat-${id}`);
+            if (el) {
+                el.innerHTML = '<span class="badge bg-success">Sudah Dilihat</span>';
+                el.closest('tr').classList.add('table-success');
+            }
+        });
+    });
+
+    // Fungsi saat tombol Chat ditekan
+    function handleChatClick(event, id, url) {
+        event.preventDefault(); // Cegah redirect langsung
+
+        const el = document.getElementById(`status-dilihat-${id}`);
+        if (el) {
+            el.innerHTML = '<span class="badge bg-success">Sudah Dilihat</span>';
+            el.closest('tr').classList.add('table-success');
+
             const STORAGE_KEY = 'pengaduan_terbaca';
             let terbacaList = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
-            document.querySelectorAll('.centang-dilihat').forEach(cb => {
-                const id = cb.getAttribute('data-id');
+            if (!terbacaList.includes(id.toString())) {
+                terbacaList.push(id.toString());
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(terbacaList));
+            }
+        }
 
-                // Tandai checkbox jika sebelumnya dicentang
-                if (terbacaList.includes(id)) {
-                    cb.checked = true;
-                    cb.disabled = true;
-                    cb.closest('tr').classList.add('table-success');
-                }
-
-
-                cb.addEventListener('change', function () {
-                const index = terbacaList.indexOf(id);
-
-                if (this.checked && index === -1) {
-                terbacaList.push(id);
-                    cb.closest('tr').classList.add('table-success');
-                    this.disabled = true;
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(terbacaList));
-                } else {
-                // Jangan lakukan apa pun jika sudah dicentang
-                    this.checked = true;
-                }
-                });
-
-            });
-        });
+        // Redirect ke halaman chat setelah status disimpan
+        setTimeout(() => {
+            window.location.href = url;
+        }, 200); // Delay kecil agar efek perubahan terlihat
+    }
 
         function showGambar(src) {
     const gambar = document.getElementById('gambarPreview');
@@ -190,8 +202,6 @@ function centangOtomatis(id) {
         checkbox.disabled = true;
     }
 }
-
-
 
     </script>
 @endsection

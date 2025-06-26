@@ -88,9 +88,8 @@ class LoginController extends Controller
             ], 401);
         }
 
-        return back()->withErrors([
-            'username' => 'The provided credentials do not match our records.',
-        ]);
+        return back()->with('error', 'Username atau password salah!');
+
     }
 
     /**
@@ -103,4 +102,6 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
     }
+
+    
 }

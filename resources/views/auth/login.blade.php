@@ -12,6 +12,9 @@
     <!-- CSS Khusus Login -->
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
     <style>
         body {
             background-image: url('{{ asset('assets/background.jpg') }}');
@@ -176,6 +179,19 @@
             });
         });
     </script>
+
+
+@if (session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Login Gagal!',
+        text: '{{ session('error') }}',
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Tutup'
+    });
+</script>
+@endif
 
 </body>
 

@@ -3,27 +3,42 @@
 @section('content')
     <div class="container d-flex">
         <div class="user-list" style="width: 25%; border-right: 1px solid #ccc; padding-right: 10px;">
-            <h5>Daftar Pengguna</h5>
+            <h5 class="mb-3 fw-bold text-primary"><i class="ri-user-3-line"></i> Daftar Pasien Pengadu</h5>
 
             @if ($users->isEmpty())
-                <p>Tidak ada pengguna lain.</p>
+                <div class="alert alert-warning text-center">Tidak ada pengguna.</div>
             @else
-                <ul class="list-group">
-                    @foreach ($users as $user)
-                        <li class="list-group-item {{ $chatWith->id_user === $user->id_user ? 'active' : '' }}">
-                            <a href="{{ route('admin.chat', ['userId' => $user->id_user]) }}"
-                                style="text-decoration: none; color: inherit;">
-                                {{ $user->name }}
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
+        <div class="list-group">
+            @foreach ($users as $user)
+            @php $isRespon = "respon_" . $user->id_user; @endphp
+            <a href="{{ route('admin.chat', ['userId' => $user->id_user]) }}"
+               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ $chatWith->id_user === $user->id_user ? 'active' : '' }}"
+               id="pasien-item-{{ $user->id_user }}"
+               onclick="tandaiSudahDirespon('{{ $user->id_user }}')">
+                <div>
+                    <i class="ri-user-line me-2"></i> {{ $user->name }}
+                </div>
+                <span class="badge text-white fw-semibold status-badge" id="status-{{ $user->id_user }}">Belum</span>
+            </a>
+        @endforeach
+                </div>
             @endif
         </div>
 
         <div class="chat-section" style="width: 75%; padding-left: 10px;">
-            <h4>Chat dengan {{ $chatWith->name }}</h4>
-
+            <div class="d-flex align-items-center mb-3 border-bottom pb-2">
+                <img src="https://ui-avatars.com/api/?name={{ urlencode($chatWith->name) }}&background=0D8ABC&color=fff&size=40" 
+                     alt="Avatar" class="rounded-circle me-3" style="width: 40px; height: 40px;">
+                
+                <div>
+                    <h4 class="m-0 text-primary fw-bold">
+                        <i class="ri-chat-3-line me-1"></i> Chat dengan {{ $chatWith->name }}
+                    </h4>
+                    <small class="text-muted">Silakan balas pesan pasien secara langsung</small>
+                </div>
+            </div>
+            
+            <br>
             <div id="loading" style="display:none;">Memuat pesan...</div>
             <div id="chat-box"
                 style="border:1px solid #ccc; padding:15px; height:300px; overflow-y:scroll; margin-bottom:10px;">
@@ -136,4 +151,35 @@
             });
         });
     </script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Saat halaman dimuat, periksa siapa saja yang sudah direspon
+        document.querySelectorAll('.status-badge').forEach(el => {
+            const userId = el.id.replace('status-', '');
+            const isRespon = localStorage.getItem('respon_' + userId);
+            if (isRespon === 'true') {
+                el.classList.remove('bg-secondary');
+                el.classList.add('bg-success');
+                el.textContent = 'Terespond';
+            } else {
+                el.classList.remove('bg-success');
+                el.classList.add('bg-secondary');
+                el.textContent = 'Belum';
+            }
+        });
+    });
+
+    function tandaiSudahDirespon(userId) {
+        localStorage.setItem('respon_' + userId, 'true');
+        const badge = document.getElementById('status-' + userId);
+        if (badge) {
+            badge.classList.remove('bg-secondary');
+            badge.classList.add('bg-success');
+            badge.textContent = 'Sudah';
+        }
+    }
+</script>
+
 @endsection

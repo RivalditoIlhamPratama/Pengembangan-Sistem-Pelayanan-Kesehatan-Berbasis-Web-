@@ -9,16 +9,22 @@
                 @csrf
                 <input type="hidden" name="Klinik_id" value="{{ $klinik->idKlinik ?? '' }}" />
                 <div class="row mb-3">
-                    <div class="col-md-6">
-                        <div class="col-md-3">
-                            <label for="Klinik_id" class="form-label">Klinik</label>
-                            <input type="text" value="{{ $klinik->namaKlinik ?? 'Nama Klinik' }}" readonly />
+                    <div class="col-md-6 mb-3">
+                        <label for="Klinik_id" class="form-label fw-semibold text-muted">Klinik</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-dark"><i class="fas fa-clinic-medical"></i></span>
+                            <input type="text" 
+                                   class="form-control bg-white text-dark" 
+                                   id="Klinik_id" 
+                                   value="{{ $klinik->namaKlinik ?? 'Nama Klinik' }}" 
+                                   readonly>
                         </div>
                     </div>
+                    
                     <div class="col-md-6">
                         <label for="RekamMedis_id" class="form-label">Rekam Medis</label>
                         <select name="RekamMedis_id" id="RekamMedis_id" class="form-control">
-                            <option value="">Pilih Rekam Medis</option>
+                            <option value="">Sesuai Rekam Medis</option>
                             @foreach ($rekammedis as $rekam)
                                 <option value="{{ $rekam->idRekamMedis }}" data-namapasien="{{ $rekam->namaPasien }}"
                                     data-namadokter="{{ optional($rekam->dokter)->namaDokter }}"

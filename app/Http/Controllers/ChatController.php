@@ -59,14 +59,18 @@ class ChatController extends Controller
     public function adminChat($userId = null)
     {
         $authId = auth()->id();
-        $users = User::where('id_user', '!=', $authId)->get();
-
+    
+        // Ambil semua user selain admin yang punya role pasien
+        $users = User::where('id_user', '!=', $authId)
+                     ->where('role', 'pasien')
+                     ->get();
+    
         if ($userId) {
             $chatWith = User::where('id_user', $userId)->firstOrFail();
         } else {
             $chatWith = $users->first();
         }
-
+    
         return view('admin.chatadmin', [
             'chatWith' => $chatWith,
             'users' => $users,

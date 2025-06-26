@@ -111,4 +111,21 @@
             }
         });
     </script>
+
+    <!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if(session('login_success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Login Berhasil!',
+        text: 'Selamat datang kembali 👋',
+        showConfirmButton: false,
+        timer: 2500
+    });
+</script>
+@endif
+
+
 @endsection

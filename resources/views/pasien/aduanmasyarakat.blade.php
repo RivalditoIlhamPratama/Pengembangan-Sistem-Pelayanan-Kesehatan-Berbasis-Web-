@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
     <link rel="stylesheet" href="{{ asset('assets/aduanmasyarakat.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <title>Puskesmas Kraksaan</title>
 </head>
 
@@ -56,10 +58,19 @@
 
             {{-- Success Message --}}
             @if (session('success'))
-                <div class="alert alert-success" style="color: green; margin-bottom: 10px;">
-                    {{ session('success') }}
-                </div>
-            @endif
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            Swal.fire({
+                icon: 'success',
+                title: 'Pengaduan berhasil dikirim!',
+                text: '{{ session("success") }}',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK'
+            });
+        });
+    </script>
+@endif
+
 
             {{-- Validation Errors --}}
             @if ($errors->any())
@@ -107,10 +118,22 @@
         </div>
 
         <div class="hubungi-kami">
-            <div style="display: flex; justify-content: center; margin-top: 5px;">
-                <img src="{{ asset('assets/Pengaduan.png') }}" alt="Lokasi Puskesmas Kraksaan" class="floating-image"
-                    style="max-width: 55%; height: auto; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-            </div>
+            <!-- Gambar kecil yang bisa diklik -->
+<div style="display: flex; justify-content: center; margin-top: 5px;">
+    <img src="{{ asset('assets/Pengaduan.png') }}" 
+         alt="Lokasi Puskesmas Kraksaan" 
+         class="floating-image"
+         id="thumbnailImage"
+         style="max-width: 55%; height: auto; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); cursor: pointer;">
+</div>
+
+<!-- Modal Gambar -->
+<div id="imageModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.8);">
+    <span style="position:absolute; top:20px; right:35px; color:#fff; font-size:40px; font-weight:bold; cursor:pointer;" id="closeModal">&times;</span>
+    <img id="modalImage" src="{{ asset('assets/Pengaduan.png') }}" 
+         style="margin:auto; display:block; max-width:90%; max-height:90%; margin-top:5%;">
+</div>
+
 
 
             <h2>Hubungi Kami</h2>
@@ -391,6 +414,31 @@
             setInterval(loadMessages, 5000);
         });
     </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const thumbnail = document.getElementById('thumbnailImage');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeModal = document.getElementById('closeModal');
+
+        thumbnail.addEventListener('click', function () {
+            modal.style.display = 'block';
+        });
+
+        closeModal.addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
+
+        // Tutup modal jika klik di luar gambar
+        window.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+</script>
+
 </body>
 
 </html>

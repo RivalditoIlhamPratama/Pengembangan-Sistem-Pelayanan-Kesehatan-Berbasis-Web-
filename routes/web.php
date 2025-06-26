@@ -96,6 +96,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/data-dokter/delete/{id}', [DokterController::class, 'destroy'])->name('admin.data_dokter.delete');
     Route::get('/laporan-klinik', [AdminController::class, 'reports'])->name('admin.reports');
     Route::get('/chat/{userId}', [ChatController::class, 'adminChat'])->name('admin.chat');
+
+
     //
     Route::get('/berita', [BeritaController::class, 'index'])->name('admin.berita');
     Route::get('/berita/edit/{id}', [BeritaController::class, 'edit_data_dokter'])->name('admin.berita.edit');
@@ -103,6 +105,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/berita/update/{id}', [BeritaController::class, 'update'])->name('admin.berita.update');
     Route::post('/berita/delete/{id}', [BeritaController::class, 'destroy'])->name('admin.berita.delete');
     Route::delete('/admin/berita/delete/{id}', [BeritaController::class, 'destroy'])->name('admin.berita.destroy');
+    Route::put('/admin/berita/update/{id}', [BeritaController::class, 'update'])->name('admin.berita.update');
+    Route::get('/admin/berita', [BeritaController::class, 'index'])->name('admin.berita');
+
 
     // Add user update route
     Route::put('/pengguna/update', [\App\Http\Controllers\AdminController::class, 'updateUser'])->name('admin.pengguna.update');
@@ -205,3 +210,8 @@ Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show
 
 
 Route::delete('/admin/pengaduan/{id}', [AdminController::class, 'destroyPengaduan'])->name('admin.pengaduan.destroy');
+
+
+
+
+Route::get('/export-excel', [LaporanController::class, 'exportExcel']);

@@ -112,13 +112,13 @@
                                         </a>
                                         <!-- Delete Button -->
                                         <form action="{{ route('dokter.rekam_medis.delete', $rekam->idRekamMedis) }}"
-                                            method="POST"
-                                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus rekam medis ini?');">
-                                            @csrf
-                                            <button type="submit" class="btn btn-sm btn-danger">
-                                                <i class="fas fa-trash"></i> Delete
-                                            </button>
-                                        </form>
+                                            method="POST" class="delete-form d-inline">
+                                          @csrf
+                                          <button type="button" class="btn btn-sm btn-danger delete-button">
+                                              <i class="fas fa-trash"></i> Delete
+                                          </button>
+                                      </form>
+                                      
                                     </div>
                                 </td>
                             </tr>
@@ -437,5 +437,36 @@
 
     <!-- Excel: SheetJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+
+
+    <!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.delete-button');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const form = this.closest('.delete-form');
+                Swal.fire({
+                    title: 'Yakin ingin menghapus?',
+                    text: "Data rekam medis yang dihapus tidak bisa dikembalikan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, hapus',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    });
+</script>
 
 @endsection

@@ -94,10 +94,10 @@
 
             <!-- Tambahan menu di bawah -->
             <div class="mt-auto px-4 pb-4 border-t border-gray-700 pt-4">
-                <a href=""
+                <!-- <a href=""
                     class="py-2 px-4 rounded hover:bg-gray-800 flex items-center {{ request()->routeIs('admin.activity_log') ? 'bg-gray-800' : '' }}">
                     <i class="ri-history-line mr-2"></i> Riwayat Aktivitas
-                </a>
+                </a> -->
 
 
                 <div class="flex justify-center gap-4 mt-6 mb-4">
@@ -129,14 +129,27 @@
                             <i class="ri-logout-box-r-line text-xl"></i>
                         </button>
                     </form>
+                    
 
                     <script>
                         function confirmLogout() {
-                            if (confirm("Apakah Anda yakin ingin logout?")) {
-                                document.getElementById('logout-form').submit();
-                            }
+                            Swal.fire({
+                                title: 'Yakin ingin logout?',
+                                text: "Anda akan keluar dari sistem",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#d33',
+                                cancelButtonColor: '#3085d6',
+                                confirmButtonText: 'Ya, logout',
+                                cancelButtonText: 'Batal'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    document.getElementById('logout-form').submit();
+                                }
+                            });
                         }
                     </script>
+                    
 
                 </div>
             </header>
@@ -169,6 +182,9 @@
     @endpush
 
     @yield('scripts')
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 

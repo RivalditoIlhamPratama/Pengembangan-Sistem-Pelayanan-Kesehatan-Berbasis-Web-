@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="{{ asset('assets/styles.css') }}">
     <script src="{{ asset('assets/main.js') }}" defer></script>
+
+    <!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <title>Puskesmas Kraksaan</title>
 </head>
 
@@ -74,12 +78,13 @@
                             <span class="user-btn">
                                 <i class="ri-user-fill"></i> {{ auth()->user()->name }}
                             </span>
-                            <form method="POST" action="{{ route('logout') }}">
+                            <form id="logoutForm" method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="logout-btn">
+                                <button type="button" id="logoutBtn" class="logout-btn">
                                     <i class="ri-logout-box-r-line"></i> Logout
                                 </button>
                             </form>
+                            
                         </div>
                     </li>
                 @endif
@@ -402,6 +407,34 @@
                     });
                 });
             </script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const logoutBtn = document.getElementById("logoutBtn");
+        const logoutForm = document.getElementById("logoutForm");
+
+        if (logoutBtn && logoutForm) {
+            logoutBtn.addEventListener("click", function () {
+                Swal.fire({
+                    title: 'Yakin ingin logout?',
+                    text: "Anda akan keluar dari sistem.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, logout',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        logoutForm.submit();
+                    }
+                });
+            });
+        }
+    });
+</script>
+
 
 </body>
 

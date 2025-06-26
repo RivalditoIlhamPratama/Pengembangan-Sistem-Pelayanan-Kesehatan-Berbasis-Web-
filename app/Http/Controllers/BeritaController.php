@@ -66,31 +66,35 @@ class BeritaController extends Controller
 
 
     public function update(Request $request, $id)
-    {
-        try {
-            $berita = berita::findOrFail($id);
+{
+    $request->validate([
+        'tanggalBerita' => 'required|date',
+        'judulBerita' => 'required|string|max:255',
+        'isiBerita' => 'required|string',
+        'gambarBerita' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-            $validatedData = $request->validate([
-                'judulBerita' => 'required|string',
-                'isiBerita' => 'required|string',
-                'tanggalBerita' => 'required|date',
-            ]);
+    $berita = Berita::findOrFail($id);
+    $berita->tanggalBerita = $request->tanggalBerita;
+    $berita->judulBerita = $request->judulBerita;
+    $berita->isiBerita = $request->isiBerita;
 
-            $berita->judulBerita = $validatedData['judulBerita'];
-            $berita->isiBerita = $validatedData['isiBerita'];
-            $berita->tanggalBerita = $validatedData['tanggalBerita'];
-
-            $berita->save();
-
-            Log::info('Berita updated successfully', ['berita_id' => $berita->idBerita]);
-
-            return redirect()->route('admin.berita')->with('success', 'Data berita berhasil diperbarui.');
-        } catch (\Exception $e) {
-            Log::error('Error updating berita: ' . $e->getMessage() . "\n" . $e->getTraceAsString());
-
-            return back()->withErrors(['error' => 'Terjadi kesalahan saat memperbarui data berita.']);
+    // Ganti gambar jika ada upload baru
+    if ($request->hasFile('gambarBerita')) {
+        // Hapus gambar lama kalau ada
+        if ($berita->gambarBerita && Storage::disk('public')->exists($berita->gambarBerita)) {
+            Storage::disk('public')->delete($berita->gambarBerita);
         }
+
+        // Simpan gambar baru
+        $berita->gambarBerita = $request->file('gambarBerita')->store('berita', 'public');
     }
+
+    $berita->save();
+
+    return redirect()->route('admin.berita')->with('success', 'Berita berhasil diperbarui.');
+}
+
 
     public function destroy($id)
     {

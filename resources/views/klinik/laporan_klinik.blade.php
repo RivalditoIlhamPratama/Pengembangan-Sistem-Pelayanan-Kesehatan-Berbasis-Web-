@@ -84,7 +84,7 @@
                                         <button type="submit" class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
-                                    </form>
+                                    </form>                       
                                 </td>
                                 
                             </tr>

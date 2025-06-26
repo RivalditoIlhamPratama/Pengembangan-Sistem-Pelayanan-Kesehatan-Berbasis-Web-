@@ -75,7 +75,13 @@
             </div>
 
             <button type="submit" class="btn-daftar">Daftar</button>
-            <a href="{{ route('login') }}" class="btn-masuk">Masuk</a>
+<a href="{{ route('login') }}" class="btn-masuk">Masuk</a>
+
+<a href="{{ url()->previous() }}" class="btn btn-outline-secondary btn-sm mt-3">
+    <i class="fas fa-arrow-left"></i> Kembali
+</a>
+
+
         </form>
     </div>
 </body>

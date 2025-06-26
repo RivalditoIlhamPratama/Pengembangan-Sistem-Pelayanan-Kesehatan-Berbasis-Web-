@@ -14,6 +14,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body class="bg-gray-100">
@@ -76,9 +80,9 @@
 
             <!-- Footer Menu -->
             <div class="mt-auto px-4 pb-4 border-t border-gray-700 pt-4 relative z-10">
-                <a href="#" class="py-2 px-4 rounded hover:bg-gray-800 flex items-center">
+                <!-- <a href="#" class="py-2 px-4 rounded hover:bg-gray-800 flex items-center">
                     <i class="ri-history-line mr-2"></i> Riwayat Aktivitas
-                </a>
+                </a>  -->
 
 
             <!-- Animated Icons Bar -->
@@ -106,12 +110,13 @@
                     <a href="{{ route('dokter.data_dokter') }}" class="text-decoration-none text-dark fw-semibold">
                         <i class="ri-user-fill text-xl me-1"></i> {{ $dokter->namaDokter }}
                     </a>
-                    <form method="POST" action="{{ route('logout') }}">
+                    <form id="logoutForm" method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="text-black hover:text-gray-500 ml-3">
+                        <button type="button" id="logoutBtn" class="text-black hover:text-gray-500 ml-3">
                             <i class="ri-logout-box-r-line text-xl"></i>
                         </button>
                     </form>
+                    
                 </div>
             </header>
 
@@ -134,6 +139,27 @@
             sidebar.classList.toggle('hidden');
         });
     </script>
+
+
+<script>
+    document.getElementById('logoutBtn').addEventListener('click', function (e) {
+        Swal.fire({
+            title: 'Yakin ingin logout?',
+            text: "Anda akan keluar dari sistem.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, logout',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('logoutForm').submit();
+            }
+        });
+    });
+</script>
+
 
 </body>
 
