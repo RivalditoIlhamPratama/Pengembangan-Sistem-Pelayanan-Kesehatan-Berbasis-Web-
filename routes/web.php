@@ -9,6 +9,7 @@ use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\RekammedisController;
 use App\Http\Controllers\StaffrekammedisController;
 use App\Http\Controllers\LandingController;
+use App\Models\dokter;
 use App\Models\staffrekammedis;
 use Illuminate\Support\Facades\Route;
 
@@ -99,7 +100,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
 
     //
-    Route::get('/berita', [BeritaController::class, 'index'])->name('admin.berita');
+    //Route::get('/berita', [BeritaController::class, 'index'])->name('admin.berita');
     Route::get('/berita/edit/{id}', [BeritaController::class, 'edit_data_dokter'])->name('admin.berita.edit');
     Route::post('/berita/store', [BeritaController::class, 'store'])->name('admin.berita.store');
     Route::post('/berita/update/{id}', [BeritaController::class, 'update'])->name('admin.berita.update');
@@ -215,3 +216,18 @@ Route::delete('/admin/pengaduan/{id}', [AdminController::class, 'destroyPengadua
 
 
 Route::get('/export-excel', [LaporanController::class, 'exportExcel']);
+
+use App\Http\Controllers\JadwalDokterController;
+
+Route::get('/dokter/{id}/jadwal', [JadwalDokterController::class, 'show'])->name('jadwal.dokter');
+
+
+
+
+Route::get('/dokter', function() {
+    $dokter = dokter::all();
+    return view('daftardokter', compact('dokter'));
+});
+
+
+

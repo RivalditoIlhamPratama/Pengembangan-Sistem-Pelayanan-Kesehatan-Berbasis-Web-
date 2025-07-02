@@ -1,26 +1,18 @@
 <!DOCTYPE html>
+<html lang="id">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="{{ asset('assets/daftardokter.css') }}">
-    <script src="{{ asset('assets/main.js') }}" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Puskesmas Kraksaan</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/berita.css') }}">
+    <script src="{{ asset('assets/main.js') }}" defer></script>
 </head>
 
 <body>
-
-    <!-- Loader -->
-    <div id="loader" class="loader-wrapper">
-        <div class="loader-content">
-            <img src="{{ asset('assets/11.png') }}" alt="Logo Puskesmas" class="loader-logo" />
-            <div class="spinner"></div>
-            <p class="loading-text">Mohon Tunggu...</p>
-        </div>
-    </div>
-
+    @php use Illuminate\Support\Str; use Carbon\Carbon; @endphp
     <header class="header mt-0">
         <nav class="mt-0">
             <div class="nav__header">
@@ -74,29 +66,106 @@
             </ul>
         </nav>
     </header>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-    <div class="container">
-        <h2 class="section-title">Dokter Puskesmas Kraksaan</h2>
-        <br>
-        <div class="doctor-card-container">
-            @foreach ($dokter as $dokters)
-                <div class="doctor-card">
-                    <img src="{{ asset('storage/' . $dokters->gambarProfil) }}" alt="{{ $dokters->namaDokter }}">
-                    <div class="doctor-info">
-                        <h3>{{ $dokters->namaDokter }}</h3>
-                        <p>{{ $dokters->spesialis }}</p>
-                        <div class="btn-container">
-                            <a href="{{ route('jadwal.dokter', $dokters->idDokter) }}" class="btn">Jadwal</a>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+    <section class="doctor-detail" style="padding: 2rem;">
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start; max-width: 900px; margin: 0 auto;">
+    
+            {{-- Foto Dokter di Kiri --}}
+            <div style="flex: 0 0 220px;">
+                @if ($dokter->gambarProfil)
+                    <img src="{{ asset('storage/' . $dokter->gambarProfil) }}"
+                         alt="{{ $dokter->namaDokter }}"
+                         style="width: 220px; height: auto; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                @else
+                    <img src="{{ asset('assets/default-doctor.png') }}"
+                         alt="Foto Default"
+                         style="width: 220px; height: auto; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                @endif
+            </div>
+    
+            {{-- Informasi Dokter di Kanan --}}
+            <div style="flex: 1;">
+    
+                {{-- Nama Dokter --}}
+                <h1 style="font-size: 1.8rem; font-weight: bold; color: #333; margin-bottom: 0.2rem;">
+                    {{ $dokter->namaDokter }}
+                </h1>
+    
+                {{-- Spesialis --}}
+                <p style="font-size: 0.9rem; color: #777; margin-bottom: 1rem;">
+                    Dokter {{ $dokter->spesialis }}
+                </p>
+    
+                {{-- Judul Jadwal --}}
+                <h3 style="font-size: 1.1rem; margin-bottom: 0.8rem;">Jadwal Pelayanan :</h3>
+    
+                @if ($dokter->jadwaldokters->count() > 0)
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.95rem;">
+                        <thead>
+                            <tr>
+                                <th style="background-color: #e0e7ff; text-align: left; padding: 8px; color: #333; border: 1px solid #ccc;">
+                                    Hari Pelayanan
+                                </th>
+                                <th style="background-color: #e0e7ff; text-align: left; padding: 8px; color: #333; border: 1px solid #ccc;">
+                                    Waktu Pelayanan
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($dokter->jadwaldokters as $jadwal)
+                                @if ($jadwal->hari && $jadwal->waktu)
+                                    <tr>
+                                        <td style="padding: 8px; border: 1px solid #ccc;">
+                                            {{ $jadwal->hari->namaHari }} | Poli Umum
+                                        </td>
+                                        <td style="padding: 8px; border: 1px solid #ccc;">
+                                            {{ $jadwal->waktu->jamMulai }} - {{ $jadwal->waktu->jamSelesai }} WIB
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
+    
+                    <p style="font-size: 0.8rem; color: #777; margin-top: 0.5rem; font-style: italic;">
+                        *Mohon Maaf, Jadwal sewaktu-waktu dapat berubah
+                    </p>
+                @else
+                    <p style="color: #999;">Belum ada jadwal yang terdaftar.</p>
+                @endif
+    
+                {{-- Tombol Kembali --}}
+                <a href="{{ url('/dokter') }}"
+                    style="
+                        display: inline-block;
+                        margin-top: 1rem;
+                        padding: 8px 16px;
+                        background-color: #007bff;
+                        color: white;
+                        text-decoration: none;
+                        border-radius: 6px;
+                        font-size: 0.95rem;
+                    ">
+                    ← Kembali
+                </a>
+    
+            </div>
         </div>
-    </div>
-
-    <br><br><br>
-
-    <!--Footer-->
+    </section>
+    
+    
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <footer class="footer">
         <div class="section__container footer__container">
             <div class="footer__col">
@@ -147,26 +216,7 @@
 
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="{{ asset('assets/main.js') }}"></script>
-
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const links = document.querySelectorAll("a:not(.read-more):not([target='_blank']):not(.btn-wa)");
-            links.forEach((link) => {
-                link.addEventListener("click", function(e) {
-                    const href = link.getAttribute("href");
-                    if (href && !href.startsWith("#") && !href.startsWith("javascript") && !link.classList.contains("disabled-link")) {
-                        document.getElementById("loader").style.display = "flex";
-                    }
-                });
-            });
-
-            window.addEventListener("pageshow", function() {
-                document.getElementById("loader").style.display = "none";
-            });
-        });
-    </script>
+    
 
 </body>
 

@@ -201,117 +201,102 @@ h2 {
     color: #333; /* Optional: to set a specific text color */
     margin-top: 5rem;
 }
-
 .doctor-card-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Maksimal 4 kolom */
-    gap: 1rem;
-    justify-content: center; /* Memusatkan grid secara horizontal */
-    align-items: center; /* Memusatkan item secara vertikal */
-    margin: 2rem auto; /* Auto margin untuk pusatkan container */
-    max-width: 1550px; /* Menyesuaikan agar tidak terlalu lebar */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 80px; /* ✅ Jarak antar card longgar, sesuai gambar */
+    margin-top: 40px;
 }
 
 .doctor-card {
+    width: 300px; /* ✅ Lebar tetap (sesuai gambar) */
+    min-height: 300px; /* ✅ Tinggi card biar space antar komponen cukup */
     background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 50px; /* Mengurangi radius agar lebih proporsional */
-    width: 180px; /* Ukuran card lebih kecil */
+    border-radius: 80px; /* ✅ Lebih bulat */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* ✅ Soft shadow */
+    padding: 20px 15px;
     text-align: center;
-    padding: 0.8rem; /* Mengurangi padding agar tidak terlalu besar */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: auto; /* Memastikan card tetap di tengah */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.doctor-img {
-    width: 190px;
-    height: 200px;
+.doctor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.doctor-card img {
+    width: 150px; /* ✅ Ukuran gambar kecil di tengah */
+    height: 150px;
+    border-radius: 50%;
     object-fit: cover;
-    border-radius: 100%;
-    margin-bottom: 1rem;
-  
-    /* Tambahan agar gambar center */
-    margin-left: auto;
-    margin-right: auto;
-  
-    border: 4px solid #e2e8f0;
-    transition: transform 0.3s ease;
-  }
-  
+    border: 4px solid #e2e8f0; /* ✅ Border lingkaran tipis abu muda */
+    margin-bottom: 15px;
+}
 
 .doctor-info h3 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
     color: #333;
+    margin-bottom: 5px;
 }
 
 .doctor-info p {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #777;
+    margin-bottom: 15px;
 }
 
 .btn {
-    background-color: #1771ca; /* Warna latar belakang tosca yang mencolok namun lembut, cocok untuk menarik perhatian pada tombol. */
-    color: white; /* Warna teks putih memberikan kontras yang jelas dengan latar belakang untuk keterbacaan yang baik. */
-    border: none; /* Menghilangkan border default tombol agar terlihat lebih bersih dan modern. */
-    padding: 7px 20px; /* Memberikan ruang di dalam tombol sehingga terlihat lebih proporsional dan nyaman untuk diklik. */
-    text-align: center; /* Memastikan teks di dalam tombol terpusat secara horizontal. */
-    text-decoration: none; /* Menghapus garis bawah pada teks untuk menjaga tampilan tombol tetap bersih. */
-    display: inline-block; /* Memastikan elemen tombol tetap dalam satu baris dengan elemen lainnya jika ada. */
-    font-size: 1rem; /* Ukuran teks tombol yang sesuai dengan ukuran teks standar untuk keterbacaan. */
-    cursor: pointer; /* Mengubah kursor menjadi pointer untuk menunjukkan bahwa elemen ini bisa diklik. */
-    border-radius: 20px; /* Membuat sudut tombol melengkung sehingga terlihat lebih ramah dan modern. */
-    margin-top: 0px; /* Memberikan jarak antara tombol dan elemen lain di atasnya untuk tata letak yang lebih rapi. */
-    margin-left: 1px;
+    background-color: #1771ca;
+    color: white;
+    border: none;
+    padding: 6px 20px; /* ✅ Lebar tombol */
+    text-align: center;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .btn:hover {
-    background-color: #4572a0; /* Darker green on hover */
-    transform: translateY(-2px); /* Slight movement for effect */
+    background-color: #145fa8;
+    transform: translateY(-2px);
 }
 
 .btn:active {
-    background-color: #3e778e; /* Even darker green when clicked */
-    transform: translateY(0); /* Reset the button position */
+    background-color: #124f8a;
+    transform: translateY(0);
 }
 
-/* Responsivitas untuk layar lebih kecil */
+/* ✅ Responsive Tablet */
 @media (max-width: 1024px) {
     .doctor-card-container {
-        grid-template-columns: repeat(3, 1fr); /* 3 kolom pada tablet besar */
+        gap: 20px;
+    }
+
+    .doctor-card {
+        width: 200px;
     }
 }
 
+/* ✅ Responsive Mobile */
 @media (max-width: 768px) {
     .doctor-card-container {
-        grid-template-columns: repeat(1, 1fr); /* 2 kolom pada tablet */
         flex-direction: column;
         align-items: center;
+        gap: 15px;
+    }
+
+    .doctor-card {
+        width: 80%;
     }
 }
 
-.doctor-card {
-    width: 80%;
-    margin-bottom: 1rem;
-}
-
-
-.section-title {
-    text-align: center;
-    position: relative;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .section-title::after {
-    content: "";
-    display: block;
-    width: 440px;
-    height: 2px;
-    background-color: #5294d6; 
-    margin: 0.5rem auto 0;
-    border-radius: 2px;
-  }
   
 
 /* ----------End DOkter------- */
@@ -597,3 +582,4 @@ p {
     opacity: 0;
     pointer-events: none;
   }
+

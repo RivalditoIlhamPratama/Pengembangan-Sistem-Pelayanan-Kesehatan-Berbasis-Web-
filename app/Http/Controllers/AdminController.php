@@ -172,9 +172,13 @@ class AdminController extends Controller
 
     public function destroyUser($id)
     {
-        $pengaduan = User::findOrFail($id);
-        $pengaduan->delete();
-
-        return redirect()->back()->with('success', 'Data pengaduan berhasil dihapus.');
+        $user = User::findOrFail($id);
+        $user->delete();
+    
+        return redirect()->back()->with('success', 'User berhasil dihapus');
     }
+    
+
+
+
 }
