@@ -147,6 +147,11 @@ Route::middleware(['auth', 'klinik'])->prefix('klinik')->group(function () {
     Route::get('/laporan', [KlinikController::class, 'laporan'])->name('klinik.laporan');
     Route::get('/laporan/tambah', [KlinikController::class, 'tambah_laporan'])->name('klinik.laporan.tambah');
     Route::post('/laporan/submit', [LaporanController::class, 'store'])->name('klinik.laporan.submit');
+    Route::delete('/laporan/{id}', [LaporanController::class, 'destroy'])->name('klinik.laporan.hapus');
+    Route::get('/laporan/edit/{id}', [LaporanController::class, 'edit'])->name('klinik.laporan.edit');
+Route::put('/laporan/update/{id}', [LaporanController::class, 'update'])->name('klinik.laporan.update');
+return redirect('/klinik/laporan')->with('success', 'Data laporan berhasil diperbarui.');
+
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -196,6 +201,13 @@ Route::get('/admin/dokter/edit', function () {
 Route::get('/admin/pengguna/create', [AdminController::class, 'createUserForm'])->name('admin.pengguna.create');
 
 Route::post('/admin/pengguna/store', [AdminController::class, 'storeUser'])->name('admin.pengguna.store');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/profil', [AdminController::class, 'profil'])->name('admin.profil');
+    Route::put('/admin/update-profile', [AdminController::class, 'updateProfile'])->name('admin.updateProfile');
+});
+
+Route::put('/admin/pengguna/update', [AdminController::class, 'updateUser'])->name('admin.pengguna.update');
 
 
 

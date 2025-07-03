@@ -9,6 +9,7 @@ class laporan extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'idLaporan'; // ✅ Tambahkan ini
     public $timestamps = true;
 
     protected $fillable = [
@@ -20,12 +21,12 @@ class laporan extends Model
         'NIK',
         'alamatPasien',
     ];
-
-
+    
     public function klinik()
     {
         return $this->belongsTo(Klinik::class, 'Klinik_id', 'idKlinik');
     }
+
     public function rekam_medis()
     {
         return $this->belongsTo(\App\Models\rekammedis::class, 'RekamMedis_id', 'idRekamMedis');

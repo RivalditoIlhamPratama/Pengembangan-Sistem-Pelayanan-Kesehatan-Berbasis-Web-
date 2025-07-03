@@ -46,12 +46,27 @@
                 <tr class="align-middle text-center">
                     <td>{{ $lap->idLaporan }}</td>
                     <td><strong class="text-primary">{{ $lap->klinik->namaKlinik }}</strong></td>
-                    <td class="fw-bold">{{ $lap->rekam_medis->tanggalPeriksa }}</td>
-                    <td class="nama-pasien">{{ $lap->rekam_medis->namaPasien }}</td>
-                    <td>{{ $lap->rekam_medis->tindakan }}</td>
                     <td class="fw-bold">
-                        {{ optional($lap->rekam_medis->dokter)->namaDokter ?? (optional($lap->rekam_medis->staffrekammedis)->namaStaff ?? '-') }}
+                        {{ optional($lap->rekam_medis)->tanggalPeriksa 
+                            ? \Carbon\Carbon::parse($lap->rekam_medis->tanggalPeriksa)->format('d-m-Y') 
+                            : '-' }}
                     </td>
+                    
+                    <td class="nama-pasien">
+                        {{ optional($lap->rekam_medis)->namaPasien ?? '-' }}
+                    </td>
+                    
+                    <td>
+                        {{ optional($lap->rekam_medis)->tindakan ?? '-' }}
+                    </td>
+                    
+                    <td class="fw-bold">
+                        {{ optional(optional($lap->rekam_medis)->dokter)->namaDokter 
+                            ?? optional(optional($lap->rekam_medis)->staffrekammedis)->namaStaff 
+                            ?? '-' }}
+                    </td>
+                    
+                    
                     <td>
                         <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalDetail{{ $lap->idLaporan }}">
                             <i class="fas fa-eye"></i>
@@ -70,15 +85,25 @@
                             </div>
                             <div class="modal-body text-start">
                                 <p><strong>Klinik:</strong> {{ $lap->klinik->namaKlinik }}</p>
-                                <p><strong>Tanggal Tindakan:</strong> {{ $lap->rekam_medis->tanggalPeriksa }}</p>
-                                <p><strong>Nama Pasien:</strong> {{ $lap->rekam_medis->namaPasien }}</p>
-                                <p><strong>Alamat Pasien:</strong> {{ $lap->rekam_medis->alamatPasien }}</p>
-                                <p><strong>Usia / Jenis Kelamin:</strong> {{ $lap->rekam_medis->usiaPasien }} tahun / {{ $lap->rekam_medis->jenisKelamin }}</p>
-                                <p><strong>Diagnosa:</strong> {{ $lap->rekam_medis->diagnosaMedis }}</p>
-                                <p><strong>Tindakan:</strong> {{ $lap->rekam_medis->tindakan }}</p>
-                                <p><strong>Resep Obat:</strong> {{ $lap->rekam_medis->resepObat }}</p>
+                                <p><strong>Tanggal Tindakan:</strong> 
+                                    {{ optional($lap->rekam_medis)->tanggalPeriksa 
+                                        ? \Carbon\Carbon::parse($lap->rekam_medis->tanggalPeriksa)->format('d-m-Y') 
+                                        : '-' }}
+                                </p>
+                                
+                                <p><strong>Nama Pasien:</strong> {{ optional($lap->rekam_medis)->namaPasien ?? '-' }}</p>
+                                <p><strong>Alamat Pasien:</strong> {{ optional($lap->rekam_medis)->alamatPasien ?? '-' }}</p>
+                                <p><strong>Usia / Jenis Kelamin:</strong> 
+                                    {{ optional($lap->rekam_medis)->usiaPasien ?? '-' }} / {{ optional($lap->rekam_medis)->jenisKelamin ?? '-' }}
+                                </p>
+                                <p><strong>Diagnosa:</strong> {{ optional($lap->rekam_medis)->diagnosaMedis ?? '-' }}</p>
+                                <p><strong>Tindakan:</strong> {{ optional($lap->rekam_medis)->tindakan ?? '-' }}</p>
+                                <p><strong>Resep Obat:</strong> {{ optional($lap->rekam_medis)->resepObat ?? '-' }}</p>
                                 <p><strong>Dokter / Petugas:</strong> 
-                                    {{ optional($lap->rekam_medis->dokter)->namaDokter ?? (optional($lap->rekam_medis->staffrekammedis)->namaStaff ?? '-') }}
+                                    {{ optional(optional($lap->rekam_medis)->dokter)->namaDokter 
+                                        ?? optional(optional($lap->rekam_medis)->staffrekammedis)->namaStaff 
+                                        ?? '-' }}
+                                    
                                 </p>
                             </div>
                             <div class="modal-footer">

@@ -2,8 +2,8 @@ describe('UC03_Admin - Lihat Data Dokter', () => {
     before(() => {
       // Login Admin
       cy.visit('http://127.0.0.1:8000/login');
-      cy.get('input[name="username"]').type('admin1');
-      cy.get('input[name="password"]').type('password'); // Ganti dengan password admin yang sesuai
+      cy.get('input[name="username"]').type('admin puskesmas');
+      cy.get('input[name="password"]').type('password12345'); // Ganti dengan password admin yang sesuai
       cy.get('button[type="submit"]').click();
   
       // Pastikan berhasil masuk dashboard

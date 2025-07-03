@@ -122,7 +122,7 @@
                                 @if ($jadwal->hari && $jadwal->waktu)
                                     <tr>
                                         <td style="padding: 8px; border: 1px solid #ccc;">
-                                            {{ $jadwal->hari->namaHari }} | Poli Umum
+                                            {{ $jadwal->hari->namaHari }} 
                                         </td>
                                         <td style="padding: 8px; border: 1px solid #ccc;">
                                             {{ $jadwal->waktu->jamMulai }} - {{ $jadwal->waktu->jamSelesai }} WIB

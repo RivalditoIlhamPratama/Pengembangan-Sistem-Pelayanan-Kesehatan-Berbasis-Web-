@@ -60,12 +60,12 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <span
-                                        class="badge {{ strtolower($user->role) == 'dokter' ? 'bg-primary' : 'bg-secondary' }} text-white">
+                                    <span class="badge {{ strtolower($user->role) == 'dokter' ? 'bg-primary' : 'bg-secondary' }} text-white">
                                         {{ $user->role ?? 'N/A' }}
                                     </span>
                                 </td>
                                 <td>
+                                    <!-- Tombol Edit -->
                                     <button type="button" class="btn btn-sm btn-warning edit-btn" data-bs-toggle="modal"
                                         data-bs-target="#editModal" data-id="{{ $user->id_user }}"
                                         data-name="@if ($user->role == 'admin' && $user->admin) {{ $user->admin->first()->namaAdmin ?? $user->name }}@elseif ($user->role == 'dokter' && $user->dokter){{ $user->dokter->first()->namaDokter ?? $user->name }}@elseif ($user->role == 'pasien' && $user->pasien){{ $user->pasien->namaPasien ?? $user->name }}@elseif ($user->role == 'stafrekammedis' && $user->stafrekammedis){{ $user->stafrekammedis->first()->namaStaff ?? $user->name }}@elseif ($user->role == 'klinik' && $user->klinik){{ $user->klinik->namaKlinik ?? $user->name }}@else{{ $user->name }} @endif"
@@ -74,11 +74,11 @@
                                         data-role="{{ $user->role }}">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="{{ route('admin.pengguna.destroy', $user->id_user) }}" method="POST"
-                                        class="d-inline">
+
+                                    <!-- Tombol Hapus -->
+                                    <form action="{{ route('admin.pengguna.destroy', $user->id_user) }}" method="POST" class="d-inline" data-confirm-delete>
                                         @csrf @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger"
-                                            onclick="return confirm('Hapus pengguna ini?')">
+                                        <button type="submit" class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
@@ -115,6 +115,13 @@
                         <label for="edit-email" class="form-label">Email</label>
                         <input type="email" class="form-control" name="email" id="edit-email">
                     </div>
+                    
+                    <div class="mb-3">
+                        <label for="edit-password" class="form-label">Password (Opsional)</label>
+                        <input type="password" class="form-control" name="password" id="edit-password" placeholder="Kosongkan jika tidak diubah">
+                    </div>
+                    
+
                     <div class="mb-3">
                         <label for="edit-role" class="form-label">Role</label>
                         <select class="form-select" name="role" id="edit-role" required>
@@ -136,18 +143,41 @@
 @endsection
 
 @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.body.addEventListener("click", function(event) {
+        document.addEventListener("DOMContentLoaded", function () {
+            // Isi modal edit
+            document.body.addEventListener("click", function (event) {
                 if (event.target.closest(".edit-btn")) {
                     const btn = event.target.closest(".edit-btn");
-                    console.log("Edit button clicked:", btn);
                     document.getElementById('edit-id').value = btn.dataset.id;
                     document.getElementById('edit-name').value = btn.dataset.name;
                     document.getElementById('edit-username').value = btn.dataset.username;
                     document.getElementById('edit-email').value = btn.dataset.email;
                     document.getElementById('edit-role').value = btn.dataset.role;
                 }
+            });
+
+            // SweetAlert konfirmasi hapus
+            document.querySelectorAll('form[data-confirm-delete]').forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Yakin ingin menghapus?',
+                        text: "Data pengguna akan dihapus permanen!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Ya, hapus!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+                });
             });
         });
     </script>

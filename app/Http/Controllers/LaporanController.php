@@ -84,7 +84,36 @@ class LaporanController extends Controller
         return redirect()->route('klinik.laporan')->with('success', 'Laporan berhasil disimpan.');
     }
 
+    public function destroy($id)
+    {
+        $laporan = \App\Models\Laporan::findOrFail($id);
+        $laporan->delete();
+    
+        return redirect()->back()->with('success', 'Laporan berhasil dihapus.');
+    }
+    
 
+    public function edit($id)
+{
+    $laporan = laporan::findOrFail($id);
+    return view('klinik.laporan_edit', compact('laporan'));
+}
 
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'namaPasien' => 'required|string|max:255',
+        'NIK' => 'required|string|max:25',
+        'alamatPasien' => 'required|string',
+        'diagnosaMedis' => 'required|string',
+        'namaDokter' => 'required|string',
+    ]);
+
+    $laporan = laporan::findOrFail($id);
+    $laporan->update($request->all());
+
+    return redirect('/klinik/laporan')->with('success', 'Data laporan berhasil diperbarui.');
+
+}
 
 }

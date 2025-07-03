@@ -48,14 +48,13 @@
                     <tbody>
                         @foreach ($laporan as $lap)
                             <tr>
-                                <td>{{ $lap->idLaporan }}</td>
+                                <td>{{ $loop->iteration }}</td> {{-- Nomor urut --}}
                                 <td>{{ $lap->created_at ? $lap->created_at->format('Y-m-d') : '' }}</td>
                                 <td>{{ $lap->rekam_medis ? $lap->rekam_medis->namaPasien : $lap->namaPasien }}</td>
                                 <td>{{ $lap->rekam_medis ? $lap->rekam_medis->NIK : $lap->NIK }}</td>
                                 <td>{{ $lap->rekam_medis ? $lap->rekam_medis->alamatPasien : $lap->alamatPasien }}</td>
                                 <td>{{ $lap->rekam_medis ? $lap->rekam_medis->diagnosaMedis : $lap->diagnosaMedis }}</td>
-                                <td>{{ optional($lap->rekam_medis)->dokter ? optional($lap->rekam_medis->dokter)->namaDokter : $lap->namaDokter ?? '' }}
-                                </td>
+                                <td>{{ optional($lap->rekam_medis)->dokter ? optional($lap->rekam_medis->dokter)->namaDokter : $lap->namaDokter ?? '' }}</td>
                                 <td>{{ $lap->klinik->namaKlinik }}</td>
                                 <td class="text-center">
                                     <!-- Tombol Detail -->
@@ -71,25 +70,25 @@
                                         data-tanggal="{{ $lap->created_at ? $lap->created_at->format('Y-m-d') : '' }}">
                                         <i class="fas fa-info-circle"></i>
                                     </button>
-                                
+                    
                                     <!-- Tombol Edit -->
-                                    <a href="" class="btn btn-sm btn-warning">
+                                    <a href="{{ route('klinik.laporan.edit', $lap->idLaporan) }}" class="btn btn-sm btn-warning">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                
+                    
                                     <!-- Tombol Hapus -->
-                                    <form action="" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
+                                    <form action="{{ route('klinik.laporan.hapus', $lap->idLaporan) }}" method="POST" style="display:inline-block;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
-                                    </form>                       
+                                    </form>
                                 </td>
-                                
                             </tr>
                         @endforeach
                     </tbody>
+                    
                 </table>
             </div>
         </div>
@@ -169,7 +168,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.21/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const deleteButtons = document.querySelectorAll("form[method='POST'] button[type='submit'].btn-danger");
+        
+            deleteButtons.forEach(button => {
+                button.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const form = this.closest("form");
+        
+                    Swal.fire({
+                        title: 'Yakin, data akan dihapus?',
+                        text: "Tindakan ini tidak dapat dibatalkan.",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#6c757d',
+                        confirmButtonText: 'Ya, hapus',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+                });
+            });
+        });
+        </script>
+        
+        
     <script>
         // Modifying table and export functionality
         document.querySelectorAll(".detail-btn").forEach(button => {
@@ -320,4 +350,7 @@ document.getElementById("exportExcel").addEventListener("click", function () {
             });
         });
     </script>
+
+
+
 @endsection

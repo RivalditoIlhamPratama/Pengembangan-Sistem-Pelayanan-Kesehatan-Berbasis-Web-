@@ -24,8 +24,6 @@ describe('UC01_StafRekamMedis - Klik Detail lalu Cetak Rekam Medis', () => {
       // Klik tombol Cetak
       cy.get('#printDetail').should('exist').click();
   
-      // ✅ Opsional: Karena Cypress tidak bisa test native window.print(),
-      // cukup pastikan tidak error saat klik.
     });
   });
   

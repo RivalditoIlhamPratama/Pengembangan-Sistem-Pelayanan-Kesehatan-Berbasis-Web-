@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 
 class AdminController extends Controller
@@ -178,7 +179,107 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'User berhasil dihapus');
     }
     
+    public function profil()
+    {
+        $user = auth()->user(); // ambil user yang login
+    
+        if (!$user) {
+            return redirect()->route('login');
+        }
+    
+        // Ambil data admin dari tabel adminpuskesmas
+        $admin = \App\Models\adminpuskesmas::where('user_id', $user->id_user)->first();
+    
+        return view('admin.profil', compact('admin', 'user'));
 
+    }
+    
+    
+
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'username' => 'required|string|max:255',
+            'email' => 'nullable|email',
+            'password' => 'nullable|min:6',
+        ]);
+    
+        $user = auth()->user();
+    
+        if (!$user) {
+            return redirect()->route('login');
+        }
+    
+        $admin = \App\Models\adminpuskesmas::where('user_id', $user->id_user)->first();
+    
+        if (!$admin) {
+            return redirect()->back()->with('error', 'Data admin tidak ditemukan.');
+        }
+    
+        // Simpan data ke tabel adminpuskesmas
+        $admin->namaAdmin = $request->namaAdmin;
+        $admin->jenisKelamin = $request->jenisKelamin;
+        $admin->noHp = $request->noHp;
+        $admin->alamatAdmin = $request->alamatAdmin;
+        $admin->email = $request->email;
+        $admin->save();
+    
+        // Simpan ke tabel users
+        $user->username = $request->username;
+        $user->email = $request->email;
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+    
+        return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
+    }
+    
+    
+    public function updateUser(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:users,id_user',
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'role' => 'required|string|in:admin,dokter,klinik,pasien,stafrekammedis',
+            'password' => 'nullable|string|min:6',
+        ]);
+    
+        $user = User::where('id_user', $request->id)->first();
+    
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->role = $request->role;
+    
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+    
+        $user->save();
+    
+        // Update nama di tabel relasional berdasarkan role
+        switch ($request->role) {
+            case 'admin':
+                $user->admin()->update(['namaAdmin' => $request->name]);
+                break;
+            case 'dokter':
+                $user->dokter()->update(['namaDokter' => $request->name]);
+                break;
+            case 'klinik':
+                $user->klinik()->update(['namaKlinik' => $request->name]);
+                break;
+            case 'pasien':
+                $user->pasien()->update(['namaPasien' => $request->name]);
+                break;
+            case 'stafrekammedis':
+                $user->stafrekammedis()->update(['namaStaff' => $request->name]);
+                break;
+        }
+    
+        return redirect()->route('admin.users')->with('success', 'Pengguna berhasil diperbarui.');
+    }
 
 
 }
