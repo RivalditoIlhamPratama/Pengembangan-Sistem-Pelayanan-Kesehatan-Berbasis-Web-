@@ -58,6 +58,7 @@ class LaporanController extends Controller
             'diagnosaMedis' => 'nullable|string|max:255',
             'NIK' => 'nullable|string|max:20',
             'alamatPasien' => 'nullable|string|max:255',
+            'tindakan' => 'nullable|string|max:255',
         ]);
 
         // Verify that the dokter belongs to the klinik if RekamMedis_id is provided
@@ -79,6 +80,7 @@ class LaporanController extends Controller
         $laporan->diagnosaMedis = $validatedData['diagnosaMedis'] ?? null;
         $laporan->NIK = $validatedData['NIK'] ?? null;
         $laporan->alamatPasien = $validatedData['alamatPasien'] ?? null;
+        $laporan->deskripsi_tindakan = $validatedData['tindakan'] ?? null;
         $laporan->save();
 
         return redirect()->route('klinik.laporan')->with('success', 'Laporan berhasil disimpan.');
@@ -88,32 +90,30 @@ class LaporanController extends Controller
     {
         $laporan = \App\Models\Laporan::findOrFail($id);
         $laporan->delete();
-    
+
         return redirect()->back()->with('success', 'Laporan berhasil dihapus.');
     }
-    
+
 
     public function edit($id)
-{
-    $laporan = laporan::findOrFail($id);
-    return view('klinik.laporan_edit', compact('laporan'));
-}
+    {
+        $laporan = laporan::findOrFail($id);
+        return view('klinik.laporan_edit', compact('laporan'));
+    }
 
-public function update(Request $request, $id)
-{
-    $request->validate([
-        'namaPasien' => 'required|string|max:255',
-        'NIK' => 'required|string|max:25',
-        'alamatPasien' => 'required|string',
-        'diagnosaMedis' => 'required|string',
-        'namaDokter' => 'required|string',
-    ]);
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'namaPasien' => 'required|string|max:255',
+            'NIK' => 'required|string|max:25',
+            'alamatPasien' => 'required|string',
+            'diagnosaMedis' => 'required|string',
+            'namaDokter' => 'required|string',
+        ]);
 
-    $laporan = laporan::findOrFail($id);
-    $laporan->update($request->all());
+        $laporan = laporan::findOrFail($id);
+        $laporan->update($request->all());
 
-    return redirect('/klinik/laporan')->with('success', 'Data laporan berhasil diperbarui.');
-
-}
-
+        return redirect('/klinik/laporan')->with('success', 'Data laporan berhasil diperbarui.');
+    }
 }

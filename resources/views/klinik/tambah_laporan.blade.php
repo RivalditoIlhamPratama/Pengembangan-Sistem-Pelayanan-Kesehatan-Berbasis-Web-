@@ -13,14 +13,11 @@
                         <label for="Klinik_id" class="form-label fw-semibold text-muted">Klinik</label>
                         <div class="input-group">
                             <span class="input-group-text bg-light text-dark"><i class="fas fa-clinic-medical"></i></span>
-                            <input type="text" 
-                                   class="form-control bg-white text-dark" 
-                                   id="Klinik_id" 
-                                   value="{{ $klinik->namaKlinik ?? 'Nama Klinik' }}" 
-                                   readonly>
+                            <input type="text" class="form-control bg-white text-dark" id="Klinik_id"
+                                value="{{ $klinik->namaKlinik ?? 'Nama Klinik' }}" readonly>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <label for="RekamMedis_id" class="form-label">Rekam Medis</label>
                         <select name="RekamMedis_id" id="RekamMedis_id" class="form-control">
@@ -29,7 +26,7 @@
                                 <option value="{{ $rekam->idRekamMedis }}" data-namapasien="{{ $rekam->namaPasien }}"
                                     data-namadokter="{{ optional($rekam->dokter)->namaDokter }}"
                                     data-diagnosa="{{ $rekam->diagnosaMedis }}" data-nik="{{ $rekam->NIK }}"
-                                    data-alamat="{{ $rekam->alamatPasien }}">
+                                    data-alamat="{{ $rekam->alamatPasien }}" data-tindakan="{{ $rekam->tindakan }}">
                                     {{ $rekam->namaPasien }}
                                 </option>
                             @endforeach
@@ -63,9 +60,13 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <label class="form-label">Diagnosa Medis</label>
                         <input type="text" id="diagnosa" name="diagnosaMedis" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Tindakan Medis</label>
+                        <input type="text" id="tindakan" name="tindakan" class="form-control">
                     </div>
                 </div>
 

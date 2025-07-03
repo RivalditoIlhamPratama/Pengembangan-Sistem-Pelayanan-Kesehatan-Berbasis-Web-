@@ -88,7 +88,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
     Route::get('/data-pengaduan', [AdminController::class, 'data_pengaduan'])->name('admin.data_pengaduan');
-    Route::get('/laporan-klinik', [AdminController::class, 'laporan_klinik'])->name('admin.laporan_klinik');
+    // Route::get('/laporan-klinik', [AdminController::class, 'laporan_klinik'])->name('admin.laporan_klinik');
     Route::get('/data-dokter', [AdminController::class, 'data_dokter'])->name('admin.data_dokter');
     Route::get('/data-dokter/tambah', [AdminController::class, 'tambah_data_dokter'])->name('admin.data_dokter.tambah');
     Route::get('/data-dokter/edit/{id}', [AdminController::class, 'edit_data_dokter'])->name('admin.data_dokter.edit');
@@ -149,9 +149,8 @@ Route::middleware(['auth', 'klinik'])->prefix('klinik')->group(function () {
     Route::post('/laporan/submit', [LaporanController::class, 'store'])->name('klinik.laporan.submit');
     Route::delete('/laporan/{id}', [LaporanController::class, 'destroy'])->name('klinik.laporan.hapus');
     Route::get('/laporan/edit/{id}', [LaporanController::class, 'edit'])->name('klinik.laporan.edit');
-Route::put('/laporan/update/{id}', [LaporanController::class, 'update'])->name('klinik.laporan.update');
-return redirect('/klinik/laporan')->with('success', 'Data laporan berhasil diperbarui.');
-
+    Route::put('/laporan/update/{id}', [LaporanController::class, 'update'])->name('klinik.laporan.update');
+    return redirect('/klinik/laporan')->with('success', 'Data laporan berhasil diperbarui.');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -236,10 +235,7 @@ Route::get('/dokter/{id}/jadwal', [JadwalDokterController::class, 'show'])->name
 
 
 
-Route::get('/dokter', function() {
+Route::get('/dokter', function () {
     $dokter = dokter::all();
     return view('daftardokter', compact('dokter'));
 });
-
-
-

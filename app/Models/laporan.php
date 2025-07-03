@@ -20,8 +20,9 @@ class laporan extends Model
         'diagnosaMedis',
         'NIK',
         'alamatPasien',
+        'deskripsi_tindakan',
     ];
-    
+
     public function klinik()
     {
         return $this->belongsTo(Klinik::class, 'Klinik_id', 'idKlinik');

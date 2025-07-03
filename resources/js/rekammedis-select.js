@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const NIKInput = document.getElementById("NIK");
     const alamatPasienInput = document.getElementById("alamatPasien");
     const diagnosaInput = document.getElementById("diagnosa");
+    const tindakanInput = document.getElementById("tindakan");
 
     rekamSelect.addEventListener("change", function () {
         const selectedOption = this.options[this.selectedIndex];
@@ -17,6 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
         NIKInput.value = selectedOption.getAttribute("data-nik") || "";
         alamatPasienInput.value =
             selectedOption.getAttribute("data-alamat") || "";
+        tindakanInput.value =
+            selectedOption.getAttribute("data-tindakan") || "";
     });
 
     // Trigger change event on page load if a value is selected
