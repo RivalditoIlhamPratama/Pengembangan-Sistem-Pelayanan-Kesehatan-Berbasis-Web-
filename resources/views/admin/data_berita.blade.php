@@ -56,7 +56,7 @@
           <th>Tanggal</th>
           <th>Judul</th>
           <th>Isi Berita</th>
-          <th>Gambar</th> {{-- Tambahkan kolom gambar --}}
+          <th>Gambar</th> 
           <th>Action</th>
       </tr>
   </thead>

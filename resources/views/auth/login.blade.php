@@ -86,7 +86,7 @@
 
     <div class="login-container">
         <!-- Logo -->
-        <img src="{{ asset('assets/11.png') }}" alt="Logo Puskesmas">
+        <img src="{{ asset('assets/logobaru.png') }}" alt="Logo Puskesmas">
 
         <h2>Masuk ke Akun Anda</h2>
 

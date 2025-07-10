@@ -10,6 +10,8 @@ class klinik extends Model
     use HasFactory;
 
     public $timestamps = false;
+    protected $primaryKey = 'idKlinik';
+public $incrementing = true;
 
     protected $fillable = ['user_id', 'namaKlinik', 'alamatKlinik', 'email'];
 

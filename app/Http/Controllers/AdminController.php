@@ -29,7 +29,8 @@ class AdminController extends Controller
         $admin = Adminpuskesmas::where('user_id', $user_auth->id_user)->first();
         $user_dokter = User::where('role', 'dokter')->count();
         $pengaduan = pengaduan::count();
-        return view('admin.dashboard', ['user' => $user, 'user_dokter' => $user_dokter, 'pengaduan' => $pengaduan, 'admin' => $admin]);
+        $laporan_klinik = \App\Models\laporan::count();
+        return view('admin.dashboard', ['user' => $user, 'user_dokter' => $user_dokter, 'pengaduan' => $pengaduan, 'laporan_klinik' => $laporan_klinik, 'admin' => $admin]);
     }
 
     public function createUserForm()
@@ -281,5 +282,5 @@ class AdminController extends Controller
         return redirect()->route('admin.users')->with('success', 'Pengguna berhasil diperbarui.');
     }
 
-
+    
 }

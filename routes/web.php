@@ -134,12 +134,15 @@ Route::middleware(['auth', 'dokter'])->prefix('dokter')->group(function () {
     Route::get('/rekam_medis/edit/{id}', [RekammedisController::class, 'edit'])->name('dokter.rekam_medis.edit');
     Route::put('/rekam_medis/update/{id}', [RekammedisController::class, 'update'])->name('dokter.rekam_medis.update');
     Route::post('/rekam_medis/delete/{id}', [RekammedisController::class, 'destroy'])->name('dokter.rekam_medis.delete');
+    
 });
 
 Route::middleware(['auth', 'stafrekammedis'])->prefix('stafrekammedis')->group(function () {
     Route::get('/dashboard', [StaffrekammedisController::class, 'dashboard'])->name('stafrekammedis.dashboard');
     Route::get('/rekam_medis/tambah', [StaffrekammedisController::class, 'tambah_rekam_medis'])->name('stafrekammedis.tambah_rekam_medis');
     Route::post('/rekam_medis/submit', [RekammedisController::class, 'store'])->name('stafrekammedis.rekam_medis.submit');
+    Route::put('/staff/update-profil', [StaffrekammedisController::class, 'updateProfil'])->name('staff.update_profil');
+
 });
 
 Route::middleware(['auth', 'klinik'])->prefix('klinik')->group(function () {
@@ -150,7 +153,8 @@ Route::middleware(['auth', 'klinik'])->prefix('klinik')->group(function () {
     Route::delete('/laporan/{id}', [LaporanController::class, 'destroy'])->name('klinik.laporan.hapus');
     Route::get('/laporan/edit/{id}', [LaporanController::class, 'edit'])->name('klinik.laporan.edit');
     Route::put('/laporan/update/{id}', [LaporanController::class, 'update'])->name('klinik.laporan.update');
-    return redirect('/klinik/laporan')->with('success', 'Data laporan berhasil diperbarui.');
+    Route::get('/profil', [KlinikController::class, 'profil'])->name('klinik.profil');
+    Route::post('/update_profil', [KlinikController::class, 'updateProfilKlinik'])->name('klinik.update_profil');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -239,3 +243,26 @@ Route::get('/dokter', function () {
     $dokter = dokter::all();
     return view('daftardokter', compact('dokter'));
 });
+
+
+
+    Route::get('/dokter/profil', [DokterController::class, 'data_dokter'])->name('dokter.data_dokter');
+    Route::post('/dokter/profil/update', [DokterController::class, 'updateProfilDokter'])->name('dokter.data_dokter.update');
+
+    Route::post('/dokter/data_dokter/update', [DokterController::class, 'updateProfilDokter'])->name('dokter.data_dokter.update');
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/dokter/profil', [DokterController::class, 'data_dokter'])->name('dokter.profil');
+    });
+
+
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/staff/data_staffrm', [StaffrekammedisController::class, 'editProfil'])->name('staff.data_staffrm');
+        Route::post('/staff/update_profil', [StaffrekammedisController::class, 'updateProfil'])->name('staff.update_profil');
+    });
+    
+
+    Route::get('/staff/data-staffrm', [StaffrekammedisController::class, 'editProfil'])->name('staff.data_staffrm');
+Route::post('/staff/update-profil', [StaffrekammedisController::class, 'updateProfil'])->name('staff.updateProfil');
+
+
+

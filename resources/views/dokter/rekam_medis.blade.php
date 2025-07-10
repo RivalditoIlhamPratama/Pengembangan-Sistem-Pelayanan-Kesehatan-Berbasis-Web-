@@ -3,9 +3,7 @@
     <div class="container-fluid mt-5">
         <div class="card p-4 shadow-sm">
             <h2 class="mb-4 fw-bold">Data Rekam Medis</h2>
-            @if (session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
+            
 
             @if ($rekammedis->isEmpty())
                 <div class="d-flex justify-content-between align-items-center mb-4">
@@ -140,7 +138,7 @@
                 <div class="modal-body" id="printArea">
                     <!-- Print Layout -->
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <img src="{{ asset('assets/11.png') }}" alt="Puskesmas Logo" style="max-width: 100px;">
+                        <img src="{{ asset('assets/logobaru.png') }}" alt="Puskesmas Logo" style="max-width: 100px;">
                         <div class="text-center ms-3">
                             <h5 class="mb-0">PEMERINTAH KABUPATEN PROBOLINGGO DINAS KESEHATAN </h5>
                             <h5 class="mb-0">PUSKESMAS KRAKSAAN</h5>

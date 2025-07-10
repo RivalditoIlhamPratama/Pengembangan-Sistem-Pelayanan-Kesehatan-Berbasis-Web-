@@ -4,9 +4,7 @@
     <div class="container-fluid mt-5">
         <div class="card p-4 shadow-sm">
             <h2 class="mb-4 fw-bold">Data Pengaduan</h2>
-            @if (session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
+            
 
             @if ($pengaduan->isEmpty())
                 <div class="d-flex justify-content-between align-items-center mb-4">

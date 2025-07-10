@@ -27,7 +27,8 @@ class DokterController extends Controller
         $user = auth()->user();
         $waktu = Waktu::all();
         $hari = Hari::all();
-        $dokter = Dokter::where('user_id', $user->id_user)->first();
+        $dokter = Dokter::with('user')->where('user_id', $user->id_user)->first();
+
         return view('dokter.data_dokter', ['dokter' => $dokter, 'waktu' => $waktu, 'hari' => $hari]);
     }
     public function rekam_medis()
@@ -190,4 +191,59 @@ class DokterController extends Controller
 
         return redirect()->route('admin.data_dokter')->with('success', 'Data dokter berhasil dihapus!');
     }
+
+    public function updateProfilDokter(Request $request)
+{
+    $user = auth()->user();
+    $dokter = Dokter::where('user_id', $user->id_user)->firstOrFail();
+
+    $validated = $request->validate([
+        'namaDokter'    => 'required|string|max:255',
+        'tglLahir'      => 'nullable|date',
+        'jenisKelamin'  => 'required|in:Laki-Laki,Perempuan',
+        'alamatDokter'  => 'nullable|string|max:255',
+        'noTelepon'     => 'nullable|string|max:20',
+        'username'      => 'required|string|max:255',
+        'email'         => 'required|email|max:255',
+        'password'      => 'nullable|string|min:6',
+        'gambarProfil' => 'nullable|image|mimes:jpeg,jpg,png|max:5120' // 5120 KB = 5 MB
+
+    ]);
+
+    // Update data dokter
+    $dokter->namaDokter    = $validated['namaDokter'];
+    $dokter->tglLahir      = $validated['tglLahir'];
+    $dokter->jenisKelamin  = $validated['jenisKelamin'];
+    $dokter->alamatDokter  = $validated['alamatDokter'];
+    $dokter->noTelepon     = $validated['noTelepon'];
+    $dokter->email         = $validated['email'];
+
+    // Jika ada gambar profil baru, hapus yang lama dan simpan yang baru
+    if ($request->hasFile('gambarProfil')) {
+        if ($dokter->gambarProfil && Storage::disk('public')->exists($dokter->gambarProfil)) {
+            Storage::disk('public')->delete($dokter->gambarProfil);
+        }
+
+        $path = $request->file('gambarProfil')->store('dokter', 'public');
+        $dokter->gambarProfil = $path;
+    }
+
+    $dokter->save();
+
+    // Update user (username & email)
+    $user->username = $validated['username'];
+    $user->email    = $validated['email'];
+
+    if (!empty($validated['password'])) {
+        $user->password = Hash::make($validated['password']);
+    }
+
+    $user->save();
+
+    return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
+}
+
+
+    
+
 }

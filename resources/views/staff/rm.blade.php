@@ -107,7 +107,7 @@
             <div class="modal-body" id="printArea">
                 <!-- Print Layout -->
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <img src="{{ asset('assets/11.png') }}" alt="Puskesmas Logo" style="max-width: 100px;">
+                    <img src="{{ asset('assets/logobaru.png') }}" alt="Puskesmas Logo" style="max-width: 100px;">
                     <div class="text-center ms-3">
                         <h5 class="mb-0">PEMERINTAH KABUPATEN PROBOLINGGO DINAS KESEHATAN </h5>
                         <h5 class="mb-0">PUSKESMAS KRAKSAAN</h5>

@@ -13,7 +13,7 @@ describe('UC10_Dokter - Edit Nama Pasien dan klik Update Rekam Medis', () => {
   
       // Pastikan tabel muncul
       cy.get('#rekamMedisTable').should('exist');
-  
+      
       // Klik tombol Edit pertama
       cy.get('a.btn-warning').first().click();
   

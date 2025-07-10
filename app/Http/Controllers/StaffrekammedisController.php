@@ -56,4 +56,65 @@ class StaffrekammedisController extends Controller
 
     //     return redirect()->route('dokter.data_dokter')->with('success', 'Data dokter berhasil diperbarui.');
     // }
+
+    public function editProfil()
+{
+    $user = auth()->user();
+    $staff = Staffrekammedis::where('user_id', $user->id_user)->first();
+
+    if (!$staff) {
+        // Bisa redirect atau munculkan error friendly
+        return redirect()->route('dashboard')->with('error', 'Data staff belum tersedia.');
+    }
+
+    return view('staff.data_staffrm', compact('staff'));
+}
+
+    public function updateProfil(Request $request)
+{
+    $user = auth()->user();
+    $staff = Staffrekammedis::where('user_id', $user->id_user)->first();
+
+    $validated = $request->validate([
+        'namaStaff' => 'required|string|max:255',
+        'jenisKelamin' => 'required|in:Laki-Laki,Perempuan',
+        'noHp' => 'nullable|string|max:20',
+        'alamatStaff' => 'nullable|string|max:255',
+        'email' => 'required|email|max:255',
+        'username' => 'required|string|max:255',
+        'password' => 'nullable|string|min:6',
+        'gambarProfil' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
+
+    // Update staff data
+    $staff->update([
+        'namaStaff' => $validated['namaStaff'],
+        'jenisKelamin' => $validated['jenisKelamin'],
+        'noHp' => $validated['noHp'],
+        'alamatStaff' => $validated['alamatStaff'],
+        'email' => $validated['email'],
+    ]);
+
+    // Update User
+    $user->username = $validated['username'];
+    $user->email = $validated['email'];
+    if ($validated['password']) {
+        $user->password = bcrypt($validated['password']);
+    }
+    $user->save();
+
+    // Upload foto
+    if ($request->hasFile('gambarProfil')) {
+        $filename = 'staff_' . $staff->idStaffRm . '.' . $request->file('gambarProfil')->getClientOriginalExtension();
+        $path = $request->file('gambarProfil')->storeAs('staff_foto', $filename, 'public');
+        $staff->gambarProfil = $path;
+        $staff->save();
+    }
+
+    return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
+}
+
+
+
+
 }

@@ -41,7 +41,12 @@
                     <input type="text" class="form-control" id="username" name="username"
                         placeholder="Masukkan username" value="{{ old('username') }}">
                 </div>
-
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                        placeholder="Masukkan password" required>
+                </div>
+                
                 <div class="mb-3">
                     <label for="role" class="form-label">Role</label>
                     <select class="form-select" id="role" name="role" onchange="toggleKlinikSelect()">

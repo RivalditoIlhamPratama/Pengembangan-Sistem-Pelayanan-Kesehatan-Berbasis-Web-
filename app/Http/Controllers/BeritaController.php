@@ -39,7 +39,7 @@ class BeritaController extends Controller
             $imagePath = $request->file('gambarBerita')->store('berita', 'public');
         }
 
-        $adminPuskesmas = Auth::user()->admin->first();
+        $adminPuskesmas = Adminpuskesmas::where('user_id', Auth::id())->first();
         if (!$adminPuskesmas) {
             return back()->withErrors(['error' => 'User tidak memiliki data admin puskesmas terkait.']);
         }

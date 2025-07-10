@@ -102,18 +102,28 @@ class LaporanController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'namaPasien' => 'required|string|max:255',
-            'NIK' => 'required|string|max:25',
-            'alamatPasien' => 'required|string',
-            'diagnosaMedis' => 'required|string',
-            'namaDokter' => 'required|string',
-        ]);
+{
+    $request->validate([
+        'namaPasien' => 'required|string|max:255',
+        'NIK' => 'required|string|max:25',
+        'alamatPasien' => 'required|string',
+        'diagnosaMedis' => 'required|string',
+        'namaDokter' => 'required|string',
+        'deskripsi_tindakan' => 'required|string|max:255', // sekarang wajib diisi
+    ]);
 
-        $laporan = laporan::findOrFail($id);
-        $laporan->update($request->all());
+    $laporan = laporan::findOrFail($id);
+    $laporan->namaPasien = $request->namaPasien;
+    $laporan->NIK = $request->NIK;
+    $laporan->alamatPasien = $request->alamatPasien;
+    $laporan->diagnosaMedis = $request->diagnosaMedis;
+    $laporan->namaDokter = $request->namaDokter;
+    $laporan->deskripsi_tindakan = $request->deskripsi_tindakan;
+    $laporan->save();
 
-        return redirect('/klinik/laporan')->with('success', 'Data laporan berhasil diperbarui.');
-    }
+    
+    return redirect()->back()->with('success', 'Laporan berhasil diperbarui.');
+
+}
+
 }

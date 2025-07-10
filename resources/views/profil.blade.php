@@ -16,7 +16,7 @@
     <!-- Loader -->
     <div id="loader" class="loader-wrapper">
         <div class="loader-content">
-            <img src="{{ asset('assets/11.png') }}" alt="Logo Puskesmas" class="loader-logo" />
+            <img src="{{ asset('assets/logobaru.png') }}" alt="Logo Puskesmas" class="loader-logo" />
             <div class="spinner"></div>
             <p class="loading-text">Mohon Tunggu...</p>
         </div>
@@ -26,7 +26,7 @@
         <nav>
             <div class="nav__header">
                 <div class="nav__logo">
-                    <a href="{{ url('/') }}"><img src="assets/11.png" alt="logo" />Puskesmas Kraksaan</a>
+                    <a href="{{ url('/') }}"><img src="assets/logobaru.png" alt="logo" />Puskesmas Kraksaan</a>
                 </div>
                 <div class="nav__menu__btn" id="menu-btn">
                     <span><i class="ri-menu-line"></i></span>
@@ -123,7 +123,7 @@
                 </div>
                 <div class="struktur-row">
                     <div class="struktur-item">
-                        <img src="assets/dokter.png" alt="Cholidun">
+                        <img src="assets/pjukm.png" alt="Cholidun">
                         <h3>CHUSAIMI</h3>
                         <p>PJ UKM</p>
 
@@ -131,11 +131,11 @@
                     <div class="struktur-item">
                         <img src="assets/tatausaha.png" alt="Fajiz Ilyasri">
                         <h3>Fajar Ariani</h3>
-                        <p>Bidan</p>
+                        <p>Tata Usaha</p>
 
                     </div>
                     <div class="struktur-item">
-                        <img src="assets/dokter.png" alt="Ferdi Kurniawan">
+                        <img src="assets/pengelolapengaduan.png" alt="Ferdi Kurniawan">
                         <h3>FERINDY KURNIAWAN</h3>
                         <p>Pengelola Pengaduan</p>
 
@@ -150,7 +150,7 @@
         <div class="section__container footer__container">
             <div class="footer__col">
                 <div class="footer__logo">
-                    <a href="#"><img src="assets/11.png" alt="logo" />Puskesmas Kraksaan</a>
+                    <a href="#"><img src="assets/logobaru.png" alt="logo" />Puskesmas Kraksaan</a>
                 </div>
                 <p>
                     layanan digital seperti jadwal praktik dokter,

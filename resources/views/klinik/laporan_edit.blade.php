@@ -33,12 +33,30 @@
                 <input type="text" name="namaDokter" class="form-control" value="{{ $laporan->namaDokter }}" required>
             </div>
 
+            <div class="mb-3">
+                <label class="form-label">Tindakan Medis</label>
+                <input type="text" name="deskripsi_tindakan" class="form-control" value="{{ $laporan->deskripsi_tindakan }}" required>
+            </div>
+
             <button type="submit" class="btn btn-primary">
                 <i class="fas fa-save"></i> Simpan Perubahan
             </button>
             <a href="{{ route('klinik.laporan') }}" class="btn btn-secondary">Kembali</a>
-
         </form>
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    @if (session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: '{{ session("success") }}',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+        });
+    @endif
+</script>
+@endpush

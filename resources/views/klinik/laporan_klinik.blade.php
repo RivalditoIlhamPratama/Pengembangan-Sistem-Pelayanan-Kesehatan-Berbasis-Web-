@@ -40,11 +40,13 @@
                             <th>NIK</th>
                             <th>Alamat</th>
                             <th>Diagnosa</th>
+                            <th>Tindakan</th> {{-- Tambahan --}}
                             <th>Nama Dokter</th>
                             <th>Nama Klinik</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
+                    
                     <tbody>
                         @foreach ($laporan as $lap)
                             <tr>
@@ -54,6 +56,7 @@
                                 <td>{{ $lap->rekam_medis ? $lap->rekam_medis->NIK : $lap->NIK }}</td>
                                 <td>{{ $lap->rekam_medis ? $lap->rekam_medis->alamatPasien : $lap->alamatPasien }}</td>
                                 <td>{{ $lap->rekam_medis ? $lap->rekam_medis->diagnosaMedis : $lap->diagnosaMedis }}</td>
+                                <td>{{ $lap->rekam_medis ? $lap->rekam_medis->tindakan : $lap->deskripsi_tindakan }}</td>
                                 <td>{{ optional($lap->rekam_medis)->dokter ? optional($lap->rekam_medis->dokter)->namaDokter : $lap->namaDokter ?? '' }}</td>
                                 <td>{{ $lap->klinik->namaKlinik }}</td>
                                 <td class="text-center">
@@ -65,6 +68,7 @@
                                         data-nik="{{ $lap->rekam_medis ? $lap->rekam_medis->NIK : $lap->NIK }}"
                                         data-alamat="{{ $lap->rekam_medis ? $lap->rekam_medis->alamatPasien : $lap->alamatPasien }}"
                                         data-diagnosa="{{ $lap->rekam_medis ? $lap->rekam_medis->diagnosaMedis : $lap->diagnosaMedis }}"
+                                        data-tindakan="{{ $lap->rekam_medis ? $lap->rekam_medis->tindakan : $lap->deskripsi_tindakan }}"
                                         data-klinik="{{ $lap->klinik->namaKlinik }}"
                                         data-dokter="{{ optional($lap->rekam_medis)->dokter ? optional($lap->rekam_medis->dokter)->namaDokter : $lap->namaDokter ?? '' }}"
                                         data-tanggal="{{ $lap->created_at ? $lap->created_at->format('Y-m-d') : '' }}">
@@ -104,7 +108,7 @@
                 </div>
                 <div class="modal-body" id="printArea">
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <img src="{{ asset('assets/11.png') }}" alt="Puskesmas Logo" style="max-width: 100px;">
+                        <img src="{{ asset('assets/logobaru.png') }}" alt="Puskesmas Logo" style="max-width: 100px;">
                         <div class="text-center ms-3">
                             <h5 class="mb-0">PEMERINTAH KABUPATEN PROBOLINGGO DINAS KESEHATAN </h5>
                             <h5 class="mb-0">PUSKESMAS KRAKSAAN</h5>
@@ -143,6 +147,12 @@
                                 <td><strong>Diagnosa :</strong></td>
                                 <td id="detailDiagnosa"></td>
                             </tr>
+
+                            <tr>
+                                <td><strong>Tindakan :</strong></td>
+                                <td id="detailTindakan"></td>
+                            </tr>
+                            
                             <tr>
                                 <td><strong>Nama Klinik :</strong></td>
                                 <td id="detailKlinik"></td>
@@ -209,6 +219,7 @@
                 document.getElementById("detailNik").innerText = this.getAttribute("data-nik");
                 document.getElementById("detailAlamat").innerText = this.getAttribute("data-alamat");
                 document.getElementById("detailDiagnosa").innerText = this.getAttribute("data-diagnosa");
+                document.getElementById("detailTindakan").innerText = this.getAttribute("data-tindakan");
                 document.getElementById("detailKlinik").innerText = this.getAttribute("data-klinik");
                 document.getElementById("detailDokter").innerText = this.getAttribute("data-dokter");
                 document.getElementById("detailTanggal").innerText = this.getAttribute("data-tanggal");
@@ -232,7 +243,7 @@ document.getElementById("exportPdf").addEventListener("click", function () {
 
     const logoKiri = new Image();
     const logoKanan = new Image();
-    logoKiri.src = "/assets/11.png";
+    logoKiri.src = "/assets/logobaru.png";
     logoKanan.src = "/assets/dinas.png";
 
     logoKiri.onload = () => {
@@ -254,7 +265,8 @@ document.getElementById("exportPdf").addEventListener("click", function () {
             doc.setFont(undefined, "bold");
             doc.text("Laporan Tindakan Klinik", 105, 45, { align: "center" });
 
-            const tableHeaders = [["No", "Tanggal", "Nama Pasien", "NIK", "Alamat", "Diagnosa", "Nama Dokter", "Nama Klinik"]];
+            const tableHeaders = [["No", "Tanggal", "Nama Pasien", "NIK", "Alamat", "Diagnosa", "Tindakan", "Nama Dokter", "Nama Klinik"]];
+
 
             // Ambil hanya baris yang masih terlihat (tidak tersembunyi karena filter)
             const visibleRows = Array.from(document.querySelectorAll("#rekamMedisTable tbody tr"))
@@ -262,15 +274,17 @@ document.getElementById("exportPdf").addEventListener("click", function () {
                 .map(row => {
                     const cells = row.querySelectorAll("td");
                     return [
-                        cells[0]?.innerText || "",
-                        cells[1]?.innerText || "",
-                        cells[2]?.innerText || "",
-                        cells[3]?.innerText || "",
-                        cells[4]?.innerText || "",
-                        cells[5]?.innerText || "",
-                        cells[6]?.innerText || "",
-                        cells[7]?.innerText || ""
-                    ];
+    cells[0]?.innerText || "",
+    cells[1]?.innerText || "",
+    cells[2]?.innerText || "",
+    cells[3]?.innerText || "",
+    cells[4]?.innerText || "",
+    cells[5]?.innerText || "",
+    cells[6]?.innerText || "", // Tindakan
+    cells[7]?.innerText || "",
+    cells[8]?.innerText || ""
+];
+
                 });
 
                 doc.autoTable({

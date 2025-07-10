@@ -9,23 +9,19 @@ class adminpuskesmas extends Model
 {
     use HasFactory;
 
-    protected $table = 'adminpuskesmas'; // pastikan nama tabel sesuai
-    protected $primaryKey = 'idAdmin';   // 👉 tambahkan ini
-
-    public $timestamps = false; // jika tabel tidak punya created_at & updated_at
-
+    protected $table = 'adminpuskesmas';
+    protected $primaryKey = 'idAdmin';
+    public $timestamps = false;
 
     protected $fillable = ['user_id', 'namaAdmin', 'jenisKelamin', 'noHp', 'alamatAdmin', 'email'];
 
     public function user()
     {
-        return $this->belongsTo(user::class, 'user_id', 'id_user');
+        return $this->belongsTo(User::class, 'user_id', 'id'); // default Laravel
     }
 
     public function berita()
     {
-        return $this->hasMany(berita::class, 'idAdmin', 'admin_id');
+        return $this->hasMany(berita::class, 'admin_id', 'idAdmin'); // sudah benar
     }
-
-
 }

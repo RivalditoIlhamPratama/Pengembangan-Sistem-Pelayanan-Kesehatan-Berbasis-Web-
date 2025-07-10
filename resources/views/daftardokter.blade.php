@@ -15,7 +15,7 @@
     <!-- Loader -->
     <div id="loader" class="loader-wrapper">
         <div class="loader-content">
-            <img src="{{ asset('assets/11.png') }}" alt="Logo Puskesmas" class="loader-logo" />
+            <img src="{{ asset('assets/logobaru.png') }}" alt="Logo Puskesmas" class="loader-logo" />
             <div class="spinner"></div>
             <p class="loading-text">Mohon Tunggu...</p>
         </div>
@@ -25,7 +25,7 @@
         <nav class="mt-0">
             <div class="nav__header">
                 <div class="nav__logo">
-                    <a href="{{ url('/') }}"><img src="{{ asset('assets/11.png') }}" alt="logo" />Puskesmas Kraksaan</a>
+                    <a href="{{ url('/') }}"><img src="{{ asset('assets/logobaru.png') }}" alt="logo" />Puskesmas Kraksaan</a>
                 </div>
                 <div class="nav__menu__btn" id="menu-btn">
                     <span><i class="ri-menu-line"></i></span>
@@ -101,7 +101,7 @@
         <div class="section__container footer__container">
             <div class="footer__col">
                 <div class="footer__logo">
-                    <a href="#"><img src="{{ asset('assets/11.png') }}" alt="logo" />Puskesmas
+                    <a href="#"><img src="{{ asset('assets/logobaru.png') }}" alt="logo" />Puskesmas
                         Kraksaan</a>
                 </div>
                 <p>

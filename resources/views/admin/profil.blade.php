@@ -5,9 +5,7 @@
     <div class="card p-4 shadow-sm">
         <h4 class="fw-bold mb-4">Profil</h4>
 
-        @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
+      
 
         <form method="POST" action="{{ route('admin.updateProfile') }}">
             @csrf
@@ -57,3 +55,19 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if (session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: '{{ session("success") }}',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+    });
+</script>
+@endif
+@endpush
