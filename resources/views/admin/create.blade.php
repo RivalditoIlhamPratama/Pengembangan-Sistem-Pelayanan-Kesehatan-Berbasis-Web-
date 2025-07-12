@@ -56,7 +56,7 @@
                         <option value="klinik" {{ old('role') == 'klinik' ? 'selected' : '' }}>Klinik</option>
                     </select>
                 </div>
-
+                
                 <div class="mb-3" id="klinik-select" style="display: none;">
                     <label for="klinik_id" class="form-label">Pilih Klinik</label>
                     <select class="form-select" id="klinik_id" name="klinik_id">
@@ -69,23 +69,23 @@
                         @endforeach
                     </select>
                 </div>
-
+                
                 <script>
                     function toggleKlinikSelect() {
-                        var roleSelect = document.getElementById('role');
-                        var klinikSelect = document.getElementById('klinik-select');
-                        if (roleSelect.value === 'dokter') {
+                        const role = document.getElementById('role').value;
+                        const klinikSelect = document.getElementById('klinik-select');
+                
+                        if (role === 'dokter' || role === 'klinik') {
                             klinikSelect.style.display = 'block';
                         } else {
                             klinikSelect.style.display = 'none';
                             document.getElementById('klinik_id').value = '';
                         }
                     }
-                    // Call on page load to set initial state
-                    window.onload = function() {
-                        toggleKlinikSelect();
-                    };
+                
+                    window.onload = toggleKlinikSelect;
                 </script>
+                
 
                 <a href="javascript:history.back()" class="btn btn-secondary">Kembali</a>
                 <button type="submit" class="btn btn-primary">Simpan</button>

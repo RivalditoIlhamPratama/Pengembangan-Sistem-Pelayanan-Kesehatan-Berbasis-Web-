@@ -34,6 +34,7 @@
                 <table id="rekamMedisTable" class="table table-striped table-bordered table-hover">
                     <thead class="table-light">
                         <tr class="text-center">
+                            <th style="display: none;">ID</th> {{-- Disembunyikan --}}
                             <th>No</th>
                             <th>Tanggal</th>
                             <th>Nama Pasien</th>
@@ -48,50 +49,53 @@
                     </thead>
                     
                     <tbody>
+                        @php $nomor = 1; @endphp
                         @foreach ($laporan as $lap)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td> {{-- Nomor urut --}}
-                                <td>{{ $lap->created_at ? $lap->created_at->format('Y-m-d') : '' }}</td>
-                                <td>{{ $lap->rekam_medis ? $lap->rekam_medis->namaPasien : $lap->namaPasien }}</td>
-                                <td>{{ $lap->rekam_medis ? $lap->rekam_medis->NIK : $lap->NIK }}</td>
-                                <td>{{ $lap->rekam_medis ? $lap->rekam_medis->alamatPasien : $lap->alamatPasien }}</td>
-                                <td>{{ $lap->rekam_medis ? $lap->rekam_medis->diagnosaMedis : $lap->diagnosaMedis }}</td>
-                                <td>{{ $lap->rekam_medis ? $lap->rekam_medis->tindakan : $lap->deskripsi_tindakan }}</td>
-                                <td>{{ optional($lap->rekam_medis)->dokter ? optional($lap->rekam_medis->dokter)->namaDokter : $lap->namaDokter ?? '' }}</td>
-                                <td>{{ $lap->klinik->namaKlinik }}</td>
-                                <td class="text-center">
-                                    <!-- Tombol Detail -->
-                                    <button class="btn btn-sm btn-info detail-btn" data-bs-toggle="modal"
-                                        data-bs-target="#detailModal"
-                                        data-id="{{ $lap->idLaporan }}"
-                                        data-nama="{{ $lap->rekam_medis ? $lap->rekam_medis->namaPasien : $lap->namaPasien }}"
-                                        data-nik="{{ $lap->rekam_medis ? $lap->rekam_medis->NIK : $lap->NIK }}"
-                                        data-alamat="{{ $lap->rekam_medis ? $lap->rekam_medis->alamatPasien : $lap->alamatPasien }}"
-                                        data-diagnosa="{{ $lap->rekam_medis ? $lap->rekam_medis->diagnosaMedis : $lap->diagnosaMedis }}"
-                                        data-tindakan="{{ $lap->rekam_medis ? $lap->rekam_medis->tindakan : $lap->deskripsi_tindakan }}"
-                                        data-klinik="{{ $lap->klinik->namaKlinik }}"
-                                        data-dokter="{{ optional($lap->rekam_medis)->dokter ? optional($lap->rekam_medis->dokter)->namaDokter : $lap->namaDokter ?? '' }}"
-                                        data-tanggal="{{ $lap->created_at ? $lap->created_at->format('Y-m-d') : '' }}">
-                                        <i class="fas fa-info-circle"></i>
-                                    </button>
-                    
-                                    <!-- Tombol Edit -->
-                                    <a href="{{ route('klinik.laporan.edit', $lap->idLaporan) }}" class="btn btn-sm btn-warning">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                    
-                                    <!-- Tombol Hapus -->
-                                    <form action="{{ route('klinik.laporan.hapus', $lap->idLaporan) }}" method="POST" style="display:inline-block;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash-alt"></i>
+                            @if ($lap->Klinik_id == auth()->user()->klinik->idKlinik)
+                                <tr>
+                                    <td style="display: none;">{{ $lap->idLaporan }}</td>
+                                    <td>{{ $nomor++ }}</td>
+                                    <td>{{ $lap->created_at ? $lap->created_at->format('Y-m-d') : '' }}</td>
+                                    <td>{{ $lap->rekam_medis ? $lap->rekam_medis->namaPasien : $lap->namaPasien }}</td>
+                                    <td>{{ $lap->rekam_medis ? $lap->rekam_medis->NIK : $lap->NIK }}</td>
+                                    <td>{{ $lap->rekam_medis ? $lap->rekam_medis->alamatPasien : $lap->alamatPasien }}</td>
+                                    <td>{{ $lap->rekam_medis ? $lap->rekam_medis->diagnosaMedis : $lap->diagnosaMedis }}</td>
+                                    <td>{{ $lap->rekam_medis ? $lap->rekam_medis->tindakan : $lap->deskripsi_tindakan }}</td>
+                                    <td>{{ optional($lap->rekam_medis)->dokter ? optional($lap->rekam_medis->dokter)->namaDokter : $lap->namaDokter ?? '' }}</td>
+                                    <td>{{ auth()->user()->klinik->namaKlinik ?? '-' }}</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-info detail-btn" data-bs-toggle="modal"
+                                            data-bs-target="#detailModal"
+                                            data-id="{{ $lap->idLaporan }}"
+                                            data-nama="{{ $lap->rekam_medis ? $lap->rekam_medis->namaPasien : $lap->namaPasien }}"
+                                            data-nik="{{ $lap->rekam_medis ? $lap->rekam_medis->NIK : $lap->NIK }}"
+                                            data-alamat="{{ $lap->rekam_medis ? $lap->rekam_medis->alamatPasien : $lap->alamatPasien }}"
+                                            data-diagnosa="{{ $lap->rekam_medis ? $lap->rekam_medis->diagnosaMedis : $lap->diagnosaMedis }}"
+                                            data-tindakan="{{ $lap->rekam_medis ? $lap->rekam_medis->tindakan : $lap->deskripsi_tindakan }}"
+                                            data-klinik="{{ auth()->user()->klinik->namaKlinik ?? '-' }}"
+                                            data-dokter="{{ optional($lap->rekam_medis)->dokter ? optional($lap->rekam_medis->dokter)->namaDokter : $lap->namaDokter ?? '' }}"
+                                            data-tanggal="{{ $lap->created_at ? $lap->created_at->format('Y-m-d') : '' }}">
+                                            <i class="fas fa-info-circle"></i>
                                         </button>
-                                    </form>
-                                </td>
-                            </tr>
+                    
+                                        <a href="{{ route('klinik.laporan.edit', $lap->idLaporan) }}" class="btn btn-sm btn-warning">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                    
+                                        <form action="{{ route('klinik.laporan.hapus', $lap->idLaporan) }}" method="POST" style="display:inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
+                    
+                    
                     
                 </table>
             </div>
@@ -270,22 +274,22 @@ document.getElementById("exportPdf").addEventListener("click", function () {
 
             // Ambil hanya baris yang masih terlihat (tidak tersembunyi karena filter)
             const visibleRows = Array.from(document.querySelectorAll("#rekamMedisTable tbody tr"))
-                .filter(row => row.style.display !== "none")
-                .map(row => {
-                    const cells = row.querySelectorAll("td");
-                    return [
-    cells[0]?.innerText || "",
-    cells[1]?.innerText || "",
-    cells[2]?.innerText || "",
-    cells[3]?.innerText || "",
-    cells[4]?.innerText || "",
-    cells[5]?.innerText || "",
-    cells[6]?.innerText || "", // Tindakan
-    cells[7]?.innerText || "",
-    cells[8]?.innerText || ""
-];
+    .filter(row => row.style.display !== "none")
+    .map(row => {
+        const cells = row.querySelectorAll("td");
+        return [
+            cells[1]?.innerText || "", // No
+            cells[2]?.innerText || "", // Tanggal
+            cells[3]?.innerText || "", // Nama Pasien
+            cells[4]?.innerText || "", // NIK
+            cells[5]?.innerText || "", // Alamat
+            cells[6]?.innerText || "", // Diagnosa
+            cells[7]?.innerText || "", // Tindakan
+            cells[8]?.innerText || "", // Nama Dokter
+            cells[9]?.innerText || "", // Nama Klinik
+        ];
+    });
 
-                });
 
                 doc.autoTable({
     head: tableHeaders,
@@ -323,25 +327,36 @@ doc.save("Laporan_Tindakan.pdf");
 
 
 document.getElementById("exportExcel").addEventListener("click", function () {
-    const table = document.getElementById("rekamMedisTable");
     const wb = XLSX.utils.book_new();
-    const ws = XLSX.utils.table_to_sheet(table, { raw: true });
+    const ws_data = [];
 
-    // Cek range data untuk memastikan baris dan kolom
-    const range = XLSX.utils.decode_range(ws['!ref']);
-    for (let row = range.s.r + 1; row <= range.e.r; ++row) {
-        const nikCellRef = XLSX.utils.encode_cell({ r: row, c: 3 }); // kolom ke-4 = NIK
-        const cell = ws[nikCellRef];
+    // Header
+    ws_data.push(["No", "Tanggal", "Nama Pasien", "NIK", "Alamat", "Diagnosa", "Tindakan", "Nama Dokter", "Nama Klinik"]);
 
-        if (cell && typeof cell.v !== 'undefined') {
-            cell.v = cell.v.toString(); // ubah ke string
-            cell.t = 's'; // pastikan tipe string
+    // Baris isi
+    const rows = document.querySelectorAll("#rekamMedisTable tbody tr");
+    rows.forEach(row => {
+        const cells = row.querySelectorAll("td");
+        if (row.style.display !== "none") {
+            ws_data.push([
+                cells[1]?.innerText || "", // No
+                cells[2]?.innerText || "", // Tanggal
+                cells[3]?.innerText || "", // Nama Pasien
+                cells[4]?.innerText || "", // NIK
+                cells[5]?.innerText || "", // Alamat
+                cells[6]?.innerText || "", // Diagnosa
+                cells[7]?.innerText || "", // Tindakan
+                cells[8]?.innerText || "", // Nama Dokter
+                cells[9]?.innerText || "", // Nama Klinik
+            ]);
         }
-    }
+    });
 
+    const ws = XLSX.utils.aoa_to_sheet(ws_data);
     XLSX.utils.book_append_sheet(wb, ws, "Laporan Tindakan");
     XLSX.writeFile(wb, "Laporan_Tindakan.xlsx");
 });
+
 
     </script>
 
