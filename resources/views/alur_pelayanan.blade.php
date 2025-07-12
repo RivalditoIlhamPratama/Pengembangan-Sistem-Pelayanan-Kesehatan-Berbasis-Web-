@@ -102,99 +102,127 @@
             <br>
             <br>
             <br>
-            <!-- Jenis Pelayanan -->
-            <h2 style="color: #1771ca; margin-top: 60px;">Jenis-Jenis Pelayanan</h2>
-            <table class="service-table">
-                <thead>
-                    <tr>
-                        <th>UKM Esensial</th>
-                        <th>UKM Pengembangan</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="service-title">1. Pelayanan Promosi Kesehatan</div>
-                            <ul class="service-list">
-                                <li>Pemberdayaan Masyarakat dalam PHBS</li>
-                                <li>UKBM</li>
-                            </ul>
-                            <div class="service-title">2. Pelayanan Kesehatan Lingkungan</div>
-                            <ul class="service-list">
-                                <li>Pembinaan Tempat Fasilitas Umum</li>
-                                <li>STBM Pemberdayaan Masyarakat</li>
-                            </ul>
-                            <div class="service-title">3. Pelayanan KIA & KB</div>
-                            <ul class="service-list">
-                                <li>ANC Terpadu Ibu Hamil</li>
-                                <li>Kelas Ibu Hamil, Balita</li>
-                                <li>Konseling Catin</li>
-                                <li>SDIDTK</li>
-                            </ul>
-                            <div class="service-title">4. Pelayanan Kesehatan Lansia</div>
-                            <ul class="service-list">
-                                <li>Posyandu Lansia</li>
-                            </ul>
-                            <div class="service-title">5. Pelayanan Kesehatan Anak Sekolah dan Remaja</div>
-                            <ul class="service-list">
-                                <li>Screening Anak Sekolah dan Remaja</li>
-                            </ul>
-                            <div class="service-title">6. Pelayanan Gizi</div>
-                            <ul class="service-list">
-                                <li>Pelayanan Gizi Masyarakat</li>
-                                <li>Penanggulangan Gangguan Gizi</li>
-                                <li>Pemantauan Status Gizi</li>
-                            </ul>
-                            <div class="service-title">7. Pelayanan Pencegahan dan Pengendalian Penyakit</div>
-                            <ul class="service-list">
-                                <li>Pemantauan Pemberian Zinc</li>
-                                <li>Pencegahan Hepatitis B pada Ibu Hamil</li>
-                                <li>Screening Kusta/Frambusia</li>
-                                <li>Imunisasi Anak Sekolah</li>
-                                <li>Mobile Klinik VCT</li>
-                                <li>POPM Cacingan</li>
-                                <li>Pelacakan dan Penemuan Kasus TB</li>
-                            </ul>
-                            <div class="service-title">8. Pencegahan dan Penanggulangan Penyakit Tidak Menular</div>
-                            <ul class="service-list">
-                                <li>Pelayanan POSBINDU</li>
-                                <li>Deteksi Dini Gangguan Indera</li>
-                            </ul>
-                            <div class="service-title">9. Pelayanan Kesehatan Jiwa</div>
-                            <ul class="service-list">
-                                <li>Screening Kesehatan Jiwa</li>
-                            </ul>
-                            <div class="service-title">10. Pelayanan Keperawatan Kesehatan Masyarakat (PERKESMAS)</div>
-                            <ul class="service-list">
-                                <li>Kunjungan Intervensi PIS-PK</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <div class="service-title">1. Pelayanan Kesehatan Gigi Masyarakat</div>
-                            <ul class="service-list">
-                                <li>Penyuluhan/Pemeriksaan gigi dan mulut di PAUD, TK dan POSYANDU</li>
-                            </ul>
-                            <div class="service-title">2. Pelayanan Kesehatan Tradisional</div>
-                            <ul class="service-list">
-                                <li>Visitasi Kelompok ASMAN TOGA</li>
-                            </ul>
-                            <div class="service-title">3. Pelayanan Kesehatan Olahraga</div>
-                            <ul class="service-list">
-                                <li>Pengukuran Kebugaran Calon Jamaah Haji</li>
-                                <li>Pengukuran Kebugaran Anak Sekolah</li>
-                            </ul>
-                            <div class="service-title">4. Pelayanan Kesehatan Kerja</div>
-                            <ul class="service-list">
-                                <li>Pembinaan Kelompok Kesehatan Kerja Informal</li>
-                            </ul>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        
+<h2 style="color: #1771ca; margin-top: 60px;">Jenis-Jenis Pelayanan</h2>
+<div class="jenis-pelayanan-grid">
+    <!-- UKM Esensial -->
+    <div class="pelayanan-box">
+        <h4>1. Pelayanan Promosi Kesehatan</h4>
+        <ul>
+            <li>Pemberdayaan Masyarakat dalam PHBS</li>
+            <li>UKBM</li>
+        </ul>
+    </div>
+
+    <div class="pelayanan-box">
+        <h4>2. Pelayanan Kesehatan Lingkungan</h4>
+        <ul>
+            <li>Pembinaan Tempat Fasilitas Umum</li>
+            <li>STBM Pemberdayaan Masyarakat</li>
+        </ul>
+    </div>
+
+    <div class="pelayanan-box">
+        <h4>3. Pelayanan KIA & KB</h4>
+        <ul>
+            <li>ANC Terpadu Ibu Hamil</li>
+            <li>Kelas Ibu Hamil, Balita</li>
+            <li>Konseling Catin</li>
+            <li>SDIDTK</li>
+        </ul>
+    </div>
+
+    <div class="pelayanan-box">
+        <h4>4. Pelayanan Kesehatan Lansia</h4>
+        <ul>
+            <li>Posyandu Lansia</li>
+        </ul>
+    </div>
+
+    <div class="pelayanan-box">
+        <h4>5. Pelayanan Kesehatan Anak Sekolah dan Remaja</h4>
+        <ul>
+            <li>Screening Anak Sekolah dan Remaja</li>
+        </ul>
+    </div>
+
+    <div class="pelayanan-box">
+        <h4>6. Pelayanan Gizi</h4>
+        <ul>
+            <li>Pelayanan Gizi Masyarakat</li>
+            <li>Penanggulangan Gangguan Gizi</li>
+            <li>Pemantauan Status Gizi</li>
+        </ul>
+    </div>
+
+    <div class="pelayanan-box">
+        <h4>7. Pelayanan Pencegahan dan Pengendalian Penyakit</h4>
+        <ul>
+            <li>Pemantauan Pemberian Zinc</li>
+            <li>Pencegahan Hepatitis B pada Ibu Hamil</li>
+            <li>Screening Kusta/Frambusia</li>
+            <li>Imunisasi Anak Sekolah</li>
+            <li>Mobile Klinik VCT</li>
+            <li>POPM Cacingan</li>
+            <li>Pelacakan dan Penemuan Kasus TB</li>
+        </ul>
+    </div>
+
+    <div class="pelayanan-box">
+        <h4>8. Pencegahan dan Penanggulangan Penyakit Tidak Menular</h4>
+        <ul>
+            <li>Pelayanan POSBINDU</li>
+            <li>Deteksi Dini Gangguan Indera</li>
+        </ul>
+    </div>
+
+    <div class="pelayanan-box">
+        <h4>9. Pelayanan Kesehatan Jiwa</h4>
+        <ul>
+            <li>Screening Kesehatan Jiwa</li>
+        </ul>
+    </div>
+
+    <div class="pelayanan-box">
+        <h4>10. Pelayanan Keperawatan Kesehatan Masyarakat (PERKESMAS)</h4>
+        <ul>
+            <li>Kunjungan Intervensi PIS-PK</li>
+        </ul>
+    </div>
+
+    <!-- UKM Pengembangan -->
+    <div class="pelayanan-box">
+        <h4>11. Pelayanan Kesehatan Gigi Masyarakat</h4>
+        <ul>
+            <li>Penyuluhan/Pemeriksaan gigi dan mulut di PAUD, TK dan POSYANDU</li>
+        </ul>
+    </div>
+
+    <div class="pelayanan-box">
+        <h4>12. Pelayanan Kesehatan Tradisional</h4>
+        <ul>
+            <li>Visitasi Kelompok ASMAN TOGA</li>
+        </ul>
+    </div>
+
+    <div class="pelayanan-box">
+        <h4>13. Pelayanan Kesehatan Olahraga</h4>
+        <ul>
+            <li>Pengukuran Kebugaran Calon Jamaah Haji</li>
+            <li>Pengukuran Kebugaran Anak Sekolah</li>
+        </ul>
+    </div>
+
+    <div class="pelayanan-box">
+        <h4>14. Pelayanan Kesehatan Kerja</h4>
+        <ul>
+            <li>Pembinaan Kelompok Kesehatan Kerja Informal</li>
+        </ul>
+    </div>
+</div>
 
         </div>
     </section>
-
 
     </div>
     </div>

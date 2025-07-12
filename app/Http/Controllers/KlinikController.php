@@ -78,6 +78,6 @@ public function updateProfilKlinik(Request $request)
     return redirect()->route('klinik.profil')->with('success', 'Profil berhasil diperbarui.');
     return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
     
-
+ 
 }
 }

@@ -17,7 +17,7 @@ class KlinikSeeder extends Seeder
     public function run(): void
     {
         // Create specific test users
-        $nama = ['Gigi', 'Umum', ' Anak'];
+        $nama = ['Gigi', 'Umum', 'Kandungan'];
         for ($i = 0; $i < count($nama); $i++) {
             $user = User::create([
                 'username' => 'Klinik' . $nama[$i],
