@@ -23,22 +23,23 @@ class RegisterController extends Controller
     }
 
     protected function validator(array $data)
-{
-    return Validator::make($data, [
-        'username' => ['required', 'string', 'max:255'],
-        'password' => ['required', 'string', 'max:255', 'confirmed'],
-        'role' => ['required', 'string'],
-        'jenisKelamin' => ['required', 'string'],
-        'noHp' => ['required', 'string'],
-        'alamatPasien' => ['required', 'string'],
-        'email' => ['required', 'string', 'email', 'max:255'],
-    ]);
-}
+    {
+        return Validator::make($data, [
+            'username' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'max:255', 'confirmed'],
+            'role' => ['required', 'string'],
+            'jenisKelamin' => ['required', 'string'],
+            'noHp' => ['required', 'string'],
+            'alamatPasien' => ['required', 'string'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+        ]);
+    }
 
     protected function create(array $data)
     {
         return User::create([
             'username' => $data['username'],
+            'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role' => $data['role'],
             'remember_token' => Str::random(10),
@@ -46,30 +47,29 @@ class RegisterController extends Controller
     }
 
     protected function registered(Request $request, $user)
-{
-    $user = User::find($user->id_user);
-    if ($user->role === 'pasien') {
-        pasien::create([
-            'user_id' => $user->id_user,
-            'namaPasien' => $user->username,
-            'jenisKelamin' => $request->input('jenisKelamin'),
-            'noHp' => $request->input('noHp'),
-            'alamatPasien' => $request->input('alamatPasien'),
-            'email' => $request->input('email'),
-        ]);
+    {
+        $user = User::find($user->id_user);
+        if ($user->role === 'pasien') {
+            pasien::create([
+                'user_id' => $user->id_user,
+                'namaPasien' => $user->username,
+                'jenisKelamin' => $request->input('jenisKelamin'),
+                'noHp' => $request->input('noHp'),
+                'alamatPasien' => $request->input('alamatPasien'),
+                'email' => $request->input('email'),
+            ]);
+        }
+
+        $token = $user->createToken('api-token')->plainTextToken;
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'message' => 'Registration successful',
+                'token' => $token,
+                'user' => $user,
+            ]);
+        }
+
+        return redirect($this->redirectPath());
     }
-
-    $token = $user->createToken('api-token')->plainTextToken;
-
-    if ($request->wantsJson()) {
-        return response()->json([
-            'message' => 'Registration successful',
-            'token' => $token,
-            'user' => $user,
-        ]);
-    }
-
-    return redirect($this->redirectPath());
-
-}
 }

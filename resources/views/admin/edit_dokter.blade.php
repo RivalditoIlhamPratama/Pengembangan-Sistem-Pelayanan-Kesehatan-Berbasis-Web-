@@ -33,7 +33,7 @@
                 {{-- Hari Praktek --}}
                 <div class="mb-3">
                     <label for="hariPraktek" class="form-label">Hari Praktek</label>
-                    <select id="hariPraktek" name="hariPraktek[]" multiple class="form-control">
+                    <select id="hariPraktek" name="hariPraktek[]" multiple class="form-control" style="display:none;">
                         @foreach ($hari as $h)
                             <option value="{{ $h->idHari }}"
                                 {{ in_array($h->idHari, old('hariPraktek', $dokter->jadwaldokters->pluck('Hari_id')->toArray())) ? 'selected' : '' }}>
@@ -131,7 +131,6 @@
             plugins: ['remove_button'],
             create: false, // Disable creating new items
             placeholder: 'Pilih hari praktek',
-            maxItems: 5, // Maximum number of selected items
             searchField: ['text'], // Enable search within the dropdown
             items: 3, // Number of items to display before scrolling
             render: {

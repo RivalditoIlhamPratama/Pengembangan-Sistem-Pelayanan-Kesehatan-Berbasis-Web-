@@ -8,14 +8,14 @@
             <!-- Pencarian dan Tombol Tambah -->
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <!-- <div class="input-group w-25">
-                    <input type="text" class="form-control" placeholder="Search">
-                    <button class="btn btn-outline-secondary" type="button">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div> -->
-                <a href="{{ route('admin.data_dokter.tambah') }}" class="btn btn-primary">
+                        <input type="text" class="form-control" placeholder="Search">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div> -->
+                {{-- <a href="{{ route('admin.data_dokter.tambah') }}" class="btn btn-primary">
                     <i class="fas fa-plus"></i> Tambah Dokter
-                </a>
+                </a> --}}
 
             </div>
 
@@ -45,7 +45,8 @@
                                 <td>
                                     @foreach ($dokters->jadwaldokters as $jadwal)
                                         @if ($jadwal->hari && $jadwal->waktu)
-                                            {{ $jadwal->hari->namaHari }}<br>{{ $jadwal->waktu->jamMulai }} - {{ $jadwal->waktu->jamSelesai }}<br>
+                                            {{ $jadwal->hari->namaHari }}<br>{{ $jadwal->waktu->jamMulai }} -
+                                            {{ $jadwal->waktu->jamSelesai }}<br>
                                         @endif
                                     @endforeach
                                 </td>
@@ -55,10 +56,11 @@
                                 <td>{{ $dokters->noTelepon }}</td>
                                 <td>
                                     @if ($dokters->gambarProfil)
-    <img src="{{ asset('storage/' . $dokters->gambarProfil) }}" alt="Foto Dokter" class="img-thumbnail" style="width: 80px;">
-@else
-    <span class="text-muted">Tidak ada</span>
-@endif
+                                        <img src="{{ asset('storage/' . $dokters->gambarProfil) }}" alt="Foto Dokter"
+                                            class="img-thumbnail" style="width: 80px;">
+                                    @else
+                                        <span class="text-muted">Tidak ada</span>
+                                    @endif
                                 </td>
                                 <td>
                                     <div class="d-flex gap-2">

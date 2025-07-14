@@ -29,23 +29,33 @@ class AdminController extends Controller
         $admin = Adminpuskesmas::where('user_id', $user_auth->id_user)->first();
         $user_dokter = User::where('role', 'dokter')->count();
         $pengaduan = pengaduan::count();
-        $laporan_klinik = \App\Models\laporan::count();
+        $laporan_klinik = laporan::count();
         return view('admin.dashboard', ['user' => $user, 'user_dokter' => $user_dokter, 'pengaduan' => $pengaduan, 'laporan_klinik' => $laporan_klinik, 'admin' => $admin]);
     }
 
     public function createUserForm()
     {
+        session()->forget('success');
+        session()->forget('error');
+
         $user_auth = auth()->user();
         $admin = Adminpuskesmas::where('user_id', $user_auth->id_user)->first();
-        $kliniks = \App\Models\klinik::all();
-        return view('admin.create', ['admin' => $admin, 'kliniks' => $kliniks]);
+        $kliniks = klinik::all();
+        $hari = Hari::all();
+        $waktu = Waktu::all();
+
+        return view('admin.create', [
+            'admin' => $admin,
+            'kliniks' => $kliniks,
+            'hari' => $hari,
+            'waktu' => $waktu,
+        ]);
     }
 
     public function users()
     {
         $user_auth = auth()->user();
         $admin = Adminpuskesmas::where('user_id', $user_auth->id_user)->first();
-        // Eager load related klinik and dokter with their klinik
         $users = User::with(['admin', 'stafrekammedis', 'pasien', 'klinik', 'dokter.klinik'])->get();
         return view('admin.users', compact('users', 'admin'));
     }
@@ -60,6 +70,7 @@ class AdminController extends Controller
             'email' => 'nullable|email|max:255',
             'role' => 'required|in:admin,dokter,klinik',
             'klinik_id' => 'required_if:role,dokter|nullable|exists:kliniks,idKlinik',
+            'jamPraktek' => 'required_if:role,dokter|nullable|exists:waktus,idWaktu',
         ];
 
         if ($request->role === 'klinik') {
@@ -71,7 +82,6 @@ class AdminController extends Controller
         $user = new User();
 
         if ($request->role === 'klinik') {
-            // For klinik, set username as slug of klinik name
             $user->username = Str::slug($request->name);
         } else {
             $user->username = $request->username;
@@ -79,13 +89,11 @@ class AdminController extends Controller
 
         $user->role = $request->role;
         $user->email = $request->email;
-        // Set a default password or generate one, here using 'password' hashed
         $user->password = bcrypt('password');
         $user->save();
 
-        // Create related record based on role
         if ($user->role === 'admin') {
-            \App\Models\adminpuskesmas::create([
+            adminpuskesmas::create([
                 'user_id' => $user->id_user,
                 'namaAdmin' => $request->name,
                 'jenisKelamin' => 'Laki-laki',
@@ -94,21 +102,36 @@ class AdminController extends Controller
                 'email' => $request->email ?? '',
             ]);
         } elseif ($user->role === 'dokter') {
-            \App\Models\dokter::create([
+            $imagePath = null;
+            if ($request->hasFile('gambarProfil')) {
+                $imagePath = $request->file('gambarProfil')->store('dokter', 'public');
+            }
+
+            $dokter = dokter::create([
                 'user_id' => $user->id_user,
                 'Klinik_id' => $request->klinik_id,
                 'namaDokter' => $request->name,
-                'spesialis' => '',
-                'jenisKelamin' => 'Laki-Laki',
-                'tglLahir' => '2002-04-16',
-                'alamatDokter' => 'Jl. Example No.',
-                'noTelepon' => '',
-                'alamatDokter' => '',
-                'gambarProfil' => '',
+                'spesialis' => $request->input('spesialis', ''),
+                'jenisKelamin' => $request->input('jenisKelamin', 'Laki-Laki'),
+                'tglLahir' => $request->input('tglLahir', '2002-04-16'),
+                'alamatDokter' => $request->input('alamatDokter', ''),
+                'noTelepon' => $request->input('noTelepon', ''),
+                'gambarProfil' => $imagePath ?? '',
                 'email' => $request->email ?? '',
             ]);
+
+            // Save jadwaldokter entries for selected hariPraktek
+            if ($request->has('hariPraktek')) {
+                foreach ($request->input('hariPraktek') as $hariId) {
+                    \App\Models\jadwaldokter::create([
+                        'Dokter_id' => $dokter->idDokter,
+                        'Hari_id' => $hariId,
+                        'Waktu_id' => $request->input('jamPraktek'), // Add waktu_id from request
+                    ]);
+                }
+            }
         } elseif ($user->role === 'klinik') {
-            \App\Models\klinik::create([
+            klinik::create([
                 'user_id' => $user->id_user,
                 'namaKlinik' => $request->name,
                 'alamatKlinik' => '',
@@ -176,26 +199,25 @@ class AdminController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-    
+
         return redirect()->back()->with('success', 'User berhasil dihapus');
     }
-    
+
     public function profil()
     {
         $user = auth()->user(); // ambil user yang login
-    
+
         if (!$user) {
             return redirect()->route('login');
         }
-    
+
         // Ambil data admin dari tabel adminpuskesmas
         $admin = \App\Models\adminpuskesmas::where('user_id', $user->id_user)->first();
-    
-        return view('admin.profil', compact('admin', 'user'));
 
+        return view('admin.profil', compact('admin', 'user'));
     }
-    
-    
+
+
 
     public function updateProfile(Request $request)
     {
@@ -204,19 +226,19 @@ class AdminController extends Controller
             'email' => 'nullable|email',
             'password' => 'nullable|min:6',
         ]);
-    
+
         $user = auth()->user();
-    
+
         if (!$user) {
             return redirect()->route('login');
         }
-    
-        $admin = \App\Models\adminpuskesmas::where('user_id', $user->id_user)->first();
-    
+
+        $admin = adminpuskesmas::where('user_id', $user->id_user)->first();
+
         if (!$admin) {
             return redirect()->back()->with('error', 'Data admin tidak ditemukan.');
         }
-    
+
         // Simpan data ke tabel adminpuskesmas
         $admin->namaAdmin = $request->namaAdmin;
         $admin->jenisKelamin = $request->jenisKelamin;
@@ -224,7 +246,7 @@ class AdminController extends Controller
         $admin->alamatAdmin = $request->alamatAdmin;
         $admin->email = $request->email;
         $admin->save();
-    
+
         // Simpan ke tabel users
         $user->username = $request->username;
         $user->email = $request->email;
@@ -232,11 +254,11 @@ class AdminController extends Controller
             $user->password = Hash::make($request->password);
         }
         $user->save();
-    
+
         return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
     }
-    
-    
+
+
     public function updateUser(Request $request)
     {
         $request->validate([
@@ -247,19 +269,19 @@ class AdminController extends Controller
             'role' => 'required|string|in:admin,dokter,klinik,pasien,stafrekammedis',
             'password' => 'nullable|string|min:6',
         ]);
-    
+
         $user = User::where('id_user', $request->id)->first();
-    
+
         $user->username = $request->username;
         $user->email = $request->email;
         $user->role = $request->role;
-    
+
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
-    
+
         $user->save();
-    
+
         // Update nama di tabel relasional berdasarkan role
         switch ($request->role) {
             case 'admin':
@@ -278,9 +300,7 @@ class AdminController extends Controller
                 $user->stafrekammedis()->update(['namaStaff' => $request->name]);
                 break;
         }
-    
+
         return redirect()->route('admin.users')->with('success', 'Pengguna berhasil diperbarui.');
     }
-
-    
 }
