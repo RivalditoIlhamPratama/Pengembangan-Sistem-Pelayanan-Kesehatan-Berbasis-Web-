@@ -52,11 +52,23 @@ class AdminController extends Controller
         ]);
     }
 
-    public function users()
+    public function users(Request $request)
     {
         $user_auth = auth()->user();
         $admin = Adminpuskesmas::where('user_id', $user_auth->id_user)->first();
-        $users = User::with(['admin', 'stafrekammedis', 'pasien', 'klinik', 'dokter.klinik'])->get();
+
+        $query = User::with(['admin', 'stafrekammedis', 'pasien', 'klinik', 'dokter.klinik']);
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('username', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+
+        $users = $query->paginate(10)->appends($request->all());
+
         return view('admin.users', compact('users', 'admin'));
     }
 
@@ -141,22 +153,61 @@ class AdminController extends Controller
         return redirect()->route('admin.users')->with('success', 'Pengguna berhasil ditambahkan dengan role ' . $user->role);
     }
 
-    public function data_pengaduan()
+    public function data_pengaduan(Request $request)
     {
         $user_auth = auth()->user();
         $admin = Adminpuskesmas::where('user_id', $user_auth->id_user)->first();
-        $pengaduan = Pengaduan::with('pasien')->get();
+
+        $query = Pengaduan::with('pasien');
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('jenisPengaduan', 'like', "%{$search}%")
+                    ->orWhere('isiPengaduan', 'like', "%{$search}%")
+                    ->orWhereHas('pasien', function ($q2) use ($search) {
+                        $q2->where('namaPasien', 'like', "%{$search}%");
+                    });
+            });
+        }
+
+        $pengaduan = $query->paginate(10)->appends($request->all());
+
         return view('admin.data_pengaduan', ['pengaduan' => $pengaduan, 'admin' => $admin]);
     }
 
-    public function data_dokter()
+    public function data_dokter(Request $request)
     {
         $user_auth = auth()->user();
         $jadwal = jadwaldokter::all();
         $waktu = Waktu::all();
         $hari = Hari::all();
         $admin = Adminpuskesmas::where('user_id', $user_auth->id_user)->first();
-        $dokter = Dokter::all();
+
+        $query = Dokter::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('namaDokter', 'like', "%{$search}%")
+                    ->orWhere('spesialis', 'like', "%{$search}%")
+                    ->orWhere('alamatDokter', 'like', "%{$search}%")
+                    ->orWhere('noTelepon', 'like', "%{$search}%")
+                    ->orWhere('jenisKelamin', 'like', "%{$search}%")
+                    ->orWhere('tglLahir', 'like', "%{$search}%")
+                    ->orWhereHas('jadwaldokters', function ($q2) use ($search) {
+                        $q2->whereHas('hari', function ($q3) use ($search) {
+                            $q3->where('namaHari', 'like', "%{$search}%");
+                        })->orWhereHas('waktu', function ($q4) use ($search) {
+                            $q4->where('jamMulai', 'like', "%{$search}%")
+                                ->orWhere('jamSelesai', 'like', "%{$search}%");
+                        });
+                    });
+            });
+        }
+
+        $dokter = $query->paginate(10)->appends($request->all());
+
         return view('admin.data_dokter', ['admin' => $admin, 'dokter' => $dokter, 'waktu' => $waktu, 'hari' => $hari, 'jadwal' => $jadwal]);
     }
 
@@ -185,13 +236,37 @@ class AdminController extends Controller
         return view('admin.complaints');
     }
 
-    public function reports()
+    public function reports(Request $request)
     {
         $user_auth = auth()->user();
-        $laporan = laporan::with(['rekam_medis', 'klinik'])->get();
-        Log::info('Fetched laporan count: ' . $laporan->count());
+
+        $query = laporan::with(['rekam_medis', 'klinik']);
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->whereHas('rekam_medis', function ($q2) use ($search) {
+                    $q2->where('namaPasien', 'like', "%{$search}%")
+                        ->orWhereHas('dokter', function ($q3) use ($search) {
+                            $q3->where('namaDokter', 'like', "%{$search}%");
+                        })
+                        ->orWhereHas('staffrekammedis', function ($q4) use ($search) {
+                            $q4->where('namaStaff', 'like', "%{$search}%");
+                        });
+                })
+                    ->orWhere('namaPasien', 'like', "%{$search}%")
+                    ->orWhere('namaDokter', 'like', "%{$search}%")
+                    ->orWhere('deskripsi_tindakan', 'like', "%{$search}%")
+                    ->orWhereHas('klinik', function ($q5) use ($search) {
+                        $q5->where('namaKlinik', 'like', "%{$search}%");
+                    });
+            });
+        }
+
+        $laporan = $query->paginate(10)->appends($request->all());
         $klinik = Klinik::all();
         $admin = Adminpuskesmas::where('user_id', $user_auth->id_user)->first();
+
         return view('admin.laporan_klinik', ['admin' => $admin, 'laporan' => $laporan, 'klinik' => $klinik]);
     }
 

@@ -7,17 +7,17 @@
 
             <!-- Pencarian dan Tambah -->
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <div class="input-group w-25">
-                    <input type="text" class="form-control" placeholder="Search">
-                    <button class="btn btn-outline-secondary" type="button">
+                <form method="GET" action="{{ route('admin.users') }}" class="input-group w-25">
+                    <input type="text" name="search" class="form-control" placeholder="Search"
+                        value="{{ request('search') }}">
+                    <button class="btn btn-outline-secondary" type="submit">
                         <i class="fas fa-search"></i>
                     </button>
-                </div>
+                </form>
                 <a href="{{ route('admin.pengguna.create') }}" class="btn btn-primary">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
             </div>
-
             <!-- Tabel -->
             <div class="table-responsive pt-4">
                 <table class="table table-striped table-bordered table-hover mb-5">
@@ -32,10 +32,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php $no = 1; @endphp
-                        @foreach ($users as $user)
-                            <tr class="align-middle text-center">
-                                <td>{{ $no++ }}</td>
+                        @foreach ($users as $index => $user)
+                            <tr class="align-middle text-center justify-between">
+                                <td>{{ $users->firstItem() + $index }}</td>
                                 <td class="text-start">
                                     @if ($user->role == 'admin' && $user->admin)
                                         {{ $user->admin->first()->namaAdmin ?? $user->name }}
@@ -60,7 +59,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <span class="badge {{ strtolower($user->role) == 'dokter' ? 'bg-primary' : 'bg-secondary' }} text-white">
+                                    <span
+                                        class="badge {{ strtolower($user->role) == 'dokter' ? 'bg-primary' : 'bg-secondary' }} text-white">
                                         {{ $user->role ?? 'N/A' }}
                                     </span>
                                 </td>
@@ -76,7 +76,8 @@
                                     </button>
 
                                     <!-- Tombol Hapus -->
-                                    <form action="{{ route('admin.pengguna.destroy', $user->id_user) }}" method="POST" class="d-inline" data-confirm-delete>
+                                    <form action="{{ route('admin.pengguna.destroy', $user->id_user) }}" method="POST"
+                                        class="d-inline" data-confirm-delete>
                                         @csrf @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash"></i>
@@ -87,6 +88,8 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $users->links('vendor.pagination.bootstrap-5') }}
+
             </div>
         </div>
     </div>
@@ -115,12 +118,13 @@
                         <label for="edit-email" class="form-label">Email</label>
                         <input type="email" class="form-control" name="email" id="edit-email">
                     </div>
-                    
+
                     <div class="mb-3">
                         <label for="edit-password" class="form-label">Password (Opsional)</label>
-                        <input type="password" class="form-control" name="password" id="edit-password" placeholder="Kosongkan jika tidak diubah">
+                        <input type="password" class="form-control" name="password" id="edit-password"
+                            placeholder="Kosongkan jika tidak diubah">
                     </div>
-                    
+
 
                     <div class="mb-3">
                         <label for="edit-role" class="form-label">Role</label>
@@ -146,9 +150,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             // Isi modal edit
-            document.body.addEventListener("click", function (event) {
+            document.body.addEventListener("click", function(event) {
                 if (event.target.closest(".edit-btn")) {
                     const btn = event.target.closest(".edit-btn");
                     document.getElementById('edit-id').value = btn.dataset.id;
@@ -161,7 +165,7 @@
 
             // SweetAlert konfirmasi hapus
             document.querySelectorAll('form[data-confirm-delete]').forEach(form => {
-                form.addEventListener('submit', function (e) {
+                form.addEventListener('submit', function(e) {
                     e.preventDefault();
                     Swal.fire({
                         title: 'Yakin ingin menghapus?',

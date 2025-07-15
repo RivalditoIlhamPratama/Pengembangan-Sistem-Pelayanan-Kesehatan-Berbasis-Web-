@@ -7,12 +7,13 @@
 
             <!-- Pencarian dan Tombol Tambah -->
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <!-- <div class="input-group w-25">
-                        <input type="text" class="form-control" placeholder="Search">
-                        <button class="btn btn-outline-secondary" type="button">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div> -->
+                <form method="GET" action="{{ route('admin.data_dokter') }}" class="input-group w-25">
+                    <input type="text" name="search" class="form-control" placeholder="Search"
+                        value="{{ request('search') }}">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
                 {{-- <a href="{{ route('admin.data_dokter.tambah') }}" class="btn btn-primary">
                     <i class="fas fa-plus"></i> Tambah Dokter
                 </a> --}}
@@ -84,6 +85,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $dokter->links('vendor.pagination.bootstrap-5') }}
             </div>
         </div>
     </div>

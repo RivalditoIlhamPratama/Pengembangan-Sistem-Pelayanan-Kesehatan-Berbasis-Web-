@@ -7,25 +7,30 @@
 
             <!-- Tombol Export -->
             <!-- Tombol Export -->
-            <div class="mb-4 d-flex justify-content-end gap-2">
-                <a href="{{ url('/export-pdf') }}" target="_blank" class="btn btn-danger btn-sm">
-                    <i class="fas fa-file-pdf"></i> Export PDF
-                </a>
-                <a href="{{ url('/export-excel') }}" target="_blank" class="btn btn-success btn-sm">
-                    <i class="fas fa-file-excel"></i> Export Excel
-                </a>
-            </div>
-
-
-            <!-- Pencarian -->
-            <div class="d-flex justify-content-end mb-4">
-                <div class="input-group w-25">
-                    <input type="text" id="searchInput" class="form-control" placeholder="Cari nama pasien...">
-                    <button class="btn btn-outline-secondary" type="button">
+            <div
+                class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2 mb-4">
+                {{-- Search --}}
+                <form method="GET" action="{{ url('/admin/laporan-klinik') }}" class="d-flex w-25">
+                    <input type="text" name="search" class="form-control me-2" placeholder="Cari nama pasien..."
+                        value="{{ request('search') }}">
+                    <button class="btn btn-outline-secondary" type="submit">
                         <i class="fas fa-search"></i>
                     </button>
+                </form>
+
+                {{-- Export Buttons --}}
+                <div class="d-flex gap-2">
+                    <a href="{{ url('/export-pdf') }}" target="_blank" class="btn btn-danger btn-sm">
+                        <i class="fas fa-file-pdf"></i> Export PDF
+                    </a>
+                    <a href="{{ url('/export-excel') }}" target="_blank" class="btn btn-success btn-sm">
+                        <i class="fas fa-file-excel"></i> Export Excel
+                    </a>
                 </div>
             </div>
+
+
+
 
             <!-- Tabel Data Laporan Klinik -->
             <div class="table-responsive">
@@ -130,19 +135,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $laporan->links('vendor.pagination.bootstrap-5') }}
             </div>
         @endsection
 
         @section('scripts')
-            <script>
-                document.getElementById('searchInput').addEventListener('keyup', function() {
-                    const searchValue = this.value.toLowerCase();
-                    const rows = document.querySelectorAll('#laporanTable tbody tr');
-
-                    rows.forEach(function(row) {
-                        const text = row.textContent.toLowerCase();
-                        row.style.display = text.includes(searchValue) ? '' : 'none';
-                    });
-                });
-            </script>
         @endsection
