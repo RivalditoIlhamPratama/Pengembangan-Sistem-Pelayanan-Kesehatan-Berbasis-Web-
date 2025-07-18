@@ -3,7 +3,7 @@ describe('UC04 - Melihat Alur Layanan', () => {
       cy.visit('http://127.0.0.1:8000/');
       cy.get('nav').contains('Pelayanan').click();
       cy.url().should('include', '/alur-pelayanan');
-      cy.contains('Alur Pelayanan');
+      cy.contains('Jenis-Jenis Pelayanan Luar Gedung');
     });
   });
   

@@ -80,30 +80,13 @@
 
     <section class="about">
         <div class="container">
-            <div class="about__content">
-                <div class="about__image">
-                    <img src="assets/alur pelayanan.png" alt="Logo Puskesmas Kraksaan"
-                        style="width: 110%; max-width: 1010px; height: auto;">
-                </div>
-                <br><br>
-                <div class="about__text">
-                    <h2>Alur Pelayanan</h2>
-                    <p>
-                        Alur pelayanan di Puskesmas Kraksaan dimulai dari pasien datang dan melakukan pendaftaran serta
-                        rekam medis. Setelah itu, pasien akan diarahkan ke berbagai jenis pelayanan sesuai kebutuhannya,
-                        seperti pelayanan umum, gigi, KIA & KB, TB, HIV, kusta, hepatitis, gizi, dan sanitasi. Jika
-                        diperlukan, pasien dapat dirujuk untuk pemeriksaan laboratorium. Setelah pelayanan selesai,
-                        pasien akan menuju farmasi untuk mengambil obat. Pasien kemudian dapat pulang atau dirujuk ke
-                        rumah sakit jika kondisi darurat atau membutuhkan penanganan lanjutan.
-                    </p>
-                </div>
-            </div>
-            <br>
-            <br>
-            <br>
-            <br>
-        
-<h2 style="color: #1771ca; margin-top: 60px;">Jenis-Jenis Pelayanan</h2>
+            
+           
+            <h2 style="color: #1771ca; margin-top: 60px;">Jenis-Jenis Pelayanan Luar Gedung</h2>
+            <p style="margin-bottom: 20px; font-size: 16px; color: #444;">
+              Berikut adalah jenis pelayanan luar gedung yang dilakukan oleh Puskesmas Kraksaan, mencakup kegiatan promotif, preventif, dan pelayanan langsung ke masyarakat melalui posyandu, sekolah, dan kunjungan ke kelompok sasaran tertentu.
+            </p>
+            
 <div class="jenis-pelayanan-grid">
     <!-- UKM Esensial -->
     <div class="pelayanan-box">
@@ -221,8 +204,186 @@
     </div>
 </div>
 
+<hr style="margin: 50px 0;">
+
+<h2 class="text-center">Jenis Pelayanan Dalam Gedung</h2>
+<div class="jenis-pelayanan-grid">
+  <div class="pelayanan-box">
+    <h4><i class="ri-hospital-line"></i> Ruang Bersalin</h4>
+    <p><strong>Jam Layanan:</strong> 24 Jam</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-stethoscope-line"></i> Ruang Tindakan</h4>
+    <p>Senin – Kamis: 08.00 – 13.00 WIB<br>Jumat: 08.00 – 10.00 WIB<br>Sabtu: 08.00 – 11.00 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-user-add-line"></i> Ruang Pendaftaran</h4>
+    <p>Senin – Kamis: 07.30 – 12.00 WIB<br>Jumat: 07.30 – 10.00 WIB<br>Sabtu: 07.30 – 11.00 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-user-heart-line"></i> Pelayanan Umum</h4>
+    <p>Senin – Kamis: 08.00 – 13.00 WIB<br>Jumat: 08.00 – 10.30 WIB<br>Sabtu: 08.00 – 12.00 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-tooth-line"></i> Pelayanan Gigi</h4>
+    <p>Senin – Kamis: 08.00 – 13.00 WIB<br>Jumat: 08.00 – 10.30 WIB<br>Sabtu: 08.00 – 12.00 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-heart-pulse-line"></i> Pelayanan KIA</h4>
+    <p>Senin – Kamis: 08.00 – 13.00 WIB<br>Jumat: 08.00 – 10.30 WIB<br>Sabtu: 08.00 – 12.00 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-flask-line"></i> Laboratorium</h4>
+    <p>Senin – Kamis: 08.00 – 13.00 WIB<br>Jumat: 08.00 – 10.30 WIB<br>Sabtu: 08.00 – 12.00 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-shield-cross-line"></i> Imunisasi</h4>
+    <p>Jumat: 08.00 – 10.30 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-parent-line"></i> CATIN</h4>
+    <p>Selasa & Rabu: 08.00 – 13.00 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-group-line"></i> KB</h4>
+    <p>Rabu: 08.00 – 13.00 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-body-scan-line"></i> ANC dan USG Ibu Hamil</h4>
+    <p>Senin & Kamis: 08.00 – 13.00 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-capsule-line"></i> Pelayanan Obat</h4>
+    <p>Senin – Kamis: 08.00 – 13.00 WIB<br>Jumat: 08.00 – 10.30 WIB<br>Sabtu: 08.00 – 12.00 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-restaurant-line"></i> Konsultasi Gizi</h4>
+    <p>Senin – Kamis: 08.00 – 13.00 WIB<br>Jumat: 08.00 – 10.00 WIB<br>Sabtu: 08.00 – 12.00 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-brush-line"></i> Sanitasi</h4>
+    <p>Senin – Kamis: 08.00 – 13.00 WIB<br>Jumat: 08.00 – 10.00 WIB<br>Sabtu: 08.00 – 12.00 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-virus-line"></i> TBC</h4>
+    <p>Selasa & Rabu: 08.00 – 13.00 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-shield-line"></i> HIV dan IMS</h4>
+    <p>Senin & Kamis: 08.00 – 13.00 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-user-3-line"></i> Dokter Umum</h4>
+    <p>Senin & Kamis: ANCT 08.00 – 13.00 WIB<br>Selasa & Rabu: 08.00 – 13.00 WIB<br>Jumat: 08.00 – 11.00 WIB<br>Sabtu: 08.00 – 12.00 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-tooth-line"></i> Dokter Gigi</h4>
+    <p>Senin & Kamis: ANCT 08.00 – 13.00 WIB<br>Selasa & Rabu: 08.00 – 13.00 WIB<br>Jumat: 08.00 – 11.00 WIB<br>Sabtu: 08.00 – 12.00 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-truck-line"></i> Ambulance</h4>
+    <p>24 Jam</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-home-heart-line"></i> Pustu / Polindes / Ponkesdes</h4>
+    <p>Senin – Kamis: 08.00 – 12.00 WIB<br>Jumat: 08.00 – 10.00 WIB<br>Sabtu: 08.00 – 11.00 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-user-settings-line"></i> Posbindu PTM</h4>
+    <p>Selasa: 08.00 – 13.00 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-hand-heart-line"></i> Kusta</h4>
+    <p>Kamis: 08.00 – 13.00 WIB</p>
+  </div>
+  <div class="pelayanan-box">
+    <h4><i class="ri-brain-line"></i> Pelayanan Jiwa</h4>
+    <p>Senin – Kamis: 08.00 – 13.00 WIB<br>Jumat: 08.00 – 10.00 WIB<br>Sabtu: 08.00 – 12.00 WIB</p>
+  </div>
+</div>
+</section>
+
+<section class="tarif-layanan mt-5">
+    <h2 class="text-center mb-4">Tarif Layanan</h2>
+    
+    <!-- Input pencarian -->
+<div style="text-align:center; margin: 20px 0;">
+    <input type="text" id="searchInput" placeholder="Cari jenis pelayanan..." style="padding: 8px; width: 300px; border-radius: 8px; border: 1px solid #ccc;">
+  </div>
+    <div class="tabel-pelayanan-wrapper">
+      <div class="tabel-pelayanan">
+        <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Jenis Pelayanan</th>
+                <th>Jasa Sarana (Rp)</th>
+                <th>Jasa Pelayanan (Rp)</th>
+                <th>Total (Rp)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- I. UGD -->
+              <tr><td colspan="5"><strong>I. UGD</strong></td></tr>
+              <tr><td>1</td><td>Pemeriksaan kesehatan umum</td><td>10.000</td><td>10.000</td><td>20.000</td></tr>
+              <tr><td>2</td><td>Pelayanan observasi (maks. 6 jam)</td><td>30.000</td><td>30.000</td><td>60.000</td></tr>
+              <tr><td>3</td><td>Tarif Pelayanan Rekam Medik dan kartu pasien baru</td><td>10.000</td><td>5.000</td><td>15.000</td></tr>
+      
+              <!-- II. RAWAT JALAN -->
+              <tr><td colspan="5"><strong>II. RAWAT JALAN</strong></td></tr>
+              <tr><td>1</td><td>Di Pelayanan Umum, Gigi dan KIA</td><td>6.000</td><td>4.000</td><td>10.000</td></tr>
+              <tr><td>2</td><td>Pelayanan Konsultasi</td><td>8.000</td><td>12.000</td><td>20.000</td></tr>
+              <tr><td>3</td><td>Pemeriksaan Pelayanan Umum Sore hari</td><td>10.000</td><td>10.000</td><td>20.000</td></tr>
+              <tr><td>4</td><td>Tarif Pelayanan Rekam Medik dan kartu pasien baru</td><td>10.000</td><td>5.000</td><td>15.000</td></tr>
+      
+              <!-- IV. PERSALINAN -->
+              <tr><td colspan="5"><strong>IV. PERSALINAN</strong></td></tr>
+              <tr><td>1</td><td>Persalinan Normal</td><td>200.000</td><td>400.000</td><td>600.000</td></tr>
+              <tr><td>2</td><td>Persalinan dengan Penyulit (termasuk vakum)</td><td colspan="3"></td></tr>
+              <tr><td></td><td>a. Dokter Umum</td><td>250.000</td><td>500.000</td><td>750.000</td></tr>
+              <tr><td></td><td>b. Dokter Spesialis</td><td>100.000</td><td>800.000</td><td>900.000</td></tr>
+              <tr><td>3</td><td>Abortus spontan tanpa penyulit</td><td>60.000</td><td>100.000</td><td>160.000</td></tr>
+              <tr><td>4</td><td>Curretage pd Abortus tanpa penyulit</td><td>100.000</td><td>500.000</td><td>600.000</td></tr>
+              <tr><td>5</td><td>Pertolongan pada Retensio Plasenta</td><td>100.000</td><td>150.000</td><td>250.000</td></tr>
+      
+              <!-- V. TINDAKAN MEDIK POLI UMUM/UGD/RAWAT INAP -->
+              <tr><td colspan="5"><strong>V. TINDAKAN MEDIK DI POLI UMUM/UGD/RAWAT INAP</strong></td></tr>
+      
+              <!-- A. RINGAN -->
+              <tr><td colspan="5"><em>A. Tindakan Medis Ringan</em></td></tr>
+              <tr><td></td><td>Luka Lecet</td><td>4.000</td><td>6.000</td><td>10.000</td></tr>
+              <tr><td></td><td>Luka Bakar Ringan</td><td colspan="3"></td></tr>
+              <tr><td></td><td>Luka Bakar Sedang</td><td colspan="3"></td></tr>
+              <tr><td></td><td>Tampon Hidung</td><td colspan="3"></td></tr>
+      
+              <!-- B. KECIL -->
+              <tr><td colspan="5"><em>B. Tindakan Medis Kecil</em></td></tr>
+              <tr><td></td><td>Jahit luka 1 s.d. 3 jahitan</td><td>8.000</td><td>12.000</td><td>20.000</td></tr>
+              <tr><td></td><td>Perawat luka/tindik</td><td colspan="3"></td></tr>
+              <tr><td></td><td>Pemasangan bidai</td><td colspan="3"></td></tr>
+              <tr><td></td><td>Pemakaian suction/hari</td><td colspan="3"></td></tr>
+              <tr><td></td><td>Lavement</td><td colspan="3"></td></tr>
+      
+              <!-- C. SEDANG -->
+              <tr><td colspan="5"><em>C. Tindakan Medis Sedang</em></td></tr>
+              <tr><td></td><td>Luka Bakar Sedang</td><td>10.000</td><td>15.000</td><td>25.000</td></tr>
+              <tr><td></td><td>Jahit luka 4 s/d 7 jahitan</td><td colspan="3"></td></tr>
+              <tr><td></td><td>Incisi abses</td><td colspan="3"></td></tr>
+              <tr><td></td><td>Ekstraksi kuku termasuk roster plasty</td><td colspan="3"></td></tr>
+              <tr><td></td><td>Pengambilan benda asing</td><td colspan="3"></td></tr>
+              <tr><td></td><td>Pasang atau buka kateter</td><td colspan="3"></td></tr>
+              <tr><td></td><td>Nekrotomi/hari</td><td colspan="3"></td></tr>
+              <tr><td></td><td>Pemasangan infus/hari</td><td colspan="3"></td></tr>
+              <tr><td></td><td>Resusitasi</td><td colspan="3"></td></tr>
+              <tr><td></td><td>Tampon vagina</td><td colspan="3"></td></tr>
+            </tbody>
+          </table>
         </div>
-    </section>
+
+        
+      </section>
+  
+  
 
     </div>
     </div>
@@ -306,6 +467,18 @@
         });
     </script>
 
+<script>
+    document.getElementById('searchInput').addEventListener('keyup', function () {
+      const input = this.value.toLowerCase();
+      const rows = document.querySelectorAll('#tarifTable tbody tr');
+  
+      rows.forEach(row => {
+        const cellsText = row.innerText.toLowerCase();
+        row.style.display = cellsText.includes(input) ? '' : 'none';
+      });
+    });
+  </script>
+  
 </body>
 
 </html>

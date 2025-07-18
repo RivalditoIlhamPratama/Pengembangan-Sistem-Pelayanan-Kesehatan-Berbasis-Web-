@@ -153,7 +153,7 @@
                         const alamatSelect = document.getElementById('alamat-select');
                         const telpSelect = document.getElementById('telp-select');
                         const gambarSelect = document.getElementById('gambar-select');
-
+                
                         if (role === 'dokter') {
                             klinikSelect.style.display = 'block';
                             spesialisSelect.style.display = 'block';
@@ -165,13 +165,35 @@
                             telpSelect.style.display = 'block';
                             gambarSelect.style.display = 'block';
                         } else {
+                            // SEMBUNYIKAN SEMUA FIELD TAMBAHAN
                             klinikSelect.style.display = 'none';
-                            document.getElementById('klinik_id').value = '';
+                            spesialisSelect.style.display = 'none';
+                            hariSelect.style.display = 'none';
+                            jamSelect.style.display = 'none';
+                            jenisKelaminSelect.style.display = 'none';
+                            lahirSelect.style.display = 'none';
+                            alamatSelect.style.display = 'none';
+                            telpSelect.style.display = 'none';
+                            gambarSelect.style.display = 'none';
+                
+                            // KOSONGKAN NILAI-NILAI FIELD TAMBAHAN
+                            document.getElementById('klinik_id').selectedIndex = 0;
+                            document.getElementById('spesialis').value = '';
+                            document.getElementById('jenisKelamin').value = '';
+                            document.getElementById('tglLahir').value = '';
+                            document.getElementById('alamatDokter').value = '';
+                            document.getElementById('noTelepon').value = '';
+                            document.getElementById('gambarProfil').value = '';
+                            if (window.hariSelect) {
+                                hariSelect.tomselect.clear(); // reset TomSelect
+                            }
                         }
                     }
-
+                
+                    // Jalankan saat halaman dimuat
                     window.onload = toggleKlinikSelect;
                 </script>
+                
 
 
                 <a href="javascript:history.back()" class="btn btn-secondary">Kembali</a>

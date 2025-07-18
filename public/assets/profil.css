@@ -934,32 +934,45 @@ p {
 
   .jenis-pelayanan-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr); /* Selalu 3 kolom di desktop */
+    gap: 24px;
     margin-top: 30px;
 }
 
+/* Responsive untuk tablet */
+@media (max-width: 992px) {
+    .jenis-pelayanan-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Responsive untuk mobile */
+@media (max-width: 600px) {
+    .jenis-pelayanan-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .pelayanan-box {
-    background: #e7f0fd;
-    border-left: 6px solid #1771ca;
+    background-color: #f9f9f9;
+    border-radius: 12px;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    transition: 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
 }
 
 .pelayanan-box:hover {
-    background: #d4e6fb;
+    transform: translateY(-5px);
 }
 
 .pelayanan-box h4 {
     margin-bottom: 10px;
-    color: #0c4e9a;
-    font-weight: bold;
+    color: #1771ca;
+    font-size: 1.1rem;
 }
 
 .pelayanan-box ul {
-    padding-left: 20px;
+    padding-left: 18px;
     margin: 0;
 }
 
@@ -968,3 +981,62 @@ p {
     color: #333;
     font-size: 15px;
 }
+
+
+.tabel-pelayanan {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.tabel-pelayanan table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.tabel-pelayanan th,
+.tabel-pelayanan td {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+.tabel-pelayanan th {
+    background-color: #1771ca;
+    color: white;
+    font-weight: 600;
+}
+
+.tabel-pelayanan td {
+    color: #333;
+}
+
+.pelayanan-box h4 i {
+    color: #1771ca;
+    margin-right: 8px;
+  }
+  .pelayanan-box p {
+    margin: 5px 0;
+    font-size: 15px;
+    color: #333;
+  }
+
+
+  
+  
+  .tabel-pelayanan-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.tabel-pelayanan {
+    width: 100%;
+    max-width: 850px; /* Ubah angka sesuai kebutuhan */
+}
+
