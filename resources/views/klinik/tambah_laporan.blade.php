@@ -39,13 +39,9 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="namaDokter" class="form-label">Nama Dokter</label>
-                        <select name="namaDokter" id="namaDokter" class="form-control" required>
-                            <option value="">Pilih Dokter</option>
-                            @foreach ($dokters as $dokter)
-                                <option value="{{ $dokter->namaDokter }}">{{ $dokter->namaDokter }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" id="namaDokter" name="namaDokter" class="form-control" placeholder="Masukkan nama dokter" required>
                     </div>
+                    
                     <div class="col-md-6">
                         <label class="form-label">Nama Pasien</label>
                         <input type="text" id="namaPasien" name="namaPasien" class="form-control">

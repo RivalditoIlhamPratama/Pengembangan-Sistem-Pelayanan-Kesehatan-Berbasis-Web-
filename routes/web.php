@@ -100,7 +100,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
 
     //
-    //Route::get('/berita', [BeritaController::class, 'index'])->name('admin.berita');
+    Route::get('/berita', [BeritaController::class, 'index'])->name('admin.berita');
     Route::get('/berita/edit/{id}', [BeritaController::class, 'edit_data_dokter'])->name('admin.berita.edit');
     Route::post('/berita/store', [BeritaController::class, 'store'])->name('admin.berita.store');
     Route::post('/berita/update/{id}', [BeritaController::class, 'update'])->name('admin.berita.update');

@@ -14,8 +14,9 @@ class BeritaController extends Controller
 {
     public function index()
     {
-        $user_auth = auth()->user();
-        $admin = Adminpuskesmas::where('user_id', $user_auth->id_user)->first();
+        $user_id = Auth::id(); // Ambil ID dari user login
+        $admin = Adminpuskesmas::where('user_id', $user_id)->first();
+
 
         $berita = [];
         if ($admin) {

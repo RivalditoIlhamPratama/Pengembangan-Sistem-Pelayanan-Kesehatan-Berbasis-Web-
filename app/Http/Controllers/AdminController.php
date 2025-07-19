@@ -57,7 +57,8 @@ class AdminController extends Controller
         $user_auth = auth()->user();
         $admin = Adminpuskesmas::where('user_id', $user_auth->id_user)->first();
 
-        $query = User::with(['admin', 'stafrekammedis', 'pasien', 'klinik', 'dokter.klinik']);
+        $query = User::with(['admin', 'stafrekammedis', 'pasien', 'dokter']);
+
 
         if ($request->has('search') && $request->search != '') {
             $search = $request->search;
@@ -81,7 +82,7 @@ class AdminController extends Controller
             'username' => 'required|string|max:255|unique:users,username',
             'email' => 'nullable|email|max:255',
             'role' => 'required|in:admin,dokter,klinik',
-            'klinik_id' => 'required_if:role,dokter|nullable|exists:kliniks,idKlinik',
+            'klinik_id' => 'nullable|exists:kliniks,idKlinik',
             'jamPraktek' => 'required_if:role,dokter|nullable|exists:waktus,idWaktu',
         ];
 
@@ -121,7 +122,7 @@ class AdminController extends Controller
 
             $dokter = dokter::create([
                 'user_id' => $user->id_user,
-                'Klinik_id' => $request->klinik_id,
+                // 'Klinik_id' => $request->filled('klinik_id') ? $request->klinik_id : null, // Hapus baris ini
                 'namaDokter' => $request->name,
                 'spesialis' => $request->input('spesialis', ''),
                 'jenisKelamin' => $request->input('jenisKelamin', 'Laki-Laki'),

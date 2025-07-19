@@ -11,7 +11,7 @@ class dokter extends Model
 
     protected $primaryKey = 'idDokter';
 
-    protected $fillable = ['Klinik_id', 'user_id', 'namaDokter', 'spesialis', 'jenisKelamin', 'tglLahir', 'noTelepon', 'alamatDokter', 'gambarProfil', 'email'];
+    protected $fillable = ['user_id', 'namaDokter', 'spesialis', 'jenisKelamin', 'tglLahir', 'noTelepon', 'alamatDokter', 'gambarProfil', 'email'];
 
 
     public $timestamps = false;
@@ -19,10 +19,6 @@ class dokter extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id_user');
-    }
-    public function klinik()
-    {
-        return $this->belongsTo(Klinik::class, 'Klinik_id', 'idKlinik');
     }
     public function rekammedis()
     {
