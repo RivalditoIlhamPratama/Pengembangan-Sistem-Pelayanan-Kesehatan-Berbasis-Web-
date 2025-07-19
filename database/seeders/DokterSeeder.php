@@ -22,11 +22,12 @@ class DokterSeeder extends Seeder
         $klinikAnak = Klinik::where('namaKlinik', 'like', '%anak%')->first();
 
         $nama = ['Siti Jamila, Amd. Keb', 'drg. Dwi Wahyudi', 'dr. Fathullah Huda'];
-        $klinikMap = [
-            0 => $klinikAnak ? $klinikAnak->idKlinik : null,       // Siti Jamila : Anak
-            1 => $klinikGigi ? $klinikGigi->idKlinik : null,       // Dwi Wahyudi : Gigi
-            2 => $klinikUmum ? $klinikUmum->idKlinik : null,       // Fathullah Huda : Umum
-        ];
+        // Removed Klinik_id mapping since column is dropped
+        // $klinikMap = [
+        //     0 => $klinikAnak ? $klinikAnak->idKlinik : null,       // Siti Jamila : Anak
+        //     1 => $klinikGigi ? $klinikGigi->idKlinik : null,       // Dwi Wahyudi : Gigi
+        //     2 => $klinikUmum ? $klinikUmum->idKlinik : null,       // Fathullah Huda : Umum
+        // ];
 
         for ($i = 0; $i < count($nama); $i++) {
             $user = User::create([
@@ -39,7 +40,8 @@ class DokterSeeder extends Seeder
 
             $dokter = Dokter::create([
                 'user_id' => $user->id_user,
-                'Klinik_id' => $klinikMap[$i],
+                // Removed Klinik_id since column no longer exists
+                // 'Klinik_id' => $klinikMap[$i],
                 'namaDokter' => $nama[$i],
                 'spesialis' => 'Spesialis',
                 'jenisKelamin' => ($i + 1) % 2 ? 'Laki-laki' : 'Perempuan',

@@ -65,18 +65,7 @@
                     </select>
                 </div>
 
-                <div class="mb-3" id="klinik-select" style="display: none;">
-                    <label for="klinik_id" class="form-label">Pilih Klinik</label>
-                    <select class="form-select" id="klinik_id" name="klinik_id">
-                        <option selected disabled>Pilih Klinik</option>
-                        @foreach ($kliniks as $klinik)
-                            <option value="{{ $klinik->idKlinik }}"
-                                {{ old('klinik_id') == $klinik->idKlinik ? 'selected' : '' }}>
-                                {{ $klinik->namaKlinik }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
+
 
                 <div class="mb-3" id="spesialis-select" style="display: none;">
                     <label for="spesialis" class="form-label">Spesialis</label>
@@ -144,7 +133,7 @@
                 <script>
                     function toggleKlinikSelect() {
                         const role = document.getElementById('role').value;
-                        const klinikSelect = document.getElementById('klinik-select');
+                        // const klinikSelect = document.getElementById('klinik-select');
                         const spesialisSelect = document.getElementById('spesialis-select');
                         const hariSelect = document.getElementById('hari-select');
                         const jamSelect = document.getElementById('jam-select');
@@ -153,11 +142,11 @@
                         const alamatSelect = document.getElementById('alamat-select');
                         const telpSelect = document.getElementById('telp-select');
                         const gambarSelect = document.getElementById('gambar-select');
-                
+
                         if (role === 'dokter') {
                             // Dokter tidak perlu pilih klinik (hapus baris ini)
-                            klinikSelect.style.display = 'none'; // ✅ fix: tetap sembunyikan kolom klinik
-                
+                            // klinikSelect.style.display = 'none'; // ✅ fix: tetap sembunyikan kolom klinik
+
                             spesialisSelect.style.display = 'block';
                             hariSelect.style.display = 'block';
                             jamSelect.style.display = 'block';
@@ -166,8 +155,12 @@
                             alamatSelect.style.display = 'block';
                             telpSelect.style.display = 'block';
                             gambarSelect.style.display = 'block';
+
+                            // Set required attributes for visible selects
+                            jamSelect.querySelector('select').required = true;
+                            jenisKelaminSelect.querySelector('select').required = true;
                         } else if (role === 'klinik') {
-                            klinikSelect.style.display = 'block'; // ✅ tampilkan saat role klinik
+                            // klinikSelect.style.display = 'block'; // ✅ tampilkan saat role klinik
                             spesialisSelect.style.display = 'none';
                             hariSelect.style.display = 'none';
                             jamSelect.style.display = 'none';
@@ -176,9 +169,13 @@
                             alamatSelect.style.display = 'none';
                             telpSelect.style.display = 'none';
                             gambarSelect.style.display = 'none';
+
+                            // Remove required attributes for hidden selects
+                            jamSelect.querySelector('select').required = false;
+                            jenisKelaminSelect.querySelector('select').required = false;
                         } else {
                             // Role admin
-                            klinikSelect.style.display = 'none';
+                            // klinikSelect.style.display = 'none';
                             spesialisSelect.style.display = 'none';
                             hariSelect.style.display = 'none';
                             jamSelect.style.display = 'none';
@@ -187,10 +184,14 @@
                             alamatSelect.style.display = 'none';
                             telpSelect.style.display = 'none';
                             gambarSelect.style.display = 'none';
+
+                            // Remove required attributes for hidden selects
+                            jamSelect.querySelector('select').required = false;
+                            jenisKelaminSelect.querySelector('select').required = false;
                         }
-                
+
                         // Kosongkan semua nilai form tersembunyi
-                        document.getElementById('klinik_id').selectedIndex = 0;
+                        // document.getElementById('klinik_id').selectedIndex = 0;
                         document.getElementById('spesialis').value = '';
                         document.getElementById('jenisKelamin').value = '';
                         document.getElementById('tglLahir').value = '';
@@ -201,13 +202,13 @@
                             hariSelect.tomselect.clear();
                         }
                     }
-                
+
                     window.onload = toggleKlinikSelect;
                 </script>
-                
-                
-                
-                
+
+
+
+
 
 
                 <a href="javascript:history.back()" class="btn btn-secondary">Kembali</a>
