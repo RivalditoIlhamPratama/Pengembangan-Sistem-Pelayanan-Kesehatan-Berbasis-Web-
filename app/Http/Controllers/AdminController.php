@@ -241,21 +241,12 @@ class AdminController extends Controller
     {
         $user_auth = auth()->user();
 
-        $query = laporan::with(['rekam_medis', 'klinik']);
+        $query = laporan::with(['klinik']);
 
         if ($request->has('search') && $request->search != '') {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
-                $q->whereHas('rekam_medis', function ($q2) use ($search) {
-                    $q2->where('namaPasien', 'like', "%{$search}%")
-                        ->orWhereHas('dokter', function ($q3) use ($search) {
-                            $q3->where('namaDokter', 'like', "%{$search}%");
-                        })
-                        ->orWhereHas('staffrekammedis', function ($q4) use ($search) {
-                            $q4->where('namaStaff', 'like', "%{$search}%");
-                        });
-                })
-                    ->orWhere('namaPasien', 'like', "%{$search}%")
+                $q->where('namaPasien', 'like', "%{$search}%")
                     ->orWhere('namaDokter', 'like', "%{$search}%")
                     ->orWhere('deskripsi_tindakan', 'like', "%{$search}%")
                     ->orWhereHas('klinik', function ($q5) use ($search) {

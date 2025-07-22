@@ -21,24 +21,26 @@ class KlinikController extends Controller
     public function laporan()
     {
         $user = auth()->user();
-        $laporan = laporan::with('rekam_medis')->get();
         $klinik = Klinik::where('user_id', $user->id_user)->first();
+
+        $laporan = laporan::where('Klinik_id', $klinik->idKlinik)->paginate(10);
+
         return view('klinik.laporan_klinik', ['klinik' => $klinik, 'laporan' => $laporan]);
     }
     public function tambah_laporan()
     {
         $user = auth()->user();
-        $rekammedis = rekammedis::doesntHave('laporan')->get();
 
         // Since Klinik_id column is removed, fetch dokters differently
         // Assuming dokters are linked to user or other relation, adjust accordingly
 
+        $dokters = dokter::all();
 
         $klinik = Klinik::where('user_id', $user->id_user)->first();
 
         return view('klinik.tambah_laporan', [
-            'rekammedis' => $rekammedis,
             'klinik' => $klinik,
+            'dokters' => $dokters,
         ]);
     }
 

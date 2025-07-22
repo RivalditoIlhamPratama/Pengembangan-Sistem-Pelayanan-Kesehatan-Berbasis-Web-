@@ -46,7 +46,6 @@ class LaporanController extends Controller
         $klinik = Klinik::where('user_id', Auth::user()->id_user)->firstOrFail();
 
         $validatedData = $request->validate([
-            'RekamMedis_id' => 'nullable|exists:rekammedis,idRekamMedis',
             'namaPasien' => 'nullable|string|max:255',
             'namaDokter' => 'nullable|string|max:255',
             'diagnosaMedis' => 'nullable|string|max:255',
@@ -55,20 +54,10 @@ class LaporanController extends Controller
             'tindakan' => 'nullable|string|max:255',
         ]);
 
-        if (!empty($validatedData['RekamMedis_id'])) {
-            $rekammedis = rekammedis::with('dokter')->find($validatedData['RekamMedis_id']);
-            if (!$rekammedis || $rekammedis->Klinik_id != $klinik->idKlinik) {
-                return redirect()->back()->withErrors(['RekamMedis_id' => 'Rekammedis tidak cocok dengan klinik.'])->withInput();
-            }
 
-            if ($rekammedis->dokter && $rekammedis->dokter->Klinik_id != $klinik->idKlinik) {
-                return redirect()->back()->withErrors(['Dokter_id' => 'Dokter tidak cocok dengan klinik.'])->withInput();
-            }
-        }
 
         $laporan = new laporan();
         $laporan->Klinik_id = $klinik->idKlinik;
-        $laporan->RekamMedis_id = $validatedData['RekamMedis_id'] ?? null;
         $laporan->namaPasien = $validatedData['namaPasien'] ?? null;
         $laporan->namaDokter = $validatedData['namaDokter'] ?? null;
         $laporan->diagnosaMedis = $validatedData['diagnosaMedis'] ?? null;

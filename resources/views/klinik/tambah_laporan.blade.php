@@ -18,30 +18,16 @@
                         </div>
                     </div>
 
-                    <!--
-<div class="col-md-6">
-    <label for="RekamMedis_id" class="form-label">Rekam Medis</label>
-    <select name="RekamMedis_id" id="RekamMedis_id" class="form-control">
-        <option value="">Sesuai Rekam Medis</option>
-        @foreach ($rekammedis as $rekam)
-            <option value="{{ $rekam->idRekamMedis }}" data-namapasien="{{ $rekam->namaPasien }}"
-                data-namadokter="{{ optional($rekam->dokter)->namaDokter }}"
-                data-diagnosa="{{ $rekam->diagnosaMedis }}" data-nik="{{ $rekam->NIK }}"
-                data-alamat="{{ $rekam->alamatPasien }}" dapta-tindakan="{{ $rekam->tindakan }}">
-                {{ $rekam->namaPasien }}
-            </option>
-        @endforeach
-    </select>
-</div>
--->
+                    <!-- Removed Rekam Medis select because RekamMedis_id column was dropped -->
 
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="namaDokter" class="form-label">Nama Dokter</label>
-                        <input type="text" id="namaDokter" name="namaDokter" class="form-control" placeholder="Masukkan nama dokter" required>
+                        <input type="text" id="namaDokter" name="namaDokter" class="form-control"
+                            placeholder="Masukkan nama dokter" required>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <label class="form-label">Nama Pasien</label>
                         <input type="text" id="namaPasien" name="namaPasien" class="form-control">
@@ -81,5 +67,3 @@
     </div>
     @vite('resources/js/rekammedis-select.js')
 @endsection
-
-

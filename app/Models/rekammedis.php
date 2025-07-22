@@ -13,15 +13,11 @@ class rekammedis extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['Klinik_id', 'StaffRm_id', 'Dokter_id', 'noRm', 'namaPasien', 'alamatPasien', 'jenisKelamin', 'usiaPasien', 'agamaPasien', 'statusNikah', 'NIK', 'tanggalPeriksa', 'tekananDarah', 'rr', 'nadi', 'suhu', 'tinggiBadan', 'beratBadan', 'riwayatPenyakit', 'diagnosaMedis', 'tindakan', 'resepObat', 'rujukan', 'alasanRujukan'];
+    protected $fillable = ['StaffRm_id', 'Dokter_id', 'noRm', 'namaPasien', 'alamatPasien', 'jenisKelamin', 'usiaPasien', 'agamaPasien', 'statusNikah', 'NIK', 'tanggalPeriksa', 'tekananDarah', 'rr', 'nadi', 'suhu', 'tinggiBadan', 'beratBadan', 'riwayatPenyakit', 'diagnosaMedis', 'tindakan', 'resepObat', 'rujukan', 'alasanRujukan'];
 
     public function staffrekammedis()
     {
         return $this->belongsTo(Staffrekammedis::class, 'StaffRm_id', 'idStaffRm');
-    }
-    public function klinik()
-    {
-        return $this->belongsTo(Klinik::class, 'Klinik_id', 'idKlinik');
     }
     public function dokter()
     {

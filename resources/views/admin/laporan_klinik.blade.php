@@ -20,12 +20,12 @@
 
                 {{-- Export Buttons --}}
                 <div class="d-flex gap-2">
-                    <a href="{{ url('/export-pdf') }}" target="_blank" class="btn btn-danger btn-sm">
+                    <a id="exportPdf" class="btn btn-danger btn-sm">
                         <i class="fas fa-file-pdf"></i> Export PDF
                     </a>
-                    <a href="{{ url('/export-excel') }}" target="_blank" class="btn btn-success btn-sm">
+                    <button id="exportExcel" class="btn btn-success">
                         <i class="fas fa-file-excel"></i> Export Excel
-                    </a>
+                    </button>
                 </div>
             </div>
 
@@ -34,7 +34,7 @@
 
             <!-- Tabel Data Laporan Klinik -->
             <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover" id="laporanTable">
+                <table id="laporanTable" class="table table-striped table-bordered table-hover" id="laporanTable">
                     <thead class="table-light text-center">
                         <tr>
                             <th>No</th>
@@ -137,7 +137,69 @@
                 </table>
                 {{ $laporan->links('vendor.pagination.bootstrap-5') }}
             </div>
-        @endsection
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 
-        @section('scripts')
+            <script>
+                document.getElementById("exportExcel").addEventListener("click", function() {
+                    const wb = XLSX.utils.book_new();
+                    const wsData = [];
+
+                    const headerCells = document.querySelectorAll("#laporanTable thead th");
+                    const headers = Array.from(headerCells).slice(0, 6).map(cell => cell.innerText.trim()); // Skip aksi
+                    wsData.push(headers);
+
+                    document.querySelectorAll("#laporanTable tbody tr").forEach((row) => {
+                        if (row.style.display !== "none") {
+                            const rowData = [];
+                            row.querySelectorAll("td").forEach((cell, index) => {
+                                if (index < 6) rowData.push(cell.innerText.trim());
+                            });
+                            wsData.push(rowData);
+                        }
+                    });
+
+                    const ws = XLSX.utils.aoa_to_sheet(wsData);
+                    XLSX.utils.book_append_sheet(wb, ws, "Data Laporan Klinik");
+
+                    const today = new Date().toISOString().slice(0, 6);
+                    XLSX.writeFile(wb, `Data_Laporan_Klinik_${today}.xlsx`);
+                });
+
+                document.getElementById("exportPdf").addEventListener("click", function() {
+                    const {
+                        jsPDF
+                    } = window.jspdf;
+                    const doc = new jsPDF();
+
+                    doc.text("Laporan Klinik", 14, 10);
+
+                    const headers = [];
+                    document.querySelectorAll("#laporanTable thead th").forEach((th, index) => {
+                        // Skip kolom aksi terakhir
+                        if (index < 6) headers.push(th.innerText);
+                    });
+
+                    const data = [];
+                    document.querySelectorAll("#laporanTable tbody tr").forEach((row) => {
+                        if (row.style.display !== "none") {
+                            const rowData = [];
+                            row.querySelectorAll("td").forEach((cell, index) => {
+                                if (index < 6) rowData.push(cell.innerText.trim()); // skip aksi
+                            });
+                            data.push(rowData);
+                        }
+                    });
+
+                    doc.autoTable({
+                        head: [headers],
+                        body: data,
+                        startY: 20
+                    });
+
+                    const today = new Date().toISOString().slice(0, 10);
+                    doc.save(`Data_Rekam_Medis_${today}.pdf`);
+                });
+            </script>
         @endsection

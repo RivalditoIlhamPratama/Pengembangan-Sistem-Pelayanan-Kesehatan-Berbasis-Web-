@@ -14,7 +14,7 @@ class laporan extends Model
 
     protected $fillable = [
         'Klinik_id',
-        'RekamMedis_id',
+
         'namaPasien',
         'namaDokter',
         'diagnosaMedis',
@@ -28,8 +28,5 @@ class laporan extends Model
         return $this->belongsTo(Klinik::class, 'Klinik_id', 'idKlinik');
     }
 
-    public function rekam_medis()
-    {
-        return $this->belongsTo(\App\Models\rekammedis::class, 'RekamMedis_id', 'idRekamMedis');
-    }
+    // Removed rekam_medis relation because RekamMedis_id column was dropped
 }
