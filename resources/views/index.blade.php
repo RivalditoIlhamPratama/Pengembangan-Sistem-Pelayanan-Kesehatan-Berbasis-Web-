@@ -42,7 +42,7 @@
                     <li class="link"><a href="{{ route('pasien.dashboard') }}">Beranda</a></li>
                     <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
                     <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
-                    <li class="link"><a href="{{ url('/alur-pelayanan') }}">Alur Pelayanan</a></li>
+                    <li class="link"><a href="{{ url('/alur-pelayanan') }}">Pelayanan</a></li>
                     <li class="link">
                         <a href="javascript:void(0);" style="pointer-events: none; color: gray; opacity: 0.6; cursor: default;">
                             Pengaduan
