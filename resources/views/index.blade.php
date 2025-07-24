@@ -146,16 +146,7 @@
     <!-- Card Dokter -->
     <h2>Dokter Puskesmas Kraksaan</h2> <br>
     <div class="doctor-card-container">
-        <div class="doctor-card">
-            <img src="assets/dokter.png" alt="Dr. Komang Ayu" class="doctor-img" />
-            <div class="doctor-info">
-                <h3>dr. Siti Jamila</h3>
-                <br>
-                <p>Dokter Spesialis Anak</p>
-                <br>
-
-            </div>
-        </div>
+        
         <div class="doctor-card">
             <img src="assets/Dokter1.jpg" alt="Dr. Ni Made Maya" class="doctor-img" />
             <div class="doctor-info">
@@ -166,16 +157,7 @@
 
             </div>
         </div>
-        <div class="doctor-card">
-            <img src="assets/kepalapuskesmas.png" alt="Dr. Muhammad Reza" class="doctor-img" />
-            <div class="doctor-info">
-                <h3>dr. Heni Rahmawati</h3>
-                <br>
-                <p>Dokter Spesialis Anak</p>
-                <br>
-
-            </div>
-        </div>
+    
         <div class="doctor-card">
             <img src="assets/dokter.png" alt="Dr. Yessi Rahmawati" class="doctor-img" />
             <div class="doctor-info">

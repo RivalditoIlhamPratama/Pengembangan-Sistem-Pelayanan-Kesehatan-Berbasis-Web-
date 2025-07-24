@@ -81,57 +81,47 @@
                             </tr>
 
                             <!-- Modal Detail (tidak berubah) -->
-                            <div class="modal fade" id="modalDetail{{ $lap->idLaporan }}" tabindex="-1"
-                                aria-labelledby="modalLabel{{ $lap->idLaporan }}" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="modalLabel{{ $lap->idLaporan }}">Detail Laporan
-                                                Klinik</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body text-start">
-                                            <p><strong>Klinik:</strong> {{ $lap->klinik->namaKlinik }}</p>
-                                            <p><strong>Tanggal Tindakan:</strong>
-                                                {{ optional($lap->rekam_medis)->tanggalPeriksa
-                                                    ? \Carbon\Carbon::parse($lap->rekam_medis->tanggalPeriksa)->format('d-m-Y')
-                                                    : '-' }}
-                                            </p>
+<div class="modal fade" id="modalDetail{{ $lap->idLaporan }}" tabindex="-1"
+    aria-labelledby="modalLabel{{ $lap->idLaporan }}" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel{{ $lap->idLaporan }}">Detail Laporan Klinik</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-start">
+                <div id="printArea{{ $lap->idLaporan }}">
+                    <p><strong>Klinik:</strong> {{ $lap->klinik->namaKlinik }}</p>
+                    <p><strong>Nama Pasien:</strong>
+                        {{ optional($lap->rekam_medis)->namaPasien ?? ($lap->namaPasien ?? '-') }}
+                    </p>
+                    <p><strong>Alamat Pasien:</strong>
+                        {{ optional($lap->rekam_medis)->alamatPasien ?? ($lap->alamatPasien ?? '-') }}
+                    </p>
+                    <p><strong>Diagnosa:</strong>
+                        {{ optional($lap->rekam_medis)->diagnosaMedis ?? ($lap->diagnosaMedis ?? '-') }}
+                    </p>
+                    <p><strong>Deskripsi Tindakan:</strong> {{ $lap->deskripsi_tindakan ?? '-' }}</p>
+                    <p><strong>Dokter / Petugas:</strong>
+                        {{ optional(optional($lap->rekam_medis)->dokter)->namaDokter ??
+                            (optional(optional($lap->rekam_medis)->staffrekammedis)->namaStaff ?? ($lap->namaDokter ?? '-')) }}
+                    </p>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-primary" onclick="printModalContent({{ $lap->idLaporan }})">
+                    <i class="fas fa-print"></i> Cetak
+                </button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
 
-                                            <p><strong>Nama Pasien:</strong>
-                                                {{ optional($lap->rekam_medis)->namaPasien ?? ($lap->namaPasien ?? '-') }}
-                                            </p>
-                                            <p><strong>Alamat Pasien:</strong>
-                                                {{ optional($lap->rekam_medis)->alamatPasien ?? ($lap->alamatPasien ?? '-') }}
-                                            </p>
-                                            <p><strong>Usia / Jenis Kelamin:</strong>
-                                                {{ optional($lap->rekam_medis)->usiaPasien ?? '-' }} /
-                                                {{ optional($lap->rekam_medis)->jenisKelamin ?? '-' }}
-                                            </p>
-                                            <p><strong>Diagnosa:</strong>
-                                                {{ optional($lap->rekam_medis)->diagnosaMedis ?? ($lap->diagnosaMedis ?? '-') }}
-                                            </p>
-                                            <p><strong>Deskripsi Tindakan:</strong> {{ $lap->deskripsi_tindakan ?? '-' }}
-                                            </p>
-                                            <p><strong>Tindakan:</strong>
-                                                {{ optional($lap->rekam_medis)->tindakan ?? '-' }}</p>
-                                            <p><strong>Resep Obat:</strong>
-                                                {{ optional($lap->rekam_medis)->resepObat ?? '-' }}</p>
-                                            <p><strong>Dokter / Petugas:</strong>
-                                                {{ optional(optional($lap->rekam_medis)->dokter)->namaDokter ??
-                                                    (optional(optional($lap->rekam_medis)->staffrekammedis)->namaStaff ?? ($lap->namaDokter ?? '-')) }}
-
-                                            </p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Tutup</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Modal -->
                         @endforeach
                     </tbody>
                 </table>
@@ -202,4 +192,25 @@
                     doc.save(`Data_Rekam_Medis_${today}.pdf`);
                 });
             </script>
+        
+
+        <script>
+            function printModalContent(id) {
+                const content = document.getElementById('printArea' + id).innerHTML;
+                const printWindow = window.open('', '', 'height=600,width=800');
+        
+                printWindow.document.write('<html><head><title>Cetak Detail Laporan</title>');
+                printWindow.document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">');
+                printWindow.document.write('</head><body>');
+                printWindow.document.write('<h4 class="text-center mb-4">Detail Laporan Klinik</h4>');
+                printWindow.document.write('<div class="container">' + content + '</div>');
+                printWindow.document.write('</body></html>');
+        
+                printWindow.document.close();
+                printWindow.focus();
+                printWindow.print();
+                printWindow.close();
+            }
+        </script>
+        
         @endsection
