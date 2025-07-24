@@ -9,13 +9,24 @@ class dokter extends Model
 {
     use HasFactory;
 
-    protected $fillable =['namaDokter','spesialis','jenisKelamin','jadwalPraktek','tglLahir','alamatDokter'];
+    protected $primaryKey = 'idDokter';
+
+    protected $fillable = ['user_id', 'namaDokter', 'spesialis', 'jenisKelamin', 'tglLahir', 'noTelepon', 'alamatDokter', 'gambarProfil', 'email'];
+
+
+    public $timestamps = false;
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id_user');
     }
-    public function rekammedis(){
-        return $this->hasMany(Rekammedis::class, 'idDokter', 'Dokter_id');
+    public function rekammedis()
+    {
+        return $this->hasMany(Rekammedis::class, 'Dokter_id', 'idDokter');
+    }
+
+    public function jadwaldokters()
+    {
+        return $this->hasMany(jadwaldokter::class, 'Dokter_id', 'idDokter');
     }
 }

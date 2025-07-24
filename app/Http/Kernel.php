@@ -34,6 +34,8 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'pasien' => \App\Http\Middleware\PasienMiddleware::class,
         'dokter' => \App\Http\Middleware\DokterMiddleware::class,
+        'stafrekammedis' => \App\Http\Middleware\StafrekammedisMiddleware::class,
+        'klinik' => \App\Http\Middleware\KlinikMiddleware::class,
     ];
 
     protected $middlewareGroups = [
@@ -47,7 +49,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],

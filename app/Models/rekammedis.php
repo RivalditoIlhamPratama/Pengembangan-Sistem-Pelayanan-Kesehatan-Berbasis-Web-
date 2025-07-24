@@ -9,7 +9,11 @@ class rekammedis extends Model
 {
     use HasFactory;
 
-    protected $fillable =['namaPasien','NIK','alamatPasien','tanggalRekamMedis','tekananDarah','nadi','suhu','tinggiBadan','beratBadan','diagnosaMedis'];
+    protected $primaryKey = 'idRekamMedis';
+
+    public $timestamps = false;
+
+    protected $fillable = ['StaffRm_id', 'Dokter_id', 'noRm', 'namaPasien', 'alamatPasien', 'jenisKelamin', 'usiaPasien', 'agamaPasien', 'statusNikah', 'NIK', 'tanggalPeriksa', 'tekananDarah', 'rr', 'nadi', 'suhu', 'tinggiBadan', 'beratBadan', 'riwayatPenyakit', 'diagnosaMedis', 'tindakan', 'resepObat', 'rujukan', 'alasanRujukan'];
 
     public function staffrekammedis()
     {
@@ -18,5 +22,9 @@ class rekammedis extends Model
     public function dokter()
     {
         return $this->belongsTo(Dokter::class, 'Dokter_id', 'idDokter');
+    }
+    public function laporan()
+    {
+        return $this->hasOne(\App\Models\laporan::class, 'RekamMedis_id', 'idRekamMedis');
     }
 }

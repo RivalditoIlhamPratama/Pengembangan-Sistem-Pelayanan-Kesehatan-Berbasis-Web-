@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id('idAdmin');
             $table->unsignedBigInteger('user_id');
             $table->string('namaAdmin');
-            $table->enum('jenisKelamin',['Pria', 'Wanita']);
+            $table->enum('jenisKelamin',['Laki-laki', 'Perempuan']);
             $table->string('noHp');
             $table->text('alamatAdmin');
             $table->string('email');
-            $table->timestamps();
 
             $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');
         });

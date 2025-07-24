@@ -1,62 +1,188 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container-fluid mt-5"> <!-- Tambah mt-5 agar lebih ke bawah -->
-    <div class="card p-4 shadow-sm">
-        <h1 class="mb-4 fw-bold">Data Pengguna</h1>
+    <div class="container-fluid mt-5">
+        <div class="card p-4 shadow-sm">
+            <h1 class="mb-4 fw-bold">Data Pengguna</h1>
 
-        <!-- Pencarian dan Tombol Tambah -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <div class="input-group w-25">
-                <input type="text" class="form-control" placeholder="Search">
-                <button class="btn btn-outline-secondary" type="button">
-                    <i class="fas fa-search"></i>
-                </button>
+            <!-- Pencarian dan Tambah -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <form method="GET" action="{{ route('admin.users') }}" class="input-group w-25">
+                    <input type="text" name="search" class="form-control" placeholder="Search"
+                        value="{{ request('search') }}">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+                <a href="{{ route('admin.pengguna.create') }}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Tambah
+                </a>
             </div>
-            <a href="#" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah</a>
-        </div>
+            <!-- Tabel -->
+            <div class="table-responsive pt-4">
+                <table class="table table-striped table-bordered table-hover mb-5">
+                    <thead class="table-light text-center">
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Pengguna</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($users as $index => $user)
+                            <tr class="align-middle text-center justify-between">
+                                <td>{{ $users->firstItem() + $index }}</td>
+                                <td class="text-start">
+                                    @if ($user->role == 'admin' && $user->admin)
+                                        {{ $user->admin->first()->namaAdmin ?? $user->name }}
+                                    @elseif ($user->role == 'dokter' && $user->dokter)
+                                        {{ $user->dokter->first()->namaDokter ?? $user->name }}
+                                    @elseif ($user->role == 'pasien' && $user->pasien)
+                                        {{ $user->pasien->namaPasien ?? $user->name }}
+                                    @elseif ($user->role == 'stafrekammedis' && $user->stafrekammedis)
+                                        {{ $user->stafrekammedis->first()->namaStaff ?? $user->name }}
+                                    @elseif ($user->role == 'klinik' && $user->klinik)
+                                        {{ $user->klinik->namaKlinik ?? $user->name }}
+                                    @else
+                                        {{ $user->name }}
+                                    @endif
+                                </td>
+                                <td>{{ $user->username ?? 'N/A' }}</td>
+                                <td>
+                                    @if ($user->role == 'klinik' && $user->klinik)
+                                        {{ $user->klinik->email ?? 'N/A' }}
+                                    @else
+                                        {{ $user->email ?? 'N/A' }}
+                                    @endif
+                                </td>
+                                <td>
+                                    <span
+                                        class="badge {{ strtolower($user->role) == 'dokter' ? 'bg-primary' : 'bg-secondary' }} text-white">
+                                        {{ $user->role ?? 'N/A' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <!-- Tombol Edit -->
+                                    <button type="button" class="btn btn-sm btn-warning edit-btn" data-bs-toggle="modal"
+                                        data-bs-target="#editModal" data-id="{{ $user->id_user }}"
+                                        data-name="@if ($user->role == 'admin' && $user->admin) {{ $user->admin->first()->namaAdmin ?? $user->name }}@elseif ($user->role == 'dokter' && $user->dokter){{ $user->dokter->first()->namaDokter ?? $user->name }}@elseif ($user->role == 'pasien' && $user->pasien){{ $user->pasien->namaPasien ?? $user->name }}@elseif ($user->role == 'stafrekammedis' && $user->stafrekammedis){{ $user->stafrekammedis->first()->namaStaff ?? $user->name }}@elseif ($user->role == 'klinik' && $user->klinik){{ $user->klinik->namaKlinik ?? $user->name }}@else{{ $user->name }} @endif"
+                                        data-username="{{ $user->username }}"
+                                        data-email="@if ($user->role == 'klinik' && $user->klinik) {{ $user->klinik->email ?? $user->email }}@else{{ $user->email }} @endif"
+                                        data-role="{{ $user->role }}">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
 
-        <!-- Tabel Data Pengguna -->
-        <div class="table-responsive pt-4"> <!-- Tambahkan pt-4 supaya tabel turun -->
-            <table class="table table-striped table-bordered table-hover mb-5"> <!-- Tambah mb-5 -->
-                <thead class="table-light">
-                    <tr class="text-center">
-                        <th>No</th>
-                        <th>Nama Pengguna</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php $no = 1; @endphp
-                    @foreach([
-                        ['Dr hargianto Sucipto SE SKOM', 'Hargianto', 'har@gmail.com', 'Dokter'],
-                        ['Dr Sheilla Ayu Aqillah', 'Sheilla', 'Sheill@gmail.com', 'Dokter'],
-                        ['Dr Bima Yuna Saptaji', 'Bimaa', 'har@gmail.com', 'Dokter'],
-                        ['Klinik Gigi', 'Kgigi', 'KlinikGigi@gmail.com', 'Klinik'],
-                        ['Klinik Umum', 'Kumum', 'KlinikUmum@gmail.com', 'Klinik'],
-                    ] as $user)
-                    <tr class="align-middle text-center">
-                        <td>{{ $no++ }}</td>
-                        <td class="text-start">{{ $user[0] }}</td>
-                        <td>{{ $user[1] }}</td>
-                        <td>{{ $user[2] }}</td>
-                        <td>
-                            <span class="badge {{ $user[3] == 'Dokter' ? 'bg-primary' : 'bg-secondary' }} text-white">
-                                {{ $user[3] }}
-                            </span>
-                        </td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                            <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                                    <!-- Tombol Hapus -->
+                                    <form action="{{ route('admin.pengguna.destroy', $user->id_user) }}" method="POST"
+                                        class="d-inline" data-confirm-delete>
+                                        @csrf @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                {{ $users->links('vendor.pagination.bootstrap-5') }}
+
+            </div>
         </div>
     </div>
-</div>
+
+    <!-- Modal Edit -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form method="POST" action="{{ route('admin.pengguna.update') }}" id="editUserForm" class="modal-content">
+                @csrf
+                @method('PUT')
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Pengguna</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="edit-id">
+                    <div class="mb-3">
+                        <label for="edit-name" class="form-label">Nama</label>
+                        <input type="text" class="form-control" name="name" id="edit-name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-username" class="form-label">Username</label>
+                        <input type="text" class="form-control" name="username" id="edit-username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" id="edit-email">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="edit-password" class="form-label">Password (Opsional)</label>
+                        <input type="password" class="form-control" name="password" id="edit-password"
+                            placeholder="Kosongkan jika tidak diubah">
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="edit-role" class="form-label">Role</label>
+                        <select class="form-select" name="role" id="edit-role" required>
+                            <option value="admin">Admin</option>
+                            <option value="dokter">Dokter</option>
+                            <option value="klinik">Klinik</option>
+                            <option value="pasien">Pasien</option>
+                            <option value="stafrekammedis">Staf Rekam Medis</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Isi modal edit
+            document.body.addEventListener("click", function(event) {
+                if (event.target.closest(".edit-btn")) {
+                    const btn = event.target.closest(".edit-btn");
+                    document.getElementById('edit-id').value = btn.dataset.id;
+                    document.getElementById('edit-name').value = btn.dataset.name;
+                    document.getElementById('edit-username').value = btn.dataset.username;
+                    document.getElementById('edit-email').value = btn.dataset.email;
+                    document.getElementById('edit-role').value = btn.dataset.role;
+                }
+            });
+
+            // SweetAlert konfirmasi hapus
+            document.querySelectorAll('form[data-confirm-delete]').forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Yakin ingin menghapus?',
+                        text: "Data pengguna akan dihapus permanen!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Ya, hapus!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+@endpush

@@ -1,55 +1,163 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dokter Puskesmas</title>
+    <title>Dokter - Puskesmas</title>
+
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Remixicon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome untuk ikon -->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
+
 <body class="bg-gray-100">
+
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <div class="w-64 bg-gray-900 text-white flex flex-col">
-            <div class="p-5 flex items-center space-x-3">
-                <img src="{{ asset('assets/11.png') }}" alt="Logo Puskesmas" class="w-15 h-14">
-                <h1 class="text-xl font-bold">Puskesmas</h1>
-            </div>
-            <ul class="space-y-2 px-4">
-                <li>
-                    <a href="{{ route('dokter.dashboard') }}" class="block py-2 px-4">Dashboard</a>
-                </li>
-                <li>
-                    <a href="{{ route('dokter.data_dokter') }}" class="block py-2 px-4">Data Dokter</a>
-                </li>
-                <li>
-                    <a href="{{ route('dokter.rekam_medis') }}" class="block py-2 px-4">Rekam Medis</a>
-                </li>
-            </ul>
+        <aside id="sidebar"
+    class="w-64 bg-white text-gray-800 flex flex-col relative overflow-hidden transition-all duration-300 shadow-md">
+
+    <!-- Background Ikon Acak -->
+    <div class="absolute inset-0 z-0 pointer-events-none">
+        <i class="ri-heart-pulse-line text-gray-500 text-xl absolute top-4 left-5 opacity-20"></i>
+        <i class="ri-stethoscope-line text-gray-500 text-2xl absolute top-12 right-6 opacity-20"></i>
+        <i class="ri-capsule-line text-gray-500 text-lg absolute top-24 left-8 opacity-20"></i>
+        <i class="ri-first-aid-kit-line text-gray-500 text-2xl absolute top-40 right-10 opacity-20"></i>
+        <i class="ri-dna-line text-gray-500 text-xl absolute top-32 right-3 opacity-20"></i>
+        <i class="ri-user-heart-line text-gray-500 text-2xl absolute bottom-36 left-4 opacity-20"></i>
+        <i class="ri-nurse-line text-gray-500 text-lg absolute bottom-24 right-6 opacity-20"></i>
+        <i class="ri-syringe-line text-gray-500 text-xl absolute top-56 left-6 opacity-20"></i>
+        <i class="ri-hospital-line text-gray-500 text-xl absolute bottom-20 left-16 opacity-20"></i>
+        <i class="ri-heart-add-line text-gray-500 text-2xl absolute bottom-36 right-10 opacity-20"></i>
+        <i class="ri-capsule-fill text-gray-500 text-lg absolute top-72 right-4 opacity-20"></i>
+        <i class="ri-microscope-line text-gray-500 text-lg absolute bottom-[250px] left-[50px] opacity-20"></i>
+        <i class="ri-mental-health-line text-gray-500 text-xl absolute top-[300px] left-[10px] opacity-20"></i>
+        <i class="ri-thermometer-line text-gray-500 text-xl absolute top-[160px] right-[60px] opacity-20"></i>
+        <i class="ri-contrast-drop-line text-gray-500 text-lg absolute bottom-[70px] right-[80px] opacity-20"></i>
+        <i class="ri-aliens-line text-gray-500 text-lg absolute top-[450px] left-[40px] opacity-20"></i>
+        <i class="ri-drop-line text-gray-500 text-2xl absolute top-[360px] right-[30px] opacity-20"></i>
+        <i class="ri-medicine-bottle-line text-gray-500 text-xl absolute bottom-[180px] left-[100px] opacity-20"></i>
+        <i class="ri-brain-line text-gray-500 text-2xl absolute top-[220px] right-[100px] opacity-20"></i>
+        <i class="ri-bandage-line text-gray-500 text-xl absolute bottom-[130px] right-[50px] opacity-20"></i>
+        <i class="ri-eye-2-line text-gray-500 text-lg absolute top-[80px] left-[120px] opacity-20"></i>
+        <i class="ri-hospital-line text-gray-500 text-xl absolute bottom-[20px] right-[15px] opacity-20"></i>
+    </div>
+    
+
+    <!-- Logo -->
+    <div class="p-5 flex items-center space-x-3 border-b border-gray-300 relative z-10">
+        <img src="{{ asset('assets/logobaru.png') }}" alt="Logo Puskesmas" class="w-12 h-12">
+        <h1 class="text-xl font-bold text-gray-800">Puskesmas</h1>
+    </div>
+
+    <!-- Menu -->
+    <nav class="mt-4 flex flex-col gap-2 px-4 relative z-10">
+        <a href="{{ route('dokter.dashboard') }}"
+            class="py-2 px-4 rounded hover:bg-blue-50 transition-all duration-150 font-medium {{ request()->routeIs('dokter.dashboard') ? 'bg-blue-100 text-blue-700 font-semibold' : '' }}">
+            <i class="ri-dashboard-line mr-2"></i> Dashboard
+        </a>
+        <a href="{{ route('dokter.data_dokter') }}"
+            class="py-2 px-4 rounded hover:bg-blue-50 transition-all duration-150 font-medium {{ request()->routeIs('dokter.data_dokter') ? 'bg-blue-100 text-blue-700 font-semibold' : '' }}">
+            <i class="ri-user-3-line mr-2"></i> Data Dokter
+        </a>
+        <a href="{{ route('dokter.rekam_medis') }}"
+            class="py-2 px-4 rounded hover:bg-blue-50 transition-all duration-150 font-medium {{ request()->routeIs('dokter.rekam_medis') ? 'bg-blue-100 text-blue-700 font-semibold' : '' }}">
+            <i class="ri-clipboard-line mr-2"></i> Rekam Medis
+        </a>
+    </nav>
+    
+
+    <!-- Footer Icon Animasi -->
+    <div class="mt-auto px-4 pb-4 border-t border-gray-300 pt-4 relative z-10">
+        <div class="flex justify-center gap-4 mt-6 mb-4">
+            <i class="ri-heart-pulse-line text-red-500 text-2xl animate-pulse"></i>
+            <i class="ri-stethoscope-line text-green-500 text-2xl animate-bounce"></i>
+            <i class="ri-dna-line text-purple-500 text-2xl animate-spin"></i>
+            <i class="ri-first-aid-kit-line text-orange-500 text-2xl animate-pulse"></i>
+            <i class="ri-capsule-line text-pink-500 text-2xl animate-bounce"></i>
         </div>
+    </div>
+</aside>
 
-        <!-- Content -->
-        <div class="flex-1 p-10">
-            <!-- Header -->
-            <div class="flex justify-between items-center mb-6">
-                <button class="text-2xl"><i class="ri-menu-line"></i></button>
+
+
+
+
+
+
+        <!-- Main content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="flex justify-between items-center p-4 bg-white border-b">
+                <button id="toggleSidebar" class="text-2xl text-gray-700">
+                    <i class="ri-menu-line"></i>
+                </button>
+
                 <div class="flex items-center space-x-3">
-                    <i class="ri-user-fill text-xl"></i>
-                    <span>Dokter</span>
+                    <a href="{{ route('dokter.data_dokter') }}" class="text-decoration-none text-dark fw-semibold">
+                        <i class="ri-user-fill text-xl me-1"></i> {{ $dokter->namaDokter }}
+                    </a>
+                    <form id="logoutForm" method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="button" id="logoutBtn" class="text-black hover:text-gray-500 ml-3">
+                            <i class="ri-logout-box-r-line text-xl"></i>
+                        </button>
+                    </form>
+                    
                 </div>
-            </div>
+            </header>
 
-            <div>
+
+            <!-- Page Content -->
+            <main class="p-6 overflow-auto">
                 @yield('content')
-            </div>
+            </main>
         </div>
     </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const toggleBtn = document.getElementById('toggleSidebar');
+        const sidebar = document.getElementById('sidebar');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+        });
+    </script>
+
+
+<script>
+    document.getElementById('logoutBtn').addEventListener('click', function (e) {
+        Swal.fire({
+            title: 'Yakin ingin logout?',
+            text: "Anda akan keluar dari sistem.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, logout',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('logoutForm').submit();
+            }
+        });
+    });
+</script>
+@stack('scripts')
+
+
 </body>
+
 </html>

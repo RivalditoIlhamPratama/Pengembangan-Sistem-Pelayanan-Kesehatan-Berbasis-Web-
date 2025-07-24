@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('namaKlinik');
             $table->text('alamatKlinik');
             $table->string('email');
-            $table->timestamps();
 
             $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');
         });

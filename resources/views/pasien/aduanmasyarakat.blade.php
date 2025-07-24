@@ -1,138 +1,444 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
     <link rel="stylesheet" href="{{ asset('assets/aduanmasyarakat.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <title>Puskesmas Kraksaan</title>
 </head>
+
 <body>
-<header class="header">
-    <nav>
-        <div class="nav__header">
-            <div class="nav__logo">
-                <a href="#"><img src="{{ asset('assets/11.png') }}" alt="logo"> Puskesmas Kraksaan</a>
-            </div>
-            <div class="nav__menu__btn" id="menu-btn">
-                <span><i class="ri-menu-line"></i></span>
-            </div>
-        </div>
-        <ul class="nav__links" id="nav-links">
-            <li class="link"><a href="{{ route('pasien.dashboard') }}">Beranda</a></li>
-            <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
-            <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
-            <li class="link"><a href="{{ url('/') }}">Alur Pelayanan</a></li>
-            <li class="link"><a href="{{route('pasien.reports') }}">Pelayanan</a></li>
-            @if(auth()->check() && auth()->user()->role === 'pasien')
-            <li class="link">
-                <div class="flex items-center space-x-4">
-                    <button class="flex items-center space-x-3">
-                        <i class="ri-user-fill text-xl"></i>
-                        <span>{{ auth()->user()->name }}</span>
-                    </button>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="text-white hover:text-gray-300">
-                            <i class="ri-logout-box-r-line text-xl"></i>
-                        </button>
-                    </form>
+    <header class="header">
+        <nav>
+            <div class="nav__header">
+                <div class="nav__logo">
+                    <a href="#"><img src="{{ asset('assets/logobaru.png') }}" alt="logo"> Puskesmas Kraksaan</a>
                 </div>
-            </li>
+                <div class="nav__menu__btn" id="menu-btn">
+                    <span><i class="ri-menu-line"></i></span>
+                </div>
+            </div>
+            <ul class="nav__links" id="nav-links">
+                <li class="link"><a href="{{ route('pasien.dashboard') }}">Beranda</a></li>
+                <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
+                <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
+                <li class="link"><a href="{{ url('/alur-pelayanan') }}">Alur Pelayanan</a></li>
+                <li class="link"><a href="{{ route('pasien.reports') }}">Pengaduan</a></li>
+
+                </li>
+                @if (auth()->check() && auth()->user()->role === 'pasien')
+                    <li class="link">
+                        <div class="user-action">
+                            <span class="user-btn">
+                                <i class="ri-user-fill"></i> {{ auth()->user()->name }}
+                            </span>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="logout-btn">
+                                    <i class="ri-logout-box-r-line"></i> Logout
+                                </button>
+                            </form>
+                        </div>
+                    </li>
+                @endif
+
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Pengaduan Section -->
+    <section class="pengaduan-container">
+        <div class="pengaduan-form">
+            <h2>Form Pengaduan</h2>
+
+            {{-- Success Message --}}
+            @if (session('success'))
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            Swal.fire({
+                icon: 'success',
+                title: 'Pengaduan berhasil dikirim!',
+                text: '{{ session("success") }}',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK'
+            });
+        });
+    </script>
+@endif
+
+
+            {{-- Validation Errors --}}
+            @if ($errors->any())
+                <div class="alert alert-danger" style="color: red; margin-bottom: 10px;">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
             @endif
-        </ul>
-    </nav>
-</header>
 
-<!-- Pengaduan Section -->
-<section class="pengaduan-container">
-    <div class="pengaduan-form">
-        <h2>Form Pengaduan</h2>
+            @if (auth()->check() && auth()->user()->role === 'pasien')
+                <form action="{{ route('pasien.reports.submit') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
 
-        {{-- Success Message --}}
-        @if (session('success'))
-            <div class="alert alert-success" style="color: green; margin-bottom: 10px;">
-                {{ session('success') }}
-            </div>
-        @endif
+                    <input type="text" value="{{ auth()->user()->pasien->namaPasien ?? 'Nama Pasien' }}" readonly />
 
-        {{-- Validation Errors --}}
-        @if ($errors->any())
-            <div class="alert alert-danger" style="color: red; margin-bottom: 10px;">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+                    <div class="phone-input">
+                        <input type="tel" name="phone" placeholder="Nomor Telepon"
+                            value="{{ old('phone', '+62' . (auth()->user()->pasien->noHp ?? '')) }}" required />
+                    </div>
 
-        @if(auth()->check() && auth()->user()->role === 'pasien')
-        <form action="{{ route('pasien.reports.submit') }}" method="POST" enctype="multipart/form-data">
-            @csrf
+                    <select name="jenis_pengaduan" required>
+                        <option value="" disabled {{ old('jenis_pengaduan') ? '' : 'selected' }}>Pilih Jenis
+                            Pengaduan</option>
+                        <option value="pelayanan" {{ old('jenis_pengaduan') == 'pelayanan' ? 'selected' : '' }}>
+                            Pelayanan</option>
+                        <option value="fasilitas" {{ old('jenis_pengaduan') == 'fasilitas' ? 'selected' : '' }}>
+                            Fasilitas</option>
+                        <option value="dokter" {{ old('jenis_pengaduan') == 'dokter' ? 'selected' : '' }}>Dokter
+                        </option>
+                    </select>
 
-            <input type="text" value="{{ auth()->user()->pasien->namaPasien ?? 'Nama Pasien' }}" readonly />
+                    <textarea name="aduan" placeholder="Isi Pengaduan" rows="4" required>{{ old('aduan') }}</textarea>
 
-            <div class="phone-input">
-                <input type="tel" name="phone" placeholder="Nomor Telepon"
-                    value="{{ old('phone', '+62' . (auth()->user()->pasien->noHp ?? '')) }}" required />
-            </div>
+                    <label for="gambar">Ambil Gambar (kamera/galeri):</label>
+                    <input type="file" id="gambar" name="gambar" accept="image/*" capture="environment">
 
-            <select name="jenis_pengaduan" required>
-                <option value="" disabled {{ old('jenis_pengaduan') ? '' : 'selected' }}>Pilih Jenis Pengaduan</option>
-                <option value="pelayanan" {{ old('jenis_pengaduan') == 'pelayanan' ? 'selected' : '' }}>Pelayanan</option>
-                <option value="fasilitas" {{ old('jenis_pengaduan') == 'fasilitas' ? 'selected' : '' }}>Fasilitas</option>
-                <option value="dokter" {{ old('jenis_pengaduan') == 'dokter' ? 'selected' : '' }}>Dokter</option>
-            </select>
 
-            <textarea name="aduan" placeholder="Isi Pengaduan" rows="4" required>{{ old('aduan') }}</textarea>
 
-            <label for="gambar">Upload Gambar (optional):</label>
-            <input type="file" id="gambar" name="gambar" accept="image/*" />
-
-            <button type="submit" class="btn">Kirim Pengaduan</button>
-        </form>
-        @endif
-    </div>
-
-    <div class="hubungi-kami">
-        <h2>Hubungi Kami</h2>
-        <div class="contact-info">
-            <p><i class="ri-map-pin-line"></i> <strong>Lokasi:</strong><br>Jl. Mayjend Sungkono No.10, Kraksaan, Probolinggo</p>
-            <p><i class="ri-mail-line"></i> <strong>Email:</strong><br>contact@puskesmaskraksaan.com</p>
-            <p><i class="ri-phone-line"></i> <strong>Hubungi Kami:</strong><br>+628123123123</p>
+                    <button type="submit" class="btn">Kirim Pengaduan</button>
+                </form>
+            @endif
         </div>
-    </div>
-</section>
 
-<!-- Footer -->
-<br><br>
-<footer class="footer">
-    <div class="section__container footer__container">
-        <div class="footer__col">
-            <div class="footer__logo">
-                <a href="#"><img src="{{ asset('assets/11.png') }}" alt="logo"> Puskesmas Kraksaan</a>
+        <div class="hubungi-kami">
+            <!-- Gambar kecil yang bisa diklik -->
+<div style="display: flex; justify-content: center; margin-top: 5px;">
+    <img src="{{ asset('assets/Pengaduan.png') }}" 
+         alt="Lokasi Puskesmas Kraksaan" 
+         class="floating-image"
+         id="thumbnailImage"
+         style="max-width: 55%; height: auto; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); cursor: pointer;">
+</div>
+
+<!-- Modal Gambar -->
+<div id="imageModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.8);">
+    <span style="position:absolute; top:20px; right:35px; color:#fff; font-size:40px; font-weight:bold; cursor:pointer;" id="closeModal">&times;</span>
+    <img id="modalImage" src="{{ asset('assets/Pengaduan.png') }}" 
+         style="margin:auto; display:block; max-width:90%; max-height:90%; margin-top:5%;">
+</div>
+
+
+
+            <h2>Hubungi Kami</h2>
+            <div class="contact-info-modern" style="margin-top: 20px;">
+                <div class="info-item">
+                    <i class="ri-map-pin-line icon"></i>
+                    <div class="info-text">
+                        <strong>Lokasi:</strong><br>
+                        <span>Jl. Mayjend Sungkono No.10, Kraksaan, Probolinggo</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="ri-mail-line icon"></i>
+                    <div class="info-text">
+                        <strong>Email:</strong><br>
+                        <span>contact@puskesmaskraksaan.com</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="ri-phone-line icon"></i>
+                    <div class="info-text">
+                        <strong>Hubungi Kami:</strong><br>
+                        <span>+0811 3373 119</span>
+                    </div>
+                </div>
             </div>
-            <p>
-                Layanan digital seperti jadwal praktik dokter,
-                daftar tenaga medis profesional,
-                rincian tarif layanan, hingga artikel
-                edukasi kesehatan yang bermanfaat.
-            </p>
-            <div class="footer__socials">
-                <a href="#"><i class="ri-facebook-fill"></i></a>
-                <a href="#"><i class="ri-instagram-line"></i></a>
-                <a href="#"><i class="ri-twitter-fill"></i></a>
-            </div>
+
         </div>
-    </div>
-    <div class="footer__bar">
-        Copyright © 2024 Puskesmas Kraksaan. All rights reserved.
-    </div>
-</footer>
 
-<script src="https://unpkg.com/scrollreveal"></script>
-<script src="{{ asset('assets/main.js') }}"></script>
+    </section>
+
+    <!-- Chat Section -->
+    <!-- Chat Section (Modern Style with Photo) -->
+    <section class="chat-container"
+        style="
+    max-width: 500px;
+    margin: 30px auto 0;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e0e0e0;
+    font-family: 'Segoe UI', sans-serif;
+">
+        <!-- Header dengan foto admin -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h4 style="font-weight: 600; color: #333; margin: 0;">
+                Respon Admin Puskesmas Kraksaan
+            </h4>
+            <img src="{{ asset('assets/Pengaduan.png') }}" alt="Foto Admin"
+                style="
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        ">
+        </div>
+
+        <!-- Chat Box -->
+        <div id="chat-box">
+            <p><strong style="color: #2b6cb0;">Admin 1:</strong> terima kasih</p>
+            <p><strong style="color: #0d6efd;">Saya:</strong> terima atas responnya</p>
+        </div>
+
+        <!-- Chat Input -->
+
+        <div style="display: flex; gap: 10px;">
+            <form id="chat-form" action="{{ route('chat.send') }}" method="POST">
+                @csrf
+                <input type="hidden" name="to_id" value="{{ $chatWith->id_user }}">
+                <input type="text" name="message" id="message-input" placeholder="Tulis pesan..." required>
+                <button type="submit">Kirim</button>
+            </form>
+        </div>
+    </section>
+
+
+
+
+    <!-- Testimoni Slider Tanpa Swiper -->
+    <section class="pengaduan-slider">
+        <h2>Testimoni Pengaduan</h2>
+
+        <!-- Pencarian -->
+        <div class="pengaduan-search-container">
+            <input type="text" id="pengaduan-search-input"
+                placeholder="Cari berdasarkan nama atau jenis pengaduan..." />
+            <button id="pengaduan-search-btn"><i class="ri-search-line"></i> Cari</button>
+        </div>
+
+        <div class="slider-wrapper">
+            <button class="slider-btn prev-btn">&#10094;</button>
+            <div class="slider-track">
+                @foreach ($pengaduan as $item)
+                    <div class="slider-card">
+                        <p class="pengaduan-isi">"{{ $item->isiPengaduan }}"</p>
+                        <p class="pengaduan-jenis"><em>Jenis Pengaduan:</em> {{ ucfirst($item->jenisPengaduan) }}</p>
+                        <strong>- {{ $item->pasien->namaPasien ?? 'Anonymous' }}</strong>
+                    </div>
+                @endforeach
+            </div>
+            <button class="slider-btn next-btn">&#10095;</button>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="section__container footer__container">
+            <div class="footer__col">
+                <div class="footer__logo">
+                    <a href="#"><img src="{{ asset('assets/logobaru.png') }}" alt="logo" />Puskesmas
+                        Kraksaan</a>
+                </div>
+                <p>
+                    layanan digital seperti jadwal praktik dokter,
+                    rincian tarif layanan, berita terkait puskesmas kraksaan
+                </p>
+                <div class="footer__socials">
+                    <a href="#"><i class="ri-facebook-fill"></i></a>
+                    <a href="#"><i class="ri-instagram-line"></i></a>
+                    <a href="#"><i class="ri-twitter-fill"></i></a>
+                </div>
+            </div>
+
+            <div class="footer__col">
+                <h4>Alamat</h4>
+                <div class="footer__links">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.124710643871!2d113.41036907410655!3d-7.759615477628249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd701af20f8ae5d%3A0x8ccde8d2ff8aed0c!2sPuskesmas%20Kraksaan!5e0!3m2!1sid!2sid!4v1714445262765!5m2!1sid!2sid"
+                        width="220%" height="270" style="border:0; border-radius:10px; margin-top:10px;"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="footer__col">
+                <h4>Contact</h4>
+                <div class="footer__links">
+                    <p><i class="ri-mail-line"></i> Email: <a
+                            href="mailto:puskesmaskraksaan@gmail.com">puskesmaskraksaan@gmail.com</a></p>
+                    <p><i class="ri-phone-line"></i> Telp: <a href="tel:+628113373119">0811-3373-119</a></p>
+                    <p><i class="ri-time-line"></i> Jam Operasional: <br>Senin - Jumat, 07.00 - 14.00</p>
+                    <a href="https://wa.me/628113373119" target="_blank" class="btn-wa">Chat WhatsApp</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer__bar">
+            Copyright © 2024 Puskesmas Kraksaan. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="{{ asset('assets/main.js') }}"></script>
+
+
+
+    <script>
+        const track = document.querySelector('.slider-track');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const cards = document.querySelectorAll('.slider-card');
+        let currentIndex = 0;
+        const cardsToShow = 3;
+
+        function updateSlider() {
+            const cardWidth = cards[0].offsetWidth + 20; // +gap
+            track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex + cardsToShow < cards.length) {
+                currentIndex += cardsToShow;
+                updateSlider();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex - cardsToShow >= 0) {
+                currentIndex -= cardsToShow;
+                updateSlider();
+            }
+        });
+
+        window.addEventListener('resize', updateSlider);
+
+
+
+        document.getElementById('pengaduan-search-btn').addEventListener('click', function() {
+            const keyword = document.getElementById('pengaduan-search-input').value.toLowerCase();
+            const cards = document.querySelectorAll('.slider-card');
+
+            cards.forEach(card => {
+                const content = card.textContent.toLowerCase();
+                card.style.display = content.includes(keyword) ? 'block' : 'none';
+            });
+
+            // Reset posisi slider ke awal setelah filter
+            currentIndex = 0;
+            updateSlider();
+        });
+    </script>
+
+
+    <script>
+        document.getElementById('chat-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+            const messageInput = form.querySelector('input[name="message"]');
+            const chatBox = document.getElementById('chat-box');
+
+            fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': form.querySelector('input[name="_token"]').value,
+                        'Accept': 'application/json',
+                    },
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === 'sent') {
+                        const newMsg = document.createElement('p');
+                        newMsg.innerHTML =
+                            `<strong style="color: #0d6efd;">Saya:</strong> ${messageInput.value}`;
+                        chatBox.appendChild(newMsg);
+                        messageInput.value = '';
+                        chatBox.scrollTop = chatBox.scrollHeight;
+                    } else {
+                        alert('Failed to send message');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error sending message');
+                });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatBox = document.getElementById('chat-box');
+            const chatWithId = {{ $chatWith->id_user }};
+            const fetchUrl = "{{ route('chat.fetch', ['userId' => $chatWith->id_user]) }}";
+
+            function loadMessages() {
+                fetch(fetchUrl)
+                    .then(response => response.json())
+                    .then(messages => {
+                        chatBox.innerHTML = '';
+                        messages.forEach(msg => {
+                            const p = document.createElement('p');
+                            const sender = msg.from_id === chatWithId ? 'Admin' : 'Saya';
+                            const color = msg.from_id === chatWithId ? '#2b6cb0' : '#0d6efd';
+                            p.innerHTML =
+                                `<strong style="color: ${color};">${sender}:</strong> ${msg.message}`;
+                            chatBox.appendChild(p);
+                        });
+                        chatBox.scrollTop = chatBox.scrollHeight;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching messages:', error);
+                    });
+            }
+
+            loadMessages();
+
+            // Optionally, refresh messages every 5 seconds
+            setInterval(loadMessages, 5000);
+        });
+    </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const thumbnail = document.getElementById('thumbnailImage');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeModal = document.getElementById('closeModal');
+
+        thumbnail.addEventListener('click', function () {
+            modal.style.display = 'block';
+        });
+
+        closeModal.addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
+
+        // Tutup modal jika klik di luar gambar
+        window.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+</script>
+
 </body>
+
 </html>

@@ -17,7 +17,11 @@ class AdminpuskesmasFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'namaAdmin' => $this->faker->name(),
+            'noHp' => $this->faker->phoneNumber(),
+            'alamatAdmin' => $this->faker->address(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'user_id' => 1, // This can be overridden in tests
         ];
     }
 }

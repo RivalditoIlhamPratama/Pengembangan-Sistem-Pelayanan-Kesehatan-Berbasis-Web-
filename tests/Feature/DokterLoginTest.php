@@ -27,8 +27,7 @@ class DokterLoginTest extends TestCase
             'user_id' => $user->id_user,
             'namaDokter' => 'Test Dokter',
             'spesialis' => 'Umum',
-            'jenisKelamin' => 'Pria',
-            'jadwalPraktek' => 'Senin-Jumat',
+            'jenisKelamin' => 'Laki-Laki',
             'tglLahir' => '1980-01-01',
             'alamatDokter' => 'Test Address'
         ]);
@@ -58,8 +57,7 @@ class DokterLoginTest extends TestCase
             'user_id' => $user->id_user,
             'namaDokter' => 'Test Dokter',
             'spesialis' => 'Umum',
-            'jenisKelamin' => 'Pria',
-            'jadwalPraktek' => 'Senin-Jumat',
+            'jenisKelamin' => 'Laki-Laki',
             'tglLahir' => '1980-01-01',
             'alamatDokter' => 'Test Address'
         ]);

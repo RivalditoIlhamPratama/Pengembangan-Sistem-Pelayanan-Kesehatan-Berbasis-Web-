@@ -98,7 +98,7 @@ body {
 }
 
 nav {
-    position: fixed;
+    position: relative;
     isolation: isolate;
     width: 100%;
     z-index: 9;
@@ -201,91 +201,103 @@ h2 {
     color: #333; /* Optional: to set a specific text color */
     margin-top: 5rem;
 }
-
 .doctor-card-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Maksimal 4 kolom */
-    gap: 1rem;
-    justify-content: center; /* Memusatkan grid secara horizontal */
-    align-items: center; /* Memusatkan item secara vertikal */
-    margin: 2rem auto; /* Auto margin untuk pusatkan container */
-    max-width: 1550px; /* Menyesuaikan agar tidak terlalu lebar */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 80px; /* ✅ Jarak antar card longgar, sesuai gambar */
+    margin-top: 40px;
 }
 
 .doctor-card {
+    width: 300px; /* ✅ Lebar tetap (sesuai gambar) */
+    min-height: 300px; /* ✅ Tinggi card biar space antar komponen cukup */
     background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 50px; /* Mengurangi radius agar lebih proporsional */
-    width: 180px; /* Ukuran card lebih kecil */
+    border-radius: 80px; /* ✅ Lebih bulat */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* ✅ Soft shadow */
+    padding: 20px 15px;
     text-align: center;
-    padding: 0.8rem; /* Mengurangi padding agar tidak terlalu besar */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: auto; /* Memastikan card tetap di tengah */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.doctor-img {
-    width: 100%;
-    border-radius: 100%;
-    height: 200px;
+.doctor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.doctor-card img {
+    width: 150px; /* ✅ Ukuran gambar kecil di tengah */
+    height: 150px;
+    border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 2rem;
+    border: 4px solid #e2e8f0; /* ✅ Border lingkaran tipis abu muda */
+    margin-bottom: 15px;
 }
 
 .doctor-info h3 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
     color: #333;
+    margin-bottom: 5px;
 }
 
 .doctor-info p {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #777;
+    margin-bottom: 15px;
 }
 
 .btn {
-    background-color: #1771ca; /* Warna latar belakang tosca yang mencolok namun lembut, cocok untuk menarik perhatian pada tombol. */
-    color: white; /* Warna teks putih memberikan kontras yang jelas dengan latar belakang untuk keterbacaan yang baik. */
-    border: none; /* Menghilangkan border default tombol agar terlihat lebih bersih dan modern. */
-    padding: 7px 20px; /* Memberikan ruang di dalam tombol sehingga terlihat lebih proporsional dan nyaman untuk diklik. */
-    text-align: center; /* Memastikan teks di dalam tombol terpusat secara horizontal. */
-    text-decoration: none; /* Menghapus garis bawah pada teks untuk menjaga tampilan tombol tetap bersih. */
-    display: inline-block; /* Memastikan elemen tombol tetap dalam satu baris dengan elemen lainnya jika ada. */
-    font-size: 1rem; /* Ukuran teks tombol yang sesuai dengan ukuran teks standar untuk keterbacaan. */
-    cursor: pointer; /* Mengubah kursor menjadi pointer untuk menunjukkan bahwa elemen ini bisa diklik. */
-    border-radius: 20px; /* Membuat sudut tombol melengkung sehingga terlihat lebih ramah dan modern. */
-    margin-top: 0px; /* Memberikan jarak antara tombol dan elemen lain di atasnya untuk tata letak yang lebih rapi. */
-    margin-left: 1px;
+    background-color: #1771ca;
+    color: white;
+    border: none;
+    padding: 6px 20px; /* ✅ Lebar tombol */
+    text-align: center;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .btn:hover {
-    background-color: #4572a0; /* Darker green on hover */
-    transform: translateY(-2px); /* Slight movement for effect */
+    background-color: #145fa8;
+    transform: translateY(-2px);
 }
 
 .btn:active {
-    background-color: #3e778e; /* Even darker green when clicked */
-    transform: translateY(0); /* Reset the button position */
+    background-color: #124f8a;
+    transform: translateY(0);
 }
 
-/* Responsivitas untuk layar lebih kecil */
+/* ✅ Responsive Tablet */
 @media (max-width: 1024px) {
     .doctor-card-container {
-        grid-template-columns: repeat(3, 1fr); /* 3 kolom pada tablet besar */
+        gap: 20px;
+    }
+
+    .doctor-card {
+        width: 200px;
     }
 }
 
+/* ✅ Responsive Mobile */
 @media (max-width: 768px) {
     .doctor-card-container {
-        grid-template-columns: repeat(1, 1fr); /* 2 kolom pada tablet */
         flex-direction: column;
         align-items: center;
+        gap: 15px;
+    }
+
+    .doctor-card {
+        width: 80%;
     }
 }
 
-.doctor-card {
-    width: 80%;
-    margin-bottom: 1rem;
-}
+  
 
 /* ----------End DOkter------- */
 
@@ -377,6 +389,32 @@ p {
     text-align: center;
 }
 
+/* Footer responsive di mobile */
+@media screen and (max-width: 768px) {
+    .footer__container {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .footer__col iframe {
+      width: 100% !important;
+    }
+  
+    .footer__logo a {
+      font-size: 1.2rem;
+    }
+  
+    .footer__links p, .footer__links a {
+      font-size: 0.95rem;
+    }
+  
+    .footer__socials a {
+      font-size: 1.5rem;
+      margin: 0 0.5rem;
+    }
+  }
+
 /*----End Footer----*/
 
 @media (width > 480px) {
@@ -452,3 +490,96 @@ p {
         grid-column: 1/3;
     }
 }
+
+.user-action {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-btn,
+.logout-btn {
+    background-color: #1976d2;
+    color: white;
+    font-size: 12px; /* slightly increased font size */
+    padding: 8px 15px; /* increased padding to make the button wider */
+    border-radius: 10px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px; /* increased gap between icon and text */
+    transition: all 0.3s ease;
+    width: auto; /* ensures it adjusts to the content width */
+    min-width: 100px; /* ensures a minimum width for consistency */
+}
+
+.logout-btn {
+    background-color: #e53935;
+}
+
+.user-btn:hover {
+    background-color: #1565c0;
+}
+
+.logout-btn:hover {
+    background-color: #c62828;
+}
+
+
+.loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.9);
+    z-index: 9999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .loader-content {
+    text-align: center;
+  }
+  
+  .loader-logo {
+    width: 300px;
+    height: auto;
+    margin-bottom: 5px;
+  }
+  
+  .spinner {
+    border: 6px solid #ddd;
+    border-top: 6px solid #1771ca;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 10px auto;
+    animation: spin 1s linear infinite;
+  }
+  
+  .loading-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    font-family: sans-serif;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  #loader {
+    transition: opacity 0.5s ease;
+  }
+  
+  #loader.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+

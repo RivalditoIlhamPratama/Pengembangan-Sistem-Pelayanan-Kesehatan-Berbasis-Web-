@@ -9,9 +9,19 @@ class adminpuskesmas extends Model
 {
     use HasFactory;
 
-    protected $fillable =['namaAdmin','jenisKelamin','noHp','alamatAdmin','email'];
+    protected $table = 'adminpuskesmas';
+    protected $primaryKey = 'idAdmin';
+    public $timestamps = false;
 
-    public function user(){
-        return $this->belongsTo(user::class,'user_id','id_user');
+    protected $fillable = ['user_id', 'namaAdmin', 'jenisKelamin', 'noHp', 'alamatAdmin', 'email'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id'); // default Laravel
+    }
+
+    public function berita()
+    {
+        return $this->hasMany(berita::class, 'admin_id', 'idAdmin'); // sudah benar
     }
 }

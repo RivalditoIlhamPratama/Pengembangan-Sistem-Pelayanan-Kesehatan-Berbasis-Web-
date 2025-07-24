@@ -54,25 +54,42 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             $user = Auth::user();
+
+            // Create token for API usage
+            $token = $user->createToken('api-token')->plainTextToken;
+
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'message' => 'Authenticated',
+                    'token' => $token,
+                    'user' => $user,
+                ]);
+            }
+
             switch($user->role) {
                 case 'pasien':
-                    return redirect()->intended('/pasien/dashboard');
+                    return redirect()->intended('/pasien/dashboard')->with('login_success', true);
                 case 'admin':
-                    return redirect()->intended('/admin/dashboard');
+                    return redirect()->intended('/admin/dashboard')->with('login_success', true);
                 case 'klinik':
-                    return redirect()->intended('/klinik/dashboard');
+                    return redirect()->intended('/klinik/dashboard')->with('login_success', true);
                 case 'dokter':
-                    return redirect()->intended('/dokter/dashboard');
-                case 'staffrekmedis':
-                    return redirect()->intended('/rekam-medis/dashboard');
+                    return redirect()->intended('/dokter/dashboard')->with('login_success', true);
+                case 'stafrekammedis':
+                    return redirect()->intended('/stafrekammedis/dashboard')->with('login_success', true);
                 default:
                     return redirect()->intended('/');
             }
         }
 
-        return back()->withErrors([
-            'username' => 'The provided credentials do not match our records.',
-        ]);
+        if ($request->wantsJson()) {
+            return response()->json([
+                'message' => 'The provided credentials do not match our records.',
+            ], 401);
+        }
+
+        return back()->with('error', 'Username atau password salah!');
+
     }
 
     /**
@@ -85,4 +102,6 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
     }
+
+    
 }

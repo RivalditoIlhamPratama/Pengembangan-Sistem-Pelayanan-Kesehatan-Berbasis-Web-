@@ -1,145 +1,198 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="id">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Login</title>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}" id="loginForm">
-                        @csrf
+    <!-- Font Awesome untuk ikon mata -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-                        @if(session('error'))
-                            <div class="alert alert-danger mb-4">
-                                {{ session('error') }}
-                            </div>
-                        @endif
+    <!-- CSS Khusus Login -->
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 
-                        @if(session('status'))
-                            <div class="alert alert-success mb-4">
-                                {{ session('status') }}
-                            </div>
-                        @endif
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-                        <div class="row mb-3">
-                            <label for="username" class="col-md-4 col-form-label text-md-end">{{ __('Username') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror"
-                                       name="username" value="{{ old('username') }}"
-                                       required autocomplete="username" autofocus
-                                       minlength="3" maxlength="30"
-                                       pattern="[a-zA-Z0-9]+" title="Only alphanumeric characters allowed">
+    <style>
+        body {
+            background-image: url('{{ asset('assets/background.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+        }
 
-                                @error('username')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 100px auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
 
-                            <div class="col-md-6">
-                                <div class="input-group">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
-                                           name="password" required autocomplete="current-password">
-                                    <button class="btn btn-outline-secondary toggle-password" type="button">
-                                        <i class="fa fa-eye"></i>
-                                    </button>
-                                </div>
+        .login-container img {
+            width: 200px;
+            display: block;
+            margin: 0 auto 20px;
+        }
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+        .form-control {
+            margin-bottom: 15px;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
 
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+        .btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+        }
 
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary" id="loginButton">
-                                    <span class="button-text">{{ __('Login') }}</span>
-                                    <span class="spinner-border spinner-border-sm d-none" role="status"></span>
-                                </button>
+        .password-wrapper {
+            position: relative;
+        }
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            z-index: 2;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+        <!-- Logo -->
+        <img src="{{ asset('assets/logobaru.png') }}" alt="Logo Puskesmas">
+
+        <h2>Masuk ke Akun Anda</h2>
+
+        <form method="POST" action="{{ route('login.post') }}" id="loginForm">
+            @csrf
+
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" value="{{ old('username') }}"
+                class="form-control @error('username') is-invalid @enderror" required autocomplete="username" autofocus
+                minlength="3" maxlength="30">
+            @error('username')
+                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+            @enderror
+
+            <label for="password">Password</label>
+            <div class="password-wrapper">
+                <input type="password" id="password"
+                       class="form-control @error('password') is-invalid @enderror"
+                       name="password" required autocomplete="current-password">
+                <span class="fa fa-eye toggle-password"></span>
+            </div>
+            @error('password')
+                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+            @enderror
+
+            <button type="submit" class="btn btn-primary" id="loginButton">
+                <span class="button-text">{{ __('Login') }}</span>
+                <span class="spinner-border spinner-border-sm d-none" role="status"></span>
+            </button>
+        </form>
+
+        <p>Belum Punya Akun? <a href="{{ url('/register') }}" style="color: black;">Buat Akun</a></p>
+    </div>
+
+    <!-- POPUP -->
+    @if (session('login_success'))
+        <div id="popup" class="popup" style="display:block;">
+            <div class="popup-content">
+                <p>Login Berhasil!</p>
+                <button onclick="closePopup()">Tutup</button>
             </div>
         </div>
-    </div>
-</div>
+    @else
+        <div id="popup" class="popup" style="display:none;">
+            <div class="popup-content">
+                <p>Login Berhasil!</p>
+                <button onclick="closePopup()">Tutup</button>
+            </div>
+        </div>
+    @endif
 
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Toggle password visibility
-    document.querySelectorAll('.toggle-password').forEach(button => {
-        button.addEventListener('click', function() {
-            const passwordInput = this.previousElementSibling;
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            this.querySelector('i').classList.toggle('fa-eye-slash');
-        });
-    });
-
-    // Form submission handling
-    const form = document.getElementById('loginForm');
-    const loginButton = document.getElementById('loginButton');
-
-    form.addEventListener('submit', function() {
-        const buttonText = loginButton.querySelector('.button-text');
-        const spinner = loginButton.querySelector('.spinner-border');
-
-        buttonText.classList.add('d-none');
-        spinner.classList.remove('d-none');
-        loginButton.disabled = true;
-    });
-
-    // Client-side validation
-    form.addEventListener('input', function(e) {
-        if (e.target.matches('input')) {
-            if (e.target.checkValidity()) {
-                e.target.classList.remove('is-invalid');
-            } else {
-                e.target.classList.add('is-invalid');
-            }
+    <!-- SCRIPT -->
+    <script>
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
         }
-    });
-});
-</script>
-@endpush
 
-<style>
-.toggle-password {
-    border-top-right-radius: .25rem;
-    border-bottom-right-radius: .25rem;
-}
-.spinner-border {
-    vertical-align: middle;
-}
-</style>
-@endsection
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tutup popup otomatis
+            if (document.getElementById("popup").style.display === "block") {
+                setTimeout(closePopup, 3000);
+            }
+
+            // Toggle password visibility
+            const toggle = document.querySelector('.toggle-password');
+            const password = document.querySelector('#password');
+
+            toggle.addEventListener('click', function () {
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+
+            // Tombol loading saat login
+            const form = document.getElementById('loginForm');
+            const loginButton = document.getElementById('loginButton');
+
+            form.addEventListener('submit', function () {
+                loginButton.querySelector('.button-text').classList.add('d-none');
+                loginButton.querySelector('.spinner-border').classList.remove('d-none');
+                loginButton.disabled = true;
+            });
+
+            // Validasi input
+            form.addEventListener('input', function (e) {
+                if (e.target.matches('input')) {
+                    e.target.classList.toggle('is-invalid', !e.target.checkValidity());
+                }
+            });
+        });
+    </script>
+
+
+@if (session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Login Gagal!',
+        text: '{{ session('error') }}',
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Tutup'
+    });
+</script>
+@endif
+
+</body>
+
+</html>

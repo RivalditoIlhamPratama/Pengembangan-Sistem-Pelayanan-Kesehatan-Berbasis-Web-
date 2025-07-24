@@ -1,0 +1,180 @@
+
+* {
+    margin: 0; /* Hilangkan margin bawaan */
+    padding: 0; /* Hilangkan padding bawaan */
+    box-sizing: border-box; /* Sertakan padding dan border dalam perhitungan width/height */
+    font-family: Arial, sans-serif; /* Font default */
+}
+
+/* Background styling */
+body {
+    display: flex; /* Gunakan flexbox */
+    justify-content: center; /* Posisi horizontal ke tengah */
+    align-items: center; /* Posisi vertikal ke tengah */
+    height: 100vh; /* Tinggi penuh layar */
+    background-color: #f5f5f5; /* Warna latar belakang */
+}
+
+/* Container styling */
+.login-container {
+    background: white; /* Warna latar kontainer */
+    padding: 30px; /* Ruang di dalam kontainer */
+    border-radius: 10px; /* Sudut membulat */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+    text-align: center; /* Konten di tengah */
+    width: 400px; /* Lebar tetap kontainer */
+}
+
+/* Title styling */
+.login-container h2 {
+    margin-bottom: 20px; /* Jarak bawah heading */
+    font-size: 20px; /* Ukuran teks */
+    font-weight: bold; /* Tebal */
+    color: #4a4a4a; /* Warna abu-abu gelap */
+}
+
+/* Label styling */
+.login-container label {
+    display: block; /* Tampilkan sebagai blok */
+    text-align: left; /* Rata kiri */
+    font-size: 14px; /* Ukuran font */
+    margin-bottom: 5px; /* Jarak bawah label */
+    color: #555; /* Warna abu-abu */
+}
+
+/* Input styling */
+.login-container input {
+    width: 100%; /* Lebar penuh */
+    padding: 10px; /* Ruang dalam input */
+    margin-bottom: 15px; /* Jarak antar elemen */
+    border: 1px solid #ccc; /* Border abu terang */
+    border-radius: 5px; /* Sudut membulat */
+    font-size: 14px; /* Ukuran font */
+    background-color: #f7f7f7; /* Warna latar input */
+}
+
+/* Disabled input styling */
+.login-container input:disabled {
+    color: #a0a0a0; /* Warna teks saat input dinonaktifkan */
+}
+
+/* Button styling */
+.login-container button {
+    width: 100%; /* Lebar penuh */
+    padding: 10px; /* Ruang dalam */
+    background-color: #007bff; /* Biru */
+    border: none; /* Tanpa border */
+    color: white; /* Teks putih */
+    border-radius: 5px; /* Sudut membulat */
+    cursor: pointer; /* Tampilkan kursor tangan */
+    font-size: 14px; /* Ukuran font */
+    margin-top: 10px; /* Jarak atas tombol */
+}
+
+/* Hover effect untuk tombol */
+.login-container button:hover {
+    background-color: #0056b3; /* Biru lebih gelap saat hover */
+}
+
+/* Paragraph styling */
+.login-container p {
+    font-size: 12px; /* Ukuran teks kecil */
+    margin-top: 15px; /* Jarak atas */
+    color: #555; /* Warna abu-abu */
+}
+
+/* Link styling */
+.login-container a {
+    text-decoration: none; /* Hilangkan garis bawah */
+    color: #ffffff; /* Warna putih */
+    font-weight: bold; /* Teks tebal */
+}
+
+/* Styling ikon toggle password */
+.toggle-password {
+    border-top-right-radius: 0.25rem; /* Sudut atas kanan */
+    border-bottom-right-radius: 0.25rem; /* Sudut bawah kanan */
+}
+
+/* Spinner untuk loading button */
+.spinner-border {
+    vertical-align: middle; /* Rata tengah secara vertikal */
+}
+
+/* Container untuk custom select dropdown */
+.custom-select-container {
+    width: 100%; /* Lebar penuh */
+    display: flex; /* Flexbox */
+    align-items: center; /* Rata tengah vertikal */
+    background-color: #f7f7f7; /* Latar abu terang */
+    border: 1px solid #ccc; /* Border abu */
+    border-radius: 5px; /* Sudut membulat */
+    padding: 10px; /* Ruang dalam */
+}
+
+/* Styling dropdown custom */
+.custom-select {
+    width: 100%; /* Lebar penuh */
+    border: none; /* Tanpa border */
+    background: none; /* Latar transparan */
+    font-size: 14px; /* Ukuran teks */
+    outline: none; /* Hilangkan garis fokus */
+    appearance: none; /* Hilangkan panah default */
+    cursor: pointer; /* Kursor tangan */
+}
+
+/* Styling untuk pop-up */
+.popup {
+    display: none; /* Awalnya disembunyikan */
+    position: fixed; /* Tetap di posisi layar */
+    top: 0; left: 0; /* Posisi atas kiri */
+    width: 100%; height: 100%; /* Penuh layar */
+    background: rgba(0, 0, 0, 0.5); /* Background transparan gelap */
+    display: flex; /* Flexbox */
+    justify-content: center; /* Tengah horizontal */
+    align-items: center; /* Tengah vertikal */
+}
+
+/* Konten dalam pop-up */
+.popup-content {
+    background: white; /* Latar putih */
+    padding: 20px; /* Padding */
+    border-radius: 10px; /* Sudut membulat */
+    text-align: center; /* Rata tengah */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Bayangan */
+}
+
+/* Tombol dalam pop-up */
+.popup-content button {
+    margin-top: 10px; /* Jarak atas */
+    padding: 10px; /* Padding tombol */
+    border: none; /* Tanpa border */
+    background-color: #007bff; /* Warna biru */
+    color: white; /* Teks putih */
+    border-radius: 5px; /* Sudut membulat */
+    cursor: pointer; /* Kursor tangan */
+}
+
+/* Hover untuk tombol pop-up */
+.popup-content button:hover {
+    background-color: #0056b3; /* Warna lebih gelap saat hover */
+}
+
+/* Tombol login */
+.login-button {
+    display: block; /* Tampilkan blok */
+    text-align: center; /* Rata tengah */
+    width: 100%; /* Lebar penuh */
+    padding: 10px; /* Padding */
+    background-color: #007bff; /* Warna biru */
+    color: white; /* Teks putih */
+    border-radius: 5px; /* Sudut membulat */
+    text-decoration: none; /* Tanpa garis bawah */
+    font-size: 14px; /* Ukuran font */
+    margin-top: 10px; /* Jarak atas */
+}
+
+/* Hover untuk tombol login */
+.login-button:hover {
+    background-color: #0056b3; /* Warna saat hover */
+}

@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id('idPasien');
             $table->unsignedBigInteger('user_id');
             $table->string('namaPasien');
-            $table->enum('jenisKelamin',['Pria', 'Wanita']);
+            $table->enum('jenisKelamin',['Laki-laki', 'Perempuan']);
             $table->string('noHp');
             $table->text('alamatPasien');
             $table->string('email');
-            $table->timestamps();
 
             $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');
         });

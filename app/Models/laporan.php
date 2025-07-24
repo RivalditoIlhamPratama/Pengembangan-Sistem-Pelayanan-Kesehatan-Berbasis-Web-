@@ -9,9 +9,24 @@ class laporan extends Model
 {
     use HasFactory;
 
-    protected $fillable =['tanggal','catatanPenyakit','jumlahPasien'];
+    protected $primaryKey = 'idLaporan'; // ✅ Tambahkan ini
+    public $timestamps = true;
 
-    public function klinik(){
-        return $this->belongsTo(Klinik::class,'Klinik_id','idKlinik');
+    protected $fillable = [
+        'Klinik_id',
+
+        'namaPasien',
+        'namaDokter',
+        'diagnosaMedis',
+        'NIK',
+        'alamatPasien',
+        'deskripsi_tindakan',
+    ];
+
+    public function klinik()
+    {
+        return $this->belongsTo(Klinik::class, 'Klinik_id', 'idKlinik');
     }
+
+    // Removed rekam_medis relation because RekamMedis_id column was dropped
 }

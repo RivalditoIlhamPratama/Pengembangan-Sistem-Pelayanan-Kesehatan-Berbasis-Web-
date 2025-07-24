@@ -1,77 +1,89 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="id">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Buat Akun</title>
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Remixicon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
+    <style>
+        body {
+            background-image: url('{{ asset('assets/background.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
 
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+</head>
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+<body>
+    <div class="register-container">
+        <!-- Tambahkan Logo di sini -->
+        <div class="logo-container d-flex justify-content-center mb-4">
+            <img src="{{ asset('assets/logobaru.png') }}" alt="Logo Puskesmas Kraksaan" class="logo-img"
+    style="max-width: 200px; width: 100%; height: auto;" />
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
         </div>
+
+        <h2>Buat Akun Baru</h2>
+
+        <form class="" method="POST" action="{{ route('register.post') }}">
+            @csrf
+            <label class="form-label" for="username">Nama Pasien</label>
+            <input class="form-control" type="text" name="username" id="username" placeholder="Username" required />
+            <label class="form-label" for="jenisKelamin">Jenis Kelamin</label>
+            <select class="form-control" name="jenisKelamin" id="jenisKelamin" required>
+                <option value="Laki-laki">Laki-laki</option>
+                <option value="Perempuan">Perempuan</option>
+            </select>
+
+            <label class="form-label" for="noHp">No HP</label>
+            <input class="form-control" type="text" name="noHp" id="noHp" required>
+
+            <label class="form-label" for="alamatPasien">Alamat</label>
+            <input class="form-control" type="text" name="alamatPasien" id="alamatPasien" required>
+
+            <label class="form-label" for="email">Email</label>
+            <input class="form-control" type="email" name="email" id="email" required>
+
+            <label class="form-label" for="password">Password</label>
+            <div style="position: relative;">
+                <input class="form-control" type="password" name="password" id="password" placeholder="password"
+                    required style="padding-right: 30px;" />
+            </div>
+
+            <label for="password_confirmation">Konfirmasi Password</label>
+            <div style="position: relative;">
+                <input class="form-control" type="password" name="password_confirmation" id="password_confirmation"
+                    placeholder="password_confirmation" required style="padding-right: 30px;" />
+            </div>
+
+            <div class="hidden">
+                <input type="text" name="role" id="role" value="pasien" required />
+            </div>
+
+            <button type="submit" class="btn-daftar">Daftar</button>
+<a href="{{ route('login') }}" class="btn-masuk">Masuk</a>
+
+<a href="{{ url()->previous() }}" class="btn btn-outline-secondary btn-sm mt-3">
+    <i class="fas fa-arrow-left"></i> Kembali
+</a>
+
+
+        </form>
     </div>
-</div>
-@endsection
+</body>
+
+</html>

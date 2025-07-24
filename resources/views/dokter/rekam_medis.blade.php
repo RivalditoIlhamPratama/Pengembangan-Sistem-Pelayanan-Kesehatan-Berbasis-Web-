@@ -1,157 +1,470 @@
 @extends('layouts.dokter')
-
 @section('content')
-<div class="container-fluid mt-5">
-    <div class="card p-4 shadow-sm">
-        <h2 class="mb-4 fw-bold">Data Rekam Medis</h2>
+    <div class="container-fluid mt-5">
+        <div class="card p-4 shadow-sm">
+            <h2 class="mb-4 fw-bold">Data Rekam Medis</h2>
+            
 
-
-        <!-- Pencarian dan Tombol Tambah -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <div class="input-group w-25">
-                <input type="text" id="searchInput" class="form-control" placeholder="Search">
-                <button class="btn btn-outline-secondary" type="button">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-            <div>
-                <a href="#" class="btn btn-primary">
-                    <i class="fas fa-plus"></i> Tambah
-                </a>
-                <button id="exportPdf" class="btn btn-danger">
-                    <i class="fas fa-file-pdf"></i> Export PDF
-                </button>
-                <button id="exportExcel" class="btn btn-success">
-                    <i class="fas fa-file-excel"></i> Export Excel
-                </button>
-            </div>
-        </div>
-
-        <!-- Tabel Data Rekam Medis -->
-        <div class="table-responsive">
-            <table id="rekamMedisTable" class="table table-striped table-bordered table-hover">
-                <thead class="table-light">
-                    <tr class="text-center">
-                        <th>No</th>
-                        <th>NIK</th>
-                        <th>Date</th>
-                        <th>Nama Pasien</th>
-                        <th>Nama Dokter</th>
-                        <th>Suhu</th>
-                        <th>TD</th>
-                        <th>Nadi</th>
-                        <th>TB</th>
-                        <th>BB</th>
-                        <th>Diagnosa</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $rekamMedis = [
-                            ['RM01', '315237128', '2025-01-10', 'Tn. A', 'Dr. Maya Rahma', '36.8°C', '120/80 mmHg', '75 bpm', '170 cm', '65 kg', 'Sehat'],
-                            ['RM02', '315237129', '2025-01-11', 'Ny. B', 'Dr. Alamsyah Teguh', '37.5°C', '130/85 mmHg', '78 bpm', '165 cm', '60 kg', 'Flu'],
-                            ['RM03', '315237130', '2025-02-01', 'Tn. C', 'Dr. Hargianto', '39.2°C', '140/90 mmHg', '82 bpm', '175 cm', '80 kg', 'Demam'],
-                            ['RM04', '315237131', '2025-02-05', 'Ny. D', 'Dr. Sheila Aqillah', '37.0°C', '125/85 mmHg', '76 bpm', '160 cm', '58 kg', 'Hipertensi'],
-                            ['RM05', '315237132', '2025-03-01', 'Tn. E', 'Dr. Bima Saptaji', '38.5°C', '135/80 mmHg', '80 bpm', '168 cm', '72 kg', 'Diabetes'],
-                            ['RM06', '315237133', '2025-03-10', 'Tn. F', 'Dr. Maya Rahma', '36.9°C', '120/85 mmHg', '74 bpm', '172 cm', '66 kg', 'Sehat'],
-                            ['RM07', '315237134', '2025-03-15', 'Ny. G', 'Dr. Alamsyah Teguh', '37.8°C', '128/86 mmHg', '79 bpm', '163 cm', '62 kg', 'Tonsilitis'],
-                        ];
-                    @endphp
-
-                    @foreach($rekamMedis as $data)
-                    <tr class="align-middle text-center">
-                        <td>{{ $data[0] }}</td>
-                        <td>{{ $data[1] }}</td>
-                        <td><strong>{{ $data[2] }}</strong></td>
-                        <td>{{ $data[3] }}</td>
-                        <td>{{ $data[4] }}</td>
-                        <td>{{ $data[5] }}</td>
-                        <td>{{ $data[6] }}</td>
-                        <td>{{ $data[7] }}</td>
-                        <td>{{ $data[8] }}</td>
-                        <td>{{ $data[9] }}</td>
-                        <td><strong>{{ $data[10] }}</strong></td>
-                        <td>
-                            <button class="btn btn-sm btn-info detail-btn"
-                                data-bs-toggle="modal"
-                                data-bs-target="#detailModal"
-                                data-no="{{ $data[0] }}" data-nik="{{ $data[1] }}" data-date="{{ $data[2] }}"
-                                data-pasien="{{ $data[3] }}" data-dokter="{{ $data[4] }}" data-suhu="{{ $data[5] }}"
-                                data-td="{{ $data[6] }}" data-nadi="{{ $data[7] }}" data-tb="{{ $data[8] }}"
-                                data-bb="{{ $data[9] }}" data-diagnosa="{{ $data[10] }}">
-                                <i class="fas fa-eye"></i> Detail
-                            </button>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-<!-- MODAL DETAIL REKAM MEDIS -->
-<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="detailModalLabel">Resume Medis</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="printArea">
-                <div class="text-center mb-4">
-                    <h3>Puskesmas kraksaan</h3>
-                    <p>Jl. Mayjend Sungkono No.10, Patokan, Kec. Kraksaan, Kabupaten Probolinggo, Jawa Timur 67282</p>
-                    <hr>
-                    <h4>Resume Medis</h4>
+            @if ($rekammedis->isEmpty())
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="input-group w-25">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Search">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <div>
+                        <a href="{{ route('dokter.tambah_rekam_medis') }}" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Tambah
+                        </a>
+                        <button id="exportPdf" class="btn btn-danger">
+                            <i class="fas fa-file-pdf"></i> Export PDF
+                        </button>
+                        <button id="exportExcel" class="btn btn-success">
+                            <i class="fas fa-file-excel"></i> Export Excel
+                        </button>
+                    </div>
                 </div>
-                <p><strong>Nomor MR:</strong> <span id="detailNo"></span></p>
-                <p><strong>Nama:</strong> <span id="detailPasien"></span></p>
-                <p><strong>Dokter:</strong> <span id="detailDokter"></span></p>
-                <p><strong>Tanggal Pemeriksaan:</strong> <span id="detailDate"></span></p>
-                <hr>
-                <h5>Hasil Lab</h5>
-                <p><strong>Tekanan Darah:</strong> <span id="detailTD"></span></p>
-                <p><strong>Suhu:</strong> <span id="detailSuhu"></span></p>
-                <p><strong>Nadi:</strong> <span id="detailNadi"></span></p>
-                <p><strong>Tinggi Badan:</strong> <span id="detailTB"></span></p>
-                <p><strong>Berat Badan:</strong> <span id="detailBB"></span></p>
-                <p><strong>Diagnosa:</strong> <span id="detailDiagnosa"></span></p>
-                <button id="printDetail" class="btn btn-primary mt-3">
-                    <i class="fas fa-print"></i> Cetak
-                </button>
+                <p>Tidak ada data rekam medis.</p>
+            @else
+                <!-- Pencarian dan Tombol Tambah -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="input-group w-25">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Search">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <div>
+                        <a href="{{ route('dokter.tambah_rekam_medis') }}" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Tambah
+                        </a>
+                        <button id="exportPdf" class="btn btn-danger">
+                            <i class="fas fa-file-pdf"></i> Export PDF
+                        </button>
+                        <button id="exportExcel" class="btn btn-success">
+                            <i class="fas fa-file-excel"></i> Export Excel
+                        </button>
+                    </div>
+                </div>
+                <table id="rekamMedisTable" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>No RM</th>
+                            <th>Nama Pasien</th>
+                            <th>NIK</th>
+                            <th>Tanggal Periksa</th>
+                            <th>Tekanan Darah</th>
+                            <th>RR</th>
+                            <th>Nadi</th>
+                            <th>Suhu</th>
+                            <th>Tinggi Badan</th>
+                            <th>Berat Badan</th>
+                            <th>Diagnosa Medis</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($rekammedis as $rekam)
+                            <tr>
+                                <td>{{ $rekam->noRm }}</td>
+                                <td>{{ $rekam->namaPasien }}</td>
+                                <td>{{ $rekam->NIK }}</td>
+                                <td>{{ \Carbon\Carbon::parse($rekam->tanggalPeriksa)->format('d-m-Y') }}</td>
+                                <td>{{ $rekam->tekananDarah }}</td>
+                                <td>{{ $rekam->rr }}</td>
+                                <td>{{ $rekam->nadi }}</td>
+                                <td>{{ $rekam->suhu }}</td>
+                                <td>{{ $rekam->tinggiBadan }}</td>
+                                <td>{{ $rekam->beratBadan }}</td>
+                                <td>{{ $rekam->diagnosaMedis }}</td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-sm btn-info detail-btn" data-bs-toggle="modal"
+                                            data-bs-target="#detailModal" data-id="{{ $rekam->noRm }}"
+                                            data-nama="{{ $rekam->namaPasien }}" data-alamat="{{ $rekam->alamatPasien }}"
+                                            data-kelamin="{{ $rekam->jenisKelamin }}" data-usia="{{ $rekam->usiaPasien }}"
+                                            data-agama="{{ $rekam->agamaPasien }}" data-nikah="{{ $rekam->statusNikah }}"
+                                            data-nik="{{ $rekam->NIK }}" data-tanggal="{{ $rekam->tanggalPeriksa }}"
+                                            data-penulis="{{ optional($rekam->dokter)->namaDokter ?? (optional($rekam->staffrekammedis)->namaStaff ?? '') }}"
+                                            data-tekananDarah="{{ $rekam->tekananDarah ?? '' }}"
+                                            data-rr="{{ $rekam->rr ?? '' }}" data-nadi="{{ $rekam->nadi ?? '' }}"
+                                            data-suhu="{{ $rekam->suhu ?? '' }}"
+                                            data-tinggi="{{ $rekam->tinggiBadan ?? '' }}"
+                                            data-berat="{{ $rekam->beratBadan ?? '' }}"
+                                            data-riwayat="{{ $rekam->riwayatPenyakit ?? '' }}"
+                                            data-diagnosa="{{ $rekam->diagnosaMedis ?? '' }}"
+                                            data-obat="{{ $rekam->resepObat }}">
+                                            <i class="fas fa-eye"></i> Detail
+                                        </button>
+                                        <!-- Edit Button -->
+                                        <a href="{{ route('dokter.rekam_medis.edit', $rekam->idRekamMedis) }}"
+                                            class="btn btn-sm btn-warning" data-alamat="{{ $rekam->alamatPasien }}"
+                                            data-kelamin="{{ $rekam->jenisKelamin }}" data-usia="{{ $rekam->usiaPasien }}"
+                                            data-agama="{{ $rekam->agamaPasien }}" data-nikah="{{ $rekam->statusNikah }}"
+                                            data-riwayat="{{ $rekam->riwayatPenyakit }}"
+                                            data-tindakan="{{ $rekam->tindakan }}" data-obat="{{ $rekam->resepObat }}"
+                                            data-rujuk="{{ $rekam->rujukan }}"
+                                            data-alasanrujuk="{{ $rekam->alasanRujukan }}">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <!-- Delete Button -->
+                                        <form action="{{ route('dokter.rekam_medis.delete', $rekam->idRekamMedis) }}"
+                                            method="POST" class="delete-form d-inline">
+                                          @csrf
+                                          <button type="button" class="btn btn-sm btn-danger delete-button">
+                                              <i class="fas fa-trash"></i> Delete
+                                          </button>
+                                      </form>
+                                      
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
+        </div>
+    </div>
+    @include('dokter.edit_rekam_medis')
+    <!-- MODAL DETAIL REKAM MEDIS -->
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailModalLabel">Resume Medis</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="printArea">
+                    <!-- Print Layout -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <img src="{{ asset('assets/logobaru.png') }}" alt="Puskesmas Logo" style="max-width: 100px;">
+                        <div class="text-center ms-3">
+                            <h5 class="mb-0">PEMERINTAH KABUPATEN PROBOLINGGO DINAS KESEHATAN </h5>
+                            <h5 class="mb-0">PUSKESMAS KRAKSAAN</h5>
+                            <p>Jl. Mayjend Sungkono No.10, Patokan, Kec. Kraksaan, Kabupaten Probolinggo, Jawa Timur 67282
+                            </p>
+                        </div>
+                        <img src="{{ asset('assets/dinas.png') }}" alt="Second Logo" style="max-width: 55px;">
+                    </div>
+                    <div class="text-center mb-4">
+                        <hr>
+                        <br>
+                        <h4>Formulir Rekam Medis Pasien</h4>
+
+                        <p><strong>No RM:</strong> <span id="detailNo"></span></p>
+                    </div>
+                    <!-- Tabel A: Identitas Pasien -->
+                    <table class="table table-bordered" style="table-layout: fixed; width: 100%;">
+                        <colgroup>
+                            <col style="width: 22%;">
+                            <col style="width: 60%;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th colspan="2">A. Identitas Pasien</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Nama Pasien :</strong></td>
+                                <td id="detailPasien"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>NIK Pasien :</strong></td>
+                                <td id="detailNikPasien"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Alamat Pasien :</strong></td>
+                                <td id="detailAlamat"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Jenis Kelamin :</strong></td>
+                                <td id="detailKelamin"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Usia :</strong></td>
+                                <td id="detailUsia"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Agama :</strong></td>
+                                <td id="detailAgama"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Status Pernikahan :</strong></td>
+                                <td id="detailStatusNikah"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tanggal Periksa :</strong></td>
+                                <td id="detailDate"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Penanggung Jawab :</strong></td>
+                                <td id="detailPenanggungJawab"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- Tabel B: Pemeriksaan Fisik -->
+                    <table class="table table-bordered" style="table-layout: fixed; width: 100%;">
+                        <colgroup>
+                            <col style="width: 22%;">
+                            <col style="width: 60%;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th colspan="2">B. Pemeriksaan Fisik</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Tekanan Darah :</strong></td>
+                                <td id="detailTD"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>RR :</strong></td>
+                                <td id="detailRR"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Nadi :</strong></td>
+                                <td id="detailNadi"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Suhu :</strong></td>
+                                <td id="detailSuhu"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tinggi Badan :</strong></td>
+                                <td id="detailTB"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Berat Badan :</strong></td>
+                                <td id="detailBB"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- Tabel C: Pemeriksaan & Tindakan -->
+                    <table class="table table-bordered" style="table-layout: fixed; width: 100%;">
+                        <colgroup>
+                            <col style="width: 22%;">
+                            <col style="width: 60%;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th colspan="2">C. Pemeriksaan dan Tindakan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Riwayat Penyakit :</strong></td>
+                                <td id="detailRiwayat"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Diagnosa Medis :</strong></td>
+                                <td id="detailDiagnosa"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Resep Obat :</strong></td>
+                                <td id="detailResepObat"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-center mt-4">
+                        <button id="printDetail" class="btn btn-primary print:hidden">
+                            <i class="fas fa-print"></i> Cetak
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+    <!-- JavaScript -->
+    <script>
+        // PDF EXPORT FILTERED
+        document.getElementById("exportPdf").addEventListener("click", function() {
+            const {
+                jsPDF
+            } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.text("Data Rekam Medis", 14, 10);
+
+            const headers = [];
+            document.querySelectorAll("#rekamMedisTable thead th").forEach((th, index) => {
+                // Skip kolom aksi terakhir
+                if (index < 11) headers.push(th.innerText);
+            });
+
+            const data = [];
+            document.querySelectorAll("#rekamMedisTable tbody tr").forEach((row) => {
+                if (row.style.display !== "none") {
+                    const rowData = [];
+                    row.querySelectorAll("td").forEach((cell, index) => {
+                        if (index < 11) rowData.push(cell.innerText.trim()); // skip aksi
+                    });
+                    data.push(rowData);
+                }
+            });
+
+            doc.autoTable({
+                head: [headers],
+                body: data,
+                startY: 20
+            });
+
+            const today = new Date().toISOString().slice(0, 10);
+            doc.save(`Data_Rekam_Medis_${today}.pdf`);
+        });
+
+        // EXCEL EXPORT FILTERED
+        document.getElementById("exportExcel").addEventListener("click", function() {
+            const wb = XLSX.utils.book_new();
+            const wsData = [];
+
+            const headerCells = document.querySelectorAll("#rekamMedisTable thead th");
+            const headers = Array.from(headerCells).slice(0, 11).map(cell => cell.innerText.trim()); // Skip aksi
+            wsData.push(headers);
+
+            document.querySelectorAll("#rekamMedisTable tbody tr").forEach((row) => {
+                if (row.style.display !== "none") {
+                    const rowData = [];
+                    row.querySelectorAll("td").forEach((cell, index) => {
+                        if (index < 11) rowData.push(cell.innerText.trim());
+                    });
+                    wsData.push(rowData);
+                }
+            });
+
+            const ws = XLSX.utils.aoa_to_sheet(wsData);
+            XLSX.utils.book_append_sheet(wb, ws, "Data Rekam Medis");
+
+            const today = new Date().toISOString().slice(0, 10);
+            XLSX.writeFile(wb, `Data_Rekam_Medis_${today}.xlsx`);
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".detail-btn").forEach(button => {
+                button.addEventListener("click", function() {
+                    document.getElementById("detailNo").innerText = this.getAttribute("data-id");
+                    document.getElementById("detailPasien").innerText = this.getAttribute(
+                        "data-nama");
+                    document.getElementById("detailNikPasien").innerText = this.getAttribute(
+                        "data-nik");
+                    document.getElementById("detailAlamat").innerText = this.getAttribute(
+                        "data-alamat");
+                    document.getElementById("detailKelamin").innerText = this.getAttribute(
+                        "data-kelamin");
+                    document.getElementById("detailUsia").innerText = this.getAttribute(
+                    "data-usia");
+                    document.getElementById("detailAgama").innerText = this.getAttribute(
+                        "data-agama");
+                    document.getElementById("detailStatusNikah").innerText = this.getAttribute(
+                        "data-nikah");
+                    document.getElementById("detailDate").innerText = this.getAttribute(
+                        "data-tanggal");
+                    const dokterName = this.getAttribute("data-dokter");
+                    const penulisName = this.getAttribute("data-penulis");
+                    if (dokterName) {
+                        document.getElementById("detailPenanggungJawab").innerText = dokterName;
+                    } else {
+                        document.getElementById("detailPenanggungJawab").innerText = penulisName;
+                    }
+                    document.getElementById("detailTD").innerText = this.getAttribute(
+                        "data-tekananDarah");
+                    document.getElementById("detailRR").innerText = this.getAttribute("data-rr");
+                    document.getElementById("detailNadi").innerText = this.getAttribute(
+                    "data-nadi");
+                    document.getElementById("detailSuhu").innerText = this.getAttribute(
+                    "data-suhu");
+                    document.getElementById("detailTB").innerText = this.getAttribute(
+                    "data-tinggi");
+                    document.getElementById("detailBB").innerText = this.getAttribute("data-berat");
+                    document.getElementById("detailRiwayat").innerText = this.getAttribute(
+                        "data-riwayat");
+                    document.getElementById("detailDiagnosa").innerText = this.getAttribute(
+                        "data-diagnosa");
+                    document.getElementById("detailResepObat").innerText = this.getAttribute(
+                        "data-obat");
+                });
+            });
+        });
+
+        document.getElementById("printDetail").addEventListener("click", function() {
+            let printContents = document.getElementById("printArea").innerHTML;
+            let originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+            location.reload(); // Reload to reset the view
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const searchInput = document.getElementById("searchInput");
+            const table = document.getElementById("rekamMedisTable").getElementsByTagName("tbody")[0];
+            const searchButton = document.querySelector('.btn-outline-secondary');
+
+            function filterTable() {
+                const searchText = searchInput.value.toLowerCase();
+                const rows = table.getElementsByTagName("tr");
+
+                for (let i = 0; i < rows.length; i++) {
+                    const rowText = rows[i].innerText.toLowerCase();
+                    if (rowText.includes(searchText)) {
+                        rows[i].style.display = "";
+                    } else {
+                        rows[i].style.display = "none";
+                    }
+                }
+            }
+
+            // Trigger saat tombol klik
+            searchButton.addEventListener("click", function() {
+                filterTable();
+            });
+
+            // Opsional: Kalau mau auto filter sambil ngetik langsung (tanpa klik tombol)
+            // searchInput.addEventListener("keyup", filterTable);
+        });
+    </script>
+
+
+    <!-- PDF: jsPDF dan autoTable -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+    <!-- Excel: SheetJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+
+
+    <!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-document.getElementById("exportPdf").addEventListener("click", function() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.delete-button');
 
-    doc.text("Data Rekam Medis", 14, 10);
-    doc.autoTable({ html: "#rekamMedisTable" });
-
-    doc.save("Data_Rekam_Medis.pdf");
-});
-
-document.getElementById("exportExcel").addEventListener("click", function() {
-    let table = document.getElementById("rekamMedisTable");
-    let wb = XLSX.utils.book_new();
-    let ws = XLSX.utils.table_to_sheet(table);
-
-    XLSX.utils.book_append_sheet(wb, ws, "Data Rekam Medis");
-    XLSX.writeFile(wb, "Data_Rekam_Medis.xlsx");
-});
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const form = this.closest('.delete-form');
+                Swal.fire({
+                    title: 'Yakin ingin menghapus?',
+                    text: "Data rekam medis yang dihapus tidak bisa dikembalikan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, hapus',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    });
 </script>
 
 @endsection
-
-

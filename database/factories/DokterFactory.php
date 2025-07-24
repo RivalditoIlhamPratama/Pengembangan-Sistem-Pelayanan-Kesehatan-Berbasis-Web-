@@ -17,7 +17,13 @@ class DokterFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => 1,
+            'namaDokter' => $this->faker->name(),
+            'spesialis' => $this->faker->randomElement(['Umum', 'Gigi', 'Anak']),
+            'jenisKelamin' => $this->faker->randomElement(['Laki-Laki', 'Perempuan']),
+            'tglLahir' => $this->faker->date(),
+            'alamatDokter' => $this->faker->address(),
+            'noTelepon' => $this->faker->phoneNumber(),
         ];
     }
 }
