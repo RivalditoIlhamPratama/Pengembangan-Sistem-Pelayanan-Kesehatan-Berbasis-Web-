@@ -45,7 +45,7 @@
                     <li class="link"><a href="{{ url('/profil') }}">Profil</a></li>
                     <li class="link"><a href="{{ url('/dokter') }}">Dokter</a></li>
                     <li class="link"><a href="{{ url('/alur-pelayanan') }}">Pelayanan</a></li>
-                    <li class="link"><a href="{{ route('pasien.reports') }} disabled-link">Pengaduan</a></li>
+                    <li class="link"><a href="{{ route('pasien.reports') }}" class="disabled-link">Pengaduan</a></li>
                 @endif
 
                 @if (!auth()->check() || (auth()->check() && auth()->user()->role !== 'pasien'))
