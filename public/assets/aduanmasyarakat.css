@@ -899,3 +899,56 @@ p {
 .floating-image {
     animation: float 4s ease-in-out infinite;
 }
+
+
+
+.chat-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.chat-message {
+    display: flex;
+}
+
+.chat-message.sent {
+    justify-content: flex-end;
+}
+
+.chat-message.received {
+    justify-content: flex-start;
+}
+
+.chat-bubble {
+    max-width: 60%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    position: relative;
+    background-color: #e0f0ff;
+    color: #000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.chat-message.sent .chat-bubble {
+    background-color: #007bff;
+    color: #fff;
+    border-bottom-right-radius: 0;
+}
+
+.chat-message.received .chat-bubble {
+    background-color: #f0f0f0;
+    color: #000;
+    border-bottom-left-radius: 0;
+}
+
+.sender {
+    font-size: 11px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    opacity: 0.7;
+}

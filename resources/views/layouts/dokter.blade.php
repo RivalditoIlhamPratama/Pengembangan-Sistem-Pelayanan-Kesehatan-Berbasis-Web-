@@ -60,21 +60,28 @@
         <h1 class="text-xl font-bold text-gray-800">Puskesmas</h1>
     </div>
 
-    <!-- Menu -->
-    <nav class="mt-4 flex flex-col gap-2 px-4 relative z-10">
-        <a href="{{ route('dokter.dashboard') }}"
-            class="py-2 px-4 rounded hover:bg-blue-50 transition-all duration-150 font-medium {{ request()->routeIs('dokter.dashboard') ? 'bg-blue-100 text-blue-700 font-semibold' : '' }}">
-            <i class="ri-dashboard-line mr-2"></i> Dashboard
-        </a>
-        <a href="{{ route('dokter.data_dokter') }}"
-            class="py-2 px-4 rounded hover:bg-blue-50 transition-all duration-150 font-medium {{ request()->routeIs('dokter.data_dokter') ? 'bg-blue-100 text-blue-700 font-semibold' : '' }}">
-            <i class="ri-user-3-line mr-2"></i> Data Dokter
-        </a>
-        <a href="{{ route('dokter.rekam_medis') }}"
-            class="py-2 px-4 rounded hover:bg-blue-50 transition-all duration-150 font-medium {{ request()->routeIs('dokter.rekam_medis') ? 'bg-blue-100 text-blue-700 font-semibold' : '' }}">
-            <i class="ri-clipboard-line mr-2"></i> Rekam Medis
-        </a>
-    </nav>
+        <!-- Menu -->
+        <nav class="mt-4 flex flex-col gap-2 px-4 relative z-10">
+            <a href="{{ route('dokter.dashboard') }}"
+                class="py-2 px-4 rounded hover:bg-blue-50 transition-all duration-150 font-medium {{ request()->routeIs('dokter.dashboard') ? 'bg-blue-100 text-blue-700 font-semibold' : '' }}">
+                <i class="ri-dashboard-line mr-2"></i> Dashboard
+            </a>
+            <a href="{{ route('dokter.data_dokter') }}"
+                class="py-2 px-4 rounded hover:bg-blue-50 transition-all duration-150 font-medium {{ request()->routeIs('dokter.data_dokter') ? 'bg-blue-100 text-blue-700 font-semibold' : '' }}">
+                <i class="ri-user-3-line mr-2"></i> Data Dokter
+            </a>
+            <a href="{{ route('dokter.rekam_medis') }}"
+                class="py-2 px-4 rounded hover:bg-blue-50 transition-all duration-150 font-medium {{ request()->routeIs('dokter.rekam_medis') ? 'bg-blue-100 text-blue-700 font-semibold' : '' }}">
+                <i class="ri-clipboard-line mr-2"></i> Rekam Medis
+            </a>
+            <a href="{{ route('dokter.konsultasi') }}"
+                class="py-2 px-4 rounded hover:bg-blue-50 transition-all duration-150 font-medium {{ request()->routeIs('dokter.konsultasi') ? 'bg-blue-100 text-blue-700 font-semibold' : '' }}">
+            <i class="ri-message-2-line mr-2"></i> Data Konsultasi
+            </a>
+            
+
+
+        </nav>
     
 
     <!-- Footer Icon Animasi -->
@@ -104,8 +111,9 @@
 
                 <div class="flex items-center space-x-3">
                     <a href="{{ route('dokter.data_dokter') }}" class="text-decoration-none text-dark fw-semibold">
-                        <i class="ri-user-fill text-xl me-1"></i> {{ $dokter->namaDokter }}
+                        <i class="ri-user-fill text-xl me-1"></i> {{ auth()->user()->name }}
                     </a>
+                    
                     <form id="logoutForm" method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="button" id="logoutBtn" class="text-black hover:text-gray-500 ml-3">

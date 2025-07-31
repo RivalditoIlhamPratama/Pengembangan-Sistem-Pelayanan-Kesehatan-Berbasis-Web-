@@ -87,6 +87,11 @@
                         <p>{{ $dokters->spesialis }}</p>
                         <div class="btn-container">
                             <a href="{{ route('jadwal.dokter', $dokters->idDokter) }}" class="btn">Jadwal</a>
+                            <a href="{{ route('konsultasi.index', $dokters->user_id) }}" class="btn btn-primary">
+                                Konsultasi
+                            </a>
+                            
+                            
                         </div>
                     </div>
                 </div>
