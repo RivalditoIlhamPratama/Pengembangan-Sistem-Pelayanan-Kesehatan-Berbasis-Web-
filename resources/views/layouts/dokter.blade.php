@@ -74,10 +74,18 @@
                 class="py-2 px-4 rounded hover:bg-blue-50 transition-all duration-150 font-medium {{ request()->routeIs('dokter.rekam_medis') ? 'bg-blue-100 text-blue-700 font-semibold' : '' }}">
                 <i class="ri-clipboard-line mr-2"></i> Rekam Medis
             </a>
-            <a href="{{ route('dokter.konsultasi') }}"
-                class="py-2 px-4 rounded hover:bg-blue-50 transition-all duration-150 font-medium {{ request()->routeIs('dokter.konsultasi') ? 'bg-blue-100 text-blue-700 font-semibold' : '' }}">
-            <i class="ri-message-2-line mr-2"></i> Data Konsultasi
-            </a>
+         <a href="{{ route('dokter.konsultasi') }}"
+        class="py-2 px-4 rounded hover:bg-blue-50 transition-all duration-150 font-medium flex justify-between items-center {{ request()->routeIs('dokter.konsultasi') ? 'bg-blue-100 text-blue-700 font-semibold' : '' }}">
+        <span><i class="ri-message-2-line mr-2"></i> Data Konsultasi</span>
+
+        @if(isset($jumlahNotifikasi) && $jumlahNotifikasi > 0)
+            <span class="bg-red-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
+                {{ $jumlahNotifikasi }}
+            </span>
+        @endif
+        </a>
+
+
             
 
 

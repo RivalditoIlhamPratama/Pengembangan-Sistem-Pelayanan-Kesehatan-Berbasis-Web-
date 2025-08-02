@@ -18,22 +18,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($pesanTerakhir as $i => $item)
-                            <tr>
-                                <td class="text-center">{{ $i + 1 }}</td>
-                                <td>{{ $item->pengirim->name }}</td>
-                                <td>{{ Str::limit($item->pesan ?? '-', 70) }}</td>
-                                <td class="text-center">
-                                    <a href="{{ route('dokter.chat', $item->from_id) }}" class="btn btn-sm btn-primary">
-                                        <i class="ri-chat-1-line"></i> Chat
-                                    </a>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="4" class="text-center">Belum ada konsultasi masuk.</td>
-                            </tr>
-                        @endforelse
+                        @if($pesanTerakhir->isEmpty())
+    <tr>
+        <td colspan="4" class="text-center">Belum ada konsultasi masuk.</td>
+    </tr>
+@else
+    @foreach ($pesanTerakhir as $i => $item)
+        <tr>
+            <td class="text-center">{{ $i + 1 }}</td>
+            <td>
+                {{ $item->pengirim->name }}
+                @if($jumlahBelumDibaca->has($item->from_id))
+                    <span class="badge bg-danger ms-2">
+                        {{ $jumlahBelumDibaca[$item->from_id] }} pesan baru
+                    </span>
+                @endif
+            </td>
+            <td>{{ Str::limit($item->pesan ?? '-', 70) }}</td>
+            <td class="text-center">
+                <a href="{{ route('dokter.chat', $item->from_id) }}" class="btn btn-sm btn-primary">
+                    <i class="ri-chat-1-line"></i> Chat
+                </a>
+            </td>
+        </tr>
+    @endforeach
+@endif
+
                     </tbody>
                 </table>
             </div>
